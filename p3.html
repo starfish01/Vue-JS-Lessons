@@ -11,29 +11,20 @@
 </head>
 <body>
 
-
-        <div class="container">
+<div class="container">
     <div id="app"> 
 
         <div class="row">
             <div class="col-xs-2"></div>
             <div class="col-xs-6">
-                <h1 v-once>{{ title }}</h1>
-                <p>{{ sayHello() }}</p> 
-                <a><a class="btn btn-primary" v-bind:href="link" target="_blank">Click here</a> 
-                <hr>
-                <p v-html="finishedLink"></p>
-                <hr>
+                <button v-on:click="increase(2, $event)">Click Me</button>
+               <p>{{ counter}}</p>
+               <p v-on:mousemove="updateCoordinates">Coordinates: {{ x }} / {{ y }}</p>
 
             </div>
         </div>        
     </div>
-
 </div>
-
-
-
-
 
     <script>
     
@@ -41,14 +32,19 @@ new Vue({
     el: '#app',
     data:{ 
         title:'hello world',
-        link:'https://google.com',
-        finishedLink:'<a href="google.com.au">finished link</a>'
+        counter:0,
+        x: 0,
+        y:0,
     }, 
     methods: { 
-        sayHello: function(){ 
-            this.title = "hello";
-            return this.title; 
+        increase: function(mike, event){
+            this.counter += mike;
+        },
+        updateCoordinates: function(event){
+            this.x = event.clientX;
+            this.y = event.clientY;
         }
+
     }
 });
 
