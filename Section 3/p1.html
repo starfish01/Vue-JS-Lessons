@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>P5</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3"></div>
+            <div id="app" class="col-xs-9">
+                <p v-if="show">You can see me!</p>
+                <p v-else>Now you see me!</p>
+                <template v-if="show">
+                    <h1>TITLE</h1>
+                    <p>inside of a template</p>
+                </template>
+                <p>Do you see me?</p>
+                <button @click="show = !show">click Me</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    new Vue({
+        el: '#app',
+        data:{
+            show: false,
+            
+        }
+    });
+
+</script>
+
+
+<style>
+
+    
+
+</style>
+
+</body>
+</html>

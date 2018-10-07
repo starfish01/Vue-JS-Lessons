@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>P5</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3"></div>
+            <div id="app" class="col-xs-9">
+                <div class="demo" @click="attachRed = !attachRed" :class="divClasses"></div>
+                <div class="demo" :class="color"></div>
+                <div class="demo" :class="[color, {red: attachRed}]"></div>
+                <div class="demo" :style="{backgroundColor: color}"></div>
+                <div class="demo" :style="myStyle"></div>
+                <div class="demo" :style="[myStyle, {height: width + 'px'} ]"></div>
+                <hr>
+                <p>Type: red, blue, or yellow</p>
+                <input type="text" v-model="color">
+                <hr>
+                <p>Type a width</p>
+                <input type="text" v-model="width">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    new Vue({
+        el: '#app',
+        data:{
+            attachRed: false,
+            color: 'yellow',
+            width:100
+        },
+        computed:{
+            divClasses: function () {
+                return{
+                    red: this.attachRed,
+                    blue: !this.attachRed
+                }
+            },
+            myStyle: function () {
+                return {
+                    backgroundColor: this.color,
+                    width: this.width + 'px'
+                }
+            }
+        },
+        methods: {
+
+        }
+    });
+
+</script>
+
+
+<style>
+
+    .demo{
+        width: 100px;
+        height: 100px;
+        background-color: gray;
+        display:inline-block;
+        margin: 10px;
+    }
+
+    .red{
+        background-color: red;
+    }
+
+    .yellow{
+        background-color: yellow;
+    }
+
+    .blue{
+        background-color: blue;
+    }
+
+</style>
+
+</body>
+</html>

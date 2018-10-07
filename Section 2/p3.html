@@ -13,13 +13,21 @@
 
 <div class="container">
     <div id="app"> 
-
         <div class="row">
             <div class="col-xs-2"></div>
             <div class="col-xs-6">
-                <button v-on:click="increase(2, $event)">Click Me</button>
-               <p>{{ counter}}</p>
-               <p v-on:mousemove="updateCoordinates">Coordinates: {{ x }} / {{ y }}</p>
+                <button v-on:click="increase(2, $event)">This button calls the function</button>
+                <button v-on:click="counter++">This increments the counter without function</button>
+                <p>{{ counter}}</p>
+                <p>{{ counter >= 10 ? 'The number is greater then 10' : 'It is less then 10' }}</p>
+                <p v-on:mousemove="updateCoordinates">
+                    Coordinates: {{ x }} / {{ y }} -
+                    <span v-on:mousemove.stop="">DEAD SPOT</span>
+                </p>
+
+                <input type="text" v-on:keyup.enter.space="alertMe">
+               
+                
 
             </div>
         </div>        
@@ -43,8 +51,11 @@ new Vue({
         updateCoordinates: function(event){
             this.x = event.clientX;
             this.y = event.clientY;
-        }
+        },
 
+        alertMe: function(){
+            alert('Alert!')
+        }
     }
 });
 
