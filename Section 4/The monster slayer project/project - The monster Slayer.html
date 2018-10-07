@@ -32,11 +32,11 @@
         </div>
     </section>
     <section class="row controls">
-        <div class="small-12 columns">
-            <button id="attack" @click="attack">ATTACK</button>
-            <button id="special-attack">SPECIAL ATTACK</button>
-            <button id="heal">HEAL</button>
-            <button id="give-up">GIVE UP</button>
+        <div class="small-12 columns" >
+            <button id="attack" @click="userEvent('attack')" v-if="userActionButtons" >ATTACK</button>
+            <button id="special-attack" @click="userEvent('specialAttack')" v-if="userActionButtons">SPECIAL ATTACK</button>
+            <button id="heal" @click="userEvent('heal')" v-if="userActionButtons">HEAL</button>
+            <button id="give-up" v-if="userActionButtons">GIVE UP</button>
         </div>
     </section>
     <section class="row log">
