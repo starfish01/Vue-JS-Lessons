@@ -13,37 +13,37 @@
         <div class="small-6 columns">
             <h1 class="text-center">YOU</h1>
             <div class="healthbar">
-                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">{{ yourHealth }}
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: yourHealth + '%'}">{{ yourHealth }}
                 </div>
             </div>
         </div>
         <div class="small-6 columns">
             <h1 class="text-center">MONSTER</h1>
             <div class="healthbar">
-                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;">{{ mostersHealth }}
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width: mostersHealth + '%'}">{{ mostersHealth }}
 
                 </div>
             </div>
         </div>
     </section>
-    <section class="row controls">
+    <section class="row controls" v-if="userActionButtons">
         <div class="small-12 columns">
             <button id="start-game" @click="startNewGame">START NEW GAME</button>
         </div>
     </section>
-    <section class="row controls">
+    <section class="row controls" v-else>
         <div class="small-12 columns" >
-            <button id="attack" @click="userEvent('attack')" v-if="userActionButtons" >ATTACK</button>
-            <button id="special-attack" @click="userEvent('specialAttack')" v-if="userActionButtons">SPECIAL ATTACK</button>
-            <button id="heal" @click="userEvent('heal')" v-if="userActionButtons">HEAL</button>
-            <button id="give-up" v-if="userActionButtons">GIVE UP</button>
+            <button id="attack" @click="userEvent('attack')"  >ATTACK</button>
+            <button id="special-attack" @click="userEvent('specialAttack')">SPECIAL ATTACK</button>
+            <button id="heal" @click="userEvent('heal')" >HEAL</button>
+            <button id="give-up"  @click="startNewGame">GIVE UP</button>
         </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="eventsInMatch.length">
         <div class="small-12 columns">
             <ul>
-                <li v-for="event in eventsInMatch ">
-                    {{event}}
+                <li v-for="event in eventsInMatch" :class="{ 'player-turn': event.isPlayer, 'monster-turn': !event.isPlayer }">
+                    {{event.text}}
                 </li>
             </ul>
         </div>

@@ -5,8 +5,9 @@ new Vue({
     data:{ 
         yourHealth:100,
         mostersHealth:100,
-        userActionButtons:false,
-        eventsInMatch:['New Game Started']
+        userActionButtons:true,
+        eventsInMatch:[],
+        noEvents: true
 
     }, 
       methods: { 
@@ -14,24 +15,22 @@ new Vue({
             alert('Starting New Game')
             this.yourHealth = 100;
             this.mostersHealth = 100;
-            this.eventsInMatch = ['New Game Started']; 
+            this.eventsInMatch = []; 
+            this.userActionButtons = false;
         },
         userEvent: function(type){
 
             if(type === 'attack'){
                 var attackPowerYou = this.randomNumberForAttackAndHeal();
                 var attackPowerMonster = this.randomNumberForAttackAndHeal();
-                console.log('attack')
             }else if(type === 'specialAttack'){
                 var attackPowerYou = this.randomNumberForAttackAndHeal()+this.randomNumberForAttackAndHeal();
                 var attackPowerMonster = this.randomNumberForAttackAndHeal();
-                console.log('specialattack')
             }else{
                 var healPowerYou = this.randomNumberForAttackAndHeal();
                 var attackPowerMonster = this.randomNumberForAttackAndHeal();
             }
             
-
             if(type === 'attack' || type === 'specialAttack'){
                 this.yourHealth -= attackPowerMonster
                 this.mostersHealth -= attackPowerYou
@@ -41,8 +40,7 @@ new Vue({
                 this.yourHealth -= attackPowerMonster
             }
 
-
-            if(this.displayEvent(attackPowerYou, attackPowerMonster,type)){
+            if(this.displayEvent(attackPowerYou, attackPowerMonster,type) === false){
                 this.endGame()
             }
 
@@ -53,27 +51,48 @@ new Vue({
         displayEvent:function(attackPowerYou, attackPowerMonster,type){
             
             if(type === 'heal'){
-                this.eventsInMatch.push('You healed with ' + attackPowerYou)
-                this.eventsInMatch.push('The monster attacked with ' + attackPowerMonster)
-                return
+                this.eventsInMatch.unshift({
+                    text: 'You healed with ' + attackPowerYou,
+                    isPlayer:true
+                })
+                this.eventsInMatch.unshift({
+                    text: 'The monster attacked with ' + attackPowerMonster,
+                    isPlayer:false
+                })
+                return true
             }
             
-            if(this.yourHealth && this.mostersHealth > 0){
+            if(this.yourHealth  > 0 && this.mostersHealth > 0){
                 //both alive
-                this.eventsInMatch.push('You attacked with ' + attackPowerYou)
-                this.eventsInMatch.push('The monster attacked with ' + attackPowerMonster)
+                this.eventsInMatch.unshift({
+                    text: 'You attacked with ' + attackPowerYou,
+                    isPlayer:true
+                })
+                this.eventsInMatch.unshift({
+                    text: 'The monster attacked with ' + attackPowerMonster,
+                    isPlayer:false
+                })
+
             }else if(this.yourHealth > 0){
                 //monster dead
-                this.eventsInMatch.push('The monster has been slayin')
-
+                this.eventsInMatch.unshift({
+                    text: 'The monster has been slayin',
+                    isPlayer:true
+                })
+                return false
+                
             }else{
                 //your dead
-                this.eventsInMatch.push('The monster has killed you')
+                this.eventsInMatch.unshift({
+                    text: 'The monster has killed you',
+                    isPlayer:false
+                })
+                return false
             }
         },
         endGame:function(){
-
+            this.userActionButtons = true
         }
-    } 
+    }
   }
 );  }
