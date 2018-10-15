@@ -64,10 +64,15 @@
 
                 <button class="btn btn-primary" @click="addItem">Add Item</button>
                 <br><br>
+
+                
                 <ul class="list-group">
-                    <li class="list-group-item" 
-                    v-for="(number,i) in numbers"
-                    @click="removeItem(i)">{{ number }}</li>
+                    <transition-group name="slide">
+                        <li class="list-group-item" 
+                        v-for="(number,i) in numbers"
+                        @click="removeItem(i)"
+                        :key="number">{{ number }}</li>
+                    </transition-group>
                 </ul>
 
 
@@ -187,7 +192,14 @@ import WarningAlert from './DangerAlert.vue'
         animation:slide-out 1s ease-out forwards;
         transition: opacity 1s;
         opacity: 0;
+        position: absolute;
     }
+
+    .slide-move{
+        transition: transform 1s;
+    }
+
+
 
     @keyframes slide-in {
         from {
