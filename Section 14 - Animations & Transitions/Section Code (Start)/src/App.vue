@@ -52,18 +52,43 @@
                 </transition>
 
 
+                <hr>
+                <button class="btn btn-primary" @click="selectedComponent == 'app-success-alert' ? selectedComponent = 'app-warning-alert' : selectedComponent = 'app-success-alert'">Change Component</button>
+                <br><br>
+
+                <transition name="fade" mode="out-in">
+                    <component :is="selectedComponent"></component>
+                </transition>
+
+                <hr>
+
+                <button class="btn btn-primary" @click="addItem">Add Item</button>
+                <br><br>
+                <ul class="list-group">
+                    <li class="list-group-item" 
+                    v-for="(number,i) in numbers"
+                    @click="removeItem(i)">{{ number }}</li>
+                </ul>
+
+
             </div>
         </div>
     </div>
 </template>
 
 <script>
+
+import SuccessAlert from './SuccessAlert.vue'
+import WarningAlert from './DangerAlert.vue'
+
     export default {
         data() {
             return {
                 show: false,
                 load: false,
-                elementWidth: 100
+                elementWidth: 100,
+                selectedComponent:'app-success-alert',
+                numbers: [1,2,3,4,5]
             }
         },
         methods:{
@@ -114,8 +139,20 @@
             },
             leaveCancelled(el){
                 console.log('enterLeave')
+            },
+
+            removeItem(id){
+                this.numbers.splice(id, 1);
+            },
+            addItem(){
+                const pos = Math.floor(Math.random() * this.numbers.length);
+                this.numbers.splice(pos, 0, this.numbers.length + 1);
             }
 
+        },
+        components:{
+            appSuccessAlert:SuccessAlert,
+            appWarningAlert:WarningAlert
         }
     }
 </script>
