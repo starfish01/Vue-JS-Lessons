@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="fightScene">
         Fight Scene
     </div>
 </template>
@@ -10,6 +10,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+    .fightScene{
+        height: 250px;
+    }
 
 </style>

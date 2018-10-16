@@ -2,7 +2,7 @@
   <div class="container" id="app">
     <div class="row card">
       <div class="col-sm-12 card-body">
-        <app-hud></app-hud>
+        <app-hud :playerData="playerData"></app-hud>
       </div>
     </div>
 
@@ -40,6 +40,18 @@
   import Log from './assets/components/Log/Log.vue'
 
   export default{
+    data(){
+      return{
+        playerData:[{
+          name:'Monster',
+          health:100
+        },
+        {
+          name:'Hero',
+          health:30
+        }]
+      }
+    },
     components:{
       appHud: HUD,
       appFightScene: FightScene,
