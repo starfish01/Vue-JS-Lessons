@@ -13,7 +13,7 @@
     <div class="row card">
       <div class="offset-sm-3"></div>
       <div class="card-body">
-        <app-action-box :attackFn="attackFn"></app-action-box>
+        <app-action-box :attackFn="attackFunction"></app-action-box>
         <div class="offset-sm-3"></div>
       </div>
     </div>
@@ -30,12 +30,12 @@
 </template>
 
 <script>
-  import HUD from './assets/components/HUD/HUD.vue'
-  import FightScene from './assets/components/FightScene/Scene.vue'
-  import ActionBox from './assets/components/ActionBox/ActionBox.vue'
-  import Log from './assets/components/Log/Log.vue'
+  import HUD from './assets/components/HUD/HUD.vue';
+  import FightScene from './assets/components/FightScene/Scene.vue';
+  import ActionBox from './assets/components/ActionBox/ActionBox.vue';
+  import Log from './assets/components/Log/Log.vue';
 
-  export default{
+  export default {
     data(){
       return{
         playerData:[ {
@@ -63,12 +63,12 @@
         }]
       }
     },
-    methods:{
-      attackFn(){
+    methods: {
+      attackFunction(){
         alert('attack');
       }
     },
-    components:{
+    components: {
       appHud: HUD,
       appFightScene: FightScene,
       appActionBox: ActionBox,

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-actions></app-actions>
+        <app-actions :attackFn="attackFn"></app-actions>
     </div>
 </template>
 
@@ -10,8 +10,9 @@
     import InfoBox from "./Infobox.vue"
 
 export default {
-   
-
+    props:{
+        attackFn: Function
+    },
    components:{
         appActions: Actions,
         appInfoBox: InfoBox
