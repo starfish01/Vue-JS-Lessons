@@ -6,26 +6,22 @@
       </div>
     </div>
 
-    <div class="row card">
-      <div class="offset-sm-3"></div>
-      <div class="col-sm-6 card-body">
+    
         <app-fight-scene></app-fight-scene>
+    
+
+    <div class="row card">
+      <div class="offset-sm-3"></div>
+      <div class="card-body">
+        <app-action-box :attackFn="attackFn"></app-action-box>
         <div class="offset-sm-3"></div>
       </div>
     </div>
 
     <div class="row card">
       <div class="offset-sm-3"></div>
-      <div class="col-sm-6 card-body">
-        <app-action-box></app-action-box>
-        <div class="offset-sm-3"></div>
-      </div>
-    </div>
-
-    <div class="row card">
-      <div class="offset-sm-3"></div>
-      <div class="col-sm-6 card-body">
-       <app-log></app-log>
+      <div class="card-body">
+       <app-log :logData="logData" :playerData="playerData"></app-log>
         <div class="offset-sm-3"></div>
       </div>
     </div>
@@ -42,14 +38,34 @@
   export default{
     data(){
       return{
-        playerData:[{
-          name:'Monster',
-          health:100
-        },
-        {
+        playerData:[ {
+          id:'0',
           name:'Hero',
           health:30
+        },{
+          id:'1',
+          name:'Monster',
+          health:60
+        }],
+        logData:[
+          {
+          id:0,
+          attackPower:10
+        },{
+          id:1,
+          attackPower:10
+        },{
+          id:0,
+          attackPower:10
+        },{
+          id:1,
+          attackPower:10
         }]
+      }
+    },
+    methods:{
+      attackFn(){
+        alert('attack');
       }
     },
     components:{

@@ -1,6 +1,6 @@
 <template>
     <div>
-        Action Box
+        <app-actions></app-actions>
     </div>
 </template>
 
@@ -20,6 +20,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 
 </style>
