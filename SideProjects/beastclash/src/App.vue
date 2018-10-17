@@ -13,7 +13,7 @@
     <div class="row card">
       <div class="offset-sm-3"></div>
       <div class="card-body">
-        <app-action-box :attackFn="attackFunction"></app-action-box>
+        <app-action-box :actionFn="actionFunction"></app-action-box>
         <div class="offset-sm-3"></div>
       </div>
     </div>
@@ -47,26 +47,68 @@
           name:'Monster',
           health:60
         }],
-        logData:[
-          {
-          id:0,
-          attackPower:10
-        },{
-          id:1,
-          attackPower:10
-        },{
-          id:0,
-          attackPower:10
-        },{
-          id:1,
-          attackPower:10
-        }]
+        logData:[],
+        randomValues:{
+        }
       }
     },
     methods: {
-      attackFunction(){
-        alert('attack');
+      actionFunction(action){
+        switch (action) {
+          case 0:
+            this.giveUp();
+            break;
+          case 1:
+            this.attack();
+          break;
+          case 2:
+            this.specialAttack();
+          break;
+          case 3:
+            this.heal();
+          break;
+          default:
+          alert('Something broke :/');
+          break;
+        }
+      },
+      attack(){
+        let heroAttack = this.randomNumberGraber();
+        let monsterAttack = this.randomNumberGraber();
+        this.playerData[1].health -= heroAttack;
+        this.logData.push({id:0, attackPower:heroAttack})
+
+        this.playerData[0].health -= monsterAttack;
+        this.logData.push({id:1, attackPower:monsterAttack})
+        
+
+      },
+      specialAttack(){
+        let heroAttack = this.randomNumberGraber()*2;
+        let monsterAttack = this.randomNumberGraber();
+        this.playerData[1].health -= heroAttack;
+        this.logData.push({id:0, attackPower:heroAttack})
+
+        this.playerData[0].health -= monsterAttack;
+        this.logData.push({id:1, attackPower:monsterAttack})
+      },
+      heal(){
+        let heroHeal = this.randomNumberGraber();
+        let monsterAttack = this.randomNumberGraber();
+
+
+        this.playerData[0].health += heroHeal;
+        this.logData.push({id:0, attackPower:heroHeal, heal:true})
+
+        this.playerData[0].health -= monsterAttack;
+        this.logData.push({id:1, attackPower:monsterAttack})
+      },
+      giveUp(){},
+
+      randomNumberGraber(){
+        return Math.floor((Math.random() * 10) + 1);
       }
+
     },
     components: {
       appHud: HUD,

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-actions :attackFn="attackFn"></app-actions>
+        <app-actions :actionFn="actionFn"></app-actions>
     </div>
 </template>
 
@@ -11,7 +11,7 @@
 
 export default {
     props:{
-        attackFn: Function
+        actionFn: Function
     },
    components:{
         appActions: Actions,

@@ -1,9 +1,9 @@
 <template>
     <div class="row">
-        <button class="btn btn-danger">Give Up</button>
-        <button class="btn btn-warning">Special Attack</button>
-        <button class="btn btn-success" @click="attackFn()">Attack</button>
-        <button class="btn btn-primary">Heal</button>
+        <button class="btn btn-danger" @click="actionFn(0)">Give Up</button>
+        <button class="btn btn-warning" @click="actionFn(2)">Special Attack</button>
+        <button class="btn btn-success" @click="actionFn(1)">Attack</button>
+        <button class="btn btn-primary"@click="actionFn(3)">Heal</button>
     </div>
     
 </template>
@@ -11,7 +11,7 @@
 <script>
 export default {
     props:{
-        attackFn: Function
+        actionFn: Function
     },
 }
 </script>
