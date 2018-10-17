@@ -13,7 +13,7 @@
     <div class="row card">
       <div class="offset-sm-3"></div>
       <div class="card-body">
-        <app-action-box :actionFn="actionFunction"></app-action-box>
+        <app-action-box :actionFn="actionFunction" v-if="gameIsActive"></app-action-box>
         <div class="offset-sm-3"></div>
       </div>
     </div>
@@ -38,14 +38,15 @@
   export default {
     data(){
       return{
+        gameIsActive:true,
         playerData:[ {
           id:'0',
           name:'Hero',
-          health:30
+          health:100
         },{
           id:'1',
           name:'Monster',
-          health:60
+          health:100
         }],
         logData:[],
         randomValues:{
@@ -76,10 +77,10 @@
         let heroAttack = this.randomNumberGraber();
         let monsterAttack = this.randomNumberGraber();
         this.playerData[1].health -= heroAttack;
-        this.logData.push({id:0, attackPower:heroAttack})
+        this.logData.unshift({id:0, attackPower:heroAttack})
 
         this.playerData[0].health -= monsterAttack;
-        this.logData.push({id:1, attackPower:monsterAttack})
+        this.logData.unshift({id:1, attackPower:monsterAttack})
         
 
       },
@@ -87,10 +88,10 @@
         let heroAttack = this.randomNumberGraber()*2;
         let monsterAttack = this.randomNumberGraber();
         this.playerData[1].health -= heroAttack;
-        this.logData.push({id:0, attackPower:heroAttack})
+        this.logData.unshift({id:0, attackPower:heroAttack})
 
         this.playerData[0].health -= monsterAttack;
-        this.logData.push({id:1, attackPower:monsterAttack})
+        this.logData.unshift({id:1, attackPower:monsterAttack})
       },
       heal(){
         let heroHeal = this.randomNumberGraber();
@@ -98,10 +99,10 @@
 
 
         this.playerData[0].health += heroHeal;
-        this.logData.push({id:0, attackPower:heroHeal, heal:true})
+        this.logData.unshift({id:0, attackPower:heroHeal, heal:true})
 
         this.playerData[0].health -= monsterAttack;
-        this.logData.push({id:1, attackPower:monsterAttack})
+        this.logData.unshift({id:1, attackPower:monsterAttack})
       },
       giveUp(){},
 
@@ -110,6 +111,7 @@
       }
 
     },
+   
     components: {
       appHud: HUD,
       appFightScene: FightScene,

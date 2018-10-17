@@ -3,7 +3,7 @@
         <ul class="list-group">
             <li :style="logitem.id == 1 ? 'background-color: #F7F6D9' : 'background-color: #F78380'" 
             class="list-group-item"
-            :class="{healingClass: logitem.healed}" 
+            :class="{healingClass: logitem.heal}" 
             :key="i" 
             v-for="(logitem,i) in logData"> 
             <img :src="logitem.id == 1 ? 'src/assets/images/monster.png' : 'src/assets/images/hero.png'" height="30px"> 
@@ -14,6 +14,7 @@
 
 <script>
 export default {
+    
     props:{
         logData:{
             options:Object
@@ -30,6 +31,7 @@ export default {
 
 .healingClass{
     background-color: blue !important;
+    color: white;
 }
 
 li{
