@@ -9,7 +9,20 @@ const router = new VueRouter({
     routes,
     //history mode requies that the server return the index page in
     // all cases to work
-    mode:'history'
+    mode:'history',
+    scrollBehavior(to, from, savedPosition){
+
+      if(savedPosition){
+        return savedPosition;
+      }
+
+      if(to.hash){
+        return { selector: to.hash };
+      }
+
+      return {x: 0, y:0}
+
+    }
 });
 
 new Vue({
