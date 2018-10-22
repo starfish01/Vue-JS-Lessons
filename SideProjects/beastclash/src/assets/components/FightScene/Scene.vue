@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-sm-6">
-            <transition name="slidemonster" type="animation" appear>
+            <transition enter-active-class="animated rollIn">
                 <img src="src\assets\images\monster.png" class="monsterClass" height="150px">
             </transition>
         </div>
