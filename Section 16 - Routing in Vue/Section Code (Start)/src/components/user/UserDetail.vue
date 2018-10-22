@@ -8,3 +8,17 @@
         >Edit User</router-link>
     </div>
 </template>
+
+<script>
+export default {
+    beforeRouteEnter (to, from, next) {
+        console.log('inside route file')
+        if(true){
+            next();
+        }else{
+            next(false);
+        }
+    }
+}
+</script>
+
