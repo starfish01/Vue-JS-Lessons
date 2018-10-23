@@ -1,5 +1,8 @@
 <template>
+<div>
     <p>Counter is: {{ doubleCounter }}</p>
+    <p>Number of clicks: {{ stringCount }}</p>
+</div>
 </template>
 
 <script>
