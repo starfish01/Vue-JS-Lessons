@@ -1,9 +1,12 @@
 <template>
     <div class="container">
-        <app-header></app-header>
-        <app-homepage></app-homepage>
-        <app-portfolio></app-portfolio>
-        <app-stocks></app-stocks>
+        <app-header @componentButton="currentComponent = $event"></app-header>
+
+    <keep-alive>
+        <transition mode="out-in" appear name="slide" type="animation">
+        <component :is="currentComponent"></component>
+        </transition>
+    </keep-alive>
 
     </div>
 </template>
@@ -15,6 +18,11 @@ import Portfolio from './components/Portfolio/Portfolio.vue'
 import Stocks from './components/Stocks/Stocks.vue'
 
     export default {
+        data(){
+            return{
+                currentComponent: 'appHomepage'
+            }
+        },
         components:{
             appHeader:Header,
             appHomepage:Homepage,
@@ -25,10 +33,17 @@ import Stocks from './components/Stocks/Stocks.vue'
     }
 </script>
 
-<style>
+
+
+<style lang="sass">
+
+@import url('/styles/sldeAnimation.scss');
 
 body {
     padding-top: 60px;
   }
+
+
+
 
 </style>
