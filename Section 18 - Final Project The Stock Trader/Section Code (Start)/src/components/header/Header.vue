@@ -14,8 +14,14 @@
                     </ul>
       
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">End day</a></li>
-                        <li><a href="#">Save & Load</a></li>
+                        <li><a href="#" @click="actionButtonClicked('endDay')">End day</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save & Load <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" @click="actionButtonClicked('save')">Save</a></li>
+                                <li><a href="#" @click="actionButtonClicked('load')">Load</a></li>
+                            </ul>
+                        </li>
                         <li><a href="#">Funds: $value</a></li>
                     </ul>
                 </div>
@@ -29,6 +35,9 @@ export default {
     methods:{
         buttonClicked(data){
             this.$emit('componentButton', data)
+        },
+        actionButtonClicked(data){
+            this.$emit('actionButtons',data)
         }
     }
 
@@ -36,5 +45,18 @@ export default {
 </script>
 
 <style>
+
+
+.navbar-nav li:hover > ul.dropdown-menu {
+    display: block;
+}
+.dropdown-submenu {
+    position:relative;
+}
+.dropdown-submenu>.dropdown-menu {
+    top:0;
+    left:100%;
+    margin-top:-6px;
+}
 
 </style>
