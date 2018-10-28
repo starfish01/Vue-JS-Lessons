@@ -22,7 +22,7 @@
                                 <li><a href="#" @click="actionButtonClicked('load')">Load</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Funds: $value</a></li>
+                        <li><a href="#">Funds: ${{ walletValue }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -39,7 +39,8 @@ export default {
         actionButtonClicked(data){
             this.$emit('actionButtons',data)
         }
-    }
+    },
+    props:['walletValue']
 
 }
 </script>

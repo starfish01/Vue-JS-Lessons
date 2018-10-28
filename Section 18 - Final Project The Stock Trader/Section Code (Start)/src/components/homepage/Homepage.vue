@@ -6,18 +6,28 @@
         <p>Click on 'End Day' to begin a new Day!</p>
         <hr>
         <h4>Your Funds: ${{ walletValue }}</h4>
+        <hr>
+        <button @click="purchaseOrder(10)">BUY</button>
+        <button @click="sellOrder(10)">Sell</button>
+
         </div>
     </div>
 </template>
 
 <script>
 
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     computed:{
         ...mapGetters([
             'walletValue'
+        ])
+    },
+    methods:{
+        ...mapActions([
+            'purchaseOrder',
+            'sellOrder'
         ])
     }
 }
