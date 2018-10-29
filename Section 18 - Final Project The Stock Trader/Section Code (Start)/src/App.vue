@@ -18,7 +18,7 @@ import Portfolio from './components/Portfolio/Portfolio.vue'
 import Stocks from './components/Stocks/Stocks.vue'
 
 
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 
     export default {
@@ -42,14 +42,19 @@ import { mapGetters } from 'vuex'
                 }else if(data == 'load'){
                     console.log('load')
                 }
-            }
+            },
+            ...mapGetters([
+                'nextDayPriceChange'
+            ])
         },
         computed:{
         ...mapGetters([
             'walletValue'
-        ])
-    }
-
+            ])
+        },
+        created() {
+            
+        },
     }
 </script>
 
