@@ -1,43 +1,48 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import wallet from './modules/wallet' ;
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
 	state:{
-        wallet: 10000,
         stocks: [
             {id:1, name:"BMW", currentPrice:0},
             {id:2, name:"COKE", currentPrice:0},
             {id:3, name:"GOOGLE", currentPrice:0},
             {id:4, name:"TESLA", currentPrice:0}
         ],
-        getStocks: state =>{
-            return state.stocks;
-        }
     },
     getters:{
-        walletValue: state =>{
-            return state.wallet;
-        },
         getStocks: state =>{
             return state.stocks;
-        }
+        },
+
     },
     mutations: {
-        increaseWalletValue: (state, payload) => {
+        updateStockPrice: (state, payload) => {
             state.wallet += payload;
         },
-        decreaseWalletValue: (state, payload) => {
-            state.wallet -= payload;
+        updatePricing:(state, payload,) =>{
+
+            for(var stock in state.stocks){
+               var random = Math.floor((Math.random() * 100) + 1);
+               state.stocks[stock].currentPrice = random;
+            }
+
         },
+        
     },
     actions:{
-        purchaseOrder: ({commit}, payload) => {
-            commit('decreaseWalletValue', payload)
+        nextDayPriceChange: ({commit},payload) => {
+
+            commit('updatePricing')
         },
-        sellOrder:({commit}, payload)=>{
-            commit('increaseWalletValue', payload)
-        }
-    }
+        
+    },
+    modules: {
+        wallet
+    },
+    
 })

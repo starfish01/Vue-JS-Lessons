@@ -11,6 +11,8 @@
         <button @click="sellOrder(10)">Sell</button>
         <hr>
         {{ getStocks[1].name }}
+        <hr>
+        <button @click="nextDayPriceChange">Day</button>
 
         </div>
     </div>
@@ -30,9 +32,11 @@ export default {
     methods:{
         ...mapActions([
             'purchaseOrder',
-            'sellOrder'
+            'sellOrder',
+            'nextDayPriceChange'
         ])
-    }
+    },
+   
 }
 </script>
 

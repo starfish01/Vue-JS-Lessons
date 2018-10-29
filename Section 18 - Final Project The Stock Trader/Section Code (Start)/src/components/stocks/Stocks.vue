@@ -1,11 +1,10 @@
 <template>
     <div class="panel panel-default">
         <div class="panel-body">
-        stocks
-        {{getStocks}}
+        <h4>Stocks</h4>
             <div class="row">
-                <div v-for="index in 10" :key="index" class="col-md-6">
-                    <app-stock :getStocks="getStocks"></app-stock>
+                <div v-for="index in getStocks" :key="index" class="col-sm-6 stock-block col-xs-12">
+                    <app-stock :index="index"></app-stock>
                 </div>
             </div>
         </div>
