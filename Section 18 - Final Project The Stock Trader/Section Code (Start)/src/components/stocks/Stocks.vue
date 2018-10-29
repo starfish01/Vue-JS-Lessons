@@ -3,8 +3,11 @@
         <div class="panel-body">
         stocks
         {{getStocks}}
-        <app-stock :getStocks="getStocks"></app-stock>
-
+            <div class="row">
+                <div v-for="index in 10" :key="index" class="col-md-6">
+                    <app-stock :getStocks="getStocks"></app-stock>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -38,5 +41,9 @@ export default {
 </script>
 
 <style>
+
+.stock-block{
+    display: inline-block
+}
 
 </style>
