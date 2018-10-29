@@ -1,5 +1,11 @@
 const state = {
-    counter:0
+    counter:0,
+    stocks:[
+        {id:1, name:"BMW", currentPrice=0},
+        {id:2, name:"COKE", currentPrice=0},
+        {id:3, name:"GOOGLE", currentPrice=0},
+        {id:4, name:"TESLA", currentPrice=0}
+    ]
 };
 
 const getters ={
@@ -8,6 +14,9 @@ const getters ={
     },
     stringCount: state =>{
         return state.counter + ' clicks';
+    },
+    getStocks: state =>{
+        return state.stocks;
     }
 };
 

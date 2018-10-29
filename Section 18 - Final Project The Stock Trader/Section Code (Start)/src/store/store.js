@@ -5,11 +5,23 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
 	state:{
-		wallet: 10000
+        wallet: 10000,
+        stocks: [
+            {id:1, name:"BMW", currentPrice:0},
+            {id:2, name:"COKE", currentPrice:0},
+            {id:3, name:"GOOGLE", currentPrice:0},
+            {id:4, name:"TESLA", currentPrice:0}
+        ],
+        getStocks: state =>{
+            return state.stocks;
+        }
     },
     getters:{
         walletValue: state =>{
             return state.wallet;
+        },
+        getStocks: state =>{
+            return state.stocks;
         }
     },
     mutations: {

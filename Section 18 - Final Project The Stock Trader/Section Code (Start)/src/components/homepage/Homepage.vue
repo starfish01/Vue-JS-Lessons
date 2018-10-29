@@ -9,6 +9,8 @@
         <hr>
         <button @click="purchaseOrder(10)">BUY</button>
         <button @click="sellOrder(10)">Sell</button>
+        <hr>
+        {{ getStocks[1].name }}
 
         </div>
     </div>
@@ -21,7 +23,8 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
     computed:{
         ...mapGetters([
-            'walletValue'
+            'walletValue',
+            'getStocks'
         ])
     },
     methods:{
