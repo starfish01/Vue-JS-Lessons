@@ -14,7 +14,7 @@ export const store = new Vuex.Store({
             {id:4, name:"TESLA", currentPrice:0}
         ],
         stocksBought:[
-            {id:1, time:1, purchasePrice:10, purchaseOrder: 50 },
+            {id:1, time:1, purchasePrice:98, purchaseOrder: 50 },
             {id:2, time:2, purchasePrice:13, purchaseOrder: 23 }
         ]
     },
