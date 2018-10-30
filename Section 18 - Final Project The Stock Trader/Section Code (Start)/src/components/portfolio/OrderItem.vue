@@ -1,12 +1,12 @@
 <template>
-    <li class="list-group-item">
-        Name: {{getStocks[stock.id-1].name}}
-        Date: {{stock.time}} 
-        Purchase Price: {{stock.purchasePrice}} 
-        Purchase Order: {{stock.purchaseOrder}}
-        Cost: ${{stock.purchasePrice * stock.purchaseOrder}}
-        Position:${{stockPosition(stock.purchasePrice, stock.purchaseOrder, getStocks[stock.id-1].currentPrice)}}
-        <button class="btn btn-primary">Sell</button>
+    <li class="list-group-item" :class=" isProfit ? 'profit' : 'loss'">
+            <b>Name:</b> {{getStocks[stock.id-1].name}}
+            <b>Date:</b> {{stock.time}} 
+            <b>Purchase Price:</b> {{stock.purchasePrice}} 
+            <b>Purchase Order:</b> {{stock.purchaseOrder}}
+            <b>Cost:</b> ${{stock.purchasePrice * stock.purchaseOrder}}
+            <b>Position:</b> ${{stockPosition(stock.purchasePrice, stock.purchaseOrder, getStocks[stock.id-1].currentPrice)}}
+            <button class="btn btn-primary" @click="sellOrdera(stock)">Sell</button>
     </li>
 
 </template>
@@ -17,27 +17,48 @@ import { mapGetters, mapActions } from 'vuex'
 
 
 export default {
+    data(){
+        return{
+           currentWorth: 0 
+        }
+    },
     props:{
         stock: {
           type: Object
         }
     },
-     computed:{
+    computed:{
         ...mapGetters([
             'getStocks'
         ]),
+        isProfit(){
+            if(this.currentWorth >= 0 ){
+                return true;
+            }else{
+                return false;
+            }
+        },
     },
     methods:{
+        ...mapActions([
+            'sellOrdera'
+        ]),
         stockPosition(p, o, c){
             var purchaseWorth = p*o
-            var currentWorth = c*o - purchaseWorth
-
-            return currentWorth
-        }
+            this.currentWorth = c*o - purchaseWorth
+            return this.currentWorth
+        },
     }
 }
 </script>
 
 <style>
+
+.profit{
+    background-color: aqua
+}
+.loss{
+    background-color: lightcoral
+}
 
 </style>

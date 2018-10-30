@@ -46,6 +46,12 @@ export const store = new Vuex.Store({
 
             commit('updatePricing')
         },
+        sellOrdera:({commit},payload) => {
+
+            console.log(Date.now())
+
+           console.log(payload.time);
+        },
         
     },
     modules: {
