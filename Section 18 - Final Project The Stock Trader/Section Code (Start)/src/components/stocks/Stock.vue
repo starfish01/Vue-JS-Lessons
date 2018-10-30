@@ -6,8 +6,14 @@
   </div>
   <div class="panel-body">
     <p>Current Stock Price ${{index.currentPrice}}</p>
-    <input type="text" class="form-control inputPrice">
-     <button class="btn btn-primary">Buy</button> <button class="btn btn-warning">Sell</button>
+<!--    
+   UP TO HERE
+   need to make it a form so i can apply form validation  -->
+   
+    <form>
+        <input v-model="purchaseOrderAmountInput" type="text" class="form-control inputPrice">
+        <button class="btn btn-primary" @click="purchaseOrder(index.id)">Buy</button>
+    </form>
   </div>
 </div>
 </div>
@@ -16,9 +22,26 @@
 
 <script>
 export default {
+    data(){
+        return{
+            purchaseOrderAmountInput:''
+        }
+    },
     props:{
         index: {
           type: Object
+        }
+    },
+    methods:{
+        purchaseOrder(order){
+            if(this.checkOrderIsValid(order)){
+                alert("true")
+            }
+
+             alert(this.purchaseOrderAmountInput)
+        },
+        checkOrderIsValid(order){
+            order = order.trim();
         }
     }
 }

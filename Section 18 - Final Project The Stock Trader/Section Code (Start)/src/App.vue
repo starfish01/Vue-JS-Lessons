@@ -36,7 +36,11 @@ import { mapGetters, mapActions } from 'vuex'
         methods:{
             actionButton(data){
                 if(data == 'endDay'){
-                    console.log('end day')
+                    if(confirm("Are you sure you want to leave today?")){
+                        alert("Tomorrow is a new Day, happy Tradding");
+                    this.$store.dispatch('nextDayPriceChange')
+                    }
+
                 }else if(data == 'save'){
                     console.log('save')
                 }else if(data == 'load'){
@@ -53,7 +57,7 @@ import { mapGetters, mapActions } from 'vuex'
             ])
         },
         created() {
-            
+            this.$store.dispatch('nextDayPriceChange')
         },
     }
 </script>
