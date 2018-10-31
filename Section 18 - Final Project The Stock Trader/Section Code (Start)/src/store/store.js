@@ -13,10 +13,7 @@ export const store = new Vuex.Store({
             {id:3, name:"GOOGLE", currentPrice:0},
             {id:4, name:"TESLA", currentPrice:0}
         ],
-        stocksBought:[
-            {id:1, time:1, purchasePrice:98, purchaseOrder: 50 },
-            {id:2, time:2, purchasePrice:13, purchaseOrder: 23 }
-        ]
+        stocksBought:[]
     },
     getters:{
         getStocks: state =>{
@@ -50,8 +47,8 @@ export const store = new Vuex.Store({
             //console.log(state.stocks[payload.id-1].currentPrice)
             //someArray.splice(x, 1);
             //remove stock option from array
-            console.log(state.stocksBought.find(x => x.time === payload.time))
-
+           // console.log(state.stocksBought.find(x => x.time === payload.time))
+            state.stocksBought.splice(state.stocksBought.find(x => x.time === payload.time),1);
         }   
     },
     actions:{
