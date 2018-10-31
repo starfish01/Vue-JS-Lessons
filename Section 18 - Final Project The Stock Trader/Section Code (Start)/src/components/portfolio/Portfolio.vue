@@ -3,14 +3,10 @@
         <div class="panel-body">
         <h4>Portfolio</h4>
             <div class="row">
-        
-        <!-- {{ getStockBought }} -->
-        <!-- <ul class="list-group"> -->
-        <div class="col-sm-6 stock-block col-xs-12" v-for="stock in getStockBought" :key="stock.time">
-            <app-stock :stock="stock" ></app-stock>
-        <!-- </ul> -->
-        </div>
-        </div>
+                <div class="col-sm-6 stock-block col-xs-12" v-for="stock in getStockBought" :key="stock.time">
+                    <app-stock :stock="stock" ></app-stock>
+                </div>
+            </div>
         </div>
     </div>
 </template>

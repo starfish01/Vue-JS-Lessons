@@ -1,6 +1,8 @@
 <template>
     <div class="container">
-        <app-header :walletValue="walletValue" @componentButton="currentComponent = $event" @actionButtons="actionButton($event)"></app-header>
+        <app-header :walletValue="walletValue" 
+        @componentButton="currentComponent = $event" 
+        @actionButtons="actionButton($event)"></app-header>
 
     <keep-alive>
         <transition mode="out-in" appear name="slide" type="animation">
@@ -15,6 +17,7 @@
 import Header from './components/header/Header.vue'
 import Homepage from './components/homepage/Homepage.vue'
 import Portfolio from './components/Portfolio/Portfolio.vue'
+import Charts from './components/Portfolio/Charts.vue'
 import Stocks from './components/Stocks/Stocks.vue'
 
 
@@ -31,7 +34,8 @@ import { mapGetters, mapActions } from 'vuex'
             appHeader:Header,
             appHomepage:Homepage,
             appPortfolio:Portfolio,
-            appStocks:Stocks
+            appStocks:Stocks,
+            appCharts:Charts
         },
         methods:{
             actionButton(data){

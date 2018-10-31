@@ -9,7 +9,12 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="#" @click="buttonClicked('appPortfolio')">Portfolio</a></li>
+                        <li><a href="#" @click="buttonClicked('appPortfolio')">Portfolio</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" @click="buttonClicked('appCharts')">Charts</a></li>
+                            </ul>
+                        
+                        </li>
                         <li><a href="#" @click="buttonClicked('appStocks')">Stocks</a></li>
                     </ul>
       
