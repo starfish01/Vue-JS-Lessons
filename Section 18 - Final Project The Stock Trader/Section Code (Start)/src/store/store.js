@@ -32,26 +32,41 @@ export const store = new Vuex.Store({
             state.wallet += payload;
         },
         updatePricing:(state, payload,) =>{
-
             for(var stock in state.stocks){
                var random = Math.floor((Math.random() * 100) + 1);
                state.stocks[stock].currentPrice = random;
             }
-
         },
-        
+        addNewPurchaseOrder:(state,payload)=>{
+            state.stocksBought.push(payload)
+        },
+        buyStockUpdateWallet:(state,payload)=>{
+            state.wallet.wallet -= payload;
+        },
+        placeASellOrder:(state,payload)=>{
+            //credit wallet
+            state.wallet.wallet += payload.purchaseOrder * state.stocks[payload.id-1].currentPrice
+            //console.log(payload.purchaseOrder);
+            //console.log(state.stocks[payload.id-1].currentPrice)
+            //someArray.splice(x, 1);
+            //remove stock option from array
+            console.log(state.stocksBought.find(x => x.time === payload.time))
+
+        }   
     },
     actions:{
         nextDayPriceChange: ({commit},payload) => {
-
             commit('updatePricing')
         },
         sellOrdera:({commit},payload) => {
-
-            console.log(Date.now())
-
-           console.log(payload.time);
+            commit('placeASellOrder',payload);
         },
+        newPurchaseOrder:({commit},payload)=>{
+            commit('addNewPurchaseOrder',payload)
+        },
+        buyStockUpdateWallet:({commit},payload)=>{
+            commit('buyStockUpdateWallet',payload)
+        }
         
     },
     modules: {

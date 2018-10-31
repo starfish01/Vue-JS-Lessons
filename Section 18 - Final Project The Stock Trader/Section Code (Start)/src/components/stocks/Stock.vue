@@ -5,14 +5,10 @@
             <h3 class="panel-title">{{index.name}}</h3>
         </div>
         <div class="panel-body">
-            <p>Current Stock Price ${{index.currentPrice}}</p>
-<!--    
-   UP TO HERE
-   need to make it a form so i can apply form validation  -->
-   
+            <p><b>Current Stock Price:</b> ${{index.currentPrice}}</p>   
             <form >
                 <div class="form-group">
-                    <label for="order">Order:</label>
+                    <label for="order">Order: ${{purchaseOrderAmountInput * index.currentPrice}}</label>
                     <input v-model="purchaseOrderAmountInput" id="order" type="number" class="form-control inputPrice">
                     <button :disabled=!purchaseOrderCorrectStock class="btn btn-primary" @click.prevent="purchaseOrder(index)">Buy</button>
                 </div>
@@ -24,6 +20,9 @@
 </template>
 
 <script>
+
+    import { mapGetters, mapActions } from 'vuex'
+
 export default {
     data(){
         return{
@@ -37,14 +36,39 @@ export default {
     },
     methods:{
         purchaseOrder(order){
-
-
-            alert(this.purchaseOrderAmountInput)
+            if(!this.checkIfThereIsRemainingFunds(this.purchaseOrderAmountInput,order.currentPrice)){
+                alert("Insuficent Funds")
+                return
+            }
+            var newOrder = {
+                 id:order.id, 
+                 time: Date.now(), 
+                 purchasePrice: order.currentPrice, 
+                 purchaseOrder: this.purchaseOrderAmountInput 
+            }
+            this.$store.dispatch('newPurchaseOrder',newOrder);
+            this.purchaseOrderAmountInput = ''
+            alert('Purchase Made')
 
         },
         checkOrderIsValid(order){
             
+        },
+        ...mapActions([
+            'newPurchaseOrder',
+            'buyStockUpdateWallet'
+        ]),
+        checkIfThereIsRemainingFunds(amount, price){
+            var orderAmount = amount * price
+            if(orderAmount > this.walletValue){
+                    this.purchaseOrderAmountInput = ''
+                return false
+            }else{
+                this.$store.dispatch('buyStockUpdateWallet',orderAmount)
+                return true
+            }
         }
+
     },
     computed:{
         purchaseOrderCorrectStock(){
@@ -52,10 +76,11 @@ export default {
                 return true
             }else{
                 return false
-            }
-            
-            
-        }
+            } 
+        },
+        ...mapGetters([
+            'walletValue'
+        ]),
     }
 }
 </script>
