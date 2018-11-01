@@ -28,13 +28,10 @@ const mutations = {
     addNewPurchaseOrder:(state,payload)=>{
         state.stocksBought.push(payload)
     },
-    buyStockUpdateWallet:(state,payload)=>{
-        //this needs fixing
-        state.wallet -= payload;
-    },
-    placeASellOrder:(state,payload)=>{
-        //this needs fixing
-        state.wallet += payload.purchaseOrder * state.stocks[payload.id-1].currentPrice
+    placeASellOrder:(state,payload)=>{  
+        console.log(state.stocksBought.find(x => x.time === payload.time).time)
+        console.log()
+        //this splicing is not working as it should
         
         state.stocksBought.splice(state.stocksBought.find(x => x.time === payload.time),1);
     }
@@ -45,13 +42,14 @@ const actions = {
         commit('updatePricing')
     },
     sellOrdera:({commit},payload) => {
+        commit('increaseWalletValue', payload.purchaseOrder * state.stocks[payload.id-1].currentPrice)
         commit('placeASellOrder',payload);
     },
     newPurchaseOrder:({commit, rootState},payload)=>{
         commit('addNewPurchaseOrder',payload)
     },
     buyStockUpdateWallet:({commit},payload)=>{
-        commit('buyStockUpdateWallet',payload)
+        commit('decreaseWalletValue',payload)
     }
 };
 
