@@ -16,6 +16,9 @@ const mutations = {
     decreaseWalletValue: (state, payload) => {
         state.wallet -= payload;
     },
+    newActionTest:(state,payload)=>{
+        console.log('that worked');
+    }
 };
 
 const actions = {
