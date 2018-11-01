@@ -1,19 +1,16 @@
 <template>
-    <div>
-        <h1>hello</h1>
-        <canvas id="planet-chart"></canvas>
+    <div class="panel panel-default">
+        <div class="panel-body">
+        <h4>Charts</h4>
+            <div class="row">
+
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import Chart from 'chart.js';
 
-
-
-export default {
-   
-
-}
 
 </script>
 

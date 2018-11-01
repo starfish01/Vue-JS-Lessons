@@ -12,7 +12,9 @@
     "chart.js": "^2.7.3",
     "moment": "^2.22.2",
     "vue": "^2.0.1",
-    "vuex": "^3.0.1"
+    "vue-chartjs": "^3.4.0",
+    "vuex": "^3.0.1",
+    "vuex-persist": "^2.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
