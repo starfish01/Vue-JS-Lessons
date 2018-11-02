@@ -25,6 +25,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#" @click="actionButtonClicked('save')">Save</a></li>
                                 <li><a href="#" @click="actionButtonClicked('load')">Load</a></li>
+                                <li><a href="#" @click="actionButtonClicked('clearData')">Clear Local</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Funds: ${{ walletValue }}</a></li>

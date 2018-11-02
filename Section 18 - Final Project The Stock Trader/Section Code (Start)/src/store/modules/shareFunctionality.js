@@ -28,12 +28,8 @@ const mutations = {
     addNewPurchaseOrder:(state,payload)=>{
         state.stocksBought.push(payload)
     },
-    placeASellOrder:(state,payload)=>{  
-        console.log(state.stocksBought.find(x => x.time === payload.time).time)
-        console.log()
-        //this splicing is not working as it should
-        
-        state.stocksBought.splice(state.stocksBought.find(x => x.time === payload.time),1);
+    placeASellOrder:(state,payload)=>{        
+        state.stocksBought.splice(state.stocksBought.findIndex(x => x.time === payload.time),1);
     }
 };
 

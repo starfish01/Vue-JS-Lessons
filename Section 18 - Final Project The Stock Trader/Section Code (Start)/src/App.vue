@@ -49,11 +49,16 @@ import { mapGetters, mapActions } from 'vuex'
                     console.log('save')
                 }else if(data == 'load'){
                     console.log('load')
+                }else if(data == 'clearData'){
+                    this.$store.dispatch('clearLocalData')
                 }
             },
             ...mapGetters([
                 'nextDayPriceChange'
-            ])
+            ]),
+            ...mapActions([
+            'clearLocalData'
+        ])
         },
         computed:{
         ...mapGetters([
