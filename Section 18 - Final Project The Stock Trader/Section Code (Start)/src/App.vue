@@ -47,6 +47,7 @@ import { mapGetters, mapActions } from 'vuex'
 
                 }else if(data == 'save'){
                     console.log('save')
+                    this.$store.dispatch('saveOnline')
                 }else if(data == 'load'){
                     console.log('load')
                 }else if(data == 'clearData'){

@@ -30,6 +30,12 @@ const mutations = {
     },
     placeASellOrder:(state,payload)=>{        
         state.stocksBought.splice(state.stocksBought.findIndex(x => x.time === payload.time),1);
+    },
+    resetShares:(state)=>{
+        state.stocksBought = []
+    },
+    submitDataOnline:(state,payload)=>{
+        this.resource.saveAlt(state.stocksBought);
     }
 };
 
@@ -37,8 +43,13 @@ const actions = {
     nextDayPriceChange: ({commit},payload) => {
         commit('updatePricing')
     },
-    sellOrdera:({commit},payload) => {
+    sellOrdera:({commit,state},payload) => {
+        //
+        
+        //console.log(state.stocks[payload.id-1].currentPrice)
         commit('increaseWalletValue', payload.purchaseOrder * state.stocks[payload.id-1].currentPrice)
+        //sellOrder
+        
         commit('placeASellOrder',payload);
     },
     newPurchaseOrder:({commit, rootState},payload)=>{

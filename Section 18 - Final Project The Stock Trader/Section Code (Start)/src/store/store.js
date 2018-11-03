@@ -25,31 +25,30 @@ export const store = new Vuex.Store({
 
     },
     mutations: {
-        clearLocalDataMutation:(state,payload)=>{
-            //trying to clear local data
-            //window.localStorage.clear('my-app');
-            // const initial = state;
-            // Object.keys(initial).forEach(key => { state[key] = initial[key] })
-            console.log(window.localStorage.clear('myApp'));
-
-            window.localStorage.clear('myApp');
-            //window.localStorage.clear()
-
-        }
            
     },
     actions:{
         clearLocalData: ({commit}, payload) => {
-            
-                
-            //window.localStorage.clear(myApp)
-
-            commit('clearLocalDataMutation', payload)
+            commit('resetWallet')
+            commit('resetShares')
         },
+        saveOnline:({commit},payload)=>{
+            commit('submitDataOnline', payload)
+        },
+        loadOnlineData:({commit},payload)=>{
+
+        }
     },
     modules: {
         wallet,
         shareFunctionality
     },
+    created(){
+        const customAction = {
+            saveAlt: {method: 'POST'},
+            getData: {method: 'GET'}
+        };
+        this.resource = this.$resource('{node}.json', {}, customAction);
+    }
     
 })

@@ -11,13 +11,14 @@ const getters ={
 
 const mutations = {
     increaseWalletValue: (state, payload) => {
+        console.log(payload)
         state.wallet += payload;
     },
     decreaseWalletValue: (state, payload) => {
         state.wallet -= payload;
     },
-    newActionTest:(state,payload)=>{
-        console.log('that worked');
+    resetWallet:(state)=>{
+        state.wallet = 10000
     }
 };
 
