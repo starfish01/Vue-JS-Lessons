@@ -39,7 +39,12 @@ const mutations = {
     },
     submitDataOnline:(state,payload)=>{
         this.resource.saveAlt(state.stocksBought);
+    },
+    loadStocksAndBoughtStocks:(state,payload)=>{
+        state.stocksBought = payload.stocksBought
+        state.stocks = payload.stocks
     }
+
 };
 
 const actions = {

@@ -17,6 +17,9 @@ const mutations = {
     },
     resetWallet:(state)=>{
         state.wallet = 10000
+    },
+    loadWalletState:(state,payload)=>{
+        state.wallet = payload
     }
 };
 
