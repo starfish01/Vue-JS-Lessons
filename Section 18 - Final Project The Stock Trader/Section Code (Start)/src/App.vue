@@ -30,9 +30,6 @@ import { mapGetters, mapActions } from 'vuex'
 
 
     export default {
-        firebase:{
-            books: booksRef
-        },
         data(){
             return{
                 currentComponent: 'appHomepage',
@@ -59,6 +56,7 @@ import { mapGetters, mapActions } from 'vuex'
                     this.$store.dispatch('saveOnline')
                 }else if(data == 'load'){
                     console.log('load')
+                    this.$store.dispatch('loadOnlineData')
                 }else if(data == 'clearData'){
                     this.$store.dispatch('clearLocalData')
                 }

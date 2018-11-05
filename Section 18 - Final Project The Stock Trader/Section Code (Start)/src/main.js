@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueResource from 'vue-resource'
+import * as firebase from 'firebase';
 import {store} from './store/store.js';
-import VueFire from 'vuefire'
+import { config } from './store/firebase-config'
 
+
+firebase.initializeApp(config);
+Vue.prototype.$firebase = firebase;
 
 Vue.use(VueResource);
 
-Vue.http.options.root = 'https://vue-stock-project-ac836.firebaseio.com/'
-
-Vue.use(VueFire)
 
 new Vue({
   el: '#app',

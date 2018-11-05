@@ -1,25 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VuexPersist from 'vuex-persist'
-
+import * as firebase from 'firebase'
 
 import Firebase from 'firebase'
 
 
 
-//i think this needs to go to the store
-let config = {
-    apiKey: "...",
-    authDomain: "...",
-    databaseURL: "https://vue-stock-project-ac836.firebaseio.com/",
-    storageBucket: "...",
-    messagingSenderId: "..."
-  };
-  
-let app = Firebase.initializeApp(config)
-let db = app.database()
 
-let booksRef = db.ref('books')
 
 
 const vuexPersist = new VuexPersist({
@@ -37,9 +25,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     plugins: [vuexPersist.plugin],
-    firebase:{
-        books: booksRef
-    },
+
 	state:{
        
     },
@@ -48,11 +34,41 @@ export const store = new Vuex.Store({
 
     },
     mutations: {
-        vueFireSaveOnline: (state, payload) => {
+        saveStockOnline:(state,payload) => {
             
-               // booksRef.push(this.newBook);
-                
+            var ref = firebase.database()
+
+            //clears db
+            firebase.database().ref('/').set({
+                stocksBought:{},
+                wallet:{},
+                stocks:{}
+            });
+            //grabs data
+            var stocksBought = state.shareFunctionality.stocksBought
+            var wallet = state.wallet.wallet
+            var stocks = state.shareFunctionality.stocks
+            //saves to db
+            firebase.database().ref('/').set({
+                stocksBought,
+                wallet,
+                stocks
+            });
         },
+        loadStocksFromFirebase:(state)=>{
+            var ref = firebase.database()
+
+            return firebase.database().ref('/').once('value').then(function(snapshot) {
+                state.wallet.wallet = snapshot.val().wallet;
+                state.shareFunctionality.stocks = snapshot.val().stocks;
+                state.shareFunctionality.stocksBought = snapshot.val().stocks;
+            });
+
+
+            console.log(ref.once())
+
+        }
+  
            
     },
     actions:{
@@ -61,12 +77,13 @@ export const store = new Vuex.Store({
             commit('resetShares')
         },
         saveOnline:({commit},payload)=>{
-            commit('submitDataOnline', payload)
+            commit('saveStockOnline', payload)
         },
         loadOnlineData:({commit},payload)=>{
-
+            commit('loadStocksFromFirebase')
         },
         addBook:({commit},payload)=>{
+            console.log('click')
             commit('vueFireSaveOnline')
         }
     },
@@ -74,13 +91,7 @@ export const store = new Vuex.Store({
         wallet,
         shareFunctionality
     },
-    created(){
-        const customAction = {
-            saveAlt: {method: 'POST'},
-            getData: {method: 'GET'}
-        };
-        this.resource = this.$resource('{node}.json', {}, customAction);
-    }
+   
     
 })
 
