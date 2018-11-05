@@ -9,7 +9,10 @@ const state = {
     
 };
 
-const getters ={
+
+
+
+const getters = {
     getStocks: state =>{
         return state.stocks;
     },
@@ -44,12 +47,7 @@ const actions = {
         commit('updatePricing')
     },
     sellOrdera:({commit,state},payload) => {
-        //
-        
-        //console.log(state.stocks[payload.id-1].currentPrice)
         commit('increaseWalletValue', payload.purchaseOrder * state.stocks[payload.id-1].currentPrice)
-        //sellOrder
-        
         commit('placeASellOrder',payload);
     },
     newPurchaseOrder:({commit, rootState},payload)=>{

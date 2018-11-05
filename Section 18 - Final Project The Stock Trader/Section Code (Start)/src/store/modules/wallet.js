@@ -1,6 +1,5 @@
 const state = {
     wallet: 10000,
-    
 };
 
 const getters ={
@@ -11,7 +10,6 @@ const getters ={
 
 const mutations = {
     increaseWalletValue: (state, payload) => {
-        console.log(payload)
         state.wallet += payload;
     },
     decreaseWalletValue: (state, payload) => {

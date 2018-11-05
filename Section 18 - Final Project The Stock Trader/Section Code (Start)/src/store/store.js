@@ -2,6 +2,26 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import VuexPersist from 'vuex-persist'
 
+
+import Firebase from 'firebase'
+
+
+
+//i think this needs to go to the store
+let config = {
+    apiKey: "...",
+    authDomain: "...",
+    databaseURL: "https://vue-stock-project-ac836.firebaseio.com/",
+    storageBucket: "...",
+    messagingSenderId: "..."
+  };
+  
+let app = Firebase.initializeApp(config)
+let db = app.database()
+
+let booksRef = db.ref('books')
+
+
 const vuexPersist = new VuexPersist({
     key: 'myApp',
     storage: window.localStorage
@@ -17,6 +37,9 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     plugins: [vuexPersist.plugin],
+    firebase:{
+        books: booksRef
+    },
 	state:{
        
     },
@@ -25,6 +48,11 @@ export const store = new Vuex.Store({
 
     },
     mutations: {
+        vueFireSaveOnline: (state, payload) => {
+            
+               // booksRef.push(this.newBook);
+                
+        },
            
     },
     actions:{
@@ -37,6 +65,9 @@ export const store = new Vuex.Store({
         },
         loadOnlineData:({commit},payload)=>{
 
+        },
+        addBook:({commit},payload)=>{
+            commit('vueFireSaveOnline')
         }
     },
     modules: {
@@ -52,3 +83,5 @@ export const store = new Vuex.Store({
     }
     
 })
+
+

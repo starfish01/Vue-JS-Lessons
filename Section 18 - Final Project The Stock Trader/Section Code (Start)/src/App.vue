@@ -10,6 +10,11 @@
         </transition>
     </keep-alive>
 
+    <hr>
+    
+   
+
+
     </div>
 </template>
 
@@ -20,14 +25,18 @@ import Portfolio from './components/Portfolio/Portfolio.vue'
 import Charts from './components/Portfolio/Charts.vue'
 import Stocks from './components/Stocks/Stocks.vue'
 
-
 import { mapGetters, mapActions } from 'vuex'
 
 
+
     export default {
+        firebase:{
+            books: booksRef
+        },
         data(){
             return{
                 currentComponent: 'appHomepage',
+         
             }
         },
         components:{
@@ -58,8 +67,9 @@ import { mapGetters, mapActions } from 'vuex'
                 'nextDayPriceChange'
             ]),
             ...mapActions([
-            'clearLocalData'
-        ])
+                'clearLocalData'
+            ]),
+            
         },
         computed:{
         ...mapGetters([
