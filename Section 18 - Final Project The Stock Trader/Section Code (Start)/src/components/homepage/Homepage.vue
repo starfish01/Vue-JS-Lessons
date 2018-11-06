@@ -7,13 +7,6 @@
         <hr>
         <h4>Your Funds: ${{ walletValue }}</h4>
         <hr>
-        <button @click="purchaseOrder(10)">BUY</button>
-        <button @click="sellOrder(10)">Sell</button>
-        <hr>
-        {{ getStocks[1].name }}
-        <hr>
-        <button @click="nextDayPriceChange">Day</button>
-
         </div>
     </div>
 </template>

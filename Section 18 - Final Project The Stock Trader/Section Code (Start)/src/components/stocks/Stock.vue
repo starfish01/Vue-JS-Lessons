@@ -11,8 +11,7 @@
                     <div class="form-group">
                         <label for="order">Order: ${{purchaseOrderAmountInput * index.currentPrice}}</label>
                         <input v-model="purchaseOrderAmountInput" id="order" type="number" class="form-control inputPrice">
-                        <button :disabled=!purchaseOrderCorrectStock class="btn btn-primary" @click.prevent="purchaseFunction(index)">Buy</button>
-                        <!-- <button :disabled=!purchaseOrderCorrectStock class="btn btn-primary" @click.prevent="purchaseOrder(index)">Buy</button> -->
+                        <button :disabled=!purchaseOrderCorrectStock class="btn btn-primary" @click.prevent="purchaseFunction(index,purchaseOrderAmountInput)">Buy</button>
                     </div>
                 </form>
             </div>
@@ -39,36 +38,6 @@ export default {
         purchaseFunction: Function
     },
     methods:{  
-        purchaseOrder(order){
-            if(!this.checkIfThereIsRemainingFunds(this.purchaseOrderAmountInput,order.currentPrice)){
-                alert("Insuficent Funds")
-                return
-            }
-            var newOrder = {
-                 id:order.id, 
-                 time: Date.now(), 
-                 purchasePrice: order.currentPrice, 
-                 purchaseOrder: this.purchaseOrderAmountInput 
-            }
-            this.$store.dispatch('newPurchaseOrder',newOrder);
-            this.purchaseOrderAmountInput = ''
-            alert('Purchase Made')
-
-        },
-        ...mapActions([
-            'newPurchaseOrder',
-            'buyStockUpdateWallet'
-        ]),
-        checkIfThereIsRemainingFunds(amount, price){
-            var orderAmount = amount * price
-            if(orderAmount > this.walletValue){
-                    this.purchaseOrderAmountInput = ''
-                return false
-            }else{
-                this.$store.dispatch('buyStockUpdateWallet',orderAmount)
-                return true
-            }
-        }
 
     },
     computed:{
@@ -79,12 +48,7 @@ export default {
                 return false
             } 
         },
-        inputValue(){
 
-        },
-        ...mapGetters([
-            'walletValue'
-        ]),
     }
 }
 </script>

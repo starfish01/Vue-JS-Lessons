@@ -10,7 +10,7 @@
         </transition>
     </keep-alive>
 
-    <hr>
+
     
    
 
@@ -82,7 +82,7 @@ import { mapGetters, mapActions } from 'vuex'
 
 
 
-<style>
+<style >
 
 .slide-enter{
 	opacity: 0;
@@ -114,9 +114,14 @@ import { mapGetters, mapActions } from 'vuex'
 	} 
 }
 
+
+
+
+
+
 body {
     padding-top: 60px;
-  }
+}
 
 
 

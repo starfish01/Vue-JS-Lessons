@@ -85,14 +85,9 @@ const actions = {
 
         });
 
-
-
         commit('loadStocksFromFirebase')
     },
-    addBook:({commit},payload)=>{
-        console.log('click')
-        commit('vueFireSaveOnline')
-    }
+
 };
 
 export default {

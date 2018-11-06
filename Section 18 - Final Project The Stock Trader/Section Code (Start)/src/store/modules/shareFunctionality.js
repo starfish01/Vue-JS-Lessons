@@ -56,9 +56,11 @@ const actions = {
         commit('placeASellOrder',payload);
     },
     newPurchaseOrder:({commit, rootState},payload)=>{
+        
         commit('addNewPurchaseOrder',payload)
     },
     buyStockUpdateWallet:({commit},payload)=>{
+        payload = payload.purchasePrice * payload.purchaseOrder
         commit('decreaseWalletValue',payload)
     }
 };
