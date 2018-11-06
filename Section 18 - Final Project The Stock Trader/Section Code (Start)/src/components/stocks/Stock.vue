@@ -1,22 +1,24 @@
 <template>
-<div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{index.name}}</h3>
-        </div>
-        <div class="panel-body">
-            <p><b>Current Stock Price:</b> ${{index.currentPrice}}</p>   
-            <form >
-                <div class="form-group">
-                    <label for="order">Order: ${{purchaseOrderAmountInput * index.currentPrice}}</label>
-                    <input v-model="purchaseOrderAmountInput" id="order" type="number" class="form-control inputPrice">
-                    <button :disabled=!purchaseOrderCorrectStock class="btn btn-primary" @click.prevent="purchaseOrder(index)">Buy</button>
-                </div>
-            </form>
+
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{index.name}}</h3>
+            </div>
+            <div class="panel-body">
+                <p><b>Current Stock Price:</b> ${{index.currentPrice}}</p>   
+                <form >
+                    <div class="form-group">
+                        <label for="order">Order: ${{purchaseOrderAmountInput * index.currentPrice}}</label>
+                        <input v-model="purchaseOrderAmountInput" id="order" type="number" class="form-control inputPrice">
+                        <button :disabled=!purchaseOrderCorrectStock class="btn btn-primary" @click.prevent="purchaseFunction(index)">Buy</button>
+                        <!-- <button :disabled=!purchaseOrderCorrectStock class="btn btn-primary" @click.prevent="purchaseOrder(index)">Buy</button> -->
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-    
+
 </template>
 
 <script>
@@ -25,16 +27,18 @@
 
 export default {
     data(){
-        return{
-            purchaseOrderAmountInput:''
+        return {
+            purchaseOrderAmountInput: ''
         }
     },
     props:{
+        purchaseOrderAmount: String,
         index: {
           type: Object
-        }
+        },
+        purchaseFunction: Function
     },
-    methods:{
+    methods:{  
         purchaseOrder(order){
             if(!this.checkIfThereIsRemainingFunds(this.purchaseOrderAmountInput,order.currentPrice)){
                 alert("Insuficent Funds")
@@ -50,9 +54,6 @@ export default {
             this.purchaseOrderAmountInput = ''
             alert('Purchase Made')
 
-        },
-        checkOrderIsValid(order){
-            
         },
         ...mapActions([
             'newPurchaseOrder',
@@ -77,6 +78,9 @@ export default {
             }else{
                 return false
             } 
+        },
+        inputValue(){
+
         },
         ...mapGetters([
             'walletValue'

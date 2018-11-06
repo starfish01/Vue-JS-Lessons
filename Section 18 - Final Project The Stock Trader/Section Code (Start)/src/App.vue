@@ -6,7 +6,7 @@
 
     <keep-alive>
         <transition mode="out-in" appear name="slide" type="animation">
-        <component :is="currentComponent"></component>
+            <component :is="currentComponent"></component>
         </transition>
     </keep-alive>
 
