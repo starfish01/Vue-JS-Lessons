@@ -1,17 +1,4 @@
 <template>
-    <!-- <li class="list-group-item" :class=" isProfit ? 'profit' : 'loss'">
-            <b>Name:</b> {{getStocks[stock.id-1].name}}
-            <b>Date:</b> {{stock.time}} 
-            <b>Purchase Price:</b> {{stock.purchasePrice}} 
-            <b>Purchase Order:</b> {{stock.purchaseOrder}}
-            <b>Cost:</b> ${{stock.purchasePrice * stock.purchaseOrder}}
-            <b>Position:</b> ${{stockPosition(stock.purchasePrice, stock.purchaseOrder, getStocks[stock.id-1].currentPrice)}}
-            <button class="btn btn-primary" @click="sellOrdera(stock)">Sell</button>
-    
-    
-    
-    
-    </li> -->
 
     
     <div class="panel panel-default" >
