@@ -4,12 +4,7 @@
         <h4>Portfolio</h4>
             <div class="row">
 
-                <transition-group  name="staggered-fade"
-    tag="ul"
-    v-bind:css="false"
-    v-on:before-enter="beforeEnter"
-    v-on:enter="enter"
-    v-on:leave="leave">
+                <transition-group mode="out-in" appear name="slide" type="animation">
 
 
                     <div class="col-sm-6 stock-block col-xs-12" v-for="stock in getStockBought" :key="stock.time">
