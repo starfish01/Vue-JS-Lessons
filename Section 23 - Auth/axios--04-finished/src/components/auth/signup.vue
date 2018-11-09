@@ -69,8 +69,7 @@
 </template>
 
 <script>
-
-import axios from '../../axios-auth';
+  import axios from '../../axios-auth';
 
   export default {
     data () {
@@ -106,9 +105,9 @@ import axios from '../../axios-auth';
           terms: this.terms
         }
         console.log(formData)
-        axios.post('/users.json',formData)
+        axios.post('/users.json', formData)
           .then(res => console.log(res))
-          .catch(error => console.log(error));
+          .catch(error => console.log(error))
       }
     }
   }
