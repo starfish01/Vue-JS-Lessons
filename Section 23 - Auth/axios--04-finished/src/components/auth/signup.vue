@@ -69,7 +69,6 @@
 </template>
 
 <script>
-
   export default {
     data () {
       return {
@@ -104,13 +103,7 @@
           terms: this.terms
         }
         console.log(formData)
-        
-        //signup
-        this.$store.dispatch('signup',{
-          email: formData.email,
-          password: formData.password
-        })
-
+        this.$store.dispatch('signup', formData)
       }
     }
   }
