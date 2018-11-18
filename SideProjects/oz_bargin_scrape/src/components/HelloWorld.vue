@@ -1,13 +1,13 @@
 <template>
   <v-container>
           <p>{{hello}}</p>
-          <button @click="getData">get data</button>
-          <p>{{data}}</p>
+          <button @click="getSiteData">get data</button>
+          <p>{{newsitedata}}</p>
   </v-container>
 </template>
 
 <script>
-import {ozSiteData} from '../../src/scrape.js'
+import { mapActions,mapState  } from 'vuex'
 
   export default {
     data(){
@@ -17,12 +17,15 @@ import {ozSiteData} from '../../src/scrape.js'
       }
     },
     computed:{
-      
+      newsitedata(){
+        return this.$store.state.siteData
+      }
     },
     methods:{
-      getData(){
-        this.data = ozSiteData;
-      }
+      ...mapActions([
+        'getSiteData'
+      ]),
+
     }
   }
 </script>

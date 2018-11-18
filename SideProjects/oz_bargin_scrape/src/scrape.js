@@ -3,7 +3,7 @@ var cheerio = require('cheerio');
 
 
 
-request('https://www.ozbargain.com.au/', function(error, response,html){
+export var ozSiteData = request('https://www.ozbargain.com.au/', function(error, response,html){
     if(!error && response.statusCode == 200){
         var $ = cheerio.load(html)
         $('h2.title').each(function(i,element){
@@ -39,16 +39,12 @@ request('https://www.ozbargain.com.au/', function(error, response,html){
                     comments,
                     tag,
                     expirydate
-
                 }
             }
             return metadata
-
         })
-        
     }
 })
 
 
 
-export var ozSiteData = 5
