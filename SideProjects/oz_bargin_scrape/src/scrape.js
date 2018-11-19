@@ -1,9 +1,9 @@
 var request = require('request');
 var cheerio = require('cheerio');
+import store from "./store.js";
 
 
-
-export var ozSiteData = request('https://www.ozbargain.com.au/', function(error, response,html){
+request('https://www.ozbargain.com.au/', function(error, response,html){
     if(!error && response.statusCode == 200){
         var $ = cheerio.load(html)
         $('h2.title').each(function(i,element){
@@ -41,10 +41,9 @@ export var ozSiteData = request('https://www.ozbargain.com.au/', function(error,
                     expirydate
                 }
             }
+            console.log('hel')
+            store.dispatch('recievedDataBack')
             return metadata
         })
     }
 })
-
-
-
