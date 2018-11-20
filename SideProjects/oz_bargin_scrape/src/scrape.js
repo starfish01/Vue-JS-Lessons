@@ -1,10 +1,15 @@
 var request = require('request');
 var cheerio = require('cheerio');
-import store from "./store.js";
+
+var metadata=[]
 
 
-request('https://www.ozbargain.com.au/', function(error, response,html){
+request('https://cors-anywhere.herokuapp.com/https://www.ozbargain.com.au/', function(error, response,html){
+    console.log('request')
+    console.log(error)
+    console.log(html)
     if(!error && response.statusCode == 200){
+        console.log('info 200')
         var $ = cheerio.load(html)
         $('h2.title').each(function(i,element){
             //checks if its a deal
@@ -30,8 +35,9 @@ request('https://www.ozbargain.com.au/', function(error, response,html){
             }
             
             var infoTAG = $(this).children('span').text()
+
             if(deal){
-                var metadata ={
+                nextObj = {
                     title,
                     description,
                     infoTAG,
@@ -40,10 +46,12 @@ request('https://www.ozbargain.com.au/', function(error, response,html){
                     tag,
                     expirydate
                 }
+                metadata.push(nextObj)
             }
-            console.log('hel')
-            store.dispatch('recievedDataBack')
-            return metadata
-        })
+        }
+        
+        )
     }
 })
+
+export default metadata

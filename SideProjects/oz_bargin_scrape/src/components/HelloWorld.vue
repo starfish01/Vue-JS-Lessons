@@ -1,13 +1,15 @@
 <template>
   <v-container>
           <p>{{hello}}</p>
-          <button @click="getSiteData">get data</button>
+          <button @click="clicker">get data</button>
           <p>{{newsitedata}}</p>
   </v-container>
 </template>
 
 <script>
 import { mapActions,mapState  } from 'vuex'
+import metadata from '../scrape'
+
 
   export default {
     data(){
@@ -25,7 +27,11 @@ import { mapActions,mapState  } from 'vuex'
       ...mapActions([
         'getSiteData'
       ]),
-
+      clicker(){
+        console.log('clicked');
+        let x = metadata
+        console.log(x)
+      }
     }
   }
 </script>
