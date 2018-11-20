@@ -1,8 +1,15 @@
 <template>
   <v-container>
-          <p>{{hello}}</p>
-          <button @click="clicker">get data</button>
-          <p>{{newsitedata}}</p>
+          <v-btn @click="clicker">get data</v-btn>
+
+          <ul>
+            
+            <li v-for="item in data">
+            {{ item.title }}
+            </li>
+          </ul>
+
+
   </v-container>
 </template>
 
@@ -14,7 +21,6 @@ import metadata from '../scrape'
   export default {
     data(){
       return{
-        hello:"hello",
         data:0
       }
     },
@@ -28,9 +34,7 @@ import metadata from '../scrape'
         'getSiteData'
       ]),
       clicker(){
-        console.log('clicked');
-        let x = metadata
-        console.log(x)
+        this. data = metadata
       }
     }
   }

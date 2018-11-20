@@ -3,13 +3,11 @@ var cheerio = require('cheerio');
 
 var metadata=[]
 
+//to bypass security we use the proxy below
+//https://cors-anywhere.herokuapp.com/
 
 request('https://cors-anywhere.herokuapp.com/https://www.ozbargain.com.au/', function(error, response,html){
-    console.log('request')
-    console.log(error)
-    console.log(html)
     if(!error && response.statusCode == 200){
-        console.log('info 200')
         var $ = cheerio.load(html)
         $('h2.title').each(function(i,element){
             //checks if its a deal
@@ -37,7 +35,7 @@ request('https://cors-anywhere.herokuapp.com/https://www.ozbargain.com.au/', fun
             var infoTAG = $(this).children('span').text()
 
             if(deal){
-                nextObj = {
+                var nextObj = {
                     title,
                     description,
                     infoTAG,
