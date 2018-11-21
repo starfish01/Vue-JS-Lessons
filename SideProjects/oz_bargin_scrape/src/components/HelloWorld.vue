@@ -7,7 +7,7 @@
                 <v-flex v-for="i in data" :key="`3${i}`" xs6>
                   <v-card dark color="primary">
                     <v-card-text class="px-6">{{ i.title }}</v-card-text>
-                    <v-card-text class="px-6"><v-btn :html="ozBarginLink(i.link)" target="_blank">Open Link {{i.link}}</v-btn></v-card-text>
+                    <v-card-text class="px-6"><v-btn :href="ozBarginLink(i.link)" target="_blank">Open Link</v-btn></v-card-text>
                   </v-card>
                 </v-flex>
               </v-layout>
