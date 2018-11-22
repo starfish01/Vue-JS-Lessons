@@ -48,7 +48,7 @@ export default {
   data(){
     return{
       currentComponent: 'appBuilderMain',
-      drawer:{},
+      drawer:false,
       props: {
         source: String
       }              
