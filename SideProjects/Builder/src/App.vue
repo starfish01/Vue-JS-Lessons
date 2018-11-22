@@ -30,9 +30,8 @@
       <v-toolbar-title>Project Builder</v-toolbar-title>
     </v-toolbar>
     <v-content>
-      
           
-            <component :is="currentComponent"></component>
+      <component :is="currentComponent"></component>
           
     </v-content>
     <v-footer app fixed>
@@ -49,6 +48,7 @@ export default {
   data(){
     return{
       currentComponent: 'appBuilderMain',
+      drawer:{},
       props: {
         source: String
       }              
