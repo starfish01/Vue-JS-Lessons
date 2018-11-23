@@ -1,0 +1,35 @@
+<v-flex>
+                <v-card dark color="primary" >
+                    <v-layout row wrap px-3>
+                    <v-flex xs3>
+                        <v-select
+                            :items="buttonSelectItems"
+                            label="Button Type"
+                            solo
+                        ></v-select>
+                    </v-flex>
+                    <v-flex xs3>
+                        <v-text-field
+                            label="Module #"
+                            single-line
+                            solo
+                        ></v-text-field>   
+                    </v-flex>
+                    <v-flex xs3>
+                        <v-text-field
+                            label="Button Up URL"
+                            single-line
+                            solo
+                        ></v-text-field>
+                    </v-flex>
+                    <v-flex xs3>
+                       <v-text-field
+                            label="Button Down URL"
+                            single-line
+                            solo
+                        ></v-text-field>
+                    </v-flex>
+                    </v-layout>
+                </v-card>
+            </v-flex>
+            
