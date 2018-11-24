@@ -10,7 +10,7 @@
     </v-layout>
     
     <div v-for="i in sections" :key="i">
-      <appButtonSection></appButtonSection>
+      <appButtonSection :sectionID="i"></appButtonSection>
     </div>
   </v-container>
 </template>
@@ -34,7 +34,7 @@ export default {
       let sectionId = this.sections.length;
       this.sections.push(sectionId)
       //this.sections.push(new Component(appButtonSection))
-      console.log(this.sections)
+      //console.log(this.sections)
     }
   }
 }
