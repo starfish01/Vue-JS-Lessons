@@ -1,5 +1,9 @@
 <template>
     <div>
+        <v-dialog v-model="dialog" persistent max-width="700px">
+            <v-btn slot="activator" :color="btnComponentSet" fab large dark>
+                <v-icon>add</v-icon>
+            </v-btn>
         <v-card>
             <v-card-title>
                 <span class="headline">User Profile - {{ button.name }}</span>
@@ -43,10 +47,10 @@
             </v-container>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat >Close</v-btn>
-            <v-btn color="blue darken-1" flat >Save</v-btn>
+            <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
         </v-card-actions>
         </v-card>
+        </v-dialog>
     </div>    
 </template>
 
@@ -54,10 +58,18 @@
 export default {
     data(){
         return{
-            
+            dialog:false
         }
     },
-    props:['button']
+    props:['button'],
+    computed:{
+        btnComponentSet(){
+            if (!this.button.name == null || !this.button.name == ''){
+                return "primary"
+            }
+            return "warning"
+        }
+    },
 
 }
 </script>

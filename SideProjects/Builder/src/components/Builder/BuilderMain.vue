@@ -5,7 +5,7 @@
           <v-flex xs3 ><v-btn @click="addSectionButton()" target="_blank">Add Component</v-btn></v-flex>
           <v-flex xs3 >
           <v-dialog v-model="dialog" width="600px">
-        <v-btn slot="activator" dark>Export JSON</v-btn>
+        <v-btn slot="activator" @click="exportJSON()" dark>Export JSON</v-btn>
         <v-card>
           <v-card-title>
             <span class="headline">JSON File</span>
@@ -23,7 +23,7 @@
     </v-layout>
     </v-card>
     <div v-for="i in sections" :key="i">
-      <appButtonSection :sectionID="i"></appButtonSection>
+      <appButtonSection :sectionID="i" ></appButtonSection>
     </div>
   </v-container>
 </template>
@@ -60,6 +60,12 @@ export default {
       this.sections.push(sectionId)
       //this.sections.push(new Component(appButtonSection))
       //console.log(this.sections)
+    },
+    exportJSON(){
+      
+
+
+      
     }
   }
 }

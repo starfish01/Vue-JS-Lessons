@@ -27,14 +27,11 @@
                         <v-flex xs4 text-xs-center v-for="button in buttonsAdded" :key="button.key">
                             {{ button.name }} 
                             {{button.id}}
-                            <v-dialog persistent max-width="700px">
-                                <v-btn slot="activator" :color="btnComponentSet" fab large dark @click="btnBtnClick(button)">
-                                    <v-icon>add</v-icon>
-                                </v-btn>
+                           
                                
                                 <appButtonDetails :button="button"></appButtonDetails>
 
-                            </v-dialog>
+                            
                         </v-flex>
                     </v-layout>
                 </v-card>
@@ -77,14 +74,7 @@ export default {
             //console.log(this.sectionID)
         }
     },
-    computed:{
-        btnComponentSet(){
-            if (!this.buttonsAdded[this.buttonsAdded.length-1].name == null || !this.buttonsAdded[this.buttonsAdded.length-1].name == ''){
-                return "primary"
-            }
-            return "warning"
-        }
-    },
+    
     components:{
             appButtonDetails:ButtonDetails
     }
