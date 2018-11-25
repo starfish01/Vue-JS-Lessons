@@ -1,4 +1,9 @@
-export default {
+export {newObject}
+
+
+function newObject(){
+
+  let obj =  {
     "name": null,
     "badge": null,
     "image": null,
@@ -9,3 +14,7 @@ export default {
     "settings": null,
     "id":null
   }
+
+
+  return obj
+}

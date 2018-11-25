@@ -18,6 +18,7 @@
                         solo
                     ></v-select>
                     <v-btn @click="addButtonToComponent()">Add</v-btn>
+                    
                 </v-toolbar-items>
             </v-toolbar>
             <v-flex>
@@ -26,12 +27,11 @@
                         <v-flex xs4 text-xs-center v-for="button in buttonsAdded" :key="button.key">
                             {{ button.name }} 
                             {{button.id}}
-                            <v-dialog   max-width="700px">
+                            <v-dialog persistent max-width="700px">
                                 <v-btn slot="activator" :color="btnComponentSet" fab large dark @click="btnBtnClick(button)">
                                     <v-icon>add</v-icon>
                                 </v-btn>
                                
-
                                 <appButtonDetails :button="button"></appButtonDetails>
 
                             </v-dialog>
@@ -46,7 +46,7 @@
 <script>
 
 import ButtonDetails from './ButtonDetails.vue'
-import ButtonTemplate from '../../template/buttonTemplate'
+import * as ButtonTemplate from '../../template/buttonTemplate'
 
 export default {
     data(){
@@ -63,7 +63,8 @@ export default {
     props:['sectionID'],
     methods:{
         addButtonToComponent(){
-            let newButton = ButtonTemplate;
+
+            let newButton = new ButtonTemplate.newObject;
 
             newButton.id = 'button-' + this.sectionID + '-' + this.buttonsAdded.length
 
@@ -78,16 +79,14 @@ export default {
     },
     computed:{
         btnComponentSet(){
-            if (this.buttonsAdded[this.buttonsAdded.length-1].name == null || this.buttonsAdded[this.buttonsAdded.length-1].name == ''){
-                return "warning"
+            if (!this.buttonsAdded[this.buttonsAdded.length-1].name == null || !this.buttonsAdded[this.buttonsAdded.length-1].name == ''){
+                return "primary"
             }
-            return "primary"
+            return "warning"
         }
     },
     components:{
             appButtonDetails:ButtonDetails
-
-
     }
 
 }
