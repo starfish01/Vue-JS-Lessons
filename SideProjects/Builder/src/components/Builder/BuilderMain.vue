@@ -11,7 +11,7 @@
             <span class="headline">JSON File</span>
           </v-card-title>
           <v-card-text>
-            <span class="grey--text">{{ testData}}</span>
+            <span class="grey--text">{{ getButtons }}</span>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -23,7 +23,7 @@
     </v-layout>
     </v-card>
     <div v-for="i in sections" :key="i">
-      <appButtonSection :sectionID="i" ></appButtonSection>
+      <appButtonSection :sectionID="i" @sectionDataReturn="databuilder($event)"></appButtonSection>
     </div>
   </v-container>
 </template>
@@ -31,6 +31,8 @@
 <script>
 
 import ButtonSection from './ButtonSection.vue'
+import { mapGetters, mapActions } from 'vuex'
+
 
 export default {
   data(){
@@ -51,6 +53,13 @@ export default {
 
     }
   },
+  computed:{
+    ...mapGetters([
+            'getButtons'
+        ]),
+  },
+
+
   components:{
     appButtonSection:ButtonSection
   },
@@ -62,10 +71,10 @@ export default {
       //console.log(this.sections)
     },
     exportJSON(){
-      
 
-
-      
+    },
+    databuilder(data){
+      console.log(data)
     }
   }
 }

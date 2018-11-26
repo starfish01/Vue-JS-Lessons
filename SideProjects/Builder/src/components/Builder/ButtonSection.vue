@@ -18,6 +18,7 @@
                         solo
                     ></v-select>
                     <v-btn @click="addButtonToComponent()">Add</v-btn>
+                    <v-btn @click="returnData()">Return</v-btn>
                     
                 </v-toolbar-items>
             </v-toolbar>
@@ -44,6 +45,7 @@
 
 import ButtonDetails from './ButtonDetails.vue'
 import * as ButtonTemplate from '../../template/buttonTemplate'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     data(){
@@ -64,6 +66,7 @@ export default {
             let newButton = new ButtonTemplate.newObject;
 
             newButton.id = 'button-' + this.sectionID + '-' + this.buttonsAdded.length
+            newButton.sectionId = this.sectionID;
 
 
             this.buttonsAdded.push(newButton)
@@ -72,7 +75,15 @@ export default {
         btnBtnClick(id){
             
             //console.log(this.sectionID)
-        }
+        },
+        returnData(){
+            this.$store.dispatch('saveSection',this.buttonsAdded);
+
+            //this.$emit('sectionDataReturn', this.buttonsAdded);
+        },
+         ...mapActions([
+            'saveSection'
+        ]),
     },
     
     components:{

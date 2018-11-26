@@ -12,7 +12,8 @@ function newObject(){
     "module_id": null,
     "css": null,
     "settings": null,
-    "id":null
+    "id":null,
+    "sectionId":null
   }
 
 

@@ -4,13 +4,25 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-
+  state:{
+    buttonsObject:[]  
+  },
+  getters:{
+    getButtons: state =>{
+      return state.buttonsObject;
+  },
+     
   },
   mutations: {
-
-  },
-  actions: {
-
+    updateSection:(state,payload)=>{
+    state.buttonsObject = payload
   }
+       
+  },
+  actions:{
+    saveSection: ({commit}, payload) => {
+      console.log(payload)
+      commit('updateSection', payload)
+  },
+  },
 })
