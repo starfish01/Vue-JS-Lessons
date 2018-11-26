@@ -15,13 +15,19 @@ export default new Vuex.Store({
   },
   mutations: {
     updateSection:(state,payload)=>{
+
+      state.buttonsObject.forEach(element => {
+        console.log('hello')
+      });
+
+
+
     state.buttonsObject = payload
   }
        
   },
   actions:{
     saveSection: ({commit}, payload) => {
-      console.log(payload)
       commit('updateSection', payload)
   },
   },

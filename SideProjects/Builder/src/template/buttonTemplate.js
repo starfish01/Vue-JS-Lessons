@@ -13,7 +13,8 @@ function newObject(){
     "css": null,
     "settings": null,
     "id":null,
-    "sectionId":null
+    "sectionId":null,
+    "buttonId":null
   }
 
 

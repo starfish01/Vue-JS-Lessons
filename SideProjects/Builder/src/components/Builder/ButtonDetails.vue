@@ -18,13 +18,14 @@
                 </v-flex>
                 <v-flex xs12 sm6 >
                     <v-select
-                        :items="['Reach Link', 'Events', 'Schoolbox Events', '...']"
+                        :items="['Reach Link', 'Events', 'Schoolbox Events', 'Core Links','...']"
                         label="Button Type"
+                        v-model="buttonSelect"
                         
                     ></v-select>
                 </v-flex>
                 <v-flex xs12 sm6 >
-                    <v-text-field label="Module #"></v-text-field>
+                    <v-text-field label="Module #"  v-model="button.module_id"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 >
                     <v-autocomplete
@@ -34,15 +35,35 @@
                     ></v-autocomplete>
                 </v-flex>
                 <v-flex xs12>
-                    <v-text-field label="Button Up"></v-text-field>
+                    <v-text-field label="Button Up" v-model="button.image"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                    <v-text-field label="Button Down" ></v-text-field>
+                    <v-text-field label="Button Down" v-model="button.image_down"></v-text-field>
                 </v-flex>
                 
-                <v-flex xs12 sm6>
-                    
+                <v-flex xs12 >
+                    <v-checkbox label="Translations:" v-model="translationCheckbox"></v-checkbox>
                 </v-flex>
+                <v-flex xs12 sm6 v-if="translationCheckbox">
+                    <v-text-field label="Title" placeholder="Sport" @blur="translationSetUp({'title':$event.target.value})"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 v-if="translationCheckbox">
+                    <v-text-field label="Empty" placeholder="No Sport Notices" @blur="translationSetUp({'empty':$event.target.value})"></v-text-field>
+                </v-flex>
+                <v-flex xs12 v-if="translationCheckbox">
+                    <v-text-field label="Message" placeholder="There are currently no sport notices." @blur="translationSetUp({'desc':$event.target.value})"></v-text-field>
+                </v-flex>
+
+                <v-flex xs12 v-if="buttonSelect == 'Core Links'">
+                    Core Links
+                    <v-btn @click="addCoreLink()">Add</v-btn>
+                </v-flex>
+                <v-flex xs12 v-if="buttonSelect == 'Core Links'" v-for="links in coreLinksAdded" :key="links.key">
+                    <appCoreLinks v-if="buttonSelect == 'Core Links'"></appCoreLinks>
+                </v-flex>
+
+
+
             </v-layout>
             </v-container>
         <v-card-actions>
@@ -55,10 +76,16 @@
 </template>
 
 <script>
+import CoreLinks from './CoreLinks/CoreLinks.vue'
+
 export default {
     data(){
         return{
-            dialog:false
+            dialog:false,
+            translationArray:{},
+            translationCheckbox:false,
+            buttonSelect:'',
+            coreLinksAdded:[]
         }
     },
     props:['button'],
@@ -69,7 +96,31 @@ export default {
             }
             return "warning"
         }
+    
     },
+    methods:{
+        translationSetUp(value){
+            if(value.title){
+                this.translationArray.title = value.title
+            }else if(value.empty){
+                this.translationArray.empty = value.empty
+            }else if(value.desc){
+                this.translationArray.desc = value.desc
+            }
+
+            
+            // This creates the JSON file just need to find out how to hook it up to the button
+            console.log(this.translationArray)
+        },
+        addCoreLink(){
+            this.coreLinksAdded.push({'key':this.coreLinksAdded.size})
+        }
+    },
+    components:{
+        appCoreLinks: CoreLinks
+    }
+
+
 
 }
 </script>

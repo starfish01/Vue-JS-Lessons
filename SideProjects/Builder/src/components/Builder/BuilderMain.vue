@@ -3,6 +3,7 @@
     <v-card dark color="primary">
     <v-layout row >
           <v-flex xs3 ><v-btn @click="addSectionButton()" target="_blank">Add Component</v-btn></v-flex>
+          <v-flex xs3 ><v-btn @click="dump()" target="_blank">dump</v-btn></v-flex>
           <v-flex xs3 >
           <v-dialog v-model="dialog" width="600px">
         <v-btn slot="activator" @click="exportJSON()" dark>Export JSON</v-btn>
@@ -11,7 +12,7 @@
             <span class="headline">JSON File</span>
           </v-card-title>
           <v-card-text>
-            <span class="grey--text">{{ getButtons }}</span>
+            <span class="grey--text">{{ allButtons }}</span>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -23,7 +24,7 @@
     </v-layout>
     </v-card>
     <div v-for="i in sections" :key="i">
-      <appButtonSection :sectionID="i" @sectionDataReturn="databuilder($event)"></appButtonSection>
+      <appButtonSection :sectionID="i" @sectionButtonData="allButtons[i] = $event" @sectionDataReturn="databuilder($event)"></appButtonSection>
     </div>
   </v-container>
 </template>
@@ -31,32 +32,20 @@
 <script>
 
 import ButtonSection from './ButtonSection.vue'
-import { mapGetters, mapActions } from 'vuex'
 
 
 export default {
   data(){
     return{
       sections:[],
+      allButtons:[],
       dialog:false,
-      testData:{
-    "name": null,
-    "badge": null,
-    "image": null,
-    "image_down": null,
-    "class_name": null,
-    "module_id": null,
-    "css": null,
-    "settings": null,
-    "id":null
-  }
+      
 
     }
   },
   computed:{
-    ...mapGetters([
-            'getButtons'
-        ]),
+
   },
 
 
@@ -67,14 +56,28 @@ export default {
     addSectionButton(){
       let sectionId = this.sections.length;
       this.sections.push(sectionId)
-      //this.sections.push(new Component(appButtonSection))
-      //console.log(this.sections)
+
     },
     exportJSON(){
 
     },
     databuilder(data){
       console.log(data)
+    },
+    dump(){
+      //console.log(this.allButtons)
+
+      if(this.allButtons.length > 1){
+        console.log('multi array')
+        this.allButtons.forEach(element => {
+          console.log(element)
+        });
+
+      }else{
+        console.log('single Array')
+        console.log(this.allButtons[0])
+      }
+
     }
   }
 }

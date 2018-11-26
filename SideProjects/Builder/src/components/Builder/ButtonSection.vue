@@ -45,7 +45,6 @@
 
 import ButtonDetails from './ButtonDetails.vue'
 import * as ButtonTemplate from '../../template/buttonTemplate'
-import { mapGetters, mapActions } from 'vuex'
 
 export default {
     data(){
@@ -59,7 +58,7 @@ export default {
                 
         }
     },
-    props:['sectionID'],
+    props:['sectionID','sectionButtonData'],
     methods:{
         addButtonToComponent(){
 
@@ -67,6 +66,7 @@ export default {
 
             newButton.id = 'button-' + this.sectionID + '-' + this.buttonsAdded.length
             newButton.sectionId = this.sectionID;
+            newButton.buttonId = this.buttonsAdded.length;
 
 
             this.buttonsAdded.push(newButton)
@@ -77,13 +77,10 @@ export default {
             //console.log(this.sectionID)
         },
         returnData(){
-            this.$store.dispatch('saveSection',this.buttonsAdded);
 
-            //this.$emit('sectionDataReturn', this.buttonsAdded);
+            this.$emit('sectionButtonData',this.buttonsAdded)
+
         },
-         ...mapActions([
-            'saveSection'
-        ]),
     },
     
     components:{
