@@ -56,10 +56,7 @@
 
                 <v-flex xs12 v-if="buttonSelect == 'Core Links'">
                     Core Links
-                    <v-btn @click="addCoreLink()">Add</v-btn>
-                </v-flex>
-                <v-flex xs12 v-if="buttonSelect == 'Core Links'" v-for="links in coreLinksAdded" :key="links.key">
-                    <appCoreLinks v-if="buttonSelect == 'Core Links'"></appCoreLinks>
+                    <appCoreLinks :coreLinksAdded="coreLinksAdded"></appCoreLinks>
                 </v-flex>
 
 
