@@ -106,10 +106,12 @@ export default {
             }
 
             
+            
             // This creates the JSON file just need to find out how to hook it up to the button
             console.log(this.translationArray)
         },
         addCoreLink(){
+            console.log(this.coreLinksAdded)
             this.coreLinksAdded.push({'key':this.coreLinksAdded.size})
         }
     },
