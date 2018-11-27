@@ -40,8 +40,10 @@
                 <v-flex xs12>
                     <v-text-field label="Button Down" v-model="button.image_down"></v-text-field>
                 </v-flex>
-                
-                <v-flex xs12 >
+                <v-flex xs6 >
+                    <v-checkbox label="Badge?" v-model="button.badge"></v-checkbox>
+                </v-flex>
+                <v-flex xs6 >
                     <v-checkbox label="Translations:" v-model="translationCheckbox"></v-checkbox>
                 </v-flex>
                 <v-flex xs12 sm6 v-if="translationCheckbox">

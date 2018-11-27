@@ -67,6 +67,7 @@ export default {
             newButton.id = 'button-' + this.sectionID + '-' + this.buttonsAdded.length
             newButton.sectionId = this.sectionID;
             newButton.buttonId = this.buttonsAdded.length;
+            newButton.badge = false;
 
 
             this.buttonsAdded.push(newButton)

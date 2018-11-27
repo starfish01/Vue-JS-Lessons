@@ -12,7 +12,7 @@
             <span class="headline">JSON File</span>
           </v-card-title>
           <v-card-text>
-            <span class="grey--text">{{ allButtons }}</span>
+            <span class="grey--text">{{ buttons }}</span>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -40,6 +40,7 @@ export default {
       sections:[],
       allButtons:[],
       dialog:false,
+      buttons:[]
       
 
     }
@@ -59,6 +60,79 @@ export default {
 
     },
     exportJSON(){
+
+    let b2 = [];
+    let buttons = this.allButtons[0]
+    this.allButtons.forEach(element => {
+      
+      let scrapper = []
+
+      
+
+      element.forEach(element => {
+      scrapper.push( {
+        "name": element.name,
+        "badge": element.badge,
+        "image": element.image,
+        "image_down": element.image_down,
+        "class_name": element.class_name,
+        "module_id": element.class_name,
+        "css": element.css,
+        "settings": element.settings
+        }
+      )
+    });
+
+      console.log(element)
+      console.log(scrapper)
+
+      let newbrn = {
+                "css": null,
+                "buttons": 
+                  scrapper
+                
+                };
+      b2.push(newbrn)
+
+    });
+    
+
+    //should be able to do a for loop here
+    // let scrapper = []
+
+    // buttons.forEach(element => {
+    //   scrapper.push( {
+    //     "name": element.name,
+    //     "badge": element.badge,
+    //     "image": element.image,
+    //     "image_down": element.image_down,
+    //     "class_name": element.class_name,
+    //     "module_id": element.class_name,
+    //     "css": element.css,
+    //     "settings": element.settings
+    //     }
+    //   )
+    // });
+
+    //end it here to insert down there
+
+
+      this.buttons = {"devices":{
+        "mobile": {
+          "sections": [
+             {
+            "name": "buttons",
+            "css": null,
+            "image": null,
+            "settings": null,
+            "collection": 
+                
+                    b2
+                
+              
+            }
+          ]
+      }}}
 
     },
     databuilder(data){
