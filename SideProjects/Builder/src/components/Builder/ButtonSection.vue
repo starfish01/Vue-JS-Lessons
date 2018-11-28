@@ -3,10 +3,10 @@
         <v-layout row wrap>
             <v-toolbar>
                 <v-toolbar-side-icon></v-toolbar-side-icon>
-                <v-toolbar-title>Button-Group ###</v-toolbar-title>
+                <v-toolbar-title>Button-Group - {{ sectionID }}</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items >
-                    <v-select class="buttonSectionSelect"
+                    <!-- <v-select class="buttonSectionSelect"
                         :items="buttonLayout"
                         label="Buttons per row"
                         v-model="buttonLayoutSelectedButton"
@@ -16,7 +16,7 @@
                         :items="buttonPermissionView"
                         label="Default View"
                         solo
-                    ></v-select>
+                    ></v-select> -->
                     <v-btn @click="addButtonToComponent()">Add</v-btn>
                     <v-btn @click="returnData()">Return</v-btn>
                     
