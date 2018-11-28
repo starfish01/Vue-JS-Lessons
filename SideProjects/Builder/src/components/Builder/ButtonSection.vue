@@ -18,7 +18,7 @@
                         solo
                     ></v-select> -->
                     <v-btn @click="addButtonToComponent()">Add</v-btn>
-                    <v-btn @click="returnData()">Return</v-btn>
+                    <!-- <v-btn @click="returnData()">Return</v-btn> -->
                     
                 </v-toolbar-items>
             </v-toolbar>
@@ -28,11 +28,7 @@
                         <v-flex xs4 text-xs-center v-for="button in buttonsAdded" :key="button.key">
                             {{ button.name }} 
                             {{button.id}}
-                           
-                               
-                                <appButtonDetails :button="button"></appButtonDetails>
-
-                            
+                            <appButtonDetails :button="button" :returnFn="returnData"></appButtonDetails>
                         </v-flex>
                     </v-layout>
                 </v-card>

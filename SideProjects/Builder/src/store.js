@@ -17,7 +17,7 @@ export default new Vuex.Store({
     updateSection:(state,payload)=>{
 
       state.buttonsObject.forEach(element => {
-        console.log('hello')
+        
       });
 
 

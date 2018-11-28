@@ -10,46 +10,39 @@
       </v-flex>
 
       <v-flex xs3 >
-          <v-dialog v-model="dialog" width="600px">
+          <v-dialog persistent v-model="dialog" width="600px">
         <v-btn slot="activator" @click="exportJSON()" dark>Export JSON</v-btn>
-
-
 
         <v-card>
           
-           <v-toolbar>
-<v-toolbar-title>Export</v-toolbar-title>
-
-        <v-tabs
-          slot="extension"
-          v-model="model"
-          centered
-          
+  <v-tabs
+        
+        color="cyan"
+        dark
+        slider-color="yellow"
+      >
+        <v-tab
+          v-for="n in exportvalues"
+          :key="n.key"
+          ripple
         >
-          <v-tab
-            v-for="i in export"
-            :key="i.key"
-            :href="`#tab-${i.title}`"
-          >
-            Item {{ i.title }}
-          </v-tab>
-        </v-tabs>
-      </v-toolbar>
+          {{ n.title }}
+  
+        </v-tab>
+        <v-tab-item
+          v-for="n in exportvalues"
+          :key="n.key"
+        >
+          <v-card flat>
+            <v-card-text>{{ n.data }}</v-card-text>
+          </v-card>
+        </v-tab-item>
+      </v-tabs>
+
           
           <v-card-text>
 
-      <v-tabs-items v-model="model">
-        <v-tab-item
-          v-for="i in 3"
-          :id="`tab-${i}`"
-          :key="i"
-        >
-          <v-card flat>
-            <v-card-text v-text="text"></v-card-text>
-          </v-card>
-        </v-tab-item>
-      </v-tabs-items>
-
+      
 
 
           </v-card-text>
@@ -82,20 +75,17 @@
 
 import ButtonSection from './ButtonSection.vue'
 
+import * as CSSTemplate from '../../template/cssTemplate.js'
+
 
 export default {
   data(){
     return{
-      export:[{title:'JSON',key:'1'},{title:'CSS',key:'2'},{title:'Module',key:'3'}],
+      exportvalues:[{title:'JSON',key:'1',data:'JSON'},{title:'CSS',key:'2',data:'CSS'},{title:'Module',key:'3',data:'Module'}],
       sections:[],
       allButtons:[],
       dialog:false,
       buttons:[],
-       model: 'tab-2',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-    
-      
-
     }
   },
   computed:{
@@ -136,8 +126,8 @@ export default {
       )
     });
 
-      console.log(element)
-      console.log(scrapper)
+      // console.log(element)
+      // console.log(scrapper)
 
       let newbrn = {
                 "css": null,
@@ -148,29 +138,8 @@ export default {
       b2.push(newbrn)
 
     });
-    
 
-    //should be able to do a for loop here
-    // let scrapper = []
-
-    // buttons.forEach(element => {
-    //   scrapper.push( {
-    //     "name": element.name,
-    //     "badge": element.badge,
-    //     "image": element.image,
-    //     "image_down": element.image_down,
-    //     "class_name": element.class_name,
-    //     "module_id": element.class_name,
-    //     "css": element.css,
-    //     "settings": element.settings
-    //     }
-    //   )
-    // });
-
-    //end it here to insert down there
-
-
-      this.buttons = {"devices":{
+      this.exportvalues[0].data = {"devices":{
         "mobile": {
           "sections": [
              {
@@ -178,33 +147,19 @@ export default {
             "css": null,
             "image": null,
             "settings": null,
-            "collection": 
-                
-                    b2
-                
-              
+            "collection": b2
             }
           ]
       }}}
+
+      this.exportvalues[1].data = CSSTemplate.newObject()
 
     },
     databuilder(data){
       console.log(data)
     },
     dump(){
-      //console.log(this.allButtons)
-
-      if(this.allButtons.length > 1){
-        console.log('multi array')
-        this.allButtons.forEach(element => {
-          console.log(element)
-        });
-
-      }else{
-        console.log('single Array')
-        console.log(this.allButtons[0])
-      }
-
+      
     }
   }
 }

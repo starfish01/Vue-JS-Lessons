@@ -67,7 +67,7 @@
             </v-container>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
+            <v-btn color="blue darken-1" flat @click="closeDialogButton()">Close</v-btn>
         </v-card-actions>
         </v-card>
         </v-dialog>
@@ -87,7 +87,9 @@ export default {
             coreLinksAdded:[]
         }
     },
-    props:['button'],
+    props:{'button': Object,
+            'returnFn':Function
+    },
     computed:{
         btnComponentSet(){
             if (!this.button.name == null || !this.button.name == ''){
@@ -107,14 +109,14 @@ export default {
                 this.translationArray.desc = value.desc
             }
 
-            
-            
-            // This creates the JSON file just need to find out how to hook it up to the button
-            console.log(this.translationArray)
         },
         addCoreLink(){
-            console.log(this.coreLinksAdded)
+            // console.log(this.coreLinksAdded)
             this.coreLinksAdded.push({'key':this.coreLinksAdded.size})
+        },
+        closeDialogButton(){
+            this.dialog = false
+            this.returnFn()
         }
     },
     components:{
