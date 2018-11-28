@@ -28,7 +28,11 @@
                         <v-flex xs4 text-xs-center v-for="button in buttonsAdded" :key="button.key">
                             {{ button.name }} 
                             {{button.id}}
-                            <appButtonDetails :button="button" :returnFn="returnData"></appButtonDetails>
+                            <appButtonDetails 
+                                :button="button" 
+                                :returnFn="returnData"
+                                
+                                ></appButtonDetails>
                         </v-flex>
                     </v-layout>
                 </v-card>
@@ -41,6 +45,7 @@
 
 import ButtonDetails from './ButtonDetails.vue'
 import * as ButtonTemplate from '../../template/buttonTemplate'
+import * as ModuleTemplate from '../../template/moduleTemplate'
 
 export default {
     data(){
@@ -49,15 +54,18 @@ export default {
                 buttonLayout:['1','2','3','4','5','6'],
                 buttonSelectItems:['Link','Reach Calendar','Contacts','SingleLink'],
                 buttonsAdded:[],
+                modulesAdded:[],
+                CSSAdded:[],
                 buttonTemplate:{},
                 buttonLayoutSelectedButton:'this',
                 
         }
     },
-    props:['sectionID','sectionButtonData'],
+    props:['sectionID','sectionButtonData','sectionModulesData','sectionCSSData'],
     methods:{
         addButtonToComponent(){
 
+            //button template
             let newButton = new ButtonTemplate.newObject;
 
             newButton.id = 'button-' + this.sectionID + '-' + this.buttonsAdded.length
@@ -65,8 +73,12 @@ export default {
             newButton.buttonId = this.buttonsAdded.length;
             newButton.badge = false;
 
-
             this.buttonsAdded.push(newButton)
+
+            //module template
+            let newModules = new ModuleTemplate.newObject
+            this.modulesAdded.push(newModules)
+
 
         },
         btnBtnClick(id){
@@ -76,6 +88,8 @@ export default {
         returnData(){
 
             this.$emit('sectionButtonData',this.buttonsAdded)
+            this.$emit('sectionModulesData',this.modulesAdded)
+            this.$emit('sectionCSSData',this.CSSAdded)
 
         },
     },

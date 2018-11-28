@@ -66,17 +66,21 @@
     </v-layout>
     </v-card>
     <div v-for="i in sections" :key="i">
-      <appButtonSection :sectionID="i" @sectionButtonData="allButtons[i] = $event" @sectionDataReturn="databuilder($event)"></appButtonSection>
+      <appButtonSection 
+        :sectionID="i" 
+        @sectionButtonData="allButtons[i] = $event" 
+        @sectionDataReturn="databuilder($event)"
+        @sectionModulesData="allModules[i] = $event"
+        @sectionCSSData="allCSS[i] = $event"
+        
+        ></appButtonSection>
     </div>
   </v-container>
 </template>
 
 <script>
-
 import ButtonSection from './ButtonSection.vue'
-
 import * as CSSTemplate from '../../template/cssTemplate.js'
-
 
 export default {
   data(){
@@ -84,6 +88,8 @@ export default {
       exportvalues:[{title:'JSON',key:'1',data:'JSON'},{title:'CSS',key:'2',data:'CSS'},{title:'Module',key:'3',data:'Module'}],
       sections:[],
       allButtons:[],
+      allModules:[],
+      allCSS:[],
       dialog:false,
       buttons:[],
     }
@@ -91,7 +97,6 @@ export default {
   computed:{
 
   },
-
 
   components:{
     appButtonSection:ButtonSection
@@ -103,41 +108,32 @@ export default {
 
     },
     exportJSON(){
-
-    let b2 = [];
-    let buttons = this.allButtons[0]
-    this.allButtons.forEach(element => {
-      
-      let scrapper = []
-
-      
-
-      element.forEach(element => {
-      scrapper.push( {
-        "name": element.name,
-        "badge": element.badge,
-        "image": element.image,
-        "image_down": element.image_down,
-        "class_name": element.class_name,
-        "module_id": element.class_name,
-        "css": element.css,
-        "settings": element.settings
-        }
-      )
-    });
-
+      //All for buttons
+        let b2 = [];
+        this.allButtons.forEach(element => {
+        let scrapper = []
+        element.forEach(element => {
+        scrapper.push( {
+          "name": element.name,
+          "badge": element.badge,
+          "image": element.image,
+          "image_down": element.image_down,
+          "class_name": element.class_name,
+          "module_id": element.class_name,
+          "css": element.css,
+          "settings": element.settings
+          }
+        )
+      });
       // console.log(element)
       // console.log(scrapper)
-
       let newbrn = {
                 "css": null,
                 "buttons": 
                   scrapper
-                
                 };
       b2.push(newbrn)
-
-    });
+      });
 
       this.exportvalues[0].data = {"devices":{
         "mobile": {
@@ -152,7 +148,24 @@ export default {
           ]
       }}}
 
+      //END BUTTON
+
+      //All for CSS
+
       this.exportvalues[1].data = CSSTemplate.newObject()
+
+      //END CSS
+
+      //All for Modules
+
+      //////////////////////////////////////
+      ///I need to export each module into one array
+
+      this.exportvalues[2].data = this.allModules
+
+     
+
+      //End Modules
 
     },
     databuilder(data){
