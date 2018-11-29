@@ -54,7 +54,6 @@
         :sectionID="i" 
         @sectionButtonData="allButtons[i] = $event" 
         @sectionDataReturn="databuilder($event)"
-        @sectionModulesData="allModules[i] = $event"
         @sectionCSSData="allCSS[i] = $event"
         
       ></appButtonSection>
@@ -94,9 +93,15 @@ export default {
     exportJSON(){
       //All for buttons
         let b2 = [];
+        let modulesTogether = [];
+
         this.allButtons.forEach(element => {
         let scrapper = []
+
         element.forEach(element => {
+
+        modulesTogether.push(element.mod)
+
         scrapper.push( {
           "name": element.name,
           "badge": element.badge,
@@ -145,7 +150,9 @@ export default {
       //////////////////////////////////////
       ///I need to export each module into one array
 
-      this.exportvalues[2].data = this.allModules
+      //console.log(modulesTogether)
+
+      this.exportvalues[2].data = modulesTogether
 
      
 

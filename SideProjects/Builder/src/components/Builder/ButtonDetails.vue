@@ -56,7 +56,7 @@
                     <v-text-field label="Message" placeholder="There are currently no sport notices." @blur="translationSetUp({'desc':$event.target.value})"></v-text-field>
                 </v-flex>
 
-                <v-flex xs12 v-if="buttonSelect == 'Core Links'">
+                <v-flex xs12 v-if="buttonSelect == 4">
                     Core Links
                     <appCoreLinks :coreLinksAdded="coreLinksAdded"></appCoreLinks>
                 </v-flex>
@@ -79,7 +79,7 @@ export default {
     data(){
         return{
             dialog:false,
-            translationArray:{},
+            translationArray:{title:null,empty:null,desc:null},
             translationCheckbox:false,
             buttonSelectionList:ListOfButtons.newObject(),
             buttonSelect:'',
@@ -111,10 +111,30 @@ export default {
             // console.log(this.coreLinksAdded)
             this.coreLinksAdded.push({'key':this.coreLinksAdded.size})
         },
-        closeDialogButton(){
-            if([].includes(this.buttonSelect)){
+        setUpModuleJSON(){
 
+            let tranlations = {
+                "list": {
+                    "title": this.translationArray.title,
+                        "empty": {
+                            "title":  this.translationArray.empty,
+                                "message": this.translationArray.desc
+                        }
+                }
             }
+
+            this.button.mod = {
+                id:this.button.module_id,
+                use_screenshot:false,
+                platform:null,
+                settings:null,
+                translations: tranlations,
+                icons:[]
+            }
+        },
+        closeDialogButton(){
+            
+            this.setUpModuleJSON();
 
             this.dialog = false
             this.returnFn()

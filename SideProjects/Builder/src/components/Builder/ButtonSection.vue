@@ -52,16 +52,13 @@ export default {
         return{
                 buttonPermissionView:['Default','Parent','Staff','Student'],
                 buttonLayout:['1','2','3','4','5','6'],
-                buttonSelectItems:['Link','Reach Calendar','Contacts','SingleLink'],
                 buttonsAdded:[],
-                modulesAdded:[],
                 CSSAdded:[],
                 buttonTemplate:{},
                 buttonLayoutSelectedButton:'this',
-                
         }
     },
-    props:['sectionID','sectionButtonData','sectionModulesData','sectionCSSData'],
+    props:['sectionID','sectionButtonData','sectionCSSData'],
     methods:{
         addButtonToComponent(){
 
@@ -79,21 +76,16 @@ export default {
 
             //module template
            //let newModules = new ModuleTemplate.newObject
-            //this.modulesAdded.push(newModules)
 
 
         },
         btnBtnClick(id){
-            
-            //console.log(this.sectionID)
+
         },
         returnData(){
             
-            console.log(this.buttonsAdded)
-            
 
             this.$emit('sectionButtonData',this.buttonsAdded)
-            this.$emit('sectionModulesData',this.modulesAdded)
             this.$emit('sectionCSSData',this.CSSAdded)
 
         },
