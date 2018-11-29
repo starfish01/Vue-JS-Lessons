@@ -29,7 +29,7 @@
                             {{ button.name }} 
                             {{button.id}}
                             <appButtonDetails 
-                                :button="button" 
+                                :button="button"
                                 :returnFn="returnData"
                                 
                                 ></appButtonDetails>
@@ -73,11 +73,13 @@ export default {
             newButton.buttonId = this.buttonsAdded.length;
             newButton.badge = false;
 
+            newButton.mod = new ModuleTemplate.newObject
+
             this.buttonsAdded.push(newButton)
 
             //module template
-            let newModules = new ModuleTemplate.newObject
-            this.modulesAdded.push(newModules)
+           //let newModules = new ModuleTemplate.newObject
+            //this.modulesAdded.push(newModules)
 
 
         },
@@ -86,6 +88,9 @@ export default {
             //console.log(this.sectionID)
         },
         returnData(){
+            
+            console.log(this.buttonsAdded)
+            
 
             this.$emit('sectionButtonData',this.buttonsAdded)
             this.$emit('sectionModulesData',this.modulesAdded)

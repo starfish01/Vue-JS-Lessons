@@ -1,51 +1,39 @@
 <template>
-   <v-container grid-list-md text-xs-left>
-     <v-card dark color="primary">
-    <v-layout row pl-3>
-      <v-flex xs3>
-        <v-select 
-          :items="['Mobile', 'Tablet']"
-          label="Layout Device"
-        ></v-select>
-      </v-flex>
-
-      <v-flex xs3 >
+  <v-container grid-list-md text-xs-left>
+    <v-card dark color="primary">
+      <v-layout row pl-3>
+        <v-flex xs3>
+          <v-select 
+            :items="['Mobile', 'Tablet']"
+            label="Layout Device"
+          ></v-select>
+        </v-flex>
+        <v-flex xs3 >
           <v-dialog persistent v-model="dialog" width="600px">
         <v-btn slot="activator" @click="exportJSON()" dark>Export JSON</v-btn>
-
         <v-card>
-          
-  <v-tabs
-        
-        color="cyan"
-        dark
-        slider-color="yellow"
-      >
-        <v-tab
-          v-for="n in exportvalues"
-          :key="n.key"
-          ripple
-        >
-          {{ n.title }}
-  
-        </v-tab>
-        <v-tab-item
-          v-for="n in exportvalues"
-          :key="n.key"
-        >
-          <v-card flat>
-            <v-card-text>{{ n.data }}</v-card-text>
-          </v-card>
-        </v-tab-item>
-      </v-tabs>
-
-          
-          <v-card-text>
-
-      
-
-
-          </v-card-text>
+          <v-tabs 
+            color="cyan"
+            dark
+            slider-color="yellow"
+          >
+            <v-tab
+              v-for="n in exportvalues"
+              :key="n.key"
+              ripple
+            >
+              {{ n.title }} 
+            </v-tab>
+            <v-tab-item
+              v-for="n in exportvalues"
+              :key="n.key"
+            >
+              <v-card flat>
+                <v-card-text>{{ n.data }}</v-card-text>
+              </v-card>
+            </v-tab-item>
+          </v-tabs>
+          <v-card-text></v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="green darken-1" flat="flat" @click="dialog = false">Close</v-btn>
@@ -53,18 +41,14 @@
         </v-card>
       </v-dialog>
     </v-flex>   
-
-
-    </v-layout>
-     </v-card>
-     
-    <v-card dark color="primary">
+  </v-layout>
+</v-card> 
+  <v-card dark color="primary">
     <v-layout row >
-          <v-flex xs3 ><v-btn @click="addSectionButton()" target="_blank">Add Component</v-btn></v-flex>
-          <v-flex xs3 ><v-btn @click="dump()" target="_blank">dump</v-btn></v-flex>
-          
+      <v-flex xs3 ><v-btn @click="addSectionButton()" target="_blank">Add Component</v-btn></v-flex>
+      <v-flex xs3 ><v-btn @click="dump()" target="_blank">dump</v-btn></v-flex>    
     </v-layout>
-    </v-card>
+  </v-card>
     <div v-for="i in sections" :key="i">
       <appButtonSection 
         :sectionID="i" 
@@ -73,7 +57,7 @@
         @sectionModulesData="allModules[i] = $event"
         @sectionCSSData="allCSS[i] = $event"
         
-        ></appButtonSection>
+      ></appButtonSection>
     </div>
   </v-container>
 </template>

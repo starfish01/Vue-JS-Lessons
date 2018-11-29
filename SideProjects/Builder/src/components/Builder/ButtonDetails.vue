@@ -18,7 +18,7 @@
                 </v-flex>
                 <v-flex xs12 sm6 >
                     <v-select
-                        :items="['Reach Link', 'Events', 'Schoolbox Events', 'Core Links','...']"
+                        :items="buttonSelectionList"
                         label="Button Type"
                         v-model="buttonSelect"
                         
@@ -60,9 +60,6 @@
                     Core Links
                     <appCoreLinks :coreLinksAdded="coreLinksAdded"></appCoreLinks>
                 </v-flex>
-
-
-
             </v-layout>
             </v-container>
         <v-card-actions>
@@ -76,6 +73,7 @@
 
 <script>
 import CoreLinks from './CoreLinks/CoreLinks.vue'
+import * as ListOfButtons from '../../template/listOfButtons'
 
 export default {
     data(){
@@ -83,6 +81,7 @@ export default {
             dialog:false,
             translationArray:{},
             translationCheckbox:false,
+            buttonSelectionList:ListOfButtons.newObject(),
             buttonSelect:'',
             coreLinksAdded:[]
         }
@@ -97,7 +96,6 @@ export default {
             }
             return "warning"
         }
-    
     },
     methods:{
         translationSetUp(value){
@@ -108,13 +106,16 @@ export default {
             }else if(value.desc){
                 this.translationArray.desc = value.desc
             }
-
         },
         addCoreLink(){
             // console.log(this.coreLinksAdded)
             this.coreLinksAdded.push({'key':this.coreLinksAdded.size})
         },
         closeDialogButton(){
+            if([].includes(this.buttonSelect)){
+
+            }
+
             this.dialog = false
             this.returnFn()
         }
