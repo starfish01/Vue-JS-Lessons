@@ -20,10 +20,12 @@
                     <v-select
                         :items="buttonSelectionList"
                         label="Button Type"
-                        v-model="buttonSelect"
-                        
+                        v-model="selectedButtonType"
+                        item-text="text"
                     ></v-select>
                 </v-flex>
+                <!-- es6 function find goes here example "let obj = objArray.find(obj => obj.id == 3);" -->
+                <v-flex xs12>{{selectedButtonType }}</v-flex>
                 <v-flex xs12 sm6 >
                     <v-text-field label="Module #"  v-model="button.module_id"></v-text-field>
                 </v-flex>
@@ -59,7 +61,7 @@
                     <v-text-field label="Message" placeholder="There are currently no sport notices." @blur="translationSetUp({'desc':$event.target.value})"></v-text-field>
                 </v-flex>
 
-                <v-flex xs12 v-if="buttonSelect == 4">
+                <v-flex xs12 v-if="button.mod.name == 4">
                     Core Links
                     <appCoreLinks :coreLinksAdded="coreLinksAdded"></appCoreLinks>
                 </v-flex>
@@ -85,7 +87,7 @@ export default {
             translationArray:{title:null,empty:null,desc:null},
             translationCheckbox:false,
             buttonSelectionList:ListOfButtons.newObject(),
-            buttonSelect:'',
+            selectedButtonType:null,
             coreLinksAdded:[]
         }
     },
@@ -129,6 +131,7 @@ export default {
             this.button.mod = {
                 id:this.button.module_id,
                 use_screenshot: this.button.mod.use_screenshot == true ? true : false,
+                name: this.button.mod.name.text,
                 platform:this.button.platform,
                 settings:null,
                 translations: tranlations,
