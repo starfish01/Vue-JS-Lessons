@@ -40,10 +40,13 @@
                 <v-flex xs12>
                     <v-text-field label="Button Down" v-model="button.image_down"></v-text-field>
                 </v-flex>
-                <v-flex xs6 >
+                <v-flex xs4 >
                     <v-checkbox label="Badge?" v-model="button.badge"></v-checkbox>
                 </v-flex>
-                <v-flex xs6 >
+                <v-flex xs4 >
+                    <v-checkbox label="Screenshot?" v-model="button.mod.use_screenshot"></v-checkbox>
+                </v-flex>
+                <v-flex xs4 >
                     <v-checkbox label="Translations:" v-model="translationCheckbox"></v-checkbox>
                 </v-flex>
                 <v-flex xs12 sm6 v-if="translationCheckbox">
@@ -125,8 +128,8 @@ export default {
 
             this.button.mod = {
                 id:this.button.module_id,
-                use_screenshot:false,
-                platform:null,
+                use_screenshot: this.button.mod.use_screenshot == true ? true : false,
+                platform:this.button.platform,
                 settings:null,
                 translations: tranlations,
                 icons:[]
