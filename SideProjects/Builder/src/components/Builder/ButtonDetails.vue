@@ -25,7 +25,14 @@
                     ></v-select>
                 </v-flex>
                 <!-- es6 function find goes here example "let obj = objArray.find(obj => obj.id == 3);" -->
-                <v-flex xs12>{{selectedButtonType }}</v-flex>
+                <!-- <v-flex xs12>{{selectedButtonType = buttonSelectionList.find(selectedButtonType => selectedButtonType.value == 2)}}</v-flex> -->
+                <v-flex xs12>{{ buttonSelectionList.find(function(element){ 
+                        
+                        return element.value == selectedButtonType
+                     })
+
+                     
+                      }}</v-flex>
                 <v-flex xs12 sm6 >
                     <v-text-field label="Module #"  v-model="button.module_id"></v-text-field>
                 </v-flex>
