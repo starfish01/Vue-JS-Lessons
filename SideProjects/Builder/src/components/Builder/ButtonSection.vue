@@ -6,34 +6,32 @@
                 <v-toolbar-title>Button-Group - {{ sectionID }}</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items >
-                    <!-- <v-select class="buttonSectionSelect"
-                        :items="buttonLayout"
-                        label="Buttons per row"
-                        v-model="buttonLayoutSelectedButton"
-                        solo
-                    ></v-select>
-                    <v-select class="buttonSectionSelect"
-                        :items="buttonPermissionView"
-                        label="Default View"
-                        solo
-                    ></v-select> -->
+
                     <v-btn @click="addButtonToComponent()">Add</v-btn>
-                    <!-- <v-btn @click="returnData()">Return</v-btn> -->
                     
                 </v-toolbar-items>
             </v-toolbar>
             <v-flex>
                 <v-card dark color="primary" >
                     <v-layout row wrap px-3>
-                        <v-flex xs4 text-xs-center v-for="button in buttonsAdded" :key="button.key">
-                            {{ button.name }} 
-                            {{button.id}}
-                            <appButtonDetails 
-                                :button="button"
-                                :returnFn="returnData"
+
+                        <draggable class="somethingTownContainer" v-model="buttonsAdded" :end="returnData()" >
+
+                            <div class="somethingTown" v-for="button in buttonsAdded" :key="button.key">
+                                <appButtonDetails 
+                                    :button="button"
+                                    :returnFn="returnData"
+                                    
+                                    ></appButtonDetails>
+                                {{ button.name}}<br>
+                                {{ button.mod.name}}
                                 
-                                ></appButtonDetails>
-                        </v-flex>
+
+                            </div>
+
+                        </draggable>
+
+
                     </v-layout>
                 </v-card>
             </v-flex>
@@ -42,10 +40,10 @@
 </template>
 
 <script>
-
 import ButtonDetails from './ButtonDetails.vue'
 import * as ButtonTemplate from '../../template/buttonTemplate'
 import * as ModuleTemplate from '../../template/moduleTemplate'
+import draggable from 'vuedraggable'
 
 export default {
     data(){
@@ -61,7 +59,6 @@ export default {
     props:['sectionID','sectionButtonData','sectionCSSData'],
     methods:{
         addButtonToComponent(){
-
             //button template
             let newButton = new ButtonTemplate.newObject;
 
@@ -74,25 +71,23 @@ export default {
 
             this.buttonsAdded.push(newButton)
 
-            //module template
-           //let newModules = new ModuleTemplate.newObject
-
-
         },
         btnBtnClick(id){
 
         },
         returnData(){
             
-
             this.$emit('sectionButtonData',this.buttonsAdded)
             this.$emit('sectionCSSData',this.CSSAdded)
 
         },
+        checkMove: function(evt){
+            console.log('hello')
+        },
     },
-    
     components:{
-            appButtonDetails:ButtonDetails
+            appButtonDetails:ButtonDetails,
+            draggable,
     }
 
 }
@@ -102,6 +97,14 @@ export default {
 .buttonSectionSelect{
     max-width: 170px;
     margin: auto 10px auto 10px !important;
+}
+.somethingTown{
+    display: -webkit-inline-box;
+    width: 33%;
+}
+.somethingTownContainer{
+    width:100%;
+    justify-content: center;
 }
 
 </style>

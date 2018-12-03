@@ -24,15 +24,6 @@
                         item-text="text"
                     ></v-select>
                 </v-flex>
-                <!-- es6 function find goes here example "let obj = objArray.find(obj => obj.id == 3);" -->
-                <!-- <v-flex xs12>{{selectedButtonType = buttonSelectionList.find(selectedButtonType => selectedButtonType.value == 2)}}</v-flex> -->
-                <v-flex xs12>{{ buttonSelectionList.find(function(element){ 
-                        
-                        return element.value == selectedButtonType
-                     })
-
-                     
-                      }}</v-flex>
                 <v-flex xs12 sm6 >
                     <v-text-field label="Module #"  v-model="button.module_id"></v-text-field>
                 </v-flex>
@@ -125,23 +116,52 @@ export default {
         },
         setUpModuleJSON(){
 
-            let tranlations = {
-                "list": {
-                    "title": this.translationArray.title,
-                        "empty": {
-                            "title":  this.translationArray.empty,
-                                "message": this.translationArray.desc
+            let tranlations = {}
+            
+            if(this.translationArray.title != null){
+
+                if(this.translationArray.title != null && this.translationArray.empty == null){
+                tranlations = {
+                    "list": {
+                        "title": this.translationArray.title}
+                }
+
+                if(this.translationArray.title != null && this.translationArray.empty != null){
+                     tranlations = {
+                        "list": {
+                            "title": this.translationArray.title,
+                                "empty": {
+                                    "title":  this.translationArray.empty,
+                                        "message": this.translationArray.desc
+                                }
                         }
+                    }
                 }
             }
+            }else{
+               tranlations = null; 
+            }
 
-            // console.log(this.getNameAndPlatform())
+
+            // tranlations = {
+            //     "list": {
+            //         "title": this.translationArray.title,
+            //             "empty": {
+            //                 "title":  this.translationArray.empty,
+            //                     "message": this.translationArray.desc
+            //             }
+            //     }
+            // }
+
+            let nameAndPlatform  = this.getNameAndPlatform();
+
+            console.log(tranlations)
 
             this.button.mod = {
                 id:this.button.module_id,
                 use_screenshot: this.button.mod.use_screenshot == true ? true : false,
-                name: this.getNameAndPlatform().text,
-                platform:this.getNameAndPlatform().platform,
+                name: (nameAndPlatform == null) ? '' : nameAndPlatform.text ,
+                platform: (nameAndPlatform == null) ? '' : nameAndPlatform.platform,
                 settings:null,
                 translations: tranlations,
                 icons:[]
@@ -151,12 +171,11 @@ export default {
 
             let selectedValue = this.selectedButtonType
 
-             let nameAndPlatform = this.buttonSelectionList.find(function(element){ 
-                         return element.value == selectedValue
-                      })
-             return nameAndPlatform
+            let nameAndPlatform = this.buttonSelectionList.find(function(element){ 
+                return element.value == selectedValue
+            })
 
-            
+            return nameAndPlatform
 
         },
         closeDialogButton(){

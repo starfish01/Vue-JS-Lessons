@@ -114,14 +114,13 @@ export default {
           }
         )
       });
-      // console.log(element)
-      // console.log(scrapper)
+
       let newbrn = {
-                "css": null,
-                "buttons": 
-                  scrapper
-                };
-      b2.push(newbrn)
+        "css": null,
+        "buttons": 
+          scrapper
+        };
+        b2.push(newbrn)
       });
 
       this.exportvalues[0].data = {"devices":{
