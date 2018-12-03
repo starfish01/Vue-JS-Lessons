@@ -135,15 +135,29 @@ export default {
                 }
             }
 
+            // console.log(this.getNameAndPlatform())
+
             this.button.mod = {
                 id:this.button.module_id,
                 use_screenshot: this.button.mod.use_screenshot == true ? true : false,
-                name: this.button.mod.name.text,
-                platform:this.button.platform,
+                name: this.getNameAndPlatform().text,
+                platform:this.getNameAndPlatform().platform,
                 settings:null,
                 translations: tranlations,
                 icons:[]
             }
+        },
+        getNameAndPlatform(){
+
+            let selectedValue = this.selectedButtonType
+
+             let nameAndPlatform = this.buttonSelectionList.find(function(element){ 
+                         return element.value == selectedValue
+                      })
+             return nameAndPlatform
+
+            
+
         },
         closeDialogButton(){
             
@@ -151,6 +165,9 @@ export default {
 
             this.dialog = false
             this.returnFn()
+        },
+        buttonSelectOnChange(){
+
         }
     },
     components:{
