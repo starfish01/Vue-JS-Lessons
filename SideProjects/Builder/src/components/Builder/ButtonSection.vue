@@ -77,17 +77,14 @@ export default {
         },
         returnData(){
             
-            this.$emit('sectionButtonData',this.buttonsAdded)
-            this.$emit('sectionCSSData',this.CSSAdded)
+            this.$emit('sectionButtonData', this.buttonsAdded)
+            this.$emit('sectionCSSData', this.CSSAdded)
 
         },
-        checkMove: function(evt){
-            console.log('hello')
-        },
     },
-    components:{
-            appButtonDetails:ButtonDetails,
-            draggable,
+    components: {
+        appButtonDetails: ButtonDetails,
+        draggable
     }
 
 }

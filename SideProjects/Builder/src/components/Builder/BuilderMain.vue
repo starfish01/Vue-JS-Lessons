@@ -53,7 +53,6 @@
       <appButtonSection 
         :sectionID="i" 
         @sectionButtonData="allButtons[i] = $event" 
-        @sectionDataReturn="databuilder($event)"
         @sectionCSSData="allCSS[i] = $event"
         
       ></appButtonSection>
@@ -157,9 +156,6 @@ export default {
 
       //End Modules
 
-    },
-    databuilder(data){
-      console.log(data)
     },
     dump(){
       

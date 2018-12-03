@@ -6,7 +6,7 @@
             </v-btn>
         <v-card>
             <v-card-title>
-                <span class="headline">User Profile - {{ button.name }}</span>
+                <span class="headline">Button - {{ button.name }}</span>
             </v-card-title>
         </v-card>
         <v-card>
@@ -111,11 +111,26 @@ export default {
             }
         },
         addCoreLink(){
-            // console.log(this.coreLinksAdded)
             this.coreLinksAdded.push({'key':this.coreLinksAdded.size})
         },
         setUpModuleJSON(){
 
+            let tranlations = this.getTranslations()
+
+            let nameAndPlatform  = this.getNameAndPlatform();
+
+
+            this.button.mod = {
+                id:this.button.module_id,
+                use_screenshot: this.button.mod.use_screenshot == true ? true : false,
+                name: (nameAndPlatform == null) ? '' : nameAndPlatform.text ,
+                platform: (nameAndPlatform == null) ? '' : nameAndPlatform.platform,
+                settings:null,
+                translations: tranlations,
+                icons:[]
+            }
+        },
+        getTranslations(){
             let tranlations = {}
             
             if(this.translationArray.title != null){
@@ -125,7 +140,7 @@ export default {
                     "list": {
                         "title": this.translationArray.title}
                 }
-
+                }
                 if(this.translationArray.title != null && this.translationArray.empty != null){
                      tranlations = {
                         "list": {
@@ -137,35 +152,11 @@ export default {
                         }
                     }
                 }
-            }
             }else{
                tranlations = null; 
             }
 
-
-            // tranlations = {
-            //     "list": {
-            //         "title": this.translationArray.title,
-            //             "empty": {
-            //                 "title":  this.translationArray.empty,
-            //                     "message": this.translationArray.desc
-            //             }
-            //     }
-            // }
-
-            let nameAndPlatform  = this.getNameAndPlatform();
-
-            console.log(tranlations)
-
-            this.button.mod = {
-                id:this.button.module_id,
-                use_screenshot: this.button.mod.use_screenshot == true ? true : false,
-                name: (nameAndPlatform == null) ? '' : nameAndPlatform.text ,
-                platform: (nameAndPlatform == null) ? '' : nameAndPlatform.platform,
-                settings:null,
-                translations: tranlations,
-                icons:[]
-            }
+            return tranlations;
         },
         getNameAndPlatform(){
 
