@@ -12,7 +12,7 @@
         <v-card>
         <v-container grid-list-md  >
             <v-layout wrap >
-     
+
                 <v-flex xs12 sm6 >
                     <v-text-field label="Button Title" required v-model="button.name"></v-text-field>
                 </v-flex>
@@ -27,10 +27,11 @@
                 <v-flex xs12 sm6 >
                     <v-text-field label="Module #"  v-model="button.module_id"></v-text-field>
                 </v-flex>
-                <v-flex xs12 sm6 >
+                <v-flex xs12 sm6 v-if="schoolboxPermissionsAllowed">
                     <v-autocomplete
                         :items="['Parent', 'Student', 'Staff']"
                         label="Permission To View"
+                        v-model="selectedSchoolboxPermissions"
                         multiple
                     ></v-autocomplete>
                 </v-flex>
@@ -71,7 +72,7 @@
         </v-card-actions>
         </v-card>
         </v-dialog>
-    </div>    
+    </div>
 </template>
 
 <script>
@@ -79,112 +80,143 @@ import CoreLinks from './CoreLinks/CoreLinks.vue'
 import * as ListOfButtons from '../../template/listOfButtons'
 
 export default {
-    data(){
-        return{
-            dialog:false,
-            translationArray:{title:null,empty:null,desc:null},
-            translationCheckbox:false,
-            buttonSelectionList:ListOfButtons.newObject(),
-            selectedButtonType:null,
-            coreLinksAdded:[]
-        }
-    },
-    props:{'button': Object,
-            'returnFn':Function
-    },
-    computed:{
-        btnComponentSet(){
-            if (!this.button.name == null || !this.button.name == ''){
-                return "primary"
-            }
-            return "warning"
-        }
-    },
-    methods:{
-        translationSetUp(value){
-            if(value.title){
-                this.translationArray.title = value.title
-            }else if(value.empty){
-                this.translationArray.empty = value.empty
-            }else if(value.desc){
-                this.translationArray.desc = value.desc
-            }
-        },
-        addCoreLink(){
-            this.coreLinksAdded.push({'key':this.coreLinksAdded.size})
-        },
-        setUpModuleJSON(){
-
-            let tranlations = this.getTranslations()
-
-            let nameAndPlatform  = this.getNameAndPlatform();
-
-
-            this.button.mod = {
-                id:this.button.module_id,
-                use_screenshot: this.button.mod.use_screenshot == true ? true : false,
-                name: (nameAndPlatform == null) ? '' : nameAndPlatform.text ,
-                platform: (nameAndPlatform == null) ? '' : nameAndPlatform.platform,
-                settings:null,
-                translations: tranlations,
-                icons:[]
-            }
-        },
-        getTranslations(){
-            let tranlations = {}
-            
-            if(this.translationArray.title != null){
-
-                if(this.translationArray.title != null && this.translationArray.empty == null){
-                tranlations = {
-                    "list": {
-                        "title": this.translationArray.title}
-                }
-                }
-                if(this.translationArray.title != null && this.translationArray.empty != null){
-                     tranlations = {
-                        "list": {
-                            "title": this.translationArray.title,
-                                "empty": {
-                                    "title":  this.translationArray.empty,
-                                        "message": this.translationArray.desc
-                                }
-                        }
-                    }
-                }
-            }else{
-               tranlations = null; 
-            }
-
-            return tranlations;
-        },
-        getNameAndPlatform(){
-
-            let selectedValue = this.selectedButtonType
-
-            let nameAndPlatform = this.buttonSelectionList.find(function(element){ 
-                return element.value == selectedValue
-            })
-
-            return nameAndPlatform
-
-        },
-        closeDialogButton(){
-            
-            this.setUpModuleJSON();
-
-            this.dialog = false
-            this.returnFn()
-        },
-        buttonSelectOnChange(){
-
-        }
-    },
-    components:{
-        appCoreLinks: CoreLinks
+  data () {
+    return {
+      dialog: false,
+      translationArray: { title: null, empty: null, desc: null },
+      translationCheckbox: false,
+      buttonSelectionList: ListOfButtons.newObject(),
+      selectedButtonType: null,
+      selectedSchoolboxPermissions:[],
+      coreLinksAdded: []
     }
+  },
+  props: { 'button': Object,
+    'returnFn': Function,
+    'schoolboxPermissionsAllowed':Boolean
+  },
+  computed: {
+    btnComponentSet () {
+      if (!this.button.name == null || !this.button.name == '') {
+        return 'primary'
+      }
+      return 'warning'
+    }
+  },
+  methods: {
+    translationSetUp (value) {
+      if (value.title) {
+        this.translationArray.title = value.title
+      } else if (value.empty) {
+        this.translationArray.empty = value.empty
+      } else if (value.desc) {
+        this.translationArray.desc = value.desc
+      }
+    },
+    addCoreLink () {
+      this.coreLinksAdded.push({ 'key': this.coreLinksAdded.size })
+    },
+    setUpModuleJSON () {
+      let tranlations = this.getTranslations()
+
+      let nameAndPlatform = this.getNameAndPlatform()
+
+      this.button.mod = {
+        id: this.button.module_id,
+        use_screenshot: this.button.mod.use_screenshot == true,
+        name: (nameAndPlatform == null) ? '' : nameAndPlatform.text,
+        platform: (nameAndPlatform == null) ? '' : nameAndPlatform.platform,
+        settings: null,
+        translations: tranlations,
+        icons: []
+      }
+    },
+    getTranslations () {
+      let tranlations = {}
+
+      if (this.translationArray.title != null) {
+        if (this.translationArray.title != null && this.translationArray.empty == null) {
+          tranlations = {
+            'list': {
+              'title': this.translationArray.title }
+          }
+        }
+        if (this.translationArray.title != null && this.translationArray.empty != null) {
+          tranlations = {
+            'list': {
+              'title': this.translationArray.title,
+              'empty': {
+                'title': this.translationArray.empty,
+                'message': this.translationArray.desc
+              }
+            }
+          }
+        }
+      } else {
+        tranlations = null
+      }
+
+      return tranlations
+    },
+    getNameAndPlatform () {
+      let selectedValue = this.selectedButtonType
+
+      let nameAndPlatform = this.buttonSelectionList.find(function (element) {
+        return element.value == selectedValue
+      })
+
+      return nameAndPlatform
+    },
+    createCSSForSchoolboxPermissions(){
+
+      let CSSstring = '';
+      let checker = false;
+
+      if(this.selectedSchoolboxPermissions.includes('Parent')){
+        CSSstring = "for-parent "
+        checker = true
+      }
+      if(this.selectedSchoolboxPermissions.includes('Staff')){
+        CSSstring += "for-staff "
+        checker = true
+      }
+      if(this.selectedSchoolboxPermissions.includes('Student')){
+        CSSstring += "for-student "
+        checker = true
+      }
+
+      if(!checker)
+      {
+        CSSstring = null
+      }
+
+      this.button.class_name = CSSstring
+
+      console.log(this.button)
 
 
+    },
+    closeDialogButton () {
+
+      if(this.schoolboxPermissionsAllowed){
+        this.createCSSForSchoolboxPermissions()
+      }else{
+        this.button.class_name = null
+      }
+
+
+      this.setUpModuleJSON()
+
+      this.dialog = false
+      this.returnFn()
+    },
+    buttonSelectOnChange () {
+
+    }
+  },
+  components: {
+    appCoreLinks: CoreLinks
+  }
 
 }
 </script>

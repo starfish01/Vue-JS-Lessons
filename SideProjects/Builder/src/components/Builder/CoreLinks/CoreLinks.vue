@@ -5,7 +5,7 @@
     </v-flex>
 
     <v-expansion-panel popout >
-            <v-expansion-panel-content class="indigo darken-4" xs12 v-for="link in coreLinksAdded" :key="link.key"> 
+            <v-expansion-panel-content class="indigo darken-4" xs12 v-for="link in coreLinksAdded" :key="link.key">
                 <div slot="header">{{ link.buttonTitle }} - {{ buttonTypeSelected }}</div>
                 <v-card>
                     <v-container grid-list-md  >
@@ -41,14 +41,11 @@
                     <v-text-field label="Apple Id" v-if="buttonTypeSelected == 'Twitter'"></v-text-field>
                 </v-flex>
 
-
-
             </v-layout>
                     </v-container>
-                </v-card> 
-            </v-expansion-panel-content>         
+                </v-card>
+            </v-expansion-panel-content>
     </v-expansion-panel>
-
 
     </span>
 </template>
@@ -57,21 +54,21 @@
 import Link from './Link'
 
 export default {
-    data(){
-        return{
-            buttonTypeSelected:'',
-            buttonTitle:''
-        }
-    },
-    props:['coreLinksAdded'],
-    methods:{
-        addCoreLink(){
-            this.coreLinksAdded.push(this.coreLinksAdded.length)
-        }
-    },
-    components:{
-        appLink:Link
+  data () {
+    return {
+      buttonTypeSelected: '',
+      buttonTitle: ''
     }
+  },
+  props: ['coreLinksAdded'],
+  methods: {
+    addCoreLink () {
+      this.coreLinksAdded.push(this.coreLinksAdded.length)
+    }
+  },
+  components: {
+    appLink: Link
+  }
 
 }
 </script>

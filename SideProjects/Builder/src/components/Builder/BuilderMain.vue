@@ -3,7 +3,7 @@
     <v-card dark color="primary">
       <v-layout row pl-3>
         <v-flex xs3>
-          <v-select 
+          <v-select
             :items="['Mobile', 'Tablet']"
             label="Layout Device"
           ></v-select>
@@ -12,7 +12,7 @@
           <v-dialog persistent v-model="dialog" width="600px">
         <v-btn slot="activator" @click="exportJSON()" dark>Export JSON</v-btn>
         <v-card>
-          <v-tabs 
+          <v-tabs
             color="cyan"
             dark
             slider-color="yellow"
@@ -22,7 +22,7 @@
               :key="n.key"
               ripple
             >
-              {{ n.title }} 
+              {{ n.title }}
             </v-tab>
             <v-tab-item
               v-for="n in exportvalues"
@@ -40,21 +40,26 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-flex>   
+    </v-flex>
   </v-layout>
-</v-card> 
+</v-card>
   <v-card dark color="primary">
     <v-layout row >
       <v-flex xs3 ><v-btn @click="addSectionButton()" target="_blank">Add Component</v-btn></v-flex>
-      <v-flex xs3 ><v-btn @click="dump()" target="_blank">dump</v-btn></v-flex>    
+      <v-flex xs3 >
+        <v-switch teal darken-3
+          label="Schoolbox Permissions"
+          v-model="schoolboxPermissionsAllowed"
+        ></v-switch></v-flex>
     </v-layout>
   </v-card>
     <div v-for="i in sections" :key="i">
-      <appButtonSection 
-        :sectionID="i" 
-        @sectionButtonData="allButtons[i] = $event" 
+      <appButtonSection
+        :sectionID="i"
+        :schoolboxPermissionsAllowed="schoolboxPermissionsAllowed"
+        @sectionButtonData="allButtons[i] = $event"
         @sectionCSSData="allCSS[i] = $event"
-        
+
       ></appButtonSection>
     </div>
   </v-container>
@@ -65,106 +70,104 @@ import ButtonSection from './ButtonSection.vue'
 import * as CSSTemplate from '../../template/cssTemplate.js'
 
 export default {
-  data(){
-    return{
-      exportvalues:[{title:'JSON',key:'1',data:'JSON'},{title:'CSS',key:'2',data:'CSS'},{title:'Module',key:'3',data:'Module'}],
-      sections:[],
-      allButtons:[],
-      allModules:[],
-      allCSS:[],
-      dialog:false,
-      buttons:[],
+  data () {
+    return {
+      exportvalues: [{ title: 'JSON', key: '1', data: 'JSON' }, { title: 'CSS', key: '2', data: 'CSS' }, { title: 'Module', key: '3', data: 'Module' }],
+      sections: [],
+      allButtons: [],
+      allModules: [],
+      allCSS: [],
+      dialog: false,
+      buttons: [],
+      schoolboxPermissionsAllowed:false
     }
   },
-  computed:{
+  computed: {
 
   },
 
-  components:{
-    appButtonSection:ButtonSection
+  components: {
+    appButtonSection: ButtonSection
   },
-  methods:{
-    addSectionButton(){
-      let sectionId = this.sections.length;
+  methods: {
+    addSectionButton () {
+      let sectionId = this.sections.length
       this.sections.push(sectionId)
-
     },
-    exportJSON(){
-      //All for buttons
-        let b2 = [];
-        let modulesTogether = [];
+    exportJSON () {
+      // All for buttons
+      let b2 = []
+      let modulesTogether = []
 
-        this.allButtons.forEach(element => {
+      this.allButtons.forEach(element => {
         let scrapper = []
 
         element.forEach(element => {
+          modulesTogether.push(element.mod)
 
-        modulesTogether.push(element.mod)
-
-        scrapper.push( {
-          "name": element.name,
-          "badge": element.badge,
-          "image": element.image,
-          "image_down": element.image_down,
-          "class_name": element.class_name,
-          "module_id": element.class_name,
-          "css": element.css,
-          "settings": element.settings
+          scrapper.push({
+            'name': element.name,
+            'badge': element.badge,
+            'image': element.image,
+            'image_down': element.image_down,
+            'class_name': element.class_name,
+            'module_id': element.class_name,
+            'css': element.css,
+            'settings': element.settings
           }
-        )
-      });
+          )
+        })
 
-      let newbrn = {
-        "css": null,
-        "buttons": 
+        let newbrn = {
+          'css': null,
+          'buttons':
           scrapper
-        };
+        }
         b2.push(newbrn)
-      });
+      })
 
-      this.exportvalues[0].data = {"devices":{
-        "mobile": {
-          "sections": [
-             {
-            "name": "buttons",
-            "css": null,
-            "image": null,
-            "settings": null,
-            "collection": b2
+      this.exportvalues[0].data = { 'devices': {
+        'mobile': {
+          'sections': [
+            {
+              'name': 'buttons',
+              'css': null,
+              'image': null,
+              'settings': null,
+              'collection': b2
             }
           ]
-      }}}
+        } } }
 
-      //END BUTTON
+      // END BUTTON
 
-      //All for CSS
+      // All for CSS
 
       this.exportvalues[1].data = CSSTemplate.newObject()
+      if(this.schoolboxPermissionsAllowed){
+        this.exportvalues[1].data += ".for-student, .for-staff, .for-parent, .for-none {display: none;} html.role-type-student .for-student, html.role-type-staff .for-staff, html.role-type-admin .for-staff, html.role-type-parent .for-parent {display: block;}"
+      }
 
-      //END CSS
+      // END CSS
 
-      //All for Modules
+      // All for Modules
 
-      //////////////////////////////////////
-      ///I need to export each module into one array
+      /// ///////////////////////////////////
+      /// I need to export each module into one array
 
-      //console.log(modulesTogether)
+      // console.log(modulesTogether)
 
       this.exportvalues[2].data = modulesTogether
 
-     
-
-      //End Modules
-
+      // End Modules
     },
-    dump(){
-      
+    dump () {
+
     }
   }
 }
 </script>
 
 <style>
-
 
 </style>
