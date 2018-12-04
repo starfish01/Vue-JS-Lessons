@@ -46,11 +46,21 @@
   <v-card dark color="primary">
     <v-layout row >
       <v-flex xs3 ><v-btn @click="addSectionButton()" target="_blank">Add Component</v-btn></v-flex>
+      
+      <v-flex xs3>
+        <app-dash-board-images></app-dash-board-images>
+      </v-flex>
+      
       <v-flex xs3 >
         <v-switch teal darken-3
           label="Schoolbox Permissions"
           v-model="schoolboxPermissionsAllowed"
-        ></v-switch></v-flex>
+        ></v-switch>
+      </v-flex>
+
+
+
+
     </v-layout>
   </v-card>
     <div v-for="i in sections" :key="i">
@@ -67,6 +77,7 @@
 
 <script>
 import ButtonSection from './ButtonSection.vue'
+import DashBoardImages from './DashBoardImages.vue'
 import * as CSSTemplate from '../../template/cssTemplate.js'
 
 export default {
@@ -87,7 +98,8 @@ export default {
   },
 
   components: {
-    appButtonSection: ButtonSection
+    appButtonSection: ButtonSection,
+    appDashBoardImages: DashBoardImages
   },
   methods: {
     addSectionButton () {

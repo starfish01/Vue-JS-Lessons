@@ -192,9 +192,6 @@ export default {
 
       this.button.class_name = CSSstring
 
-      console.log(this.button)
-
-
     },
     closeDialogButton () {
 
