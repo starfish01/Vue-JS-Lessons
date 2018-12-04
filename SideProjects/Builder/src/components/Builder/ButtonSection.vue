@@ -8,7 +8,7 @@
                 <v-toolbar-items >
 
                     <v-btn @click="addButtonToComponent()">Add</v-btn>
-                    
+
                 </v-toolbar-items>
             </v-toolbar>
             <v-flex>
@@ -18,19 +18,18 @@
                         <draggable class="somethingTownContainer" v-model="buttonsAdded" :end="returnData()" >
 
                             <div class="somethingTown" v-for="button in buttonsAdded" :key="button.key">
-                                <appButtonDetails 
+                                <appButtonDetails
                                     :button="button"
                                     :returnFn="returnData"
-                                    
+                                    :schoolboxPermissionsAllowed="schoolboxPermissionsAllowed"
+
                                     ></appButtonDetails>
                                 {{ button.name}}<br>
                                 {{ button.mod.name}}
-                                
 
                             </div>
 
                         </draggable>
-
 
                     </v-layout>
                 </v-card>
@@ -46,46 +45,43 @@ import * as ModuleTemplate from '../../template/moduleTemplate'
 import draggable from 'vuedraggable'
 
 export default {
-    data(){
-        return{
-                buttonPermissionView:['Default','Parent','Staff','Student'],
-                buttonLayout:['1','2','3','4','5','6'],
-                buttonsAdded:[],
-                CSSAdded:[],
-                buttonTemplate:{},
-                buttonLayoutSelectedButton:'this',
-        }
-    },
-    props:['sectionID','sectionButtonData','sectionCSSData'],
-    methods:{
-        addButtonToComponent(){
-            //button template
-            let newButton = new ButtonTemplate.newObject;
-
-            newButton.id = 'button-' + this.sectionID + '-' + this.buttonsAdded.length
-            newButton.sectionId = this.sectionID;
-            newButton.buttonId = this.buttonsAdded.length;
-            newButton.badge = false;
-
-            newButton.mod = new ModuleTemplate.newObject
-
-            this.buttonsAdded.push(newButton)
-
-        },
-        btnBtnClick(id){
-
-        },
-        returnData(){
-            
-            this.$emit('sectionButtonData', this.buttonsAdded)
-            this.$emit('sectionCSSData', this.CSSAdded)
-
-        },
-    },
-    components: {
-        appButtonDetails: ButtonDetails,
-        draggable
+  data () {
+    return {
+      buttonPermissionView: ['Default', 'Parent', 'Staff', 'Student'],
+      buttonLayout: ['1', '2', '3', '4', '5', '6'],
+      buttonsAdded: [],
+      CSSAdded: [],
+      buttonTemplate: {},
+      buttonLayoutSelectedButton: 'this'
     }
+  },
+  props: ['sectionID', 'sectionButtonData', 'sectionCSSData','schoolboxPermissionsAllowed'],
+  methods: {
+    addButtonToComponent () {
+      // button template
+      let newButton = new ButtonTemplate.newObject()
+
+      newButton.id = 'button-' + this.sectionID + '-' + this.buttonsAdded.length
+      newButton.sectionId = this.sectionID
+      newButton.buttonId = this.buttonsAdded.length
+      newButton.badge = false
+
+      newButton.mod = new ModuleTemplate.newObject()
+
+      this.buttonsAdded.push(newButton)
+    },
+    btnBtnClick (id) {
+
+    },
+    returnData () {
+      this.$emit('sectionButtonData', this.buttonsAdded)
+      this.$emit('sectionCSSData', this.CSSAdded)
+    }
+  },
+  components: {
+    appButtonDetails: ButtonDetails,
+    draggable
+  }
 
 }
 </script>

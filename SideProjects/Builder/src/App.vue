@@ -30,9 +30,9 @@
       <v-toolbar-title>Project Builder v0.1</v-toolbar-title>
     </v-toolbar>
     <v-content>
-          
+
       <component :is="currentComponent"></component>
-          
+
     </v-content>
     <v-footer app fixed>
       <span>&copy; {{(new Date()).getFullYear()}}</span>
@@ -43,19 +43,19 @@
 <script>
 
 import BuilderMain from './components/Builder/BuilderMain.vue'
- 
+
 export default {
-  data(){
-    return{
+  data () {
+    return {
       currentComponent: 'appBuilderMain',
-      drawer:false,
+      drawer: false,
       props: {
         source: String
-      }              
+      }
     }
   },
-  components:{
-    appBuilderMain:BuilderMain
+  components: {
+    appBuilderMain: BuilderMain
   }
 }
 </script>

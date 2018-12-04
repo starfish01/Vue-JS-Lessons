@@ -1,9 +1,7 @@
-export {newObject}
+export { newObject }
 
-
-function newObject(){
-
-  let obj =  `
+function newObject () {
+  let obj = `
   /* flex dashboard */ 
 
 .dashboard, #container, #sections { 
@@ -166,7 +164,6 @@ html.screenshot.ios .dashboard {
 
 }
   `
-
 
   return obj
 }
