@@ -21,6 +21,7 @@
                                 <appButtonDetails
                                     :button="button"
                                     :returnFn="returnData"
+                                    :deleteBtnFn="deleteBtn"
                                     :schoolboxPermissionsAllowed="schoolboxPermissionsAllowed"
 
                                     ></appButtonDetails>
@@ -76,7 +77,15 @@ export default {
     returnData () {
       this.$emit('sectionButtonData', this.buttonsAdded)
       this.$emit('sectionCSSData', this.CSSAdded)
+    },
+    deleteBtn (value) {
+
+        let item = this.buttonsAdded.findIndex(x => x.id == value)
+
+        this.buttonsAdded.splice(item,1);
+
     }
+
   },
   components: {
     appButtonDetails: ButtonDetails,

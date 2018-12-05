@@ -68,7 +68,38 @@
             </v-container>
         <v-card-actions>
             <v-spacer></v-spacer>
+            <v-btn  flat color="error" @click="deleteDialog = true">Delete</v-btn>
             <v-btn color="blue darken-1" flat @click="closeDialogButton()">Close</v-btn>
+            
+<v-dialog
+        v-model="deleteDialog"
+        max-width="290"
+      >
+        <v-card>
+          <v-card-title class="headline">Are you sure you want to delete?</v-card-title>
+  
+          <v-card-actions>
+            <v-spacer></v-spacer>
+  
+            <v-btn
+              color="error darken-1"
+              @click="deleteButton()"
+            >
+              YES
+            </v-btn>
+  
+            <v-btn
+              color="blue darken-1"
+              
+              @click="deleteDialog = false"
+            >
+              Cancel
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+
         </v-card-actions>
         </v-card>
         </v-dialog>
@@ -88,11 +119,13 @@ export default {
       buttonSelectionList: ListOfButtons.newObject(),
       selectedButtonType: null,
       selectedSchoolboxPermissions:[],
+      deleteDialog:false,
       coreLinksAdded: []
     }
   },
   props: { 'button': Object,
     'returnFn': Function,
+    'deleteBtnFn':Function,
     'schoolboxPermissionsAllowed':Boolean
   },
   computed: {
@@ -158,7 +191,7 @@ export default {
 
       return tranlations
     },
-    getNameAndPlatform () {
+    getNameAndPlatform() {
       let selectedValue = this.selectedButtonType
 
       let nameAndPlatform = this.buttonSelectionList.find(function (element) {
@@ -208,6 +241,12 @@ export default {
       this.returnFn()
     },
     buttonSelectOnChange () {
+
+    },
+    deleteButton(){
+        this.deleteDialog = false
+        this.dialog = false
+        this.deleteBtnFn(this.button.id)
 
     }
   },
