@@ -107,6 +107,9 @@ export default {
       this.sections.push(sectionId)
     },
     exportJSON () {
+      console.log(this.allCSS)
+
+
       // All for buttons
       let b2 = []
       let modulesTogether = []

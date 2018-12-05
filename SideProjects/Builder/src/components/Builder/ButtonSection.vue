@@ -5,6 +5,15 @@
                 <v-toolbar-side-icon></v-toolbar-side-icon>
                 <v-toolbar-title>Button-Group - {{ sectionID }}</v-toolbar-title>
                 <v-spacer></v-spacer>
+                <v-flex xs2>
+                    <v-select
+                        :items="buttonLayout"
+                        label="Row Width"
+                        v-model="rowWidthSelect"
+                        item-text="text"
+                    ></v-select>
+                </v-flex>
+                <v-spacer></v-spacer>
                 <v-toolbar-items >
 
                     <v-btn @click="addButtonToComponent()">Add</v-btn>
@@ -15,23 +24,19 @@
                 <v-card dark color="primary" >
                     <v-layout row wrap px-3>
 
-                        <draggable class="somethingTownContainer" v-model="buttonsAdded" :end="returnData()" >
+                        <draggable class="somethingTownContainer"  v-model="buttonsAdded" :end="returnData()" >
 
-                            <div class="somethingTown" v-for="button in buttonsAdded" :key="button.key">
+                            <div class="somethingTown" :style="{width: rowWidthSelect}" v-for="button in buttonsAdded" :key="button.key">
                                 <appButtonDetails
                                     :button="button"
                                     :returnFn="returnData"
                                     :deleteBtnFn="deleteBtn"
                                     :schoolboxPermissionsAllowed="schoolboxPermissionsAllowed"
-
                                     ></appButtonDetails>
                                 {{ button.name}}<br>
                                 {{ button.mod.name}}
-
                             </div>
-
                         </draggable>
-
                     </v-layout>
                 </v-card>
             </v-flex>
@@ -49,8 +54,9 @@ export default {
   data () {
     return {
       buttonPermissionView: ['Default', 'Parent', 'Staff', 'Student'],
-      buttonLayout: ['1', '2', '3', '4', '5', '6'],
+      buttonLayout: [{"text":'1',"value":"100%"}, {"text":'2',"value":"50%"}, {"text":'3',"value":"33%"}, {"text":'4',"value":"25%"}, {"text":'5',"value":"20%"}, {"text":'6',"value":"16.5%"}],
       buttonsAdded: [],
+      rowWidthSelect:'',
       CSSAdded: [],
       buttonTemplate: {},
       buttonLayoutSelectedButton: 'this'
@@ -75,15 +81,14 @@ export default {
 
     },
     returnData () {
-      this.$emit('sectionButtonData', this.buttonsAdded)
-      this.$emit('sectionCSSData', this.CSSAdded)
+        //this.CSSAdded.push(this.rowWidthSelect)
+
+        this.$emit('sectionButtonData', this.buttonsAdded)
+        this.$emit('sectionCSSData', this.rowWidthSelect)
     },
     deleteBtn (value) {
-
         let item = this.buttonsAdded.findIndex(x => x.id == value)
-
         this.buttonsAdded.splice(item,1);
-
     }
 
   },
@@ -102,7 +107,6 @@ export default {
 }
 .somethingTown{
     display: -webkit-inline-box;
-    width: 33%;
 }
 .somethingTownContainer{
     width:100%;
