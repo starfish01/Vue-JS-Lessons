@@ -25,18 +25,23 @@
                     <v-layout row wrap px-3>
 
                         <draggable class="somethingTownContainer"  v-model="buttonsAdded" :end="returnData()" >
-
-                            <div class="somethingTown" :style="{width: rowWidthSelect}" v-for="button in buttonsAdded" :key="button.key">
-                                <appButtonDetails
-                                    :button="button"
-                                    :returnFn="returnData"
-                                    :deleteBtnFn="deleteBtn"
-                                    :schoolboxPermissionsAllowed="schoolboxPermissionsAllowed"
-                                    ></appButtonDetails>
-                                {{ button.name}}<br>
-                                {{ button.mod.name}}
-                            </div>
+                            <transition-group name="list-complete">
+                            
+                                <div v-bind:key="button.id" class="somethingTown list-complete-item" :style="{width: rowWidthSelect}" v-for="button in buttonsAdded" >
+                                    
+                                    <appButtonDetails
+                                        :button="button"
+                                        :returnFn="returnData"
+                                        :deleteBtnFn="deleteBtn"
+                                        :schoolboxPermissionsAllowed="schoolboxPermissionsAllowed"
+                                        ></appButtonDetails>
+                                    {{ button.name}}<br>
+                                    {{ button.mod.name}}
+                                </div>
+                            
+                            </transition-group>
                         </draggable>
+
                     </v-layout>
                 </v-card>
             </v-flex>
@@ -111,6 +116,17 @@ export default {
 .somethingTownContainer{
     width:100%;
     justify-content: center;
+}
+
+.list-complete-item {
+  padding: 4px;
+  
+  border: solid 1px;
+  transition: all 1s;
+}
+
+.list-complete-enter, .list-complete-leave-active {
+  opacity: 0;
 }
 
 </style>

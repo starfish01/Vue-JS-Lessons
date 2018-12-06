@@ -11,8 +11,9 @@
                 <v-container grid-list-md  >
                    
                         <draggable v-model="dashboardImages" >
+                            <transition-group name="list-complete">
                             
-                            <v-flex xs12 v-for="(image, i) in dashboardImages" :key="i" ma-2>
+                            <v-flex xs12 v-for="(image, i) in dashboardImages" :key="i" ma-2 class="list-complete-item">
                                 <v-card >
                                     <v-layout align-center justify-center row fill-height grey darken-1 >
                                         <v-flex xs6 pl-5>
@@ -27,7 +28,7 @@
                                     </v-layout>
                                 </v-card>
                             </v-flex>
-                            
+                            </transition-group>
                         </draggable>
                         <v-btn @click="addDashboardImage()" v-if="addbButton" >Add Dashboard Image</v-btn>
                     

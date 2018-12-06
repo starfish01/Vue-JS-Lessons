@@ -4,7 +4,7 @@
       <v-layout row pl-3>
         <v-flex xs3>
           <v-select
-            disabled="true"
+            :disabled='true'
             :items="['Mobile', 'Tablet']"
             label="Layout Device"
           ></v-select>
