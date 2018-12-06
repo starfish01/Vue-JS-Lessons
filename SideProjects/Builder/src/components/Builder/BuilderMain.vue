@@ -4,6 +4,7 @@
       <v-layout row pl-3>
         <v-flex xs3>
           <v-select
+            disabled="true"
             :items="['Mobile', 'Tablet']"
             label="Layout Device"
           ></v-select>
@@ -48,7 +49,9 @@
       <v-flex xs3 ><v-btn @click="addSectionButton()" target="_blank">Add Component</v-btn></v-flex>
       
       <v-flex xs3>
-        <app-dash-board-images></app-dash-board-images>
+        <app-dash-board-images
+          @dashboardImages="dashboardImages = $event"
+        ></app-dash-board-images>
       </v-flex>
       
       <v-flex xs3 >
@@ -85,6 +88,7 @@ export default {
     return {
       exportvalues: [{ title: 'JSON', key: '1', data: 'JSON' }, { title: 'CSS', key: '2', data: 'CSS' }, { title: 'Module', key: '3', data: 'Module' }],
       sections: [],
+      dashboardImages:[],
       allButtons: [],
       allModules: [],
       allCSS: [],
@@ -156,11 +160,18 @@ export default {
 
       // All for CSS
 
-//this is correct but im not sure if im grabbing the correct css codes will need to check
+      let dashboardImagesCSS = ' ';
+
+      this.dashboardImages.forEach((element,i) => {
+        
+        dashboardImagesCSS += `.dashboard-slider-image:nth-child(${i}) { background-image: url("${element}"); } `
+      });
+
+
+
       let sectionLayoutCSS = ' ';
       this.allCSS.forEach((element,index) => {
-        sectionLayoutCSS +=  `.button-${index}{ width: ${element}} `
-        console.log(sectionLayoutCSS)
+        sectionLayoutCSS +=  `#button-group-${index} .dashboard-button { width: ${element}} `
       });
 
       this.exportvalues[1].data = CSSTemplate.newObject()
@@ -169,6 +180,7 @@ export default {
       }
 
      this.exportvalues[1].data+=sectionLayoutCSS;
+     this.exportvalues[1].data+=dashboardImagesCSS
 
       // END CSS
 

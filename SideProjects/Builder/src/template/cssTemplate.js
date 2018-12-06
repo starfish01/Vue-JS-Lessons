@@ -88,34 +88,7 @@ function newObject () {
 
 } 
 
-.dashboard-slider-image:nth-child(1) { 
-
-    background-image: url("https://digistorm-app-control.s3-ap-southeast-2.amazonaws.com/5a7bc4cb92b4b373b73e99cc57dd31b77fca996b840cb606ee168.jpeg"); 
-
-} 
-
-.dashboard-slider-image:nth-child(2) { 
-
-    background-image: url("https://digistorm-app-control.s3-ap-southeast-2.amazonaws.com/5a7bc4cbb7e5d2fdedbe8875f5e01fe77e66a0d3f0df217d2eb34.jpeg"); 
-
-} 
-
-.dashboard-slider-image:nth-child(3) { 
-
-    background-image: url("https://digistorm-app-control.s3-ap-southeast-2.amazonaws.com/5a7bc699e34327ed4f4dbe72f2fe4cefce60f7cffb93a591da8e4.jpeg"); 
-
-} 
-
-.dashboard-slider-image:nth-child(4) { 
-
-    background-image: url("https://digistorm-app-control.s3-ap-southeast-2.amazonaws.com/5a7bc4cbe1eca013faa57359c0c1bc4803c14c389c6aaa627b850.jpeg"); 
-
-} 
-
-  
-
-  
-
+ 
   
 
 /* tablet login */ 
