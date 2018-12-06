@@ -13,9 +13,16 @@
         <v-card>
         <v-container grid-list-md  >
             <v-layout wrap >
+                <v-btn @click="addDashboardImage()">Add Dashboard Image</v-btn>
 
-                <v-flex xs12 sm6 >
+                <v-flex xs12 v-for="(image, i) in dashboardImages" :key="i">
+                    <v-text-field
+                        label="Dashboard Image"
+                        v-model="dashboardImages[i]"
+                    ></v-text-field>
+
                 </v-flex>
+
             </v-layout>
                
         </v-container>
@@ -34,12 +41,19 @@
 export default {
     data(){
         return {
-            dialog: false
+            dialog: false,
+            dashboardImages:['']
         }
     },
     methods: {
         closeDialogButton(){
             this.dialog = false;
+        },
+        addDashboardImage(){
+            let val = this.dashboardImages[this.dashboardImages.length-1];
+            if( val.length > 0){
+                this.dashboardImages.push("");
+            }
         }
     }
 

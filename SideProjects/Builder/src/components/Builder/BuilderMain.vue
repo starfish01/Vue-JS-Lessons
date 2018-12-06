@@ -107,8 +107,6 @@ export default {
       this.sections.push(sectionId)
     },
     exportJSON () {
-      console.log(this.allCSS)
-
 
       // All for buttons
       let b2 = []
@@ -158,10 +156,19 @@ export default {
 
       // All for CSS
 
+//this is correct but im not sure if im grabbing the correct css codes will need to check
+      let sectionLayoutCSS = ' ';
+      this.allCSS.forEach((element,index) => {
+        sectionLayoutCSS +=  `.button-${index}{ width: ${element}} `
+        console.log(sectionLayoutCSS)
+      });
+
       this.exportvalues[1].data = CSSTemplate.newObject()
       if(this.schoolboxPermissionsAllowed){
         this.exportvalues[1].data += ".for-student, .for-staff, .for-parent, .for-none {display: none;} html.role-type-student .for-student, html.role-type-staff .for-staff, html.role-type-admin .for-staff, html.role-type-parent .for-parent {display: block;}"
       }
+
+     this.exportvalues[1].data+=sectionLayoutCSS;
 
       // END CSS
 
