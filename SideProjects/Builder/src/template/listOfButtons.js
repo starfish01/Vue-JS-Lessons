@@ -3,7 +3,7 @@ export { newObject }
 function newObject () {
   let obj = [
     { text: 'absentees', value: '1', platform: 'reach' },
-    { text: 'browser', value: '2', platform: 'reach' },
+    { text: 'browser', value: '2', platform: 'reach'},
     { text: 'businesses', value: '3', platform: 'reach' },
     { text: 'contacts', value: '4', platform: 'reach' },
     { text: 'custom-content', value: '5', platform: 'reach' },

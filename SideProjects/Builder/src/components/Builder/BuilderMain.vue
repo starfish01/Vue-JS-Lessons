@@ -4,7 +4,7 @@
       <v-layout row pl-3>
         <v-flex xs3>
           <v-select
-            :disabled='true'
+            v-model="deviceSelected"
             :items="['Mobile', 'Tablet']"
             label="Layout Device"
           ></v-select>
@@ -94,7 +94,8 @@ export default {
       allCSS: [],
       dialog: false,
       buttons: [],
-      schoolboxPermissionsAllowed:false
+      schoolboxPermissionsAllowed:false,
+      deviceSelected:"Mobile"
     }
   },
   computed: {
@@ -115,6 +116,13 @@ export default {
       // All for buttons
       let b2 = []
       let modulesTogether = []
+
+      let amountOfDashboardImages = [];
+      
+      this.dashboardImages.forEach((element,i) => {
+        amountOfDashboardImages.push(
+          {"image": `refer_to_css_${i+1}`}
+      )});
 
       this.allButtons.forEach(element => {
         let scrapper = []
@@ -143,18 +151,42 @@ export default {
         b2.push(newbrn)
       })
 
-      this.exportvalues[0].data = { 'devices': {
-        'mobile': {
-          'sections': [
-            {
-              'name': 'buttons',
-              'css': null,
-              'image': null,
-              'settings': null,
-              'collection': b2
-            }
+      let device = 'ERROR'
+
+      let sectionsJSON = {
+        'sections': [
+          {
+          "name": "slider",
+          "css": null,
+          "image": null,
+          "settings": {
+            "fade": true
+          },
+          "collection": [
+            amountOfDashboardImages
           ]
-        } } }
+          },
+          {
+            'name': 'buttons',
+            'css': null,
+            'image': null,
+            'settings': null,
+            'collection': b2
+          }
+        ]
+      }
+
+      if(this.deviceSelected == 'Mobile'){
+        device = {'mobile':sectionsJSON};
+      }else{
+        device = {'tablet':sectionsJSON};
+      }
+      
+      this.exportvalues[0].data = {
+        'devices': {
+          device
+        }
+      }
 
       // END BUTTON
 
@@ -163,7 +195,6 @@ export default {
       let dashboardImagesCSS = ' ';
 
       this.dashboardImages.forEach((element,i) => {
-        
         dashboardImagesCSS += `.dashboard-slider-image:nth-child(${i}) { background-image: url("${element}"); } `
       });
 

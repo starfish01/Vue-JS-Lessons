@@ -60,10 +60,13 @@
                     <v-text-field label="Message" placeholder="There are currently no sport notices." @blur="translationSetUp({'desc':$event.target.value})"></v-text-field>
                 </v-flex>
 
-                <v-flex xs12 v-if="button.mod.name == 4">
-                    Core Links
-                    <appCoreLinks :coreLinksAdded="coreLinksAdded"></appCoreLinks>
+                <v-flex xs12>
+                    <component :is="currentModuleSelectedAdditions"></component>
                 </v-flex>
+
+
+
+
             </v-layout>
             </v-container>
         <v-card-actions>
@@ -110,6 +113,49 @@
 import CoreLinks from './CoreLinks/CoreLinks.vue'
 import * as ListOfButtons from '../../template/listOfButtons'
 
+//modules
+import AbsencesEdumateModule from './Modules/AbsencesEdumateModule.vue';
+import AbsenteesReachModule from './Modules/AbsenteesReachModule.vue';
+import BoardingBoardingReachModule from './Modules/BoardingBoardingReachModule.vue';
+import BrowserReachModule from './Modules/BrowserReachModule.vue';
+import BusinessesReachModule from './Modules/BusinessesReachModule.vue';
+import CalendarEdumateModule from './Modules/CalendarEdumateModule.vue';
+import ClassesSchoolboxModule from './Modules/ClassesSchoolboxModule.vue';
+import ContactsReachModule from './Modules/ContactsReachModule.vue';
+import CustomContentReachModule from './Modules/CustomContentReachModule.vue';
+import DueWorkSchoolboxModule from './Modules/DueWorkSchoolboxModule.vue';
+import EdustackFormsReachModule from './Modules/EdustackFormsReachModule.vue';
+import EventsReachModule from './Modules/EventsReachModule.vue';
+import EventsSchoolboxModule from './Modules/EventsSchoolboxModule.vue';
+import EventsTASSModule from './Modules/EventsTASSModule.vue';
+import ExcursionsTASSModule from './Modules/ExcursionsTASSModule.vue';
+import FeedsReachModule from './Modules/FeedsReachModule.vue';
+import FutureEventsEdumateModule from './Modules/FutureEventsEdumateModule.vue';
+import FutureTasksEdumateModule from './Modules/FutureTasksEdumateModule.vue';
+import GalleriesReachModule from './Modules/GalleriesReachModule.vue';
+import GroupsSchoolboxModule from './Modules/GroupsSchoolboxModule.vue';
+import HomepageNewsSchoolboxModule from './Modules/HomepageNewsSchoolboxModule.vue';
+import LinksCoreModule from './Modules/LinksCoreModule.vue';
+import LinksReachModule from './Modules/LinksReachModule.vue';
+import MapsReachModule from './Modules/MapsReachModule.vue';
+import MessagesSchoolboxModule from './Modules/MessagesSchoolboxModule.vue';
+import NewsEdumateModule from './Modules/NewsEdumateModule.vue';
+import NewsSchoolboxModule from './Modules/NewsSchoolboxModule.vue';
+import NewslettersReachModule from './Modules/NewslettersReachModule.vue';
+import NoticesReachModule from './Modules/NoticesReachModule.vue';
+import NoticesTASSModule from './Modules/NoticesTASSModule.vue';
+import NotificationsTASSModule from './Modules/NotificationsTASSModule.vue';
+import PaperworkSlipsParentModule from './Modules/PaperworkSlipsParentModule.vue';
+import ParentDirectoryReachModule from './Modules/ParentDirectoryReachModule.vue';
+import ParentsTASSModule from './Modules/ParentsTASSModule.vue';
+import StudentsTASSModule from './Modules/StudentsTASSModule.vue';
+import SubscriptionsReachModule from './Modules/SubscriptionsReachModule.vue';
+import TimetableEdumateModule from './Modules/TimetableEdumateModule.vue';
+import TimetableSchoolboxModule from './Modules/TimetableSchoolboxModule.vue';
+import TimetableTASSModule from './Modules/TimetableTASSModule.vue';
+import TodosEdumateModule from './Modules/TodosEdumateModule.vue';
+import VideosReachModule from './Modules/VideosReachModule.vue';
+
 export default {
   data () {
     return {
@@ -121,6 +167,7 @@ export default {
       selectedSchoolboxPermissions:[],
       deleteDialog:false,
       coreLinksAdded: []
+      
     }
   },
   props: { 'button': Object,
@@ -134,6 +181,26 @@ export default {
         return 'primary'
       }
       return 'warning'
+    },
+    currentModuleSelectedAdditions(){
+      let platform = this.getNameAndPlatform()
+      if(platform != null){
+        if (platform.text.indexOf('-') != -1) {
+
+
+          //needs to be finished to accomedate for components with - 
+          let text = platform.text
+          console.log(text)
+          let index = text.indexOf('-')
+          text = text.slice(index+1)
+
+          console.log(text)
+          
+        }else{
+          return 'app'+platform.text.charAt(0).toUpperCase()+ platform.text.slice(1)+platform.platform.charAt(0).toUpperCase()+ platform.platform.slice(1) +'Module'
+        }
+      }
+      return null
     }
   },
   methods: {
@@ -251,7 +318,47 @@ export default {
     }
   },
   components: {
-    appCoreLinks: CoreLinks
+    appAbsencesEdumateModule: AbsencesEdumateModule,
+appAbsenteesReachModule: AbsenteesReachModule,
+appBoardingBoardingReachModule: BoardingBoardingReachModule,
+appBrowserReachModule: BrowserReachModule,
+appBusinessesReachModule: BusinessesReachModule,
+appCalendarEdumateModule: CalendarEdumateModule,
+appClassesSchoolboxModule: ClassesSchoolboxModule,
+appContactsReachModule: ContactsReachModule,
+appCustomContentReachModule: CustomContentReachModule,
+appDueWorkSchoolboxModule: DueWorkSchoolboxModule,
+appEdustackFormsReachModule: EdustackFormsReachModule,
+appEventsReachModule: EventsReachModule,
+appEventsSchoolboxModule: EventsSchoolboxModule,
+appEventsTASSModule: EventsTASSModule,
+appExcursionsTASSModule: ExcursionsTASSModule,
+appFeedsReachModule: FeedsReachModule,
+appFutureEventsEdumateModule: FutureEventsEdumateModule,
+appFutureTasksEdumateModule: FutureTasksEdumateModule,
+appGalleriesReachModule: GalleriesReachModule,
+appGroupsSchoolboxModule: GroupsSchoolboxModule,
+appHomepageNewsSchoolboxModule: HomepageNewsSchoolboxModule,
+appLinksCoreModule: LinksCoreModule,
+appLinksReachModule: LinksReachModule,
+appMapsReachModule: MapsReachModule,
+appMessagesSchoolboxModule: MessagesSchoolboxModule,
+appNewsEdumateModule: NewsEdumateModule,
+appNewsSchoolboxModule: NewsSchoolboxModule,
+appNewslettersReachModule: NewslettersReachModule,
+appNoticesReachModule: NoticesReachModule,
+appNoticesTASSModule: NoticesTASSModule,
+appNotificationsTASSModule: NotificationsTASSModule,
+appPaperworkSlipsParentModule: PaperworkSlipsParentModule,
+appParentDirectoryReachModule: ParentDirectoryReachModule,
+appParentsTASSModule: ParentsTASSModule,
+appStudentsTASSModule: StudentsTASSModule,
+appSubscriptionsReachModule: SubscriptionsReachModule,
+appTimetableEdumateModule: TimetableEdumateModule,
+appTimetableSchoolboxModule: TimetableSchoolboxModule,
+appTimetableTASSModule: TimetableTASSModule,
+appTodosEdumateModule: TodosEdumateModule,
+appVideosReachModule: VideosReachModule
   }
 
 }
