@@ -13,16 +13,20 @@
         <v-container grid-list-md  >
             <v-layout wrap >
 
-                <v-flex xs12 sm6 >
+                <v-flex xs12 sm4 >
                     <v-text-field label="Button Title" required v-model="button.name"></v-text-field>
                 </v-flex>
-                <v-flex xs12 sm6 >
+                <v-flex xs12 sm4 >
                     <v-select
                         :items="buttonSelectionList"
                         label="Button Type"
                         v-model="selectedButtonType"
                         item-text="text"
                     ></v-select>
+                </v-flex>
+                <v-flex xs12 sm4 >
+                  {{ getNameAndPlatform().platform }}
+
                 </v-flex>
                 <v-flex xs12 sm6 >
                     <v-text-field label="Module #"  v-model="button.module_id"></v-text-field>
@@ -187,15 +191,13 @@ export default {
       if(platform != null){
         if (platform.text.indexOf('-') != -1) {
 
+          let SecondText = platform.text
+          let index = SecondText.indexOf('-')
+          SecondText = SecondText.slice(index+1)
 
-          //needs to be finished to accomedate for components with - 
-          let text = platform.text
-          console.log(text)
-          let index = text.indexOf('-')
-          text = text.slice(index+1)
+          let firstText = platform.text.substring(0, index)
+          return 'app'+firstText.charAt(0).toUpperCase()+firstText.slice(1)+SecondText.charAt(0).toUpperCase()+SecondText.slice(1) +platform.platform.charAt(0).toUpperCase()+ platform.platform.slice(1) +'Module';
 
-          console.log(text)
-          
         }else{
           return 'app'+platform.text.charAt(0).toUpperCase()+ platform.text.slice(1)+platform.platform.charAt(0).toUpperCase()+ platform.platform.slice(1) +'Module'
         }
