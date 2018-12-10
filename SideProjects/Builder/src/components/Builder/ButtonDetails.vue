@@ -25,7 +25,6 @@
                     ></v-select>
                 </v-flex>
                 <v-flex xs12 sm4 >
-                  {{ getNameAndPlatform().platform }}
 
                 </v-flex>
                 <v-flex xs12 sm6 >
@@ -118,8 +117,8 @@ import CoreLinks from './CoreLinks/CoreLinks.vue'
 import * as ListOfButtons from '../../template/listOfButtons'
 
 //modules
-import AbsencesEdumateModule from './Modules/AbsencesEdumateModule.vue';
 import AbsenteesReachModule from './Modules/AbsenteesReachModule.vue';
+import AbsencesEdumateModule from './Modules/AbsencesEdumateModule.vue';
 import BoardingBoardingReachModule from './Modules/BoardingBoardingReachModule.vue';
 import BrowserReachModule from './Modules/BrowserReachModule.vue';
 import BusinessesReachModule from './Modules/BusinessesReachModule.vue';
@@ -320,8 +319,8 @@ export default {
     }
   },
   components: {
-    appAbsencesEdumateModule: AbsencesEdumateModule,
 appAbsenteesReachModule: AbsenteesReachModule,
+    appAbsencesEdumateModule: AbsencesEdumateModule,
 appBoardingBoardingReachModule: BoardingBoardingReachModule,
 appBrowserReachModule: BrowserReachModule,
 appBusinessesReachModule: BusinessesReachModule,
