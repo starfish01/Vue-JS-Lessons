@@ -49,11 +49,16 @@
       <v-flex xs3 ><v-btn @click="addSectionButton()" target="_blank">Add Component</v-btn></v-flex>
       
       <v-flex xs3>
+        <app-dashboard-logo
+        ></app-dashboard-logo>
+      </v-flex>
+      
+      <v-flex xs3>
         <app-dash-board-images
           @dashboardImages="dashboardImages = $event"
         ></app-dash-board-images>
       </v-flex>
-      
+
       <v-flex xs3 >
         <v-switch teal darken-3
           label="Schoolbox Permissions"
@@ -80,6 +85,7 @@
 
 <script>
 import ButtonSection from './ButtonSection.vue'
+import DashboardLogo from './DashboardLogo.vue'
 import DashBoardImages from './DashBoardImages.vue'
 import * as CSSTemplate from '../../template/cssTemplate.js'
 
@@ -103,6 +109,7 @@ export default {
   },
 
   components: {
+    appDashboardLogo: DashboardLogo,
     appButtonSection: ButtonSection,
     appDashBoardImages: DashBoardImages
   },
