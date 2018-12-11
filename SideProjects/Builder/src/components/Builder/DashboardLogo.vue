@@ -37,20 +37,16 @@ export default {
                 if( this.dashboardlogourl.length > 0){
                 
                     //build the module for logo here looks like this
+                    let logoToTheDashBoard = 
+                       {
+                        "name": "logo",
+                        "css": null,
+                        "image": this.dashboardlogourl,
+                        "settings": null,
+                        "collection": null
+                        }
 
-                    //    {
-                    //     "name": "logo",
-                    //     "css": {
-                    //       "position": "relative",
-                    //       "z-index": "3",
-                    //       "background-color": "#ffffff"
-                    //     },
-                    //     "image": "https://digistorm-app-control.s3-ap-southeast-2.amazonaws.com/5b5ea75d0acabc21b1a7cfd73f83c1fa7a18ebc7411235891e4c2.png",
-                    //     "settings": null,
-                    //     "collection": null
-                    //     }
-
-
+                        console.log(logoToTheDashBoard)
 
                 }
             }
