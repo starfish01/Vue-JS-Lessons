@@ -64,7 +64,10 @@
                 </v-flex>
 
                 <v-flex xs12>
-                    <component :is="currentModuleSelectedAdditions" @sectionButtonData="moduleDATA = $event"></component>
+                    <component :is="currentModuleSelectedAdditions" 
+                      @sectionButtonData="moduleDATA = $event"
+                      :schoolboxPermissionsAllowed="schoolboxPermissionsAllowed"
+                    ></component>
                 </v-flex>
 
 
