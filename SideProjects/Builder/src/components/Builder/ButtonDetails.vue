@@ -64,7 +64,7 @@
                 </v-flex>
 
                 <v-flex xs12>
-                    <component :is="currentModuleSelectedAdditions"></component>
+                    <component :is="currentModuleSelectedAdditions" @sectionButtonData="moduleDATA = $event"></component>
                 </v-flex>
 
 
@@ -169,7 +169,8 @@ export default {
       selectedButtonType: null,
       selectedSchoolboxPermissions:[],
       deleteDialog:false,
-      coreLinksAdded: []
+      coreLinksAdded: [],
+      moduleDATA:'',
       
     }
   },
@@ -295,6 +296,9 @@ export default {
 
     },
     closeDialogButton () {
+      console.log('-')
+      console.log(this.moduleDATA)
+      console.log('-')
 
       if(this.schoolboxPermissionsAllowed){
         this.createCSSForSchoolboxPermissions()

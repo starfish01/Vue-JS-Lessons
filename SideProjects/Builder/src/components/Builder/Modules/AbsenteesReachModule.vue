@@ -17,7 +17,7 @@
                 <v-text-field label="Title" required ></v-text-field>
             </v-flex>
             <v-flex xs12 sm5 >
-                <v-text-field label="Email" required ></v-text-field>
+                <v-text-field v-model="emailInput" @change="fn()" label="Email" required ></v-text-field>
             </v-flex>
 
         </v-layout>
@@ -28,11 +28,20 @@
 export default {
     data(){
         return {
+            emailInput:'',
             sickReasonsList: "[ {'value': 5,'title': 'Sick' },{'value': 6,'title': 'Contagious or infectious condition'},{'value': 2,'title': 'Medical appointment'},{'value': 3,'title': 'Religious holiday'},{'value': 4,'title': 'Exceptional or urgent family circumstance'},{'value': 100,'title': 'Other - please provide details below'} ]"
         }
     },
     methods: {
-        
+        fn(){
+            
+            this.$emit('sectionButtonData', {name:this.emailInput})
+
+            // this.moduleData = this.emailInput
+        }
+    },
+    computed:{
+
     }
 }
 </script>
