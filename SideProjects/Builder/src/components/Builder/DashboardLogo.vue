@@ -46,7 +46,10 @@ export default {
                         "collection": null
                         }
 
-                        console.log(logoToTheDashBoard)
+                        this.$emit('dashboardLogoImage', logoToTheDashBoard)
+
+
+                        //console.log(logoToTheDashBoard)
 
                 }
             }

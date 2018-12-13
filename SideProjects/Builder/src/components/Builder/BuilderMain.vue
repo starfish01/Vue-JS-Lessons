@@ -50,6 +50,7 @@
       
       <v-flex xs3>
         <app-dashboard-logo
+        @dashboardLogoImage="dashboardLogoImage = $event"
         ></app-dashboard-logo>
       </v-flex>
       
@@ -100,6 +101,7 @@ export default {
       allCSS: [],
       dialog: false,
       buttons: [],
+      dashboardLogoImage:[],
       schoolboxPermissionsAllowed:false,
       deviceSelected:"Mobile"
     }
@@ -119,6 +121,7 @@ export default {
       this.sections.push(sectionId)
     },
     exportJSON () {
+
 
       // All for buttons
       let b2 = []
@@ -160,8 +163,18 @@ export default {
 
       let device = 'ERROR'
 
+      console.log(this.dashboardLogoImage)
+
       let sectionsJSON = {
         'sections': [
+
+        {
+          "name": "logo", 
+          "css": null, 
+          "image": this.dashboardLogoImage, 
+          "settings": null, 
+          "collection": null
+        },
           {
           "name": "slider",
           "css": null,

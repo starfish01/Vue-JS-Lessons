@@ -116,7 +116,6 @@
 </template>
 
 <script>
-import CoreLinks from './CoreLinks/CoreLinks.vue'
 import * as ListOfButtons from '../../template/listOfButtons'
 
 //modules
@@ -231,7 +230,7 @@ export default {
         use_screenshot: this.button.mod.use_screenshot == true,
         name: (nameAndPlatform == null) ? '' : nameAndPlatform.text,
         platform: (nameAndPlatform == null) ? '' : nameAndPlatform.platform,
-        settings: null,
+        settings: this.moduleDATA,
         translations: tranlations,
         icons: []
       }
@@ -299,9 +298,10 @@ export default {
 
     },
     closeDialogButton () {
-      console.log('-')
-      console.log(this.moduleDATA)
-      console.log('-')
+      
+      //console.log(this.moduleDATA)
+      
+
 
       if(this.schoolboxPermissionsAllowed){
         this.createCSSForSchoolboxPermissions()

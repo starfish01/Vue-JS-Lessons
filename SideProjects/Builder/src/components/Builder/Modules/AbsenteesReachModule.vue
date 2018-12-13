@@ -71,10 +71,10 @@ export default {
                 }
             }
 
-            console.log(exportJSON)
+            // console.log(exportJSON)
 
 
-            this.$emit('sectionButtonData', {name:this.emailInput})
+            this.$emit('sectionButtonData', exportJSON)
         },
         sickReasonsSelected(){
             return this.sickReasonsList
