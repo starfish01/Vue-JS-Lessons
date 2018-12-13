@@ -140,13 +140,14 @@ export default {
         element.forEach(element => {
           modulesTogether.push(element.mod)
 
+
           scrapper.push({
             'name': element.name,
             'badge': element.badge,
             'image': element.image,
             'image_down': element.image_down,
             'class_name': element.class_name,
-            'module_id': element.class_name,
+            'module_id': element.mod.id,
             'css': element.css,
             'settings': element.settings
           }
@@ -163,7 +164,7 @@ export default {
 
       let device = 'ERROR'
 
-      console.log(this.dashboardLogoImage)
+      //console.log(this.dashboardLogoImage)
 
       let sectionsJSON = {
         'sections': [
