@@ -12,14 +12,13 @@
                 <v-container grid-list-md >
 
                             <v-flex xs12>
-                                <v-text-field label="Background Image URL" v-model="backgroundImageColor.URL"></v-text-field>
+                                <v-text-field label="Background Image URL" v-model="backgroundImageColor.image"></v-text-field>
                             </v-flex>
                             <v-flex xs3>
-                                <v-text-field label="Background Colour #" v-model="backgroundImageColor.Color" ></v-text-field>
+                                <v-text-field label="Background Colour #" v-model="backgroundColor" :disabled="true" ></v-text-field>
                             </v-flex>
                             
-                        <v-btn @click="addDashboardImage()" v-if="addbButton" >Add Dashboard Image</v-btn>
-                    
+
                 
                 </v-container>
                 <v-card-actions>
@@ -36,18 +35,43 @@ export default {
     data() {
         return {
             dialog:false,
-            backgroundImageColor:{URL:null, Color:null}
+            backgroundImageColor:{
+            "name": "background",
+            "css": null,
+            "image": null,
+            "settings": null,
+            "collection": null
+          },
+          backgroundColor:null
         }
     },
     methods:{
+        compileData() {
+            let checker = false;
+
+            if(this.backgroundImageColor.image != null){
+                if(this.backgroundImageColor.image.trim().length > 0){
+                    checker = true
+                }
+            }
+
+            if(checker){
+                this.backgroundImageColor.css = {
+                    "background-size": "cover",
+                    "background-position": "center center"
+                }
+            }else{
+                this.backgroundImageColor.image = null
+                this.backgroundImageColor.css = null
+            }
+        },
         closeDialogButton(){
-            returnData()
+            this.compileData()
+            this.returnData()
             this.dialog = false;
         },
         returnData() {
-            
             this.$emit('backgroundImageColor', this.backgroundImageColor)
-        
         }
     }
 

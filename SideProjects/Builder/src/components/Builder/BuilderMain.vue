@@ -103,7 +103,7 @@ export default {
       dashboardLogoImage: [],
       schoolboxPermissionsAllowed: false,
       deviceSelected: "Mobile",
-      backgroundImageColor:{URL:null, Color:null}
+      backgroundImageColor:null
     };
   },
   computed: {},
@@ -159,13 +159,7 @@ export default {
 
       let sectionsJSON = {
         sections: [
-          {
-            name: "background",
-            css: null,
-            image: null,
-            settings: null,
-            collection: null
-          },
+          this.backgroundImageColor,
           {
             name: "container",
             css: null,
