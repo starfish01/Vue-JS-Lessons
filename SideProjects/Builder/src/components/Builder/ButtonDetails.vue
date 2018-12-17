@@ -172,7 +172,7 @@ export default {
       selectedSchoolboxPermissions:[],
       deleteDialog:false,
       coreLinksAdded: [],
-      moduleDATA:'',
+      moduleDATA:null,
       
     }
   },
@@ -228,10 +228,10 @@ export default {
       this.button.mod = {
         id: this.button.module_id,
         use_screenshot: this.button.mod.use_screenshot == true,
-        name: (nameAndPlatform == null) ? '' : nameAndPlatform.text,
-        platform: (nameAndPlatform == null) ? '' : nameAndPlatform.platform,
-        settings: this.moduleDATA,
-        translations: tranlations,
+        name: nameAndPlatform == null ? null : nameAndPlatform.text,
+        platform: nameAndPlatform == null ? null : nameAndPlatform.platform,
+        settings: this.moduleDATA == null ? null : this.moduleDATA,
+        translations: tranlations == null ? null :tranlations,
         icons: []
       }
     },
