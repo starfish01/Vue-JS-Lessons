@@ -184,7 +184,7 @@ export default {
             settings: {
               fade: true
             },
-            collection: [amountOfDashboardImages]
+          collection: amountOfDashboardImages
           },
           {
             name: "buttons",
@@ -208,21 +208,32 @@ export default {
 
       // All for CSS
 
-      let dashboardImagesCSS = " ";
+      let dashboardImagesCSS = '';
 
       this.dashboardImages.forEach((element, i) => {
-        dashboardImagesCSS += `.dashboard-slider-image:nth-child(${i}) { background-image: url("${element}"); } `;
+        dashboardImagesCSS += `${this.deviceSelected == 'Mobile' ? '' : '.tablet'} .dashboard-slider-image:nth-child(${i}) { background-image: url("${element}"); }`;
+        dashboardImagesCSS +=`
+        `;
       });
 
       let sectionLayoutCSS = " ";
       this.allCSS.forEach((element, index) => {
-        sectionLayoutCSS += `#button-group-${index} .dashboard-button { width: ${element}} `;
+        sectionLayoutCSS += `#button-group-${index} .dashboard-button
+        {
+          width: ${element}; 
+          padding: 5px;
+        } 
+        `;
       });
 
       this.exportvalues[1].data = CSSTemplate.newObject();
       if (this.schoolboxPermissionsAllowed) {
         this.exportvalues[1].data +=
-          ".for-student, .for-staff, .for-parent, .for-none {display: none;} html.role-type-student .for-student, html.role-type-staff .for-staff, html.role-type-admin .for-staff, html.role-type-parent .for-parent {display: block;}";
+          `.for-student, .for-staff, .for-parent, .for-none 
+          {display: none;} 
+          html.role-type-student .for-student, html.role-type-staff .for-staff, html.role-type-admin .for-staff, html.role-type-parent .for-parent 
+          {display: block;}
+          `;
       }
 
       this.exportvalues[1].data += sectionLayoutCSS;
