@@ -30,7 +30,7 @@
                             </v-flex>
                             </transition-group>
                         </draggable>
-                        <v-btn @click="addDashboardImage()" v-if="addbButton" >Add Dashboard Image</v-btn>
+                        <v-btn @click="addDashboardImage()"  >Add Dashboard Image</v-btn>
                     
                 
                 </v-container>
@@ -55,13 +55,13 @@ export default {
         }
     },
     computed:{
-        addbButton(){
-            let val = this.dashboardImages[this.dashboardImages.length-1];
-            if( val.length > 0){
-                return true
-            }
-            return false
-        }
+        // addbButton(){
+        //     let val = this.dashboardImages[this.dashboardImages.length-1];
+        //     if( val.length > 0){
+        //         return true
+        //     }
+        //     return false
+        // }
     },
     methods: {
         closeDialogButton(){
@@ -69,10 +69,10 @@ export default {
             this.updateData()
         },
         addDashboardImage(){
-            let val = this.dashboardImages[this.dashboardImages.length-1];
-            if( val.length > 0){
+            // let val = this.dashboardImages[this.dashboardImages.length-1];
+            // if( val.length > 0){
                 this.dashboardImages.push("");
-            }
+            // }
         },
         updateData(){
             this.$emit('dashboardImages', this.dashboardImages)

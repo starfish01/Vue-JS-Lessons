@@ -50,7 +50,7 @@ export default {
             requirements:{phone:false, email: false, form: false, visability:false, form:false, details:false},
             emailInput:'',
             visabilityRoles:[],
-            sickReasonsList: "[ {'value': 5,'title': 'Sick' },{'value': 6,'title': 'Contagious or infectious condition'},{'value': 2,'title': 'Medical appointment'},{'value': 3,'title': 'Religious holiday'},{'value': 4,'title': 'Exceptional or urgent family circumstance'},{'value': 100,'title': 'Other - please provide details below'} ]"
+            sickReasonsList: [{"value": 5,"title": "Sick" },{"value": 6,"title": "Contagious or infectious condition"},{"value": 2,"title": "Medical appointment"},{"value": 3,"title": "Religious holiday"},{"value": 4,"title": "Exceptional or urgent family circumstance"},{"value": 100,"title": "Other - please provide details below"} ]
         
         }
     },

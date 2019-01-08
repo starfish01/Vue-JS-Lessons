@@ -211,7 +211,7 @@ export default {
       let dashboardImagesCSS = '';
 
       this.dashboardImages.forEach((element, i) => {
-        dashboardImagesCSS += `${this.deviceSelected == 'Mobile' ? '' : '.tablet'} .dashboard-slider-image:nth-child(${i}) { background-image: url("${element}"); }`;
+        dashboardImagesCSS += `${this.deviceSelected == 'Mobile' ? '' : '.tablet'} .dashboard-slider-image:nth-child(${i+1}) { background-image: url("${element}"); }`;
         dashboardImagesCSS +=`
         `;
       });
@@ -236,8 +236,22 @@ export default {
           `;
       }
 
-      this.exportvalues[1].data += sectionLayoutCSS;
-      this.exportvalues[1].data += dashboardImagesCSS;
+      let collectivelayout = "/* Button layouts and general */";
+      collectivelayout +=`
+      `;
+      collectivelayout += sectionLayoutCSS;
+      collectivelayout +=`
+      `;
+      collectivelayout += "/* Dashboard Images */";
+      collectivelayout +=`
+      `;
+      collectivelayout += dashboardImagesCSS;
+      collectivelayout += this.exportvalues[1].data;
+
+      this.exportvalues[1].data = collectivelayout;
+
+      //this.exportvalues[1].data += sectionLayoutCSS;
+      //this.exportvalues[1].data += dashboardImagesCSS;
 
       // END CSS
 
