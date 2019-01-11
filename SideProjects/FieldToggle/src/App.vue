@@ -4,15 +4,15 @@
       <div class="row">
         <div class="col-xs">
           <label>Active Field</label><br>
-          <input v-model="activeField" placeholder="">
+          <input v-model="activeField" type="number" placeholder="">
         </div>
         <div class="col-xs">
           <label>First Field</label><br>
-          <input v-model="firstField" placeholder="">
+          <input v-model="firstField"  type="number" placeholder="">
         </div>
         <div class="col-xs">
           <label>Last Field</label><br>
-          <input v-model="lastField" placeholder="">
+          <input v-model="lastField" type="number" placeholder="">
         </div>
         <div class="col-xs">
           <label>conditions</label><br>
@@ -26,7 +26,7 @@
       <br>
       <div class="row">
         <div class="col-xs">
-          <p>forms.toggle_fields({{ activeField }}, [{{conditionFields}}], [{{conditions}}]);</p>
+          <p>forms.toggle_fields({{ activeField }}, {{conditionFields}}, {{conditions}});</p>
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@ export default {
         activeField:'',
         firstField:'',
         lastField:'',
-        conditions:[""],
+        conditions:[''],
         fields:[]
   }
 },
@@ -54,16 +54,21 @@ methods: {
   },
   removeCondition(index){
     this.conditions.splice(index, 1)
-  }
+  },
 },
 computed: {
   conditionFields () {
     if(this.firstField.length > 0 & this.lastField.length > 0){
-
-      return "con";
+      if(this.firstField < this.lastField){
+        let numberArray = []
+        for (let index =  Number(this.firstField); index <= this.lastField; index++) {
+          numberArray.push(index);
+        }
+        
+        return numberArray;
+      }
     }
-
-    return "";
+    return [];
   }
 }
     
