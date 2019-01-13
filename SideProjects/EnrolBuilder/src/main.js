@@ -20,6 +20,9 @@ import store from '@/store'
 // Sync store with router
 sync(store, router)
 
+import VueClipboard from 'vue-clipboard2'
+Vue.use(VueClipboard)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

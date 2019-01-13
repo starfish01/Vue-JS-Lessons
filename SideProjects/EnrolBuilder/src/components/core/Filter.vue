@@ -19,7 +19,7 @@
       style="top: 96px;"
       top
     >
-      <v-icon>mdi-settings</v-icon>
+      <!-- <v-icon>mdi-settings</v-icon> -->
     </v-btn>
     <v-card>
       <v-container grid-list-xl>
