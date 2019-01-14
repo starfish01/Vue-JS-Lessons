@@ -19,7 +19,42 @@
                 grid-list-xl
                 fluid
               >
-              <v-btn @click="outPutData()">Output</v-btn>
+              <v-btn primary @click="outPutData()">Output</v-btn>
+              
+              <h3>Landing Page</h3>
+              <p>{{backgroundImageUrl}}</p>
+              <v-text-field 
+                label="Background Image Url"
+                v-model="backgroundImageUrl"
+              ></v-text-field>
+              <v-text-field
+              :value="colors.hex"
+                label="Button Colour"
+              ></v-text-field>
+              
+               <v-btn color="primary" dark @click="dialog3 = true">Open Dialog 3</v-btn>
+
+
+<v-dialog v-model="dialog3" >
+          
+
+                    <chrome-picker v-model="colors" />
+
+
+        </v-dialog>
+
+
+
+
+
+              <v-text-field
+                label="Button hover Colour"
+              ></v-text-field>
+
+              {{colors.hex}}
+
+                    <chrome-picker v-model="colors" />
+              
 
             </v-container>
           </v-card-text>
@@ -53,23 +88,32 @@
 
 <script>
 
-//import * as CSSTemplate from "../template/cssTemplate.js";
 import * as cssTemplate from "../templates/cssTemplate.js";
+import { Chrome } from 'vue-color'
+
 
 export default {
   data () {
     return {
-      cssOutPut: ''
+      cssOutPut: '',
+      backgroundImageUrl:'',
+      colors:{
+  hex: '#194d33'},
+  dialog3:false
     }
   },
   methods: {
     outPutData() {
-      let s = cssTemplate.newObject();
-      let x = cssTemplate.something();
-      console.log(x)
-      let user = new cssTemplate.CSSstyling('jimmy');
-      user.sayHi();
+      let styleProfile = new cssTemplate.CSSstyling();
+      styleProfile.setImageUrl(this.backgroundImageUrl);
+      this.cssOutPut = styleProfile.getStyleSheet();
+    },
+    someFunction() {
+      console.log('somethingelse')
     }
+  },
+  components: {
+    'chrome-picker': Chrome
   }
   
 }
