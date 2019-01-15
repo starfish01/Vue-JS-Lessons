@@ -10,9 +10,9 @@ export default [
     view: 'Dashboard'
   },
   {
-    path: '/user-profile',
-    name: 'User Profile',
-    view: 'UserProfile'
+    path: '/css-setup',
+    name: 'CSS Setup',
+    view: 'CSSSetup'
   },
   {
     path: '/table-list',

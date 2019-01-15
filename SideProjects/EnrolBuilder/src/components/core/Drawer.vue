@@ -84,7 +84,7 @@ export default {
         text: 'Start'
       },
       {
-        to: '/user-profile',
+        to: '/css-setup',
         icon: 'mdi-account',
         text: 'Style Setup - CSS'
       },
