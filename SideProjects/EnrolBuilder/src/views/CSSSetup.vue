@@ -2,7 +2,7 @@
   <v-container fill-height fluid grid-list-xl>
     <v-layout wrap>
       <!-- Example Screen -->
-      <v-flex xs8>
+      <!-- <v-flex xs8>
         <material-card color="warning" title="Dashboard" text>
           <v-card-text
             class="landingPageStyle"
@@ -44,8 +44,7 @@
             <v-container class="pa-0" grid-list-xl fluid></v-container>
           </v-card-text>
         </material-card>
-      </v-flex>
-
+      </v-flex>-->
       <!-- Setting CSS Values -->
       <v-flex sm12 md6>
         <material-card color="warning" title="Set CSS Values" text>
@@ -60,16 +59,16 @@
               <v-layout row>
                 <v-flex xs6>
                   <v-text-field
-                    :value="colorItems[2].hex"
-                    @click="colorPickerDialogFn(2)"
-                    label="Background Color (Set trancparency)"
+                    :value="colorItems[0].hex"
+                    @click="colorPickerDialogFn(0)"
+                    :label="colorItems[0].name"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs6>
                   <v-text-field
-                    :value="colorItems[7].hex"
-                    @click="colorPickerDialogFn(7)"
-                    :label="colorItems[7].name"
+                    :value="colorItems[1].hex"
+                    @click="colorPickerDialogFn(1)"
+                    :label="colorItems[1].name"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -79,32 +78,32 @@
               <v-layout row>
                 <v-flex xs6>
                   <v-text-field
-                    :value="colorItems[0].hex"
-                    @click="colorPickerDialogFn(0)"
-                    label="Button Colour"
+                    :value="colorItems[2].hex"
+                    @click="colorPickerDialogFn(2)"
+                    :label="colorItems[2].name"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs6>
                   <v-text-field
-                    label="Button hover Colour"
-                    :value="colorItems[1].hex"
-                    @click="colorPickerDialogFn(1)"
+                    :label="colorItems[3].name"
+                    :value="colorItems[3].hex"
+                    @click="colorPickerDialogFn(3)"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
               <v-layout row>
                 <v-flex xs6>
                   <v-text-field
-                    label="Button Text Colour"
-                    :value="colorItems[3].hex"
-                    @click="colorPickerDialogFn(3)"
+                    :label="colorItems[4].name"
+                    :value="colorItems[4].hex"
+                    @click="colorPickerDialogFn(4)"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs6>
                   <v-text-field
-                    label="Button border colour"
-                    :value="colorItems[4].hex"
-                    @click="colorPickerDialogFn(4)"
+                    :label="colorItems[5].name"
+                    :value="colorItems[5].hex"
+                    @click="colorPickerDialogFn(5)"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -114,18 +113,46 @@
               <v-layout row>
                 <v-flex xs6>
                   <v-text-field
-                    :label="colorItems[5].name"
-                    :value="colorItems[5].hex"
-                    @click="colorPickerDialogFn(5)"
-                  ></v-text-field>
-                </v-flex>
-                <v-flex xs6>
-                  <v-text-field
                     :label="colorItems[6].name"
                     :value="colorItems[6].hex"
                     @click="colorPickerDialogFn(6)"
                   ></v-text-field>
                 </v-flex>
+                <v-flex xs6>
+                  <v-text-field
+                    :label="colorItems[7].name"
+                    :value="colorItems[7].hex"
+                    @click="colorPickerDialogFn(7)"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+
+              <h3>Alert Info Panel</h3>
+              <v-layout row>
+                <v-flex xs6>
+                  <v-text-field
+                    :label="colorItems[8].name"
+                    :value="colorItems[8].hex"
+                    @click="colorPickerDialogFn(8)"
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs6>
+                  <v-text-field
+                    :label="colorItems[9].name"
+                    :value="colorItems[9].hex"
+                    @click="colorPickerDialogFn(9)"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+              <v-layout row>
+                <v-flex xs6>
+                  <v-text-field
+                    :label="colorItems[10].name"
+                    :value="colorItems[10].hex"
+                    @click="colorPickerDialogFn(10)"
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs6></v-flex>
               </v-layout>
 
               <v-dialog v-model="colorPickerDialog" width="225">
@@ -162,14 +189,20 @@ export default {
       backgroundImageUrl: "",
       colors: "#194d33",
       colorItems: [
-        { hex: "#194d33", name: "Button Colour", id: 0 },
-        { hex: "#194d33", name: "Button Colour Hover", id: 1 },
-        { hex: "#194D3354", name: "Background Color", id: 2 },
-        { hex: "#000000", name: "Button text Colour", id: 3 },
-        { hex: "#194D33", name: "Button border Colour", id: 4 },
-        { hex: "#194D33", name: "Jumbotron Colour", id: 5 },
-        { hex: "#194Df33", name: "Jumbotron Text Colour", id: 6 },
-        { hex: "#194Df33", name: "Text Colour", id: 7 }
+        { hex: "#194D3354", name: "Background Color (transparent)", id: 0 },
+        { hex: "#194Df33", name: "Heading Text Colour", id: 1 },
+
+        { hex: "#194Df33", name: "Button Colour", id: 2 },
+        { hex: "#194Df33", name: "Button Hover Colour", id: 3 },
+        { hex: "#194Df33", name: "Button Text Colour", id: 4 },
+        { hex: "#194Df33", name: "Button Border Colour", id: 5 },
+
+        { hex: "#194Df33", name: "Jumbotron Colour", id: 6 },
+        { hex: "#194Df33", name: "Jumbotron Text Colour", id: 7 },
+
+        { hex: "#194Df33", name: "Background Colour", id: 8 },
+        { hex: "#194Df33", name: "Boarder Colour", id: 9 },
+        { hex: "#194Df33", name: "HR Colour", id: 10 }
       ],
       idColorSelector: 0,
       colorPickerDialog: false,
@@ -179,8 +212,8 @@ export default {
   },
   methods: {
     outPutData() {
-      let styleProfile = new cssTemplate.CSSstyling();
-      styleProfile.setImageUrl(this.backgroundImageUrl);
+      let styleProfile = new cssTemplate.CSSstyling(this.colorItems,this.backgroundImageUrl);
+      //styleProfile.setImageUrl(this.backgroundImageUrl);
       this.cssOutPut = styleProfile.getStyleSheet();
     },
     colorPickerDialogFn(colID) {
