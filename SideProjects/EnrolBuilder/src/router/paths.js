@@ -5,9 +5,9 @@
  */
 export default [
   {
-    path: '/dashboard',
+    path: '/start',
     // Relative to /src/views
-    view: 'Dashboard'
+    view: 'Start'
   },
   {
     path: '/css-setup',

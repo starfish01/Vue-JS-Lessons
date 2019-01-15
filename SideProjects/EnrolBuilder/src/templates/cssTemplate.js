@@ -37,7 +37,7 @@ class CSSstyling {
   /* Use this for a full screen overlay over the Start page background */
       content: '';
       position: absolute;
-      background-color: ${this.styleArray[0].hex};
+      background-color: ${this.styleArray[0].hex.hex};
       width: 100%;
       height: 100%;
       top: 0;
@@ -49,43 +49,45 @@ class CSSstyling {
   #add_guardian,  #add_guardian:focus, #add_guardian:active,
   .btn.btn-primary, .btn.btn-primary:focus, .btn.btn-primary:active {
   /* set schools primary colour for buttons here. Background color + border colour will need to be overridden */
-      background: #D3A22B;
-      border-color: #D3A22B;
-      color: #000;
+      background: ${this.styleArray[2].hex.hex};
+      border-color: ${this.styleArray[3].hex.hex};
+      color: ${this.styleArray[4].hex.hex};
   }
   #add_guardian:hover,
   .btn.btn-primary:hover {
   /* set hover colour for all primary buttons */
-      background: #e5af2b;
-      border-color: #e5af2b;
-      color: #000;
+      background: ${this.styleArray[5].hex.hex};
+      border-color: ${this.styleArray[6].hex.hex};
+      color: ${this.styleArray[7].hex.hex};
   }
   
   /* Landing Page Heading Text */
   body.start .instructions p {
-      color: #333;
+      color: ${this.styleArray[1].hex.hex};
   }
   body.start h1,body.start p,body.start h4{
-    color: #000;
+    color: ${this.styleArray[1].hex.hex};
 } 
   
   /* Jumbotron */
   body.start .jumbotron{
-      background-color: rgba(255,255,255,1);   
+      background-color: ${this.styleArray[8].hex.hex};
+      color: ${this.styleArray[9].hex.hex};
   }
+  
   
   
   /*Info Side Panel */
   .alert.alert-custom {
-      background: #fff;
-      border-color: #fff;
+      background: ${this.styleArray[10].hex.hex};
+      border-color: ${this.styleArray[11].hex.hex};
   }
   .alert.alert-custom hr{
-      background: #000;
-      border-color: #000;
+      background: ${this.styleArray[12].hex.hex};
+      border-color: ${this.styleArray[12].hex.hex};
   }
   .alert.alert-custom p, .alert.alert-custom a, .alert.alert-custom h4{
-    color: #000;
+    color: ${this.styleArray[13].hex.hex};
   }
   .alert.alert-custom img.logo{
     width: 75%;

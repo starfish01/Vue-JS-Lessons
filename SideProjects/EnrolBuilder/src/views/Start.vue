@@ -4,45 +4,39 @@
     fluid
     grid-list-xl
   >
-    <v-layout wrap>
-      <v-flex xs12>
+    <v-layout row>
+                <v-flex xs6>
         <material-card
           color="warning"
           title="Set Statuses"
           text="">
 
           <v-card-text>
-            
             <v-container
               class="pa-0"
               grid-list-xl
               fluid
             >
-
               <v-data-table
                 :headers="headers"
                 :items="statusesArray"
                 hide-actions
               >
-           
                 <template
                   slot="items"
                   slot-scope="{ item }"
                 >
-                
+                  <td class="text-left">{{ item.id }}</td>
                   <td><v-btn @click="eventClick(item.id)" :color="item.clicked ? 'info' : 'primary'" v-clipboard="item.status" small >{{ item.status }}</v-btn></td>
                   <td class="text-left">{{ item.colour }}</td>
-                
                 </template>
-              
               </v-data-table>
-            
-            <v-snackbar
-              v-model="snackbar"
-              :bottom="'bottom'"
-              :right="'right'"
-              :timeout="2000"
-            >
+              <v-snackbar
+                v-model="snackbar"
+                :bottom="'bottom'"
+                :right="'right'"
+                :timeout="2000"
+              >
                 Copied!
               <v-btn
                 color="pink"
@@ -52,7 +46,6 @@
                 Close
               </v-btn>
             </v-snackbar>
-
           </v-container>
         </v-card-text>
       </material-card>
@@ -72,6 +65,11 @@ export default {
        headers: [
          {
         sortable: false,
+        text: 'Order',
+        value: 'order'
+      },
+         {
+        sortable: false,
         text: 'Status',
         value: 'status',
         clicked:false
@@ -80,7 +78,7 @@ export default {
         sortable: false,
         text: 'Colour',
         value: 'colour'
-      },
+      }
        ],
       statusesArray:[
         {
@@ -124,7 +122,7 @@ export default {
 
 <style scoped>
 td {
-  width: 50%;  
+  width: 33;  
 }
 </style>
 
