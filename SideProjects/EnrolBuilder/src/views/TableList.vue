@@ -24,7 +24,7 @@
                 <v-text-field type="number" v-model="item.lastActive"></v-text-field>
               </td>
               <td>
-                <v-text-field @click="gatherFields()" v-model="item.exclude"></v-text-field>
+                <v-text-field @click="gatherFields(item)" v-model="item.exclude"></v-text-field>
               </td>
               <td>
                 <v-text-field v-model="item.include"></v-text-field>
@@ -33,8 +33,25 @@
                 <v-checkbox v-if="!item.guardianField" v-model="item.required"/>
               </td>
               <td>
+                <v-icon src="\src\assets\icons\close-circle.svg">close-circle</v-icon>
+                d
+                <v-flex
+         
+          ma-2
+        >
+          <v-tooltip
+            top
+            content-class="top">
+            <v-icon slot="activator">
+              'close-circle'
+            </v-icon>
+            <span>close-circle</span>
+          </v-tooltip>
+        </v-flex>
+              </td>
+              <td>
                 <v-text-field
-                  v-if="item.required || !item.guardianField"
+                  v-if="item.required"
                   v-model="item.requiredExclude"
                 ></v-text-field>
               </td>
@@ -53,16 +70,9 @@
         <v-card-text>
           <div class="container">
           <div class="row">
-                              <component :is="componentForFieldSelect"></component>
-
-
-          
-
+            <component :item="selectedField" @itemReturn="item = $event" :is="componentForFieldSelect"></component>
           </div>
           </div>
-          
-    
-
         </v-card-text>
 
         <!-- <v-card-actions>
@@ -95,6 +105,18 @@ export default {
   data: () => ({
     dialog: false,
     componentForFieldSelect:'appMultiFieldSelect',
+    selectedField:null,
+    layoutTemplate: {
+      guardianField: false,
+      activeField: null,
+      firstActive: null,
+      lastActive: null,
+      excludeField: null,
+      includeField: null,
+      required: false,
+      requiredExclude: null
+    },
+    userAddedFileds: [],
     headers: [
       {
         sortable: false,
@@ -133,33 +155,21 @@ export default {
       },
       {
         sortable: false,
-        text: "Required Exclude",
+        text: "Req Exclude",
         value: "requiredExclude"
       }
-    ],
-    layoutTemplate: {
-      guardianField: false,
-      activeField: null,
-      firstActive: null,
-      lastActive: null,
-      excludeField: null,
-      includeField: null,
-      required: false,
-      requiredExclude: null
-    },
-    userAddedFileds: []
+    ]
   }),
   methods: {
     addNewField() {
       let template = Object.assign({}, this.layoutTemplate);
       this.userAddedFileds.push(template);
     },
-    gatherFields() {
+    gatherFields(item) {
+      this.selectedField = item;
       this.dialog = true;
     },
-    addFn(){
-
-    }
+    
   },
   components: {
       appMultiFieldSelect:MultiFieldSelect

@@ -68,7 +68,7 @@ computed: {
         return numberArray;
       }
     }
-    return [];
+    return [this.firstField];
   }
 }
     
