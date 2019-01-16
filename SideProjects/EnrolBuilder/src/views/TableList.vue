@@ -48,17 +48,15 @@
     <!--  -->
     <v-dialog v-model="dialog" width="500">
        <v-card>
-        <v-card-title class="headline">Use Google's location service?</v-card-title>
+        <v-card-title class="headline">Title</v-card-title>
 
         <v-card-text>
           <div class="container">
           <div class="row">
+                              <component :is="componentForFieldSelect"></component>
 
-          <div v-for="condition in conditions" :key="condition" class="col-sm-4 stock-block">
-            
-              <v-text-field/>
-           
-          </div>
+
+          
 
           </div>
           </div>
@@ -67,7 +65,7 @@
 
         </v-card-text>
 
-        <v-card-actions>
+        <!-- <v-card-actions>
           <v-spacer></v-spacer>
 
           <v-btn
@@ -85,17 +83,18 @@
           >
             Agree
           </v-btn>
-        </v-card-actions>
+        </v-card-actions> -->
        </v-card>
     </v-dialog>
   </v-container>
 </template>
 
 <script>
+import MultiFieldSelect from '../components/material/MultiFieldSelect.vue';
 export default {
   data: () => ({
     dialog: false,
-    conditions:[{id:0},{id:1},{id:2},{id:3},{id:4},{id:0},{id:1},{id:0},{id:1},{id:2},{id:3},{id:4},{id:2},{id:3},{id:4}],
+    componentForFieldSelect:'appMultiFieldSelect',
     headers: [
       {
         sortable: false,
@@ -157,7 +156,13 @@ export default {
     },
     gatherFields() {
       this.dialog = true;
+    },
+    addFn(){
+
     }
+  },
+  components: {
+      appMultiFieldSelect:MultiFieldSelect
   }
 };
 </script>
