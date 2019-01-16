@@ -1,147 +1,173 @@
 <template>
-  <v-container
-    fill-height
-    fluid
-    grid-list-xl
-  >
-    <v-layout
-      justify-center
-      wrap
-    >
-      <v-flex
-        md12
-      >
-        <material-card
-          color="green"
-          title="Simple Table"
-          text="Here is a subtitle for this table"
-        >
-          <v-data-table
-            :headers="headers"
-            :items="items"
-            hide-actions
-          >
-            <template
-              slot="headerCell"
-              slot-scope="{ header }"
-            >
+  <v-container fill-height fluid grid-list-xl>
+    <v-layout justify-center wrap>
+      <v-flex md12>
+        <material-card color="warning" title="JS Show Hide">
+          <v-data-table :headers="headers" :items="userAddedFileds" hide-actions>
+            <template slot="headerCell" slot-scope="{ header }">
               <span
                 class="subheading font-weight-light text-success text--darken-3"
                 v-text="header.text"
               />
             </template>
-            <template
-              slot="items"
-              slot-scope="{ item }"
-            >
-              <td>{{ item.name }}</td>
-              <td>{{ item.country }}</td>
-              <td>{{ item.city }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
+            <template slot="items" slot-scope="{ item }">
+              <td>
+                <v-checkbox v-model="item.guardianField"/>
+              </td>
+              <td>
+                <v-text-field type="number" v-model="item.activeField"></v-text-field>
+              </td>
+              <td>
+                <v-text-field type="number" v-model="item.firstActive"></v-text-field>
+              </td>
+              <td>
+                <v-text-field type="number" v-model="item.lastActive"></v-text-field>
+              </td>
+              <td>
+                <v-text-field @click="gatherFields()" v-model="item.exclude"></v-text-field>
+              </td>
+              <td>
+                <v-text-field v-model="item.include"></v-text-field>
+              </td>
+              <td>
+                <v-checkbox v-if="!item.guardianField" v-model="item.required"/>
+              </td>
+              <td>
+                <v-text-field
+                  v-if="item.required || !item.guardianField"
+                  v-model="item.requiredExclude"
+                ></v-text-field>
+              </td>
             </template>
           </v-data-table>
-        </material-card>
-      </v-flex>
-      <v-flex
-        md12
-      >
-        <material-card
-          color="green"
-          flat
-          full-width
-          title="Table on Plain Background"
-          text="Here is a subtitle for this table"
-        >
-          <v-data-table
-            :headers="headers"
-            :items="items.slice(0, 7)"
-            hide-actions
-          >
-            <template
-              slot="headerCell"
-              slot-scope="{ header }"
-            >
-              <span
-                class="subheading font-weight-light text--darken-3"
-                v-text="header.text"
-              />
-            </template>
-            <template
-              slot="items"
-              slot-scope="{ item }"
-            >
-              <td>{{ item.name }}</td>
-              <td>{{ item.country }}</td>
-              <td>{{ item.city }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
-            </template>
-          </v-data-table>
+          <v-btn color="primary" @click="addNewField()">Add</v-btn>
         </material-card>
       </v-flex>
     </v-layout>
+
+    <!--  -->
+    <v-dialog v-model="dialog" width="500">
+       <v-card>
+        <v-card-title class="headline">Use Google's location service?</v-card-title>
+
+        <v-card-text>
+          <div class="container">
+          <div class="row">
+
+          <div v-for="condition in conditions" :key="condition" class="col-sm-4 stock-block">
+            
+              <v-text-field/>
+           
+          </div>
+
+          </div>
+          </div>
+          
+    
+
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            color="green darken-1"
+            flat="flat"
+            @click="dialog = false"
+          >
+            Disagree
+          </v-btn>
+
+          <v-btn
+            color="green darken-1"
+            flat="flat"
+            @click="dialog = false"
+          >
+            Agree
+          </v-btn>
+        </v-card-actions>
+       </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
 export default {
   data: () => ({
+    dialog: false,
+    conditions:[{id:0},{id:1},{id:2},{id:3},{id:4},{id:0},{id:1},{id:0},{id:1},{id:2},{id:3},{id:4},{id:2},{id:3},{id:4}],
     headers: [
       {
         sortable: false,
-        text: 'Name',
-        value: 'name'
+        text: "Guardian",
+        value: "guardian"
       },
       {
         sortable: false,
-        text: 'Country',
-        value: 'country'
+        text: "Active",
+        value: "activefield"
       },
       {
         sortable: false,
-        text: 'City',
-        value: 'city'
+        text: "First",
+        value: "firstactive"
       },
       {
         sortable: false,
-        text: 'Salary',
-        value: 'salary',
-        align: 'right'
+        text: "Last",
+        value: "lastactive"
+      },
+      {
+        sortable: false,
+        text: "Exclude",
+        value: "exclude"
+      },
+      {
+        sortable: false,
+        text: "Include",
+        value: "include"
+      },
+      {
+        sortable: false,
+        text: "Required",
+        value: "required"
+      },
+      {
+        sortable: false,
+        text: "Required Exclude",
+        value: "requiredExclude"
       }
     ],
-    items: [
-      {
-        name: 'Dakota Rice',
-        country: 'Niger',
-        city: 'Oud-Tunrhout',
-        salary: '$35,738'
-      },
-      {
-        name: 'Minerva Hooper',
-        country: 'Curaçao',
-        city: 'Sinaai-Waas',
-        salary: '$23,738'
-      }, {
-        name: 'Sage Rodriguez',
-        country: 'Netherlands',
-        city: 'Overland Park',
-        salary: '$56,142'
-      }, {
-        name: 'Philip Chanley',
-        country: 'Korea, South',
-        city: 'Gloucester',
-        salary: '$38,735'
-      }, {
-        name: 'Doris Greene',
-        country: 'Malawi',
-        city: 'Feldkirchen in Kārnten',
-        salary: '$63,542'
-      }, {
-        name: 'Mason Porter',
-        country: 'Chile',
-        city: 'Gloucester',
-        salary: '$78,615'
-      }
-    ]
-  })
-}
+    layoutTemplate: {
+      guardianField: false,
+      activeField: null,
+      firstActive: null,
+      lastActive: null,
+      excludeField: null,
+      includeField: null,
+      required: false,
+      requiredExclude: null
+    },
+    userAddedFileds: []
+  }),
+  methods: {
+    addNewField() {
+      let template = Object.assign({}, this.layoutTemplate);
+      this.userAddedFileds.push(template);
+    },
+    gatherFields() {
+      this.dialog = true;
+    }
+  }
+};
 </script>
+
+<style>
+td {
+  padding: 0 5px !important;
+}
+.stock-block{
+    display: inline-block
+}
+</style>
+
