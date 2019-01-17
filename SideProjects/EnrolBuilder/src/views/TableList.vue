@@ -9,13 +9,16 @@
                 class="subheading font-weight-light text-success text--darken-3"
                 v-text="header.text"
               />
-            </template>
-            <template slot="items" slot-scope="{ item }">
+            </template> 
+            
+            <template slot="items" slot-scope="item">
+              <!-- <div v-for="(item, index) in items" :key="index"> -->
+                
               <td>
                 <v-checkbox v-model="item.guardianField"/>
               </td>
               <td>
-                <v-text-field type="number" v-model="item.activeField"></v-text-field>
+                <v-text-field @change="activeFieldChangeFN(item.index)" type="number" v-model="item.activeField"></v-text-field>
               </td>
               <td>
                 <v-text-field type="number" v-model="item.firstActive"></v-text-field>
@@ -24,7 +27,7 @@
                 <v-text-field type="number" v-model="item.lastActive"></v-text-field>
               </td>
               <td>
-                <v-text-field @click="gatherFields(item)" v-model="item.exclude"></v-text-field>
+                <v-text-field :disabled="enableExclude" @click="gatherFields(item)" v-model="item.exclude"></v-text-field>
               </td>
               <td>
                 <v-text-field v-model="item.include"></v-text-field>
@@ -33,28 +36,12 @@
                 <v-checkbox v-if="!item.guardianField" v-model="item.required"/>
               </td>
               <td>
-                <v-icon src="\src\assets\icons\close-circle.svg">close-circle</v-icon>
-                d
-                <v-flex
-         
-          ma-2
-        >
-          <v-tooltip
-            top
-            content-class="top">
-            <v-icon slot="activator">
-              'close-circle'
-            </v-icon>
-            <span>close-circle</span>
-          </v-tooltip>
-        </v-flex>
+                <v-text-field v-if="item.required" v-model="item.requiredExclude"></v-text-field>
               </td>
               <td>
-                <v-text-field
-                  v-if="item.required"
-                  v-model="item.requiredExclude"
-                ></v-text-field>
+                <img @click="deleteToggle(item.index)" class="deleteButton" src="../../src/assets/icons/close-circle.svg">
               </td>
+              <!-- </div> -->
             </template>
           </v-data-table>
           <v-btn color="primary" @click="addNewField()">Add</v-btn>
@@ -64,52 +51,37 @@
 
     <!--  -->
     <v-dialog v-model="dialog" width="500">
-       <v-card>
+      <v-card>
         <v-card-title class="headline">Title</v-card-title>
 
         <v-card-text>
           <div class="container">
-          <div class="row">
-            <component :item="selectedField" @itemReturn="item = $event" :is="componentForFieldSelect"></component>
-          </div>
+            <div class="row">
+              <component
+                :item="selectedField"
+                @itemReturn="item = $event"
+                :is="componentForFieldSelect"
+              ></component>
+            </div>
           </div>
         </v-card-text>
 
-        <!-- <v-card-actions>
-          <v-spacer></v-spacer>
-
-          <v-btn
-            color="green darken-1"
-            flat="flat"
-            @click="dialog = false"
-          >
-            Disagree
-          </v-btn>
-
-          <v-btn
-            color="green darken-1"
-            flat="flat"
-            @click="dialog = false"
-          >
-            Agree
-          </v-btn>
-        </v-card-actions> -->
-       </v-card>
+      </v-card>
     </v-dialog>
   </v-container>
 </template>
 
 <script>
-import MultiFieldSelect from '../components/material/MultiFieldSelect.vue';
+import MultiFieldSelect from "../components/material/MultiFieldSelect.vue";
 export default {
   data: () => ({
     dialog: false,
-    componentForFieldSelect:'appMultiFieldSelect',
-    selectedField:null,
+    componentForFieldSelect: "appMultiFieldSelect",
+    selectedField: null,
     layoutTemplate: {
       guardianField: false,
       activeField: null,
-      firstActive: null,
+      firstActive: 1,
       lastActive: null,
       excludeField: null,
       includeField: null,
@@ -157,6 +129,11 @@ export default {
         sortable: false,
         text: "Req Exclude",
         value: "requiredExclude"
+      },
+      {
+        sortable: false,
+        text: "Delete",
+        value: "delete"
       }
     ]
   }),
@@ -169,10 +146,23 @@ export default {
       this.selectedField = item;
       this.dialog = true;
     },
-    
+    deleteToggle(index) {
+        this.userAddedFileds.splice(index, 1)
+    },
+    activeFieldChangeFN(index){
+      console.log(this.userAddedFileds[index])
+      this.userAddedFileds[index].firstActive = this.userAddedFileds[index].activeField +1;
+
+      //item.firstActive = item.activeField + 1
+    }
+  },
+  computed: {
+    enableExclude() {
+        return false
+    }
   },
   components: {
-      appMultiFieldSelect:MultiFieldSelect
+    appMultiFieldSelect: MultiFieldSelect
   }
 };
 </script>
@@ -181,8 +171,12 @@ export default {
 td {
   padding: 0 5px !important;
 }
-.stock-block{
-    display: inline-block
+.stock-block {
+  display: inline-block;
+}
+
+.deleteButton:hover{
+  background-color: red
 }
 </style>
 
