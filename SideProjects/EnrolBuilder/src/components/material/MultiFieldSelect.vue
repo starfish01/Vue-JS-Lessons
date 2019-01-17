@@ -1,22 +1,16 @@
 <template>
   <div>
     <v-container fluid>
-      <v-layout row>
-        
-        <v-flex xs4 pa-2 order-lg2 >
-          <v-card dark tile flat color="error">
-            <v-card-text>#1</v-card-text>
-          </v-card>
+      <v-layout row wrap>
+        <v-flex xs3 pa-2 order-lg2 v-for="(fieldNumber,index) in item.lastActive-item.firstActive" :key="index">
+            <v-checkbox class="text-xs-center" v-model="checkboxes[index]" :label="labelValue(index)"></v-checkbox>
         </v-flex>
+
       </v-layout>
     </v-container>
 
-    <!-- <div v-for="condition in conditions" :color="primary" :key="condition.length()" class="col-sm-2 stock-block">
-              <v-text-field style="padding:0 10px"/>
-    </div>-->
-    <!-- need to pass array to here -->
-{{item}}
-
+    {{previouslyExcluded}}
+ 
     <v-btn @click="sendingBackData()">Add</v-btn>
   </div>
 </template>
@@ -27,16 +21,46 @@ export default {
     item: Object
   },
   data() {
-    return {};
+    return {
+      checkboxes:[],
+      previouslyExcluded:[]
+    };
   },
   methods: {
     sendingBackData() {
-        this.item.activeField = 77;
+       
+      let arrayOfFields = []
+
+      this.checkboxes.forEach((field,index) => {
+        if(field){
+          arrayOfFields.push(this.item.firstActive + index)
+        }
+      });
+
+      this.item.excludeField = arrayOfFields
+
       this.$emit("itemReturn",this.item);
+    },
+    labelValue(index) {
+      //console.log( index+this.item.firstActive)
+      let val = index+this.item.firstActive 
+      return val.toString();
     }
   },
   computed:{
     
+  },
+  created () {
+    this.previouslyExcluded = this.item.excludeField;
+
+    //Up to here need to work out this array part
+
+
+    "(fieldNumber,index) in item.lastActive-item.firstActive"
+
+
+
+    console.log('created')
   }
 };
 </script>
