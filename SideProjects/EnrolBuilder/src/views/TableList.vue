@@ -29,7 +29,7 @@
                 <v-text-field label="Last Active" type="number" v-model.number="item.lastActive"></v-text-field>
               </td>
               <td>
-                <v-text-field label="Exclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index)" v-model="item.exclude"></v-text-field>
+                <v-text-field label="Exclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index)" v-model="item.excludeField"></v-text-field>
               </td>
               <td>
                 <v-text-field label="Include" v-model="item.include"></v-text-field>
@@ -101,6 +101,7 @@ export default {
     },
     gatherFields(item,index) {
       item.index = index
+      item.selectedAction = 'exclude'
       this.selectedField = item;
       this.componentForFieldSelect = "appMultiFieldSelect";
       this.dialog = true;
@@ -117,6 +118,7 @@ export default {
       this.userAddedFileds[event.index] = event;
       this.dialog = false;
       this.componentForFieldSelect = '';
+      delete this.userAddedFileds[event.index].selectedAction;
       delete this.userAddedFileds[event.index].index;
     }
     
