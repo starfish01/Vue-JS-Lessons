@@ -29,16 +29,16 @@
                 <v-text-field label="Last Active" type="number" v-model.number="item.lastActive"></v-text-field>
               </td>
               <td>
-                <v-text-field label="Exclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index)" v-model="item.excludeField"></v-text-field>
+                <v-text-field label="Exclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index,0)" v-model="item.excludeField"></v-text-field>
               </td>
               <td>
-                <v-text-field label="Include" v-model="item.include"></v-text-field>
+                <v-text-field label="Include" @click="gatherFields(item,index,2)" v-model="item.include"></v-text-field>
               </td>
               <td>
                 <v-checkbox label="Required" v-if="!item.guardianField" v-model="item.required"/>
               </td>
               <td>
-                <v-text-field label="Exclude" v-if="item.required" v-model="item.requiredExclude"></v-text-field>
+                <v-text-field label="Exclude" v-if="item.required" v-model="item.requiredExclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index,1)"></v-text-field>
               </td>
               <td>
                 <img @click="deleteToggle(item.index)" class="deleteButton" src="../../src/assets/icons/close-circle.svg">
@@ -56,8 +56,8 @@
     <!--  -->
     <v-dialog v-model="dialog" persistent  width="500">
       <v-card>
+        
         <!-- <v-card-title class="headline">Title</v-card-title> -->
-
         <v-card-text>
           <div class="container">
             <div class="row">
@@ -99,9 +99,17 @@ export default {
       let template = Object.assign({}, this.layoutTemplate);
       this.userAddedFileds.push(template);
     },
-    gatherFields(item,index) {
+    gatherFields(item,index,buttontype) {
+      if(buttontype === 0){
+        item.selectedAction = 'exclude'
+      }else if(buttontype === 1){
+        item.selectedAction = 'excludeRequired'
+      }else if(buttontype === 3){
+        item.selectedAction = 'include'
+      }else{
+        return;
+      }
       item.index = index
-      item.selectedAction = 'exclude'
       this.selectedField = item;
       this.componentForFieldSelect = "appMultiFieldSelect";
       this.dialog = true;
