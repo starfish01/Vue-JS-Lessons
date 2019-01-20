@@ -32,7 +32,7 @@
                 <v-text-field label="Exclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index,0)" v-model="item.excludeField"></v-text-field>
               </td>
               <td>
-                <v-text-field label="Include" @click="gatherFields(item,index,2)" v-model="item.include"></v-text-field>
+                <v-text-field label="Include" @click="gatherFields(item,index,2)" v-model="item.includeField"></v-text-field>
               </td>
               <td>
                 <v-checkbox label="Required" v-if="!item.guardianField" v-model="item.required"/>
@@ -77,6 +77,7 @@
 
 <script>
 import MultiFieldSelect from "../components/material/MultiFieldSelect.vue";
+import AddFieldSelect from '../components/material/AddFieldSelect.vue';
 export default {
   data: () => ({
     dialog: false,
@@ -102,16 +103,18 @@ export default {
     gatherFields(item,index,buttontype) {
       if(buttontype === 0){
         item.selectedAction = 'exclude'
+        this.componentForFieldSelect = "appMultiFieldSelect";
       }else if(buttontype === 1){
         item.selectedAction = 'excludeRequired'
-      }else if(buttontype === 3){
+        this.componentForFieldSelect = "appMultiFieldSelect";
+      }else if(buttontype === 2){
         item.selectedAction = 'include'
+        this.componentForFieldSelect = "appAddFieldSelect";
       }else{
         return;
       }
       item.index = index
       this.selectedField = item;
-      this.componentForFieldSelect = "appMultiFieldSelect";
       this.dialog = true;
     },
     deleteToggle(index) {
@@ -138,7 +141,8 @@ export default {
     
   },
   components: {
-    appMultiFieldSelect: MultiFieldSelect
+    appMultiFieldSelect: MultiFieldSelect,
+    appAddFieldSelect: AddFieldSelect
   }
 };
 </script>
