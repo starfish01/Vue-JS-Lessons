@@ -15,9 +15,9 @@ export default [
     view: 'CSSSetup'
   },
   {
-    path: '/table-list',
-    name: 'Table List',
-    view: 'TableList'
+    path: '/js-setup',
+    name: 'JS Setup',
+    view: 'JSSetUp'
   },
   {
     path: '/typography',

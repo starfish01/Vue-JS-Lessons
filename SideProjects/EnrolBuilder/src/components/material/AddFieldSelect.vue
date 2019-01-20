@@ -2,7 +2,6 @@
   <div>
     <v-container fluid>
       {{item.selectedAction}}
-      {{includedItems}}
       <v-layout row wrap>
         <v-flex xs3 pa-2 order-lg2 v-for="(item, index) in includedItems" :key="index">
            <v-text-field type="number" v-model.number="includedItems[index]" placeholder=""/> 
@@ -54,8 +53,6 @@ export default {
       }
     }
       this.addCondition();
-
-
     }
 
   }

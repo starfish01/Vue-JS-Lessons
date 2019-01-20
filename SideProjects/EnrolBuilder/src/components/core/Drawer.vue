@@ -89,7 +89,7 @@ export default {
         text: 'Style Setup - CSS'
       },
       {
-        to: '/table-list',
+        to: '/js-setup',
         icon: 'mdi-clipboard-outline',
         text: 'JS - Set up'
       },

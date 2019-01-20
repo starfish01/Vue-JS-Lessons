@@ -1,17 +1,27 @@
 <template>
   <v-container fill-height fluid grid-list-xl>
-    <v-layout justify-center wrap>
-      <v-flex md12>
+
+
+<v-layout wrap>
+      <v-flex sm12>
+        <material-card color="warning" title="Output">
+            <v-switch label="Guardian confirm" v-model="guardianConfirmSwitch"></v-switch>
+             <v-btn color="primary" :disabled="userAddedFileds.length > 0 ? false : true" @click="output()">Output</v-btn>
+             <v-btn color="primary" :disabled="jsOutPut == '' ? true : false" v-clipboard="jsOutPut" @click="snackbar = true;">Copy</v-btn>
+             <v-card-text>
+                <v-textarea v-if="jsOutPut == ''? false : true" box v-model="jsOutPut" ></v-textarea>
+          </v-card-text>
+        </material-card>
+        
+      </v-flex>
+
+
+
+
+
+
+      <v-flex sm12>
         <material-card color="warning" title="JS Show Hide">
-          <!-- <v-data-table :headers="headers" :items="userAddedFileds" hide-actions>
-            <template slot="headerCell" slot-scope="{ header }">
-              <span
-                class="subheading font-weight-light text-success text--darken-3"
-                v-text="header.text"
-              />
-            </template>  -->
-            
-            <!-- <template slot="items" slot-scope="item"> -->
               <table>
               
                <div v-for="(item, index) in userAddedFileds" :key="index">
@@ -26,7 +36,7 @@
                 <v-text-field label="First Active" type="number" v-model.number="item.firstActive"></v-text-field>
               </td>
               <td>
-                <v-text-field label="Last Active" type="number" v-model.number="item.lastActive"></v-text-field>
+                <v-text-field label="Last Active" :disabled="item.firstActive == '' ? true: false" type="number" v-model.number="item.lastActive"></v-text-field>
               </td>
               <td>
                 <v-text-field label="Exclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index,0)" v-model="item.excludeField"></v-text-field>
@@ -46,8 +56,6 @@
               </div>
             
               </table>
-            <!-- </template> -->
-          <!-- </v-data-table> -->
           <v-btn color="primary" @click="addNewField()">Add</v-btn>
         </material-card>
       </v-flex>
@@ -72,17 +80,43 @@
 
       </v-card>
     </v-dialog>
+
+
+<v-snackbar
+        v-model="snackbar"
+        :bottom="'bottom'"
+        :right="'right'"
+        :timeout="2000"
+      >
+        Copied!
+        <v-btn
+          color="pink"
+          flat
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </v-snackbar>
+
+
+
   </v-container>
 </template>
 
 <script>
 import MultiFieldSelect from "../components/material/MultiFieldSelect.vue";
 import AddFieldSelect from '../components/material/AddFieldSelect.vue';
+import * as jsTemplate from "../templates/jsTemplate.js";
+
+
 export default {
   data: () => ({
     dialog: false,
+    snackbar:false,
     componentForFieldSelect: '',
     selectedField: null,
+    jsOutPut:'',
+    guardianConfirmSwitch:true,
     layoutTemplate: {
       guardianField: false,
       activeField: null,
@@ -131,6 +165,12 @@ export default {
       this.componentForFieldSelect = '';
       delete this.userAddedFileds[event.index].selectedAction;
       delete this.userAddedFileds[event.index].index;
+    },
+    output(){
+      this.jsOutPut = ' hello'
+
+      let z = new jsTemplate.JStemplate(this.userAddedFileds);
+
     }
     
   },
