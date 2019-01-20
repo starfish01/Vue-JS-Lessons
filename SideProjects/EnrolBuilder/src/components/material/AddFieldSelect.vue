@@ -5,7 +5,7 @@
       {{includedItems}}
       <v-layout row wrap>
         <v-flex xs3 pa-2 order-lg2 v-for="(item, index) in includedItems" :key="index">
-           <v-text-field v-model="includedItems[index]" placeholder=""/> 
+           <v-text-field type="number" v-model.number="includedItems[index]" placeholder=""/> 
             <v-btn small color="error" @click="removeCondition(index)">Delete</v-btn>
         </v-flex>
         <img class="addButton" src="../../../src/assets/icons/add.svg" @click="addCondition">
@@ -27,10 +27,17 @@ export default {
   },
   methods: {
     sendingBackData() {
-      console.log()
-    },
-    sendingBackData() {
-      this.item.includeField = this.includedItems;
+ 
+      if(this.includedItems.length === 0){
+        this.item.includeField = null;
+      }else{
+        for (let index = 0; index < this.includedItems.length; index++) {
+          if(this.includedItems[index] === ''){
+            this.removeCondition(index)
+          }
+        }
+        this.item.includeField = this.includedItems;
+      }
       this.$emit("itemReturn",this.item);
     },
     addCondition() {
@@ -41,22 +48,28 @@ export default {
     },
   },
   created () {
-    console.log(this.item.includeField) 
-    console.log(this.includedItems)
     if(this.item.includeField !== null){
-      this.includedItems = this.item.includedItems.slice(0);
-      console.log(this.includedItems)
+      for (let index = 0; index < this.item.includeField.length; index++) {
+        this.includedItems[index] = this.item.includeField[index]
+      }
+    }
+      this.addCondition();
+
+
     }
 
   }
   
-  }
+  
 
 </script>
 
 <style scopped>
 .addButton{
       width: 5%;
+      height: 5%;
+      margin-top: 10%;
+    margin-left: 5%;
 }
 .addButton:hover {
   background-color: red;
