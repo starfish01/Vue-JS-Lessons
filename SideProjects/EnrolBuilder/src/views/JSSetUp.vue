@@ -120,6 +120,7 @@ import * as jsTemplate from "../templates/jsTemplate.js";
 export default {
   data: () => ({
     dialog: false,
+    dataCompiler:null,
     snackbar:false,
     componentForFieldSelect: '',
     selectedField: null,
@@ -179,15 +180,29 @@ export default {
       delete this.userAddedFileds[event.index].index;
     },
     output(){
-      this.jsOutPut = ' hello'
+      
+      let returnData = this.dataCompiler.getData(this.userAddedFileds);
 
-      let z = new jsTemplate.JStemplate(this.userAddedFileds);
-      let returnData = z.getData();
+      
 
-      //just need to out put data
+      for (let i = 0; i < returnData.gurdianList.length; i++) {
+        console.log(returnData.gurdianList[i])
+      }
+      for (let i = 0; i < returnData.normalList.length; i++) {
+        console.log(returnData.normalList[i])
+      }
+      for (let i = 0; i < returnData.requiredList.length; i++) {
+        console.log(returnData.requiredList[i])
+      }
 
     }
     
+  },
+  created () {
+
+
+    this.dataCompiler =  new jsTemplate.JStemplate();
+   
   },
   computed: {
     

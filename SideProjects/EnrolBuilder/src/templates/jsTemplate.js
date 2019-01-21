@@ -7,17 +7,31 @@ class JStemplate {
     normalList = [];
     requiredList = [];
 
-    constructor(jsItems) {
-        this.jsItems = jsItems;
-        this.mainWorkFlow();
+    // constructor(jsItems) {
+    //     this.jsItems = jsItems;
+    //     this.mainWorkFlow();
+    // }
+
+    resetValues(){
+        this.gurdianList = [];
+        this.normalList = [];
+        this.requiredList = [];
     }
 
-    getData() {
+    getData(jsItems) {
+
+        this.jsItems = jsItems;
+
+        this.resetValues()
+
+        this.mainWorkFlow();
+
         let x = {
             gurdianList: this.gurdianList,
             normalList: this.normalList,
             requiredList: this.requiredList
         }
+
         return x;
     }
 
