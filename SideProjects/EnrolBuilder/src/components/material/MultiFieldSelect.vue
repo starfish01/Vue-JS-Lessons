@@ -28,6 +28,17 @@ export default {
   },
   methods: {
     sendingBackData() {
+
+      // console.log(this.checkboxObject)
+
+      for (var key in this.checkboxObject) {
+        if (this.checkboxObject.hasOwnProperty(key)) {
+          if(!this.checkboxObject[key]){
+            delete this.checkboxObject[key];
+          }
+        }
+      }
+
        if(this.item.selectedAction == 'exclude' ){
           this.item.excludeField = this.checkboxObject;
        }
@@ -56,6 +67,10 @@ export default {
     if(this.item.selectedAction == 'excludeRequired' ) {
       if(this.item.requiredExclude !== null){
         this.checkboxObject = this.item.requiredExclude;
+      }
+      if(this.item.includeField !== null){
+        //need to add the included field to be able to exclude them from the required output
+        console.log(this.item.includeField)
       }
     }
 

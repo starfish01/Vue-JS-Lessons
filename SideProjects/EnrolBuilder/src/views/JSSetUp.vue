@@ -51,7 +51,8 @@
                 <v-text-field label="Exclude" v-if="item.required" v-model="item.requiredExclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index,1)"></v-text-field>
               </td>
               <td>
-                <img @click="deleteToggle(item.index)" class="deleteButton" src="../../src/assets/icons/close-circle.svg">
+                
+                <img @click="deleteToggle(index)" class="deleteButton" src="../../src/assets/icons/close-circle.svg">
               </td>
               </div>
             
