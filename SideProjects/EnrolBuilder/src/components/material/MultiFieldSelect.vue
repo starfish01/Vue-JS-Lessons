@@ -4,10 +4,11 @@
       {{item.selectedAction}}
 
       <v-layout row wrap>
-        <v-flex xs3 pa-2 order-lg2 v-for="(fieldNumber,index) in item.lastActive-item.firstActive" :key="index">
+        <v-flex xs3 pa-2 order-lg2 v-for="(fieldNumber,index) in checkboxObject" :key="index">
+            {{fieldNumber}} - {{index}}
             <v-checkbox   class="text-xs-center"
-            v-model="checkboxObject[item.firstActive + index]" 
-            :label="labelValue(index)"></v-checkbox>
+            v-model="checkboxObject[index]" 
+            :label="index"></v-checkbox>
         </v-flex>
       </v-layout>
     </v-container>
@@ -22,14 +23,13 @@ export default {
   },
   data() {
     return {
-      checkboxes:[],
       checkboxObject:{},
       };
   },
   methods: {
     sendingBackData() {
 
-      // console.log(this.checkboxObject)
+       console.log(this.checkboxObject)
 
       for (var key in this.checkboxObject) {
         if (this.checkboxObject.hasOwnProperty(key)) {
@@ -57,7 +57,8 @@ export default {
   computed:{
     
   },
-  created () { 
+  created () {
+
     if(this.item.selectedAction == 'exclude' ) {
       if(this.item.excludeField !== null){
         this.checkboxObject = this.item.excludeField;
@@ -66,17 +67,55 @@ export default {
 
     if(this.item.selectedAction == 'excludeRequired' ) {
       if(this.item.requiredExclude !== null){
+        // console.log(this.item.requiredExclude)
         this.checkboxObject = this.item.requiredExclude;
       }
+      //console.log(this.checkboxObject)
       if(this.item.includeField !== null){
         //need to add the included field to be able to exclude them from the required output
-        console.log(this.item.includeField)
+        for (let i = 0; i < this.item.includeField.length; i++) {
+
+        if(this.checkboxObject[this.item.includeField[i]] == null) {
+          this.checkboxObject[this.item.includeField[i]] = false
+        } else if(this.checkboxObject[this.item.includeField[i]] == false){
+          this.checkboxObject[this.item.includeField[i]]= false
+        }else if(this.checkboxObject[this.item.includeField[i]] == true) {
+          this.checkboxObject[this.item.includeField[i]] = true
+        } else {
+          console.log('we missed something')
+        }
+        }
       }
     }
+
+
+    
 
     if(this.item.selectedAction == 'include') {
       
     }
+
+    let firstActive = Number(this.item.firstActive);
+    let lastActive = Number(this.item.lastActive);
+
+    if (firstActive < lastActive) {
+      for (let index = firstActive; index <= lastActive; index++) {
+        if(this.checkboxObject[index] == null){
+          this.checkboxObject[index] = false
+        }else{
+          this.checkboxObject[index] = true
+        }
+        
+      }
+    } else {
+      if(this.checkboxObject[firstActive] == null){
+          this.checkboxObject[firstActive] = false
+        }else{
+          this.checkboxObject[firstActive] = true
+        }
+    }
+
+
   }
 };
 </script>

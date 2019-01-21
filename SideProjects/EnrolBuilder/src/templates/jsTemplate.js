@@ -12,6 +12,15 @@ class JStemplate {
         this.mainWorkFlow();
     }
 
+    getData() {
+        let x = {
+            gurdianList: this.gurdianList,
+            normalList: this.normalList,
+            requiredList: this.requiredList
+        }
+        return x;
+    }
+
     mainWorkFlow() {
         for (let index = 0; index < this.jsItems.length; index++) {
 
@@ -31,16 +40,16 @@ class JStemplate {
 
             //check if guardian is selected
             if (this.jsItems[index].guardianField) {
-                this.guardianSelected(this.jsItems[index]);
+                this.guardianSelected(this.jsItems[index].activeField,effectedFields,this.jsItems[index].conditions);
                 continue;
             }
 
             //regular hide show
-            this.normalSelected(this.jsItems[index])
+            this.normalSelected(this.jsItems[index].activeField,effectedFields,this.jsItems[index].conditions)
 
             //check if its required
             if(this.jsItems[index].required) {
-                
+                this.requiredSelected(this.jsItems[index].activeField,effectedFields,this.jsItems[index].conditions)
             }
 
 
@@ -48,11 +57,25 @@ class JStemplate {
         }
     }
 
+    requiredSelected(active,toggleFields,conditions) {
+//conditional_required_v5(17758,"0",[17841,17843,17846,17847,17848,17849,17850,17852,17853,17854,17855,17856,17857,17858,17860,17861]);
+        let conditionSting = this.conditionStringBuilder(conditions)
+
+        for (let i = 0; i < conditions.length; i++) {
+            let field = conditions[i];
+            let newRequired = `conditional_required_v5(${active},'${field}',[${toggleFields}]);`
+            this.requiredList.push(newRequired);
+        }
+        
+    }
 
 
-    normalSelected(item) {
-        let newNormalItem = ``
-        normalList.push(newNormalItem);
+    normalSelected(active,toggleFields,conditions) {
+
+        let conditionSting = this.conditionStringBuilder(conditions)
+        
+        let newToggle = `forms.toggle_fields(${active},[${toggleFields}],[${conditionSting}]);`
+        this.normalList.push(newToggle);
     }
 
     fieldsThatWillBeExcluded(currentList, toBeExcluded) {
@@ -99,10 +122,22 @@ class JStemplate {
         return returnList;
     }
 
+    conditionStringBuilder(conditionString) {
 
-    guardianSelected(item) {
-        let newGuardian = ``
-        gurdianList.push(newGuardian);
+        let newString ='';
+        for (let i = 0; i < conditionString.length; i++) {
+            newString +="'"+conditionString[i]+"',";
+        }
+        return newString.substring(0, newString.length-1)
+    }
+
+    guardianSelected(active,toggleFields,conditions) {
+        
+        let conditionSting = this.conditionStringBuilder(conditions)
+        
+        let newGuardian = `forms.toggleGuardianFields(${active},[${toggleFields}],[${conditionSting}],guardianContainer);`
+        this.gurdianList.push(newGuardian);
+
     }
 
 

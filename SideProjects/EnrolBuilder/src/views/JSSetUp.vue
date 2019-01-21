@@ -22,13 +22,20 @@
 
       <v-flex sm12>
         <material-card color="warning" title="JS Show Hide">
+          <b>G</b> - Guardian field / <b>R</b> - Required Field
+
               <table>
               
                <div v-for="(item, index) in userAddedFileds" :key="index">
                  
               <td>
-                <v-checkbox label="Guardian" v-model="item.guardianField"/>
+                <v-checkbox label="G" v-model="item.guardianField"/>
               </td>
+              
+              <td>
+                <v-text-field label="Conditions" @click="gatherFields(item,index,3)" v-model="item.conditions"/>
+              </td>
+
               <td>
                 <v-text-field label="Active" @change="activeFieldChangeFN(index)" type="number" v-model.number="item.activeField"></v-text-field>
               </td>
@@ -45,7 +52,7 @@
                 <v-text-field label="Include" @click="gatherFields(item,index,2)" v-model="item.includeField"></v-text-field>
               </td>
               <td>
-                <v-checkbox label="Required" v-if="!item.guardianField" v-model="item.required"/>
+                <v-checkbox label="R" v-if="!item.guardianField" v-model="item.required"/>
               </td>
               <td>
                 <v-text-field label="Exclude" v-if="item.required" v-model="item.requiredExclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index,1)"></v-text-field>
@@ -120,6 +127,7 @@ export default {
     guardianConfirmSwitch:true,
     layoutTemplate: {
       guardianField: false,
+      conditions:null,
       activeField: null,
       firstActive: null,
       lastActive: null,
@@ -144,6 +152,9 @@ export default {
         this.componentForFieldSelect = "appMultiFieldSelect";
       }else if(buttontype === 2){
         item.selectedAction = 'include'
+        this.componentForFieldSelect = "appAddFieldSelect";
+      }else if(buttontype === 3){
+        item.selectedAction = 'conditions'
         this.componentForFieldSelect = "appAddFieldSelect";
       }else{
         return;
@@ -171,6 +182,9 @@ export default {
       this.jsOutPut = ' hello'
 
       let z = new jsTemplate.JStemplate(this.userAddedFileds);
+      let returnData = z.getData();
+
+      //just need to out put data
 
     }
     
