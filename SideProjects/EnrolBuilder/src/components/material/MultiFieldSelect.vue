@@ -29,7 +29,7 @@ export default {
   methods: {
     sendingBackData() {
 
-       console.log(this.checkboxObject)
+      //  console.log(this.checkboxObject)
 
       for (var key in this.checkboxObject) {
         if (this.checkboxObject.hasOwnProperty(key)) {

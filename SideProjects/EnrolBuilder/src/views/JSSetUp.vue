@@ -7,9 +7,12 @@
         <material-card color="warning" title="Output">
             <v-switch label="Guardian confirm" v-model="guardianConfirmSwitch"></v-switch>
              <v-btn color="primary" :disabled="userAddedFileds.length > 0 ? false : true" @click="output()">Output</v-btn>
-             <v-btn color="primary" :disabled="jsOutPut == '' ? true : false" v-clipboard="jsOutPut" @click="snackbar = true;">Copy</v-btn>
+             <!-- <v-btn color="primary" :disabled="jsOutPut == '' ? true : false" v-clipboard="jsOutPut" @click="snackbar = true;">Copy</v-btn> -->
              <v-card-text>
-                <v-textarea v-if="jsOutPut == ''? false : true" box v-model="jsOutPut" ></v-textarea>
+                <!-- <v-textarea v-if="jsOutPut == ''? false : true" box v-model="jsOutPut" ></v-textarea> -->
+                <div id="outputJS" contenteditable="true" v-if="jsOutPut == ''? false : true" box>
+                  <p class="outputCodeDisplayPara" v-for="(val, i) in jsOutPut" :key="i">{{val}}</p>
+                </div>
           </v-card-text>
         </material-card>
         
@@ -183,26 +186,40 @@ export default {
       
       let returnData = this.dataCompiler.getData(this.userAddedFileds);
 
-      
+      let outPutData=[];
 
-      for (let i = 0; i < returnData.gurdianList.length; i++) {
-        console.log(returnData.gurdianList[i])
+      // console.log(returnData.gurdianList.length)
+
+      if(returnData.gurdianList.length > 0){
+
+        outPutData.push(this.dataCompiler.gurardianTemplate().topElement);
+
+
+        for (let i = 0; i < returnData.gurdianList.length; i++) {        
+          outPutData.push(`${returnData.gurdianList[i]}`);
+        }
+
+        outPutData.push(this.dataCompiler.gurardianTemplate().bottomElement);
+
       }
+    
       for (let i = 0; i < returnData.normalList.length; i++) {
-        console.log(returnData.normalList[i])
+        outPutData.push(`${returnData.normalList[i]}`)
       }
+
+
       for (let i = 0; i < returnData.requiredList.length; i++) {
-        console.log(returnData.requiredList[i])
+        outPutData.push(`${returnData.requiredList[i]}`);
       }
+
+      // console.log(outPutData)
+      this.jsOutPut = outPutData;
 
     }
     
   },
   created () {
-
-
     this.dataCompiler =  new jsTemplate.JStemplate();
-   
   },
   computed: {
     
@@ -217,7 +234,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.outputCodeDisplayPara {
+  line-height: 1.2;
+}
+
+#outputJS {
+  background: lightgray;
+  max-height: 150px;
+  overflow-y: auto;
+}
 td {
   padding: 0 5px !important;
 }

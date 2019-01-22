@@ -14,7 +14,7 @@ class CSSstyling {
 
     setImageUrl(url) {
         this.url = url;
-        console.log(this.url)
+        // console.log(this.url)
     }
 
 

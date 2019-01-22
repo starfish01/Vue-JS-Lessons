@@ -21,7 +21,7 @@ export default {
       },
       set(newVal) {
         this.value = newVal;
-        console.log(this.colourFromParent.hex);
+        // console.log(this.colourFromParent.hex);
         this.$emit("colorChange", this.value);
       }
     }
