@@ -14,12 +14,10 @@ class CSSstyling {
 
     setImageUrl(url) {
         this.url = url;
-        // console.log(this.url)
     }
 
 
     getStyleSheet() {
-        //console.log(styleArray)
         return this.newObject();
     }
 

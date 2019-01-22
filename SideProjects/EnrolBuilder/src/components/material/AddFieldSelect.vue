@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-container fluid>
+    <v-container fluid @keyup.enter="sendingBackData()">
       {{item.selectedAction}}
       <v-layout row wrap>
         <v-flex xs3 pa-2 order-lg2 v-for="(item, index) in includedItems" :key="index">
-            <v-text-field :type="conditionsFields ? '' : 'number'" v-model="includedItems[index]" placeholder=""/> 
+            <v-text-field :autofocus="index == 0" :type="conditionsFields ? '' : 'number'" :input="addFieldOnChangeEvent()" v-model="includedItems[index]" placeholder=""/> 
             <v-btn small color="error" @click="removeCondition(index)">Delete</v-btn>
         </v-flex>
         <img class="addButton" src="../../../src/assets/icons/add.svg" @click="addCondition">
@@ -26,6 +26,18 @@ export default {
       };
   },
   methods: {
+
+    addFieldOnChangeEvent(){
+
+      //console.log(this.includedItems[this.includedItems.length-1].length>0)
+      if(this.includedItems[this.includedItems.length-1].length>0) {
+        this.addCondition();
+      }
+      // if(this.includedItems[this.includedItems.length].length > 0){
+      //   console.log('something')
+      // }
+
+    },
     sendingBackData() {
  
       if(this.includedItems.length === 0){

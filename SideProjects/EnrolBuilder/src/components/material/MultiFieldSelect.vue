@@ -1,18 +1,16 @@
 <template>
   <div>
-    <v-container fluid>
+    <v-container fluid >
       {{item.selectedAction}}
-
       <v-layout row wrap>
         <v-flex xs3 pa-2 order-lg2 v-for="(fieldNumber,index) in checkboxObject" :key="index">
-            {{fieldNumber}} - {{index}}
             <v-checkbox   class="text-xs-center"
             v-model="checkboxObject[index]" 
             :label="index"></v-checkbox>
         </v-flex>
       </v-layout>
     </v-container>
-    <v-btn color="primary"  @click="sendingBackData()">Save</v-btn>
+    <v-btn color="primary" autofocus @click="sendingBackData()">Save</v-btn>
   </div>
 </template>
 

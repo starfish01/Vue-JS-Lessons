@@ -5,18 +5,28 @@
 <v-layout wrap>
       <v-flex sm12>
         <material-card color="warning" title="Output">
-            <v-switch label="Guardian confirm" v-model="guardianConfirmSwitch"></v-switch>
-             <v-btn color="primary" :disabled="userAddedFileds.length > 0 ? false : true" @click="output()">Output</v-btn>
-             <!-- <v-btn color="primary" :disabled="jsOutPut == '' ? true : false" v-clipboard="jsOutPut" @click="snackbar = true;">Copy</v-btn> -->
-             <v-card-text>
-                <!-- <v-textarea v-if="jsOutPut == ''? false : true" box v-model="jsOutPut" ></v-textarea> -->
-                <div id="outputJS" contenteditable="true" v-if="jsOutPut == ''? false : true" box>
-                  <p class="outputCodeDisplayPara" v-for="(val, i) in jsOutPut" :key="i">{{val}}</p>
-                </div>
-          </v-card-text>
-        </material-card>
-        
-      </v-flex>
+          
+          <v-layout wrap>
+            <v-flex sm4>
+              <v-switch label="Guardian confirm" v-model="guardianConfirmSwitch"></v-switch>
+            </v-flex>
+            <v-flex sm4>
+              <v-switch label="Add required function" v-model="addRequiredFunction"></v-switch>
+            </v-flex>
+            <v-flex sm4>
+              <v-switch label="Guardian Function" v-model="addGuardianFunction"></v-switch>
+            </v-flex>
+          </v-layout>
+            <v-btn color="primary" :disabled="userAddedFileds.length > 0 ? false : true" @click="output()">Output</v-btn>
+            <!-- <v-btn color="primary" :disabled="jsOutPut == '' ? true : false" v-clipboard="jsOutPut" @click="snackbar = true;">Copy</v-btn> -->
+            <v-card-text>
+              <!-- <v-textarea v-if="jsOutPut == ''? false : true" box v-model="jsOutPut" ></v-textarea> -->
+              <div id="outputJS" contenteditable="true" v-if="jsOutPut == ''? false : true" box>
+                <p class="outputCodeDisplayPara" v-for="(val, i) in jsOutPut" :key="i">{{val}}</p>
+              </div>
+            </v-card-text>
+          </material-card>
+        </v-flex>
 
 
 
@@ -28,46 +38,87 @@
           <b>G</b> - Guardian field / <b>R</b> - Required Field
 
               <table>
-              
-               <div v-for="(item, index) in userAddedFileds" :key="index">
-                 
-              <td>
-                <v-checkbox label="G" v-model="item.guardianField"/>
-              </td>
-              
-              <td>
-                <v-text-field label="Conditions" @click="gatherFields(item,index,3)" v-model="item.conditions"/>
-              </td>
+                <div v-for="(item, index) in userAddedFileds" :key="index">
+                  <v-flex sm12 v-if="item.regFieldType">
+                    <td>
+                      <v-checkbox label="G" v-model="item.guardianField"/>
+                    </td>
+                    <td>
+                      <v-text-field label="Active" autofocus @change="activeFieldChangeFN(index)" type="number" v-model.number="item.activeField"></v-text-field>
+                    </td>
+                    <td>
+                      <v-text-field label="First Active" type="number" v-model.number="item.firstActive"></v-text-field>
+                    </td>
+                    <td>
+                      <v-text-field label="Last Active" :disabled="item.firstActive == '' ? true: false" type="number" v-model.number="item.lastActive"></v-text-field>
+                    </td>
+                    <td>
+                      <v-text-field label="Conditions" @click="gatherFields(item,index,3)" v-model="item.conditions"/>
+                    </td>
+                    <td>
+                      <v-text-field label="Exclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index,0)" v-model="item.excludeField"></v-text-field>
+                    </td>
+                    <td>
+                      <v-text-field label="Include" @click="gatherFields(item,index,2)" v-model="item.includeField"></v-text-field>
+                    </td>
+                    <td>
+                      <v-checkbox label="R" v-if="!item.guardianField" v-model="item.required"/>
+                    </td>
+                    <td>
+                      <v-text-field label="Exclude" v-if="item.required" v-model="item.requiredExclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index,1)"></v-text-field>
+                    </td>
+                    <td>
+                      <img @click="deleteToggle(index)" class="deleteButton" src="../../src/assets/icons/close-circle.svg">
+                    </td>
+                  </v-flex>
+                  <v-flex sm12 v-if="item.label">
+                    <td>
+                    <v-text-field v-model="item.labelValue"></v-text-field>
+                    </td>
+                    <td>
+                      <img @click="deleteToggle(index)" class="deleteButton" src="../../src/assets/icons/close-circle.svg">
+                    </td>
+                  </v-flex>
 
-              <td>
-                <v-text-field label="Active" @change="activeFieldChangeFN(index)" type="number" v-model.number="item.activeField"></v-text-field>
-              </td>
-              <td>
-                <v-text-field label="First Active" type="number" v-model.number="item.firstActive"></v-text-field>
-              </td>
-              <td>
-                <v-text-field label="Last Active" :disabled="item.firstActive == '' ? true: false" type="number" v-model.number="item.lastActive"></v-text-field>
-              </td>
-              <td>
-                <v-text-field label="Exclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index,0)" v-model="item.excludeField"></v-text-field>
-              </td>
-              <td>
-                <v-text-field label="Include" @click="gatherFields(item,index,2)" v-model="item.includeField"></v-text-field>
-              </td>
-              <td>
-                <v-checkbox label="R" v-if="!item.guardianField" v-model="item.required"/>
-              </td>
-              <td>
-                <v-text-field label="Exclude" v-if="item.required" v-model="item.requiredExclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index,1)"></v-text-field>
-              </td>
-              <td>
-                
-                <img @click="deleteToggle(index)" class="deleteButton" src="../../src/assets/icons/close-circle.svg">
-              </td>
+                  <v-flex sm12 v-if="item.singleRequiredField">
+                   
+                    <td>
+                      <v-text-field label="Active" autofocus @change="activeFieldChangeFN(index)" type="number" v-model.number="item.activeField"></v-text-field>
+                    </td>
+                    <td>
+                      <v-text-field label="First Active" type="number" v-model.number="item.firstActive"></v-text-field>
+                    </td>
+                    <td>
+                      <v-text-field label="Last Active" :disabled="item.firstActive == '' ? true: false" type="number" v-model.number="item.lastActive"></v-text-field>
+                    </td>
+                    <td>
+                      <v-text-field label="Conditions" @click="gatherFields(item,index,3)" v-model="item.conditions"/>
+                    </td>
+                    <td>
+                      <v-text-field label="Exclude" :disabled="item.firstActive >= item.lastActive" @click="gatherFields(item,index,0)" v-model="item.excludeField"></v-text-field>
+                    </td>
+                    <td>
+                      <v-text-field label="Include" @click="gatherFields(item,index,2)" v-model="item.includeField"></v-text-field>
+                    </td>
+
+
+                    <td>
+                      <img @click="deleteToggle(index)" class="deleteButton" src="../../src/assets/icons/close-circle.svg">
+                    </td>
+                  </v-flex>
+
               </div>
             
-              </table>
-          <v-btn color="primary" @click="addNewField()">Add</v-btn>
+            </table>
+            <v-layout wrap>
+              <v-flex sm8>
+                <v-btn color="primary" @click="addNewField()">Add</v-btn>
+              
+                <v-btn color="primary" @click="addNewLabel()">Label</v-btn>
+
+                <v-btn color="primary" @click="singleConditionalRequired()">Single Conditionally Required</v-btn>
+              </v-flex>
+            </v-layout>
         </material-card>
       </v-flex>
     </v-layout>
@@ -93,24 +144,21 @@
     </v-dialog>
 
 
-<v-snackbar
-        v-model="snackbar"
-        :bottom="'bottom'"
-        :right="'right'"
-        :timeout="2000"
+    <v-snackbar
+      v-model="snackbar"
+      :bottom="'bottom'"
+      :right="'right'"
+      :timeout="2000"
+    >
+      Copied!
+      <v-btn
+        color="pink"
+        flat
+        @click="snackbar = false"
       >
-        Copied!
-        <v-btn
-          color="pink"
-          flat
-          @click="snackbar = false"
-        >
-          Close
-        </v-btn>
-      </v-snackbar>
-
-
-
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -128,8 +176,11 @@ export default {
     componentForFieldSelect: '',
     selectedField: null,
     jsOutPut:'',
+    addRequiredFunction:true,
+    addGuardianFunction:true,
     guardianConfirmSwitch:true,
     layoutTemplate: {
+      regFieldType:true,
       guardianField: false,
       conditions:null,
       activeField: null,
@@ -143,6 +194,15 @@ export default {
     userAddedFileds: [],
   }),
   methods: {
+    singleConditionalRequired(){
+      let template = Object.assign({}, this.layoutTemplate);
+      template.regFieldType = false;
+      template.singleRequiredField = true;
+      this.userAddedFileds.push(template)
+    },
+    addNewLabel(){
+      this.userAddedFileds.push(Object.assign({},{label:true,labelValue:'',postion:this.userAddedFileds.length-1}))
+    },
     addNewField() {
       let template = Object.assign({}, this.layoutTemplate);
       this.userAddedFileds.push(template);
@@ -188,19 +248,33 @@ export default {
 
       let outPutData=[];
 
-      // console.log(returnData.gurdianList.length)
+
+      if(this.guardianConfirmSwitch) {
+        outPutData.push(this.dataCompiler.guardianConfirmation())
+      }
+
+      /*
+      addRequiredFunction:true,
+    addGuardianFunction:true,
+*/
+
+      if(returnData.requiredList.length > 0 && this.addRequiredFunction) {
+        outPutData.push(this.dataCompiler.requiredTemplate())
+      }
+
 
       if(returnData.gurdianList.length > 0){
 
-        outPutData.push(this.dataCompiler.gurardianTemplate().topElement);
-
+        if(this.addGuardianFunction){
+          outPutData.push(this.dataCompiler.gurardianTemplate().topElement);
+        }
 
         for (let i = 0; i < returnData.gurdianList.length; i++) {        
           outPutData.push(`${returnData.gurdianList[i]}`);
         }
-
-        outPutData.push(this.dataCompiler.gurardianTemplate().bottomElement);
-
+        if(this.addGuardianFunction){
+          outPutData.push(this.dataCompiler.gurardianTemplate().bottomElement);
+        }
       }
     
       for (let i = 0; i < returnData.normalList.length; i++) {

@@ -33,6 +33,21 @@ class JStemplate {
     mainWorkFlow() {
         for (let index = 0; index < this.jsItems.length; index++) {
 
+            if(this.jsItems[index].label){
+                let labelToPrint =  `/* ${this.jsItems[index].labelValue} */`
+                if(this.jsItems[index+1] != null){
+                    if(this.jsItems[index+1].guardianField) {
+                        this.gurdianList.push(labelToPrint);
+                    } else if(!this.jsItems[index+1].guardianField) {
+                        this.normalList.push(labelToPrint);
+                    }
+                }else{
+                    this.normalList.push(labelToPrint);
+                }
+                continue;
+            }
+
+
             //first check if the activator and effected are inputed
             if (this.jsItems[index].activeField == null || this.jsItems[index].firstActive == null ||
                 this.jsItems[index].activeField == '' || this.jsItems[index].firstActive == '') {
@@ -53,6 +68,12 @@ class JStemplate {
                 continue;
             }
 
+            //Single Conditionally Required Field
+            if(this.jsItems[index].singleRequiredField){
+                this.requiredSelected(this.jsItems[index].activeField,effectedFields,this.jsItems[index].conditions,this.jsItems[index].requiredExclude)
+                continue;
+            }
+
             //regular hide show
             this.normalSelected(this.jsItems[index].activeField,effectedFields,this.jsItems[index].conditions)
 
@@ -61,41 +82,26 @@ class JStemplate {
                 this.requiredSelected(this.jsItems[index].activeField,effectedFields,this.jsItems[index].conditions,this.jsItems[index].requiredExclude)
             }
 
-
-
         }
+    }
+
+    conditionallyRequiredSelect(){
+
     }
 
     requiredSelected(active,toggleFields,conditions,excluded) {
 
-        console.log(excluded)
-
-        console.log(excluded != null)
         if(excluded != null){
             
-
             Object.keys(excluded).forEach(element => {
-               console.log(element) 
-               console.log(conditions[element])
+
+                toggleFields.splice(toggleFields.indexOf(Number(element)),1);
+                
             });
-
-
-            
-            // Object.keys(excluded).length;
-
-            // for (let i = 0; i < excluded.length; i++) {
-            //     console.log(excluded[i])
-            //     if(excluded[i]){
-            //         console.log(excluded[i])
-            //         console.log(conditions[i])
-            //         delete conditions[i]
-            //     }
-            // }
+           
         }
 
-
-//conditional_required_v5(17758,"0",[17841,17843,17846,17847,17848,17849,17850,17852,17853,17854,17855,17856,17857,17858,17860,17861]);
-        let conditionSting = this.conditionStringBuilder(conditions)
+        // let conditionSting = this.conditionStringBuilder(conditions)
 
         for (let i = 0; i < conditions.length; i++) {
             let field = conditions[i];
@@ -184,7 +190,11 @@ class JStemplate {
     }
 
     requiredTemplate() {
-        let code = `var confirm_checkbox='<div class="row" style="margin-top:20px"><div class="col-md-12 formgroup-container" id="custom-checkbox"> <div class="form-group" style="margin-bottom:0px;"> <div class="btn-group-vertical btn-group-checkbox" data-toggle="buttons"><input type="hidden" name="[guardian_confirmation_checkbox]" value=""> <label class="btn btn-default btn-checkbox "> <input type="checkbox" name="[guardian_confirmation_checkbox][]" value="confirm"> I acknowledge that all legal guardians and carers for the student have been entered into this application </label></div> </div> </div></div>';if($("#guardians").length>0){$("#add_guardian").after(confirm_checkbox);$('button[type="submit"]').prop("disabled","disabled");$(document).on("change",'[name*="[guardian_confirmation_checkbox]"]',function(){if($('[name*="[guardian_confirmation_checkbox]"]:checked').val()=="confirm"){$('button[type="submit"]').prop("disabled",false)}else{$('button[type="submit"]').prop("disabled","disabled")}})}`
+        return `function conditional_required_v5(e,r,a){$(".form:first").submit(function(i){if(a.constructor===Array)for(var o=$(".form").parent(),n=$('[name*="formgroup_ids['+e+']"]'),l=0;l<a.length;l++){var d=$("[data-formgroup-id="+a[l]+"]");if(n.parent().hasClass("btn-radio")&&(n=$('[name*="formgroup_ids['+e+']"]:checked')),d.find(".btn-radio").length>0)void 0==(t=d.find('[name*="formgroup_ids['+a[l]+']"]:checked').val())&&(t="");else if(d.find(".btn-checkbox").length>0)t=$('[name="formgroup_ids['+a[l]+'][identify-type][]"]:checked').length>0?"field_is_set":"";else var t=d.find('[name*="formgroup_ids['+a[l]+']"]:first').val();""==t&&n.val()==r&&(i.preventDefault(),d.addClass("has-error"),0==d.find(".has-error.help-block").length&&d.append('<p class="has-error help-block">This field is required.</p>'),o.find(".alert.alert-danger:first").remove(),o.prepend('<div class="alert alert-danger">Some errors were encountered, please ensure all applicable fields are filled out</div>'),$("html,body").scrollTop(0))}else i.preventDefault(),console.log("Conditional Required V4 Error: Third argument must be an array.")})}`
+    }
+
+    guardianConfirmation() {
+        return `var confirm_checkbox='<div class="row" style="margin-top:20px"><div class="col-md-12 formgroup-container" id="custom-checkbox"> <div class="form-group" style="margin-bottom:0px;"> <div class="btn-group-vertical btn-group-checkbox" data-toggle="buttons"><input type="hidden" name="[guardian_confirmation_checkbox]" value=""> <label class="btn btn-default btn-checkbox "> <input type="checkbox" name="[guardian_confirmation_checkbox][]" value="confirm"> I acknowledge that all legal guardians and carers for the student have been entered into this application </label></div> </div> </div></div>';if($("#guardians").length>0){$("#add_guardian").after(confirm_checkbox);$('button[type="submit"]').prop("disabled","disabled");$(document).on("change",'[name*="[guardian_confirmation_checkbox]"]',function(){if($('[name*="[guardian_confirmation_checkbox]"]:checked').val()=="confirm"){$('button[type="submit"]').prop("disabled",false)}else{$('button[type="submit"]').prop("disabled","disabled")}})}`
     }
 
 
