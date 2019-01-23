@@ -85,10 +85,6 @@ class JStemplate {
         }
     }
 
-    conditionallyRequiredSelect(){
-
-    }
-
     requiredSelected(active,toggleFields,conditions,excluded) {
 
         if(excluded != null){
@@ -100,8 +96,6 @@ class JStemplate {
             });
            
         }
-
-        // let conditionSting = this.conditionStringBuilder(conditions)
 
         for (let i = 0; i < conditions.length; i++) {
             let field = conditions[i];

@@ -1,5 +1,7 @@
 <template>
+<div>
   <chrome-picker v-model="color"/>
+</div>
 </template>
 
 <script>
@@ -8,7 +10,7 @@ export default {
   props: { colourFromParent: Object },
   data() {
     return {
-      colorValue: this.colourFromParent.hex
+      colorValue: this.colourFromParent.hex8
     };
   },
   components: {
@@ -27,7 +29,8 @@ export default {
     }
   },
   created: function() {
-    
+    console.log('this')
+    console.log(this.colourFromParent)
   }
 };
 </script>

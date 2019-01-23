@@ -25,7 +25,17 @@
       <v-container grid-list-xl>
         <v-layout wrap>
           <v-flex xs12>
-            
+             <v-checkbox label="Clone Status"/>
+             <v-checkbox label="Clone default form"/>
+             <v-checkbox label="Rename Form"/>
+             <v-checkbox label="Upload Logo"/>
+             <v-checkbox label="Edit Welcome message"/>
+             <v-checkbox label="Edit Jumbotron"/>
+             <v-checkbox label="Set Form Style Defaults"/>
+             <v-checkbox label="Import TASS Data"/>
+             <v-checkbox label="Build Form"/>
+             <v-checkbox label="Style Email"/>
+             <v-checkbox label="Configure Export"/>   
             <v-divider class="mt-3"/>
           
           </v-flex>

@@ -25,6 +25,7 @@
                 <p class="outputCodeDisplayPara" v-for="(val, i) in jsOutPut" :key="i">{{val}}</p>
               </div>
             </v-card-text>
+
           </material-card>
         </v-flex>
 
@@ -111,19 +112,21 @@
             
             </table>
             <v-layout wrap>
-              <v-flex sm8>
+              <v-flex sm9>
                 <v-btn color="primary" @click="addNewField()">Add</v-btn>
               
                 <v-btn color="primary" @click="addNewLabel()">Label</v-btn>
 
                 <v-btn color="primary" @click="singleConditionalRequired()">Single Conditionally Required</v-btn>
               </v-flex>
+              <v-flex sm3>
+                <v-btn color="danger" @click="deleteLocalStorage()">Clear</v-btn>
+              </v-flex>
             </v-layout>
         </material-card>
       </v-flex>
     </v-layout>
 
-    <!--  -->
     <v-dialog v-model="dialog" persistent  width="500">
       <v-card>
         
@@ -194,18 +197,34 @@ export default {
     userAddedFileds: [],
   }),
   methods: {
+    saveToLocalStorage() {
+      const parsed = JSON.stringify(this.userAddedFileds)
+      localStorage.setItem('jsUserAddedFields',parsed)
+    },
+    deleteLocalStorage() {
+      
+      //need to delete from local
+      
+      this.userAddedFileds = [];
+    },
+    reteriveLocalStorage() {
+
+    },
     singleConditionalRequired(){
       let template = Object.assign({}, this.layoutTemplate);
       template.regFieldType = false;
       template.singleRequiredField = true;
-      this.userAddedFileds.push(template)
+      this.userAddedFileds.push(template);
+      this.saveToLocalStorage();
     },
     addNewLabel(){
       this.userAddedFileds.push(Object.assign({},{label:true,labelValue:'',postion:this.userAddedFileds.length-1}))
+      this.saveToLocalStorage();
     },
     addNewField() {
       let template = Object.assign({}, this.layoutTemplate);
       this.userAddedFileds.push(template);
+      this.saveToLocalStorage();
     },
     gatherFields(item,index,buttontype) {
       if(buttontype === 0){
@@ -229,13 +248,16 @@ export default {
     },
     deleteToggle(index) {
         this.userAddedFileds.splice(index, 1)
+        this.saveToLocalStorage();
     },
     activeFieldChangeFN(index){
       if(this.userAddedFileds[index].firstActive == null){
         this.userAddedFileds[index].firstActive = parseInt(this.userAddedFileds[index].activeField) + 1;
       }
+      this.saveToLocalStorage();
     },
     returnActiveFields(event){
+      this.saveToLocalStorage();
       this.userAddedFileds[event.index] = event;
       this.dialog = false;
       this.componentForFieldSelect = '';
@@ -243,7 +265,7 @@ export default {
       delete this.userAddedFileds[event.index].index;
     },
     output(){
-      
+      this.saveToLocalStorage();
       let returnData = this.dataCompiler.getData(this.userAddedFileds);
 
       let outPutData=[];
@@ -253,15 +275,9 @@ export default {
         outPutData.push(this.dataCompiler.guardianConfirmation())
       }
 
-      /*
-      addRequiredFunction:true,
-    addGuardianFunction:true,
-*/
-
       if(returnData.requiredList.length > 0 && this.addRequiredFunction) {
         outPutData.push(this.dataCompiler.requiredTemplate())
       }
-
 
       if(returnData.gurdianList.length > 0){
 
@@ -292,8 +308,17 @@ export default {
     }
     
   },
-  created () {
+  mounted () {
     this.dataCompiler =  new jsTemplate.JStemplate();
+    
+    if(localStorage.getItem('jsUserAddedFields')) {
+      try {
+        this.userAddedFileds = JSON.parse(localStorage.getItem('jsUserAddedFields'))
+      }catch {
+        localStorage.removeItem('jsUserAddedFields')
+      }
+    }
+
   },
   computed: {
     
