@@ -1,51 +1,46 @@
 <template>
   <v-container fill-height fluid grid-list-xl>
     <v-layout wrap>
-      <!-- Example Screen -->
-      <!-- <v-flex xs8>
-        <material-card color="warning" title="Dashboard" text>
-          <v-card-text
-            class="landingPageStyle"
-            :style="{backgroundImage: backgroundImageUrl == '' ? 'url(' + '/img/bgtemp.jpg' + ')' : 'url(' + backgroundImageUrl + ')'}"
-          >
-            <v-container class="pa-0" grid-list-xl fluid>
-              <v-layout row>
-                <v-flex xs6>
-                  <p class="templateText">Welcome to</p>
-                  <p class="templateText">School City</p>
-                </v-flex>
-                <v-flex xs6>
-                  <v-jumbotron class="jumbotronExample" style="background-color:red">
-                    <v-container>
-                      <v-layout>
-                        <v-flex>
-                          <p>Welcome to the site</p>
 
-                          <p
-                            class="subheading"
-                          >Lorem ipsum dolor sit amet, pri veniam forensibus id. Vis maluidum.</p>
 
-                          <v-divider class="my-3"></v-divider>
+      <v-flex sm8 class="imageBackground" style="height:288px; background-repeat: no-repeat; background-size: 100%; " :style="{ 'background-image':'url('+imgUrlAdded+')'}">
+        
+        <div style="width:50%; float:left;">
+          <img src="/../../img/digistorm.svg" class="digistormImg"/>
+         <p style="font-size:16px !important">Welcome to<br>
+         Digistorm<br>
+         Enrolment Form<br>
+        Fees and some other text</p>
+        </div>
+<v-spacer></v-spacer>
+        <div :style="{color: colorItems[9].hex.hex8, background:colorItems[8].hex.hex8, }" style="background:blue; padding:10px; width:168px;margin-left:auto;margin-right:0px; margin-bottom:auto;top:-7px; margin-top:-12px">
+          <p>introduction text<br>
+          <ul>
+            <li>List item</li>
+            <li>List item</li>  
+          </ul><br>Sample text</p>
+        <v-btn :color="btnColor" @mouseleave="btnHoverStateFn(false)" @mouseover="btnHoverStateFn(true)" small><span :style="{color: colorItems[4].hex.hex8}">Start</span></v-btn>
+        </div>  
 
-                          <v-btn class="mx-0" color="primary" large>See more</v-btn>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
-                  </v-jumbotron>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
-        </material-card>
+        <div style="width: 50%; height:33%" :style="{'background-color':colorItems[0].hex.hex8}">Overlay Color</div>
+
+
+        </v-flex>     
+      
+      <v-flex sm4>
+        <v-card-text  :style="{color:colorItems[13].hex.hex8, borderColor:colorItems[11].hex.hex8,background:colorItems[10].hex.hex8}" style="border:5px solid;height:288px;">
+         <img src="/../../img/digistorm.svg" class="digistormImg"/>
+
+          <p>If you have any questions please contact us on<br>
+          <a :style="{color:colorItems[13].hex.hex8}" href="tel:0411 111 111">0411 111 111</a> or email us at<br>
+          <a :style="{color:colorItems[13].hex.hex8}" href="mailto:patrick.labes@digistorm.com.au">test@digistorm.com.au</a>.</p>
+
+         <hr :style="{background:colorItems[12].hex.hex8, borderColor:colorItems[12].hex.hex8}">
+         <p>Stu Dent</p>
+         <p>Mr P Labes</p>
+       </v-card-text>
       </v-flex>
-      <v-flex xs4>
-        <material-card color="warning" title="SideBar" text>
-          <v-card-text>
-            <v-container class="pa-0" grid-list-xl fluid></v-container>
-          </v-card-text>
-        </material-card>
-      </v-flex>-->
-      <!-- Setting CSS Values -->
+      
       <v-flex sm12 md6>
         <material-card color="warning" title="Set CSS Values" text>
           <v-card-text >
@@ -84,15 +79,13 @@
                     :label="colorItems[2].name"
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs6>
+                <!-- <v-flex xs6>
                   <v-text-field
                     :label="colorItems[3].name"
                     :value="colorItems[3].hex.hex8"
                     @click="colorPickerDialogFn(3)"
                   ></v-text-field>
-                </v-flex>
-              </v-layout>
-              <v-layout row>
+                </v-flex> -->
                 <v-flex xs6>
                   <v-text-field
                     :label="colorItems[4].name"
@@ -100,6 +93,11 @@
                     @click="colorPickerDialogFn(4)"
                   ></v-text-field>
                 </v-flex>
+              </v-layout>
+            
+                
+                
+              <v-layout row>
                 <v-flex xs6>
                   <v-text-field
                     :label="colorItems[5].name"
@@ -107,15 +105,14 @@
                     @click="colorPickerDialogFn(5)"
                   ></v-text-field>
                 </v-flex>
-              </v-layout>
-              <v-layout row>
-                <v-flex xs6>
+              
+                <!-- <v-flex xs6>
                   <v-text-field
                     :label="colorItems[6].name"
                     :value="colorItems[6].hex.hex8"
                     @click="colorPickerDialogFn(6)"
                   ></v-text-field>
-                </v-flex>
+                </v-flex> -->
                 <v-flex xs6>
                   <v-text-field
                     :label="colorItems[7].name"
@@ -227,10 +224,16 @@ import * as cssTemplate from "../templates/cssTemplate.js";
 import { Chrome } from "vue-color";
 import Colorpicker from "../components/material/ColorPicker.vue";
 
+//bootstrap
+// import 'bootstrap'; 
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
 export default {
   data() {
     return {
       cssOutPut: "",
+      btnHoverState:false,
+      imageUrl:'/../../img/bgtemp.jpg',
       currentComponent:'',
       backgroundImageUrl: "",
       colors: "#194d33",
@@ -258,6 +261,9 @@ export default {
     };
   },
   methods: {
+    btnHoverStateFn(val){
+      this.btnHoverState = val
+    },
     outPutData() {
       let styleProfile = new cssTemplate.CSSstyling(
         this.colorItems,
@@ -269,7 +275,8 @@ export default {
     colorPickerDialogFn(colID) {
       this.idColorSelector = colID;
       this.colorPickerDialog = true;
-    }
+    },
+    
   },
   watch: {
     colorPickerDialog: function(newValue) {
@@ -277,18 +284,50 @@ export default {
     }
   },
   computed: {
+    btnColor() {
+      if(this.btnHoverState){
+        return this.colorItems[5].hex.hex8
+      }else{
+        return this.colorItems[2].hex.hex8
+      }
+    },
     someValue() {
       return "hello";
+    },
+    imgUrlAdded(){
+      if(this.backgroundImageUrl != ''){
+        return this.backgroundImageUrl
+      } else {
+        return '/../../img/bgtemp.jpg'
+      }
     }
   },
   components: {
     "chrome-picker": Chrome,
     appColorPicker: Colorpicker
+  },
+  mounted(){
+    
   }
 };
 </script>
 
 <style scoped>
+.imageBackground:after{
+ background-color: #563d7c;
+content: "";
+display: block;
+position: absolute;
+top: 0px;
+left: 0px;
+width: 100%;
+height: 100%;
+z-index: -1;
+opacity: 0.4;
+}
+.digistormImg {
+  width: 45%;
+}
 textarea {
   width: 100%;
 }

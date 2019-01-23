@@ -48,14 +48,14 @@ class CSSstyling {
   .btn.btn-primary, .btn.btn-primary:focus, .btn.btn-primary:active {
   /* set schools primary colour for buttons here. Background color + border colour will need to be overridden */
       background: ${this.styleArray[2].hex.hex};
-      border-color: ${this.styleArray[3].hex.hex};
+      border-color: ${this.styleArray[2].hex.hex};
       color: ${this.styleArray[4].hex.hex};
   }
   #add_guardian:hover,
   .btn.btn-primary:hover {
   /* set hover colour for all primary buttons */
       background: ${this.styleArray[5].hex.hex};
-      border-color: ${this.styleArray[6].hex.hex};
+      border-color: ${this.styleArray[5].hex.hex};
       color: ${this.styleArray[7].hex.hex};
   }
   
