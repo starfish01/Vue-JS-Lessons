@@ -7,7 +7,6 @@
         </v-flex>
 
         <!-- Start JSON EXPORT -->
-
         <v-flex xs3>
           <v-dialog persistent v-model="dialog" width="600px">
             <v-btn slot="activator" @click="exportJSON()" dark>Export JSON</v-btn>
@@ -32,14 +31,9 @@
         </v-flex>
 
         <!-- End JSON EXPORT -->
-
-        <v-flex xs3 >
-          <v-switch teal darken-3
-           label="Schoolbox"
-            v-model="schoolboxPermissionsAllowed"
-          ></v-switch>
+        <v-flex xs3>
+          <v-switch teal darken-3 label="Schoolbox" v-model="schoolboxPermissionsAllowed"></v-switch>
         </v-flex>
-
       </v-layout>
     </v-card>
     <v-card dark color="primary">
@@ -59,9 +53,6 @@
         <v-flex xs3>
           <app-dash-board-Background @backgroundImageColor="backgroundImageColor = $event"></app-dash-board-Background>
         </v-flex>
-
-
-
       </v-layout>
     </v-card>
     <div v-for="i in sections" :key="i">
@@ -83,7 +74,7 @@ import * as CSSTemplate from "../../template/cssTemplate.js";
 
 //dashboard
 
-import DashBoardBackground from "././Dashboard/DashBoardBackground.vue"
+import DashBoardBackground from "././Dashboard/DashBoardBackground.vue";
 
 export default {
   data() {
@@ -103,13 +94,13 @@ export default {
       dashboardLogoImage: [],
       schoolboxPermissionsAllowed: false,
       deviceSelected: "Mobile",
-      backgroundImageColor:null
+      backgroundImageColor: null
     };
   },
   computed: {},
 
   components: {
-    appDashBoardBackground:DashBoardBackground,
+    appDashBoardBackground: DashBoardBackground,
     appDashboardLogo: DashboardLogo,
     appButtonSection: ButtonSection,
     appDashBoardImages: DashBoardImages
@@ -159,7 +150,21 @@ export default {
 
       let sectionsJSON = {
         sections: [
-          this.backgroundImageColor,
+          {
+            name: "background",
+            css:
+              this.backgroundImageColor == null
+                ? null
+                : this.backgroundImageColor.css,
+            image:
+              this.backgroundImageColor != null &&
+              this.backgroundImageColor.image != null
+                ? this.backgroundImageColor.image
+                : null,
+            settings: null,
+            collection: null
+          },
+
           {
             name: "container",
             css: null,
@@ -184,7 +189,7 @@ export default {
             settings: {
               fade: true
             },
-          collection: amountOfDashboardImages
+            collection: amountOfDashboardImages
           },
           {
             name: "buttons",
@@ -208,11 +213,14 @@ export default {
 
       // All for CSS
 
-      let dashboardImagesCSS = '';
+      let dashboardImagesCSS = "";
 
       this.dashboardImages.forEach((element, i) => {
-        dashboardImagesCSS += `${this.deviceSelected == 'Mobile' ? '' : '.tablet'} .dashboard-slider-image:nth-child(${i+1}) { background-image: url("${element}"); }`;
-        dashboardImagesCSS +=`
+        dashboardImagesCSS += `${
+          this.deviceSelected == "Mobile" ? "" : ".tablet"
+        } .dashboard-slider-image:nth-child(${i +
+          1}) { background-image: url("${element}"); }`;
+        dashboardImagesCSS += `
         `;
       });
 
@@ -228,8 +236,7 @@ export default {
 
       this.exportvalues[1].data = CSSTemplate.newObject();
       if (this.schoolboxPermissionsAllowed) {
-        this.exportvalues[1].data +=
-          `.for-student, .for-staff, .for-parent, .for-none 
+        this.exportvalues[1].data += `.for-student, .for-staff, .for-parent, .for-none 
           {display: none;} 
           html.role-type-student .for-student, html.role-type-staff .for-staff, html.role-type-admin .for-staff, html.role-type-parent .for-parent 
           {display: block;}
@@ -237,13 +244,13 @@ export default {
       }
 
       let collectivelayout = "/* Button layouts and general */";
-      collectivelayout +=`
+      collectivelayout += `
       `;
       collectivelayout += sectionLayoutCSS;
-      collectivelayout +=`
+      collectivelayout += `
       `;
       collectivelayout += "/* Dashboard Images */";
-      collectivelayout +=`
+      collectivelayout += `
       `;
       collectivelayout += dashboardImagesCSS;
       collectivelayout += this.exportvalues[1].data;

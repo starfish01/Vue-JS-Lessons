@@ -20,7 +20,7 @@
               <v-flex xs-8>Check List</v-flex>
             </div>
             <v-expansion-panel expand>
-              <v-expansion-panel-content v-for="(item, i) in checkList" :key="i">
+              <v-expansion-panel-content v-for="(item, i) in userCheckList" :key="i">
                 <div slot="header">{{item.sectionTitle}}</div>
 
                 <v-card class="checkboxStyling" v-for="(subItem,index) in item" :key="index">
@@ -33,6 +33,7 @@
                 </v-card>
               </v-expansion-panel-content>
             </v-expansion-panel>
+            <v-btn color="danger" @click="deleteLocalStorage()" small>Clear All</v-btn>
 
             <v-divider class="mt-3"/>
           </v-flex>
@@ -48,6 +49,7 @@ import { mapMutations, mapState } from "vuex";
 
 export default {
   data: () => ({
+    userCheckList: null,
     checkList: {
       start: {
         sectionTitle: "Start",
@@ -125,12 +127,32 @@ export default {
 
   methods: {
     checkingStatus(subItem) {
-      console.log(subItem.value);
+      this.saveToLocalStorage();
+    },
+    saveToLocalStorage() {
+      const parsed = JSON.stringify(this.userCheckList);
+      localStorage.setItem("checkListItems", parsed);
+    },
+    deleteLocalStorage() {
+      //need to delete from local
+      localStorage.removeItem("checkListItems");
+      this.userCheckList = Object.assign({}, this.checkList);
+
     },
 
     ...mapMutations("app", ["setImage"]),
     setColor(color) {
       this.$store.state.app.color = color;
+    }
+  },
+  mounted() {
+    this.userCheckList = Object.assign({}, this.checkList);
+    if (localStorage.getItem("checkListItems")) {
+      try {
+        this.userCheckList = JSON.parse(localStorage.getItem("checkListItems"));
+      } catch {
+        localStorage.removeItem("checkListItems");
+      }
     }
   }
 };

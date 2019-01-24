@@ -260,7 +260,6 @@ export default {
       this.jsOutPut =''
       this.userAddedFileds = [];
     },
-    reteriveLocalStorage() {},
     singleConditionalRequired() {
       let template = Object.assign({}, this.layoutTemplate);
       template.regFieldType = false;

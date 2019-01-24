@@ -7,7 +7,7 @@
         
         <div style="width:50%; float:left;">
           <img src="/../../img/digistorm.svg" class="digistormImg"/>
-         <p style="font-size:16px !important">Welcome to<br>
+         <p :style="{color:colorItems[1].hex.hex8}" style="font-size:16px !important">Welcome to<br>
          Digistorm<br>
          Enrolment Form<br>
         Fees and some other text</p>
@@ -19,7 +19,7 @@
             <li>List item</li>
             <li>List item</li>  
           </ul><br>Sample text</p>
-        <v-btn :color="btnColor" @mouseleave="btnHoverStateFn(false)" @mouseover="btnHoverStateFn(true)" small><span :style="{color: colorItems[4].hex.hex8}">Start</span></v-btn>
+        <v-btn :color="btnColor" @mouseleave="btnHoverStateFn(false)" @mouseover="btnHoverStateFn(true)" small><span :style="{color:hoverButtonColor}">Start</span></v-btn>
         </div>  
 
         <div style="width: 50%; height:33%" :style="{'background-color':colorItems[0].hex.hex8}">Overlay Color</div>
@@ -289,6 +289,13 @@ export default {
         return this.colorItems[5].hex.hex8
       }else{
         return this.colorItems[2].hex.hex8
+      }
+    },
+    hoverButtonColor(){
+      if(this.btnHoverState){
+        return this.colorItems[7].hex.hex8
+      }else{
+        return this.colorItems[4].hex.hex8
       }
     },
     someValue() {

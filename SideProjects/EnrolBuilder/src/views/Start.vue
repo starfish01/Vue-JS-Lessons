@@ -105,7 +105,11 @@ export default {
           id:"5",
           status:"Information required",
           colour:"Info"
-        },
+        },{
+          id:"6",
+          status:"Imported into TASS",
+          colour:"Success"
+        }
       ]
       
     }
