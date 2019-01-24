@@ -9,52 +9,32 @@
     offset-x
     transition="slide-y-transition"
   >
-    <v-btn
-      slot="activator"
-      class="elevation-0"
-      color="grey"
-      dark
-      fab
-      fixed
-      style="top: 96px;"
-      top
-    >
+    <v-btn slot="activator" class="elevation-0" color="grey" dark fab fixed style="top: 96px;" top>
       <v-icon>mdi-check-all</v-icon>
     </v-btn>
     <v-card>
       <v-container grid-list-xl>
         <v-layout wrap>
           <v-flex xs12>
-             <v-checkbox label="Clone Status"/>
-             <v-checkbox label="Clone default form"/>
-             <v-checkbox label="Rename Form"/>
-             <v-checkbox label="Upload Logo"/>
-             <v-checkbox label="Edit Welcome message"/>
-             <v-checkbox label="Edit Jumbotron"/>
-             <v-checkbox label="Set Form Style Defaults"/>
-             <v-checkbox label="Import TASS Data"/>
-             <v-checkbox label="Build Form"/>
-             <v-checkbox label="Style Email"/>
-             <v-checkbox label="Configure Export"/>   
-            <v-divider class="mt-3"/>
             <div>
-      <div class="text-xs-center mb-3">{{ panel }}</div>
-      <v-expansion-panel
-        v-model="panel"
-        expand
-      >
-        <v-expansion-panel-content
-          v-for="(item, i) in 5"
-          :key="i"
-        >
-          <div slot="header">Item</div>
-          <v-card>
-            <v-card-text class="grey lighten-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-card-text>
-          </v-card>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </div>
-          
+              <v-flex xs-8>Check List</v-flex>
+            </div>
+            <v-expansion-panel expand>
+              <v-expansion-panel-content v-for="(item, i) in checkList" :key="i">
+                <div slot="header">{{item.sectionTitle}}</div>
+
+                <v-card class="checkboxStyling" v-for="(subItem,index) in item" :key="index">
+                  <v-checkbox
+                    v-if="subItem.label != null"
+                    @change="checkingStatus(subItem)"
+                    :label="subItem.label"
+                    v-model="subItem.value"
+                  />
+                </v-card>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+
+            <v-divider class="mt-3"/>
           </v-flex>
         </v-layout>
       </v-container>
@@ -64,47 +44,106 @@
 
 <script>
 // Utilities
-import {
-  mapMutations,
-  mapState
-} from 'vuex'
+import { mapMutations, mapState } from "vuex";
 
 export default {
   data: () => ({
-    colors: [
-      'primary',
-      'info',
-      'success',
-      'warning',
-      'danger'
-    ],
+    checkList: {
+      start: {
+        sectionTitle: "Start",
+        cloneStatus: {
+          label: "Clone Status",
+          value: false
+        },
+        cloneDefaultForm: {
+          label: "Clone Default Form",
+          value: false
+        },
+        renameForm: {
+          label: "Rename Form",
+          value: false
+        },
+        uploadLogo: {
+          label: "Upload Logo",
+          value: false
+        },
+        uploadBackgroundImage: {
+          label: "Upload Background Image",
+          value: false
+        }
+      },
+      cosmetics: {
+        sectionTitle: "Cosmetics",
+        editWelcomeMessage: {
+          label: "Edit Welcome Message",
+          value: false
+        },
+        editJumbotron: {
+          label: "Edit Jumbotron",
+          value: false
+        },
+        setFormStyleDefaults: {
+          label: "Set Form Style Defaults",
+          value: true
+        },
+        styleEmail: {
+          label: "Style Email",
+          value: false
+        }
+      },
+      buildForm: {
+        sectionTitle: "Build Form",
+        importTassData: {
+          label: "Import Tass Data",
+          value: false
+        },
+        buildForm: {
+          label: "Build Form",
+          value: false
+        },
+        configureExport: {
+          label: "Configure Email",
+          value: false
+        }
+      }
+    },
+    colors: ["primary", "info", "success", "warning", "danger"],
     images: [
-      'https://demos.creative-tim.com/vue-material-dashboard/img/sidebar-1.23832d31.jpg',
-      'https://demos.creative-tim.com/vue-material-dashboard/img/sidebar-2.32103624.jpg',
-      'https://demos.creative-tim.com/vue-material-dashboard/img/sidebar-3.3a54f533.jpg',
-      'https://demos.creative-tim.com/vue-material-dashboard/img/sidebar-4.3b7e38ed.jpg'
+      "https://demos.creative-tim.com/vue-material-dashboard/img/sidebar-1.23832d31.jpg",
+      "https://demos.creative-tim.com/vue-material-dashboard/img/sidebar-2.32103624.jpg",
+      "https://demos.creative-tim.com/vue-material-dashboard/img/sidebar-3.3a54f533.jpg",
+      "https://demos.creative-tim.com/vue-material-dashboard/img/sidebar-4.3b7e38ed.jpg"
     ]
   }),
 
   computed: {
-    ...mapState('app', ['image', 'color']),
-    color () {
-      return this.$store.state.app.color
+    ...mapState("app", ["image", "color"]),
+    color() {
+      return this.$store.state.app.color;
     }
   },
 
   methods: {
-    ...mapMutations('app', ['setImage']),
-    setColor (color) {
-      this.$store.state.app.color = color
+    checkingStatus(subItem) {
+      console.log(subItem.value);
+    },
+
+    ...mapMutations("app", ["setImage"]),
+    setColor(color) {
+      this.$store.state.app.color = color;
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-  .v-avatar,
-  .v-responsive {
-    cursor: pointer;
-  }
+.v-avatar,
+.v-responsive {
+  cursor: pointer;
+}
+
+.checkboxStyling {
+  background: gainsboro;
+  border-bottom: 2px gray solid;
+}
 </style>
