@@ -5,7 +5,7 @@
     grid-list-xl
   >
     <v-layout row>
-                <v-flex xs6>
+      <v-flex xs6>
         <material-card
           color="warning"
           title="Set Statuses"
@@ -31,25 +31,36 @@
                   <td class="text-left">{{ item.colour }}</td>
                 </template>
               </v-data-table>
-              <v-snackbar
-                v-model="snackbar"
-                :bottom="'bottom'"
-                :right="'right'"
-                :timeout="2000"
-              >
-                Copied!
-              <v-btn
-                color="pink"
-                flat
-                @click="snackbar = false"
-              >
-                Close
-              </v-btn>
-            </v-snackbar>
           </v-container>
         </v-card-text>
       </material-card>
     </v-flex>
+    <v-flex xs6>
+      <material-card
+        color="warning"
+        title="Quick Copy"
+        text="">
+        <v-card-text>
+          <p><v-btn color="primary" @click="snackbar=true" v-clipboard="addressObject" small>Address</v-btn></p>
+        </v-card-text>
+      </material-card>
+    </v-flex>
+
+    <v-snackbar
+      v-model="snackbar"
+      :bottom="'bottom'"
+      :right="'right'"
+      :timeout="2000"
+    >
+      Copied!
+      <v-btn
+        color="pink"
+        flat
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+  </v-snackbar>
   </v-layout>
 </v-container>
 </template>
@@ -62,6 +73,12 @@ export default {
   data () {
     return {
       snackbar: false,
+      addressObject: `{'country_restriction': 'AU',
+'street_address': 26321,
+'state': 26323,
+'suburb': 26322,
+'postcode': 26326,
+'country': 26325}`,
        headers: [
          {
         sortable: false,
