@@ -20,8 +20,13 @@ export default [
     view: 'JSSetUp'
   },
   {
-    path: '/typography',
-    view: 'Typography'
+    path: '/FunnelIntegration',
+    name: 'Funnel Integration',
+    view: 'FunnelIntegration'
+  },
+  {
+    path: '/Tools',
+    view: 'Tools'
   },
   {
     path: '/icons',

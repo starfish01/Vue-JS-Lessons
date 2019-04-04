@@ -59,7 +59,7 @@
             <v-icon>mdi-package-up</v-icon>
           </v-list-tile-action>
           <v-list-tile-title class="font-weight-light">
-            Version 0.1.2
+            Version 0.2.0
           </v-list-tile-title>
         </v-list-tile>
       </v-layout>
@@ -94,10 +94,16 @@ export default {
         text: 'JS - Set up'
       },
       {
-        to: '/typography',
+        to: '/Tools',
         icon: 'mdi-format-font',
         text: 'Tools'
       },
+      {
+        to:'/FunnelIntegration',
+        icon:'mdi-chart-bubble',
+        text:'Funnel Integration'
+      }
+
       // {
       //   to: '/icons',
       //   icon: 'mdi-chart-bubble',

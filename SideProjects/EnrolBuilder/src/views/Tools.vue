@@ -1,26 +1,123 @@
 <template>
   <v-container fill-height fluid grid-list-xl>
     <v-layout wrap>
-      
       <v-flex xs6>
-        <material-card color="warning" title="Set Statuses" text>
+        <material-card color="warning" title="Address Quick Copy" text>
           <v-card-text>
-            <v-container class="pa-0" grid-list-xl fluid>
-              <v-data-table :headers="headers" :items="statusesArray" hide-actions>
-                <template slot="items" slot-scope="{ item }">
-                  <td class="text-left">{{ item.id }}</td>
-                  <td>
-                    <v-btn
-                      @click="eventClick(item.id)"
-                      :color="item.clicked ? 'info' : 'primary'"
-                      v-clipboard="item.status"
-                      small
-                    >{{ item.status }}</v-btn>
-                  </td>
-                  <td class="text-left">{{ item.colour }}</td>
-                </template>
-              </v-data-table>
-            </v-container>
+            <v-layout row>
+              <v-flex xs4>
+                <v-text-field
+                  v-model.number="copyAddress.street_address"
+                  value="0"
+                  type="number"
+                  label="Address ID"
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs4>
+                <v-text-field type="number" v-model.number="copyAddress.suburb" label="Suburb ID"></v-text-field>
+              </v-flex>
+              <v-flex xs4>
+                <v-text-field type="number" v-model.number="copyAddress.state" label="State ID"></v-text-field>
+              </v-flex>
+            </v-layout>
+            <v-layout row>
+              <v-flex xs4>
+                <v-text-field
+                  type="number"
+                  v-model.number="copyAddress.postcode"
+                  label="Postcode ID"
+                ></v-text-field>
+              </v-flex>
+
+              <v-flex xs4>
+                <v-text-field type="number" v-model.number="copyAddress.country" label="Country ID"></v-text-field>
+              </v-flex>
+
+              <v-flex xs4>
+                <v-btn
+                  color="primary"
+                  @click="snackbar = true"
+                  v-clipboard="JSON.stringify(copyAddress)"
+                  small
+                >Address JSON</v-btn>
+              </v-flex>
+            </v-layout>
+
+            <p></p>
+          </v-card-text>
+        </material-card>
+      </v-flex>
+
+      <v-flex xs6>
+        <material-card color="warning" title="Terms And Conditions" text>
+          <v-card-text>
+            <p>Add signature to the Terms and condition print out</p>
+            <v-btn
+              color="primary"
+              @click="snackbar = true"
+              v-clipboard="termsHTML"
+              small
+            >Add this to the bottom of the terms page</v-btn>
+            <v-btn color="primary" @click="snackbar = true" v-clipboard="termsCSS" small>Add CSS</v-btn>
+            <p>Turn terms on by going to the form -> Settings Print Terms and conditions on form</p>
+          </v-card-text>
+        </material-card>
+      </v-flex>
+
+      <v-flex xs6>
+        <material-card color="warning" title="Occupation Model" text>
+          <v-btn color="primary" @click="snackbar = true" v-clipboard="helpText" small>Help Text</v-btn>
+          <v-btn color="primary" @click="snackbar = true" v-clipboard="modelText" small>Model Text</v-btn>
+        </material-card>
+      </v-flex>
+
+      <v-flex xs6>
+        <material-card color="warning" title="Dashboard side panel" text>
+          <v-card-text>
+            <v-layout wrap>
+              <v-flex xs4>
+                <v-text-field
+                  v-model.number="sidePanelDashboard.proposedYearEntry"
+                  value="0"
+                  type="number"
+                  label="Year Of Entry ID"
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs4>
+                <v-text-field
+                  v-model.number="sidePanelDashboard.propsedYearGroup"
+                  value="0"
+                  type="number"
+                  label="Year Group ID"
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs4>
+                <v-btn color="primary" @click="dashboardFn()" v-clipboard small>Dashboard HTML</v-btn>
+              </v-flex>
+            </v-layout>
+          </v-card-text>
+        </material-card>
+      </v-flex>
+
+      <v-flex xs6>
+        <material-card color="warning" title="Sidepanel Contact Info" text>
+          <v-card-text>
+            <v-layout wrap>
+              <v-flex xs4>
+                <v-text-field v-model.number="sidepanelContactInfo.email" label="Email Address"></v-text-field>
+              </v-flex>
+              <v-flex xs4>
+                <v-text-field v-model.number="sidepanelContactInfo.phoneNumber" label="Phone"></v-text-field>
+              </v-flex>
+              <v-flex xs4>
+                <v-btn
+                  color="primary"
+                  @click="sidepanelContactFn()"
+                  v-clipboard
+                  small
+                >Sidepanel HTML</v-btn>
+              </v-flex>
+            </v-layout>
           </v-card-text>
         </material-card>
       </v-flex>
@@ -34,7 +131,7 @@
 </template>
 
 <script>
-import VueClipboard from "vue-clipboard2";
+
 
 export default {
   data() {
@@ -57,57 +154,7 @@ export default {
       termsHTML:
         '<span class="parent-signature"> <hr> <h3 style="font-size: 14px !important;">Signature Parent/Guardian 1</h3> <div style="height: 50px; width: 100%; border: 2px solid black"></div> <h3 style="font-size: 14px !important;">Signature Parent/Guardian 2</h3> <div style="height: 50px; width: 100%; border: 2px solid black"></div> </span> <br>',
       termsCSS: ".parent-signature{ display: none; }",
-      headers: [
-        {
-          sortable: false,
-          text: "Order",
-          value: "order"
-        },
-        {
-          sortable: false,
-          text: "Status",
-          value: "status",
-          clicked: false
-        },
-        {
-          sortable: false,
-          text: "Colour",
-          value: "colour"
-        }
-      ],
-      statusesArray: [
-        {
-          id: "1",
-          status: "New",
-          colour: "Primary"
-        },
-        {
-          id: "2",
-          status: "Approved",
-          colour: "Success"
-        },
-        {
-          id: "3",
-          status: "Rejected",
-          colour: "Danger"
-        },
-        {
-          id: "4",
-          status: "Waiting list",
-          colour: "Warning"
-        },
-        {
-          id: "5",
-          status: "Information required",
-          colour: "Info"
-        },
-        {
-          id: "6",
-          status: "Imported into TASS",
-          colour: "Success"
-        }
-      ]
-    };
+    }
   },
   methods: {
     eventClick(id) {
@@ -132,12 +179,9 @@ export default {
 
     }
   }
-};
+}
 </script>
 
-<style scoped>
-td {
-  width: 33;
-}
+<style lang="scss">
+  
 </style>
-

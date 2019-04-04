@@ -168,7 +168,8 @@ vuetify-material-dashboard
 │       ├── Maps.vue
 │       ├── Notifications.vue
 │       ├── TableList.vue
-│       ├── Typography.vue
+│       ├── Tools.vue
+|       ├── FunnelIntegration.vue
 │       ├── Upgrade.vue
 │       └── UserProfile.vue
 ├── vue.config.js
