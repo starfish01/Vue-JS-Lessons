@@ -98,11 +98,11 @@ export default {
         icon: 'mdi-format-font',
         text: 'Tools'
       },
-      {
-        to:'/FunnelIntegration',
-        icon:'mdi-chart-bubble',
-        text:'Funnel Integration'
-      }
+      // {
+      //   to:'/FunnelIntegration',
+      //   icon:'mdi-chart-bubble',
+      //   text:'Funnel Integration'
+      // }
 
       // {
       //   to: '/icons',
