@@ -33,8 +33,7 @@
         <material-card color="warning" title="JS Show Hide">
           <b>G</b> - Guardian field /
           <b>R</b>
-
-           - Required Field
+          - Required Field
           <table>
             <div v-for="(item, index) in userAddedFileds" :key="index">
               <v-flex sm12 v-if="item.regFieldType">
@@ -214,7 +213,8 @@
       </v-card>
     </v-dialog>
 
-    <v-snackbar v-model="snackbar" :bottom="'bottom'" :right="'right'" :timeout="2000">Copied!
+    <v-snackbar v-model="snackbar" :bottom="'bottom'" :right="'right'" :timeout="2000">
+      Copied!
       <v-btn color="pink" flat @click="snackbar = false">Close</v-btn>
     </v-snackbar>
   </v-container>
@@ -257,7 +257,7 @@ export default {
     },
     deleteLocalStorage() {
       //need to delete from local
-      this.jsOutPut =''
+      this.jsOutPut = "";
       this.userAddedFileds = [];
     },
     singleConditionalRequired() {
