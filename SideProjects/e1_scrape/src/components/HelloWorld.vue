@@ -2,10 +2,9 @@
   <v-container>
     <v-layout text-xs-center wrap>
       <v-flex xs12>
-        <v-text-field label="URL"/>
-        <v-btn @click="scrapeBtn()">Scrape</v-btn>
-
-        <p>{{data}}</p>
+        <v-text-field v-model="website" label="URL"/>
+        <v-btn :disabled="website === ''" @click="scrapeBtn()">Scrape</v-btn>
+        <p>{{data}}</p>        
 
       </v-flex>
     </v-layout>
@@ -13,18 +12,34 @@
 </template>
 
 <script>
-import * as metadata from '../scrape'
+import * as metadata from "../scrape";
 
 export default {
   data: () => ({
-    data:0
+    data: 0,
+    website: ""
   }),
-  methods:{
-    scrapeBtn(){
-      // this.data = metadata.data('hj')
-      this.data = metadata.scrapFn()
+  computed: {
+    isURL() {
+      var pattern = new RegExp(
+        "^(https?:\\/\\/)?" + // protocol
+        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|" + // domain name
+        "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+        "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+          "(\\#[-a-z\\d_]*)?$",
+        "i"
+      ); // fragment locator
+      return pattern.test(this.website);
     }
-
+  },
+  methods: {
+    scrapeBtn() {
+      // this.data = metadata.data('hj')
+      // console.log(this.website);
+      metadata.scrapFn(this.website)
+      this.data = metadata.metadata;
+    }
   }
 };
 </script>
