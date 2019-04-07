@@ -17,7 +17,7 @@ import * as metadata from "../scrape";
 export default {
   data: () => ({
     data: 0,
-    website: ""
+    website: "https://digistorm-college.digistormenrol.com.au/applications/general/vnZoQC12xDbXqSpFEaXjTndqlCfFzY0bguiBEr5P18CyOTy3Bw/family"
   }),
   computed: {
     isURL() {

@@ -20,10 +20,20 @@ function scrapFn(website) {
 
             // metadata.push(html)
 
-            $('label').each((i,el)=>{
-                console.log(i)
-                console.log($(el).text())
-                metadata.push($(el).text())
+            $('[data-formgroup-id]').each((i,el)=>{
+                
+
+
+                // console.log(i)
+                // This finds the title of the label
+                console.log($(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm,"").trim())
+
+
+
+
+
+
+                metadata.push($(el).text().replace(/(\r\n|\n|\r)/gm, ""))
             })
 
             // $('h2.title').each(function (i, element) {
