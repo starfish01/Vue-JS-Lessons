@@ -4,7 +4,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 
 var metadata = []
-var buttonData = [{}]
+var buttonData = []
 
 
 function scrapFn(website) {
@@ -13,7 +13,7 @@ function scrapFn(website) {
     //https://cors-anywhere.herokuapp.com/
     console.log(website)
     // return new Promise(function(res, rej){
-    return request('https://cors-anywhere.herokuapp.com/'+website, function (error, response, html) {
+    return request('https://cors-anywhere.herokuapp.com/' + website, function (error, response, html) {
         console.log('1')
         if (!error && response.statusCode == 200) {
             console.log('2')
@@ -21,47 +21,53 @@ function scrapFn(website) {
 
             // metadata.push(html)
 
-            $('[data-formgroup-id]').each((i,el)=>{
-                
+            $('[data-formgroup-id]').each((i, el) => {
 
-                let title = $(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm,"").trim()
+                let title;
+                let type;
+                let width;
+                let elementID;
 
-                console.log($(el).children().html().trim())
-                if($(el).children().html() !== ''){
-                    if($(el).children().next()[0].name !== undefined){
-                        console.log($(el).children().next()[0].name)
+                // console.log($(el).first().attr('name'))
+
+                if ($(el).first().attr('name') !== undefined && $(el).first().attr('name').includes("wysiwyg")) {
+
+                    title = "wysiwyg"
+                    type = "wysiwyg"
+                    width = $(el).first().attr('class').substring(7, $(el).first().attr('class').length)
+                    elementID = $(el).first().attr('data-formgroup-id')
+                   
+                } else {
+
+                    title = $(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm, "").trim()
+
+                    if ($(el).children().html() !== '') {
+                        if ($(el).children().next()[0].name !== undefined) {
+
+                            if ($(el).children().next()[0].name === 'input') {
+                                type = 'input';
+                            } else if ($(el).children().next()[0].name === 'div') {
+                                type = 'div';
+                            } else if ($(el).children().next()[0].name === 'select') {
+                                type = 'select';
+                            } else if ($(el).children().next()[0].name === 'br') {
+                                type = 'file';
+                            }
+                        }
                     }
+
                 }
-                
-                
 
 
-                let type = $(el).find('input').first().attr('type')
-                // if(type === undefined){
-
-                //     if( $(el).find('select').first() !== undefined ){
-                //         console.log('1')
-                //     }
-                //     console.log($(el).find('select').first())
-
-                //     // if($(el).find('select').first())
-                //     type =  'select'
-                // }
-
-                // console.log(type)
-                
                 buttonData.push({
-                    title:title,
-                    type:type
+                    title: title,
+                    type: type,
+                    width: width,
+                    elementID:elementID
                 })
-                
-
-               
 
 
-
-
-                metadata.push($(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm,"").trim())
+                metadata.push($(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm, "").trim())
             })
 
             // $('h2.title').each(function (i, element) {
