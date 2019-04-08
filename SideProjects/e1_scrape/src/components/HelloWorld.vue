@@ -4,9 +4,9 @@
       <v-flex xs12>
         <v-text-field v-model="website" label="URL"/>
         <v-btn :disabled="website === ''" @click="scrapeBtn()">Scrape</v-btn>
-        <p>{{data}}</p>   
+        <!-- <p>{{data}}</p>    -->
         <hr>
-        <v-btn @click="btnDataPrint()">output</v-btn>
+        <!-- <v-btn @click="btnDataPrint()">output</v-btn> -->
         <code>{{ buttonData }}</code>     
 
       </v-flex>
@@ -43,7 +43,8 @@ export default {
       // console.log(this.website);
       metadata.scrapFn(this.website)
       this.data = metadata.metadata;
-      this.buttonData = metadata.buttonData;
+      // this.buttonData = metadata.buttonData;
+      this.buttonData = metadata.fieldGroup
     },
     btnDataPrint(){
       console.log(this.buttonData)

@@ -5,6 +5,8 @@ var cheerio = require('cheerio');
 
 var metadata = []
 var buttonData = []
+var fieldData = []
+var fieldGroup = []
 
 
 function scrapFn(website) {
@@ -19,52 +21,95 @@ function scrapFn(website) {
             console.log('2')
             var $ = cheerio.load(html)
 
-            // metadata.push(html)
+            $('legend').each((i, el) => {
 
-            $('[data-formgroup-id]').each((i, el) => {
+                let id =  $(el).parent().attr('id').substring(9, $(el).parent().attr('id').length)
+                let title = $(el).text().trim().substring(4, $(el).text().trim().length)
 
-                let title;
-                let type;
-                let width;
-                let elementID;
-
-                // console.log($(el).first().attr('name'))
-
-                if ($(el).first().attr('name') !== undefined && $(el).first().attr('name').includes("wysiwyg")) {
-
-                    title = "wysiwyg"
-                    type = "wysiwyg"
-                    width = $(el).first().attr('class').substring(7, $(el).first().attr('class').length)
-                    elementID = $(el).first().attr('data-formgroup-id')
-                   
-                } else {
-
-                    title = $(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm, "").trim()
-
-                    if ($(el).children().html() !== '') {
-                        if ($(el).children().next()[0].name !== undefined) {
-
-                            if ($(el).children().next()[0].name === 'input') {
-                                type = 'input';
-                            } else if ($(el).children().next()[0].name === 'div') {
-                                type = 'div';
-                            } else if ($(el).children().next()[0].name === 'select') {
-                                type = 'select';
-                            } else if ($(el).children().next()[0].name === 'br') {
-                                type = 'file';
-                            }
-                        }
-                    }
-
+                let fieldGroup = {
+                    id,
+                    title,
+                    fieldGroupfields:[]
                 }
 
+                console.log($(el).children())
 
-                buttonData.push({
-                    title: title,
-                    type: type,
-                    width: width,
-                    elementID:elementID
+
+               
+                $('[data-formgroup-id]').each((i, el) => {
+
+                    let title;
+                    let type;
+                    let width;
+                    let elementID;
+
+                    let helpText;
+                    let placeholder;
+
+
+                    let wysiwygContent;
+
+                    if ($(el).first().attr('name') !== undefined && $(el).first().attr('name').includes("wysiwyg")) {
+
+                        title = "wysiwyg"
+                        wysiwygContent = $(el).first().html().trim();
+                        type = "wysiwyg"
+                        width = $(el).first().attr('class').substring(7, $(el).first().attr('class').length)
+                        elementID = $(el).first().attr('data-formgroup-id')
+
+                    } else {
+
+                        title = $(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm, "").trim()
+
+                        if ($(el).children().html() !== '') {
+                            if ($(el).children().next()[0].name !== undefined) {
+                                if ($(el).children().next()[0].name === 'input') {
+
+                                    type = 'singleLine';
+                                    width = $(el).parent().attr('class').substring(7, $(el).parent().attr('class').length)
+                                    elementID = $(el).first().attr('data-formgroup-id')
+
+
+
+
+
+                                } else if ($(el).children().next()[0].name === 'div') {
+                                    type = 'div';
+                                } else if ($(el).children().next()[0].name === 'select') {
+                                    type = 'select';
+                                } else if ($(el).children().next()[0].name === 'br') {
+                                    type = 'file';
+                                }
+                            }
+                        }
+
+                    }
+
+                    fieldGroup.fieldGroupfields.push({
+                        title: title,
+                        type: type,
+                        width: width,
+                        elementID: elementID,
+                        wysiwygContent
+                    })
+
+                    buttonData.push({
+                        title: title,
+                        type: type,
+                        width: width,
+                        elementID: elementID,
+                        wysiwygContent
+                    })
+
+
+
                 })
+
+                console.log(fieldGroup)
+
+                fieldData.push(fieldGroup)
+
+
 
 
                 metadata.push($(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm, "").trim())
@@ -120,5 +165,5 @@ function scrapFn(website) {
 function data(val) { return val }
 
 
-export { data, metadata, buttonData, scrapFn };
+export { data, metadata, buttonData, scrapFn, fieldGroup };
 
