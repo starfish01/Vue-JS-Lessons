@@ -26,17 +26,27 @@ function scrapFn(website) {
 
                 let title = $(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm,"").trim()
 
-                let type = $(el).find('input').first().attr('type')
-                if(type === undefined){
-
-                    if( $(el).find('select').first() !== undefined ){
-                        console.log('1')
+                console.log($(el).children().html().trim())
+                if($(el).children().html() !== ''){
+                    if($(el).children().next()[0].name !== undefined){
+                        console.log($(el).children().next()[0].name)
                     }
-                    console.log($(el).find('select').first())
-
-                    // if($(el).find('select').first())
-                    type =  'select'
                 }
+                
+                
+
+
+                let type = $(el).find('input').first().attr('type')
+                // if(type === undefined){
+
+                //     if( $(el).find('select').first() !== undefined ){
+                //         console.log('1')
+                //     }
+                //     console.log($(el).find('select').first())
+
+                //     // if($(el).find('select').first())
+                //     type =  'select'
+                // }
 
                 // console.log(type)
                 
