@@ -4,7 +4,10 @@
       <v-flex xs12>
         <v-text-field v-model="website" label="URL"/>
         <v-btn :disabled="website === ''" @click="scrapeBtn()">Scrape</v-btn>
-        <p>{{data}}</p>        
+        <p>{{data}}</p>   
+        <hr>
+        <v-btn @click="btnDataPrint()">output</v-btn>
+        <code>{{ buttonData }}</code>     
 
       </v-flex>
     </v-layout>
@@ -17,7 +20,8 @@ import * as metadata from "../scrape";
 export default {
   data: () => ({
     data: 0,
-    website: "https://digistorm-college.digistormenrol.com.au/applications/general/vnZoQC12xDbXqSpFEaXjTndqlCfFzY0bguiBEr5P18CyOTy3Bw/family"
+    buttonData:{},
+    website: "https://digistorm-college.digistormenrol.com.au/applications/general/vnZoQC12xDbXqSpFEaXjTndqlCfFzY0bguiBEr5P18CyOTy3Bw/step/student-details"
   }),
   computed: {
     isURL() {
@@ -39,6 +43,10 @@ export default {
       // console.log(this.website);
       metadata.scrapFn(this.website)
       this.data = metadata.metadata;
+      this.buttonData = metadata.buttonData;
+    },
+    btnDataPrint(){
+      console.log(this.buttonData)
     }
   }
 };

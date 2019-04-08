@@ -4,6 +4,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 
 var metadata = []
+var buttonData = [{}]
 
 
 function scrapFn(website) {
@@ -23,17 +24,34 @@ function scrapFn(website) {
             $('[data-formgroup-id]').each((i,el)=>{
                 
 
+                let title = $(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm,"").trim()
 
-                // console.log(i)
-                // This finds the title of the label
-                console.log($(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm,"").trim())
+                let type = $(el).find('input').first().attr('type')
+                if(type === undefined){
+
+                    if( $(el).find('select').first() !== undefined ){
+                        console.log('1')
+                    }
+                    console.log($(el).find('select').first())
+
+                    // if($(el).find('select').first())
+                    type =  'select'
+                }
+
+                // console.log(type)
+                
+                buttonData.push({
+                    title:title,
+                    type:type
+                })
+                
+
+               
 
 
 
 
-
-
-                metadata.push($(el).text().replace(/(\r\n|\n|\r)/gm, ""))
+                metadata.push($(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm,"").trim())
             })
 
             // $('h2.title').each(function (i, element) {
@@ -86,5 +104,5 @@ function scrapFn(website) {
 function data(val) { return val }
 
 
-export { data, metadata, scrapFn };
+export { data, metadata, buttonData, scrapFn };
 
