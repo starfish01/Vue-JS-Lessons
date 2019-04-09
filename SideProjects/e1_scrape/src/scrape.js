@@ -91,6 +91,9 @@ function scrapFn(website) {
                                     //checkbox
                                     if (classString.includes("checkbox")) {
                                         type = 'checkbox';
+
+                                        //TODO - need to capture id
+
                                         $(el).children().next().children().each((i, el) => {
 
                                             if ($(el).text().trim().length !== 0 && $(el).text().trim() !== 'Other...') {
@@ -109,10 +112,15 @@ function scrapFn(website) {
                                     //datepicker
                                     if (classString.includes("datepicker")) {
                                         type = 'datepicker';
+                                        
+                                        //TODO - need to capture id
+
                                     }
 
                                 } else if ($(el).children().next()[0].name === 'select') {
                                     type = 'select';
+
+                                    elementID = $(el).first().attr('data-formgroup-id')
 
                                     $(el).children().next().children().each((i, el) => {
                                         if ($(el).text().trim().length !== 0 && $(el).text().trim() !== 'Other...' && $(el).text().trim() !== '-- Select --') {
@@ -124,10 +132,34 @@ function scrapFn(website) {
                                             )
                                         }
 
+
                                         if ($(el).text().trim() !== 'Other...') {
                                             allowOther = true;
                                         }
                                     })
+
+                                    //if its an ajax select 
+                                    if(values.length == 0){
+
+                                        let newURL = website.replace(/^https?\:\/\//i, "");
+                                        let fullstopPosition = newURL.indexOf(".");
+                                        let subdomain = newURL.substring(0, fullstopPosition)
+
+                                        let callURL = subdomain + '.digistormenrol.com.au/ajax_app/formgroup_options/' + elementID
+
+
+                                        //TODO - need to do work here to read the data stream
+                                        
+
+                                        // fetch(callURL).then(response => response.body).then((data)=>{
+                                        //     console.log(data.getReader())
+                                        // })
+
+                                        console.log(callURL)
+
+                                        
+                                        
+                                    }
 
                                 } else if ($(el).children().next()[0].name === 'br') {
                                     type = 'file';
