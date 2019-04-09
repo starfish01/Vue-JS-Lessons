@@ -21,7 +21,7 @@ function scrapFn(website) {
             console.log('2')
             var $ = cheerio.load(html)
 
-            $('legend').each((i, el) => {
+            $('legend').each((indexOfGroup, el) => {
 
                 let id =  $(el).parent().attr('id').substring(9, $(el).parent().attr('id').length)
                 let title = $(el).text().trim().substring(4, $(el).text().trim().length)
@@ -32,10 +32,11 @@ function scrapFn(website) {
                     fieldGroupfields:[]
                 }
 
-                console.log($(el).children())
+                $(el).parent().find('[data-formgroup-id]').each((i,el)=>{
+                    // console.log(el.text())
+                })
 
 
-               
                 $('[data-formgroup-id]').each((i, el) => {
 
                     let title;
