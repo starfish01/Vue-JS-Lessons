@@ -44,7 +44,7 @@ export default {
       metadata.scrapFn(this.website)
       this.data = metadata.metadata;
       // this.buttonData = metadata.buttonData;
-      this.buttonData = metadata.fieldGroup
+      this.buttonData = metadata.fieldData
     },
     btnDataPrint(){
       console.log(this.buttonData)
