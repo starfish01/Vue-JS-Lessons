@@ -12,19 +12,45 @@ function scrapFn(website) {
     // console.log(website)
     // return new Promise(function(res, rej){
 
-        
+
 
     return request.post({
         url: 'https://cors-anywhere.herokuapp.com/' + website,
         form: { 'foo': 'bar' },
         headers: {
             'User-Agent': 'Super Cool Browser' // optional headers
-         }
+        }
     }, function (error, response, html) {
         console.log('1')
         if (!error && response.statusCode == 200) {
             console.log('2')
             var $ = cheerio.load(html)
+
+            //items to be made required
+            let requiredItems = [];
+
+            $('script').each((i, el) => {
+
+                if ($(el).html().length !== 0) {
+                    let scripts = $(el).html()
+                    // console.log(scripts)
+
+                    // var position = scripts.search('formgroup_ids')
+                    // // console.log(position)
+
+                    //can confirm this returns for singleline, datapicker, select
+                    let firstSetOfRequired = scripts.match(new RegExp("formgroup_ids\[[0-9]+\]", "g"))
+                    if (firstSetOfRequired !== null) {
+                        firstSetOfRequired.forEach((el) => {
+                            let item = el.match(RegExp("[0-9]+", "g"))
+                            requiredItems.push(item[0])
+                        })
+                    }
+
+                }
+            })
+
+
 
             $('fieldset').each((i, el) => {
 
@@ -207,7 +233,7 @@ function scrapFn(website) {
 
                                     width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
 
-                                } else if($(el).children().next()[0].name === 'textarea') {
+                                } else if ($(el).children().next()[0].name === 'textarea') {
                                     type = 'textarea';
 
                                     helpText = $(el).find('p.help-block').text()
@@ -224,6 +250,11 @@ function scrapFn(website) {
 
                     }
 
+
+                    if (requiredItems.indexOf(elementID) > -1) {
+                        required = true
+                    }
+
                     fieldGroup.fieldGroupfields.push({
                         elementID,
                         positionOfElement,
@@ -231,6 +262,7 @@ function scrapFn(website) {
                         title,
                         type,
                         width,
+                        required,
 
                         values,
                         allowOther,
@@ -244,38 +276,13 @@ function scrapFn(website) {
                 })
 
 
+                console.log(fieldGroup)
 
 
                 fieldData.push(fieldGroup)
 
             })
 
-
-            console.log('fileds collected')
-
-            $('script').each((i,el)=>{
-
-                if($(el).html().length !== 0){
-                    let scripts = $(el).html()
-                    // console.log(scripts)
-
-                    // var position = scripts.search('formgroup_ids')
-                    // // console.log(position)
-
-                    let hits = scripts.match(new RegExp("formgroup_ids\[\d+\]"))
-                    console.log(hits)
-
-
-
-
-
-                    // $('formgroup_ids').each((i,el)=>{
-                    //     console.log('d')
-                    //     console.log(i)
-                    // })
-
-                }
-            })
 
         }
     })
