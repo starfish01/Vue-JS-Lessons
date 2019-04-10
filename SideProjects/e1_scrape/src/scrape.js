@@ -11,7 +11,16 @@ function scrapFn(website) {
     //https://cors-anywhere.herokuapp.com/
     // console.log(website)
     // return new Promise(function(res, rej){
-    return request('https://cors-anywhere.herokuapp.com/' + website, function (error, response, html) {
+
+        
+
+    return request.post({
+        url: 'https://cors-anywhere.herokuapp.com/' + website,
+        form: { 'foo': 'bar' },
+        headers: {
+            'User-Agent': 'Super Cool Browser' // optional headers
+         }
+    }, function (error, response, html) {
         console.log('1')
         if (!error && response.statusCode == 200) {
             console.log('2')
@@ -39,6 +48,7 @@ function scrapFn(website) {
                     let title;
                     let type;
                     let width;
+                    let required;
 
                     let values = [];
                     let allowOther;
@@ -52,8 +62,12 @@ function scrapFn(website) {
                     //placeholder looks to be just an attribute
                     //placeholder="If applicable..."
 
-
                     let wysiwygContent;
+
+                    //check if field is required
+                    // if($(el).find('p').attr('class')){
+                    //     console.log($(el).find('p').attr('class'))
+                    // }
 
                     if ($(el).first().attr('name') !== undefined && $(el).first().attr('name').includes("wysiwyg")) {
 
@@ -72,17 +86,25 @@ function scrapFn(website) {
                                 if ($(el).children().next()[0].name === 'input') {
 
                                     type = 'singleLine';
+
                                     width = $(el).parent().attr('class').substring(7, $(el).parent().attr('class').length)
+
                                     elementID = $(el).first().attr('data-formgroup-id')
+
+                                    helpText = $(el).find('p.help-block').text()
+
+                                    placeholder = $(el).children().next().attr('placeholder')
 
                                 } else if ($(el).children().next()[0].name === 'div') {
 
                                     let classString = $(el).children().next().attr('class')
-                                    //console.log($(el).children().next().attr('class'))
 
                                     //radio
                                     if (classString.includes("radio")) {
                                         type = 'radio';
+
+                                        helpText = $(el).find('p.help-block').text()
+
                                         $(el).children().next().children().each((i, el) => {
                                             values.push(
                                                 {
@@ -96,6 +118,8 @@ function scrapFn(website) {
                                     //checkbox
                                     if (classString.includes("checkbox")) {
                                         type = 'checkbox';
+
+                                        helpText = $(el).find('p.help-block').text()
 
                                         width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
 
@@ -120,25 +144,26 @@ function scrapFn(website) {
                                     if (classString.includes("datepicker")) {
                                         type = 'datepicker';
 
-                                        //need to capture width
-                                        //console.log($(el).parent().first().attr('class'))
+                                        helpText = $(el).find('p.help-block').text()
+
                                         width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
 
-
-
-
                                         elementID = $(el).first().attr('data-formgroup-id')
+
+                                        placeholder = $(el).find('input').attr('placeholder')
 
                                     }
 
                                 } else if ($(el).children().next()[0].name === 'select') {
                                     type = 'select';
 
-                                    width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
+                                    helpText = $(el).find('p.help-block').text()
 
+                                    width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
 
                                     elementID = $(el).first().attr('data-formgroup-id')
 
+                                    //get items
                                     $(el).children().next().children().each((i, el) => {
                                         if ($(el).text().trim().length !== 0 && $(el).text().trim() !== 'Other...' && $(el).text().trim() !== '-- Select --') {
                                             values.push(
@@ -175,9 +200,23 @@ function scrapFn(website) {
 
                                 } else if ($(el).children().next()[0].name === 'br') {
                                     type = 'file';
-                                    //need to capture width
-                                        // console.log($(el).parent().first().attr('class'))
-                                        width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
+
+                                    elementID = $(el).first().attr('data-formgroup-id')
+
+                                    helpText = $(el).find('p.help-block').text()
+
+                                    width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
+
+                                } else if($(el).children().next()[0].name === 'textarea') {
+                                    type = 'textarea';
+
+                                    helpText = $(el).find('p.help-block').text()
+
+                                    width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
+
+                                    elementID = $(el).first().attr('data-formgroup-id')
+
+                                    placeholder = $(el).children().next().attr('placeholder')
 
                                 }
                             }
@@ -196,16 +235,47 @@ function scrapFn(website) {
                         values,
                         allowOther,
 
+                        helpText,
+                        placeholder,
+
                         wysiwygContent
                     })
 
                 })
 
 
+
+
                 fieldData.push(fieldGroup)
 
             })
 
+
+            console.log('fileds collected')
+
+            $('script').each((i,el)=>{
+
+                if($(el).html().length !== 0){
+                    let scripts = $(el).html()
+                    // console.log(scripts)
+
+                    // var position = scripts.search('formgroup_ids')
+                    // // console.log(position)
+
+                    let hits = scripts.match(new RegExp("formgroup_ids\[\d+\]"))
+                    console.log(hits)
+
+
+
+
+
+                    // $('formgroup_ids').each((i,el)=>{
+                    //     console.log('d')
+                    //     console.log(i)
+                    // })
+
+                }
+            })
 
         }
     })
