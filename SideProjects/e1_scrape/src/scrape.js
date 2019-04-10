@@ -45,7 +45,12 @@ function scrapFn(website) {
 
 
                     let helpText;
+                    //looks like this
+                    //<p class="help-block">Use format of <strong>Name, Age, Current School (if applicable)</strong>. New line per sibling.</p>
+
                     let placeholder;
+                    //placeholder looks to be just an attribute
+                    //placeholder="If applicable..."
 
 
                     let wysiwygContent;
@@ -82,7 +87,7 @@ function scrapFn(website) {
                                             values.push(
                                                 {
                                                     title: $(el).text().trim(),
-                                                    value: $(el).children().attr('value')
+                                                    id: $(el).children().attr('value')
                                                 }
                                             )
                                         })
@@ -92,7 +97,9 @@ function scrapFn(website) {
                                     if (classString.includes("checkbox")) {
                                         type = 'checkbox';
 
-                                        //TODO - need to capture id
+                                        width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
+
+                                        elementID = $(el).first().attr('data-formgroup-id')
 
                                         $(el).children().next().children().each((i, el) => {
 
@@ -100,7 +107,7 @@ function scrapFn(website) {
 
                                                 values.push({
                                                     title: $(el).text().trim(),
-                                                    value: $(el).children().attr('value')
+                                                    id: $(el).children().attr('value')
                                                 })
                                             }
                                             if ($(el).text().trim() !== 'Other...') {
@@ -112,13 +119,23 @@ function scrapFn(website) {
                                     //datepicker
                                     if (classString.includes("datepicker")) {
                                         type = 'datepicker';
-                                        
-                                        //TODO - need to capture id
+
+                                        //need to capture width
+                                        //console.log($(el).parent().first().attr('class'))
+                                        width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
+
+
+
+
+                                        elementID = $(el).first().attr('data-formgroup-id')
 
                                     }
 
                                 } else if ($(el).children().next()[0].name === 'select') {
                                     type = 'select';
+
+                                    width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
+
 
                                     elementID = $(el).first().attr('data-formgroup-id')
 
@@ -127,7 +144,7 @@ function scrapFn(website) {
                                             values.push(
                                                 {
                                                     title: $(el).text().trim(),
-                                                    value: $(el).children().attr('value')
+                                                    id: $(el).attr('value')
                                                 }
                                             )
                                         }
@@ -139,7 +156,7 @@ function scrapFn(website) {
                                     })
 
                                     //if its an ajax select 
-                                    if(values.length == 0){
+                                    if (values.length == 0) {
 
                                         let newURL = website.replace(/^https?\:\/\//i, "");
                                         let fullstopPosition = newURL.indexOf(".");
@@ -147,22 +164,21 @@ function scrapFn(website) {
 
                                         let callURL = subdomain + '.digistormenrol.com.au/ajax_app/formgroup_options/' + elementID
 
+                                        request('https://cors-anywhere.herokuapp.com/' + callURL, function (error, response, html) {
 
-                                        //TODO - need to do work here to read the data stream
-                                        
-
-                                        // fetch(callURL).then(response => response.body).then((data)=>{
-                                        //     console.log(data.getReader())
-                                        // })
-
-                                        console.log(callURL)
-
-                                        
-                                        
+                                            if (!error && response.statusCode == 200) {
+                                                values.push(JSON.parse(html).results)
+                                            }
+                                        }
+                                        )
                                     }
 
                                 } else if ($(el).children().next()[0].name === 'br') {
                                     type = 'file';
+                                    //need to capture width
+                                        // console.log($(el).parent().first().attr('class'))
+                                        width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
+
                                 }
                             }
                         }

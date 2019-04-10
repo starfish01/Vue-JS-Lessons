@@ -35,6 +35,12 @@ export default {
         "i"
       ); // fragment locator
       return pattern.test(this.website);
+    },
+    enrolDataScrape(){
+      console.log('change')
+
+      this.buttonData = metadata.fieldData
+      return metadata.fieldData
     }
   },
   methods: {
@@ -42,7 +48,7 @@ export default {
       // this.data = metadata.data('hj')
       // console.log(this.website);
       metadata.scrapFn(this.website)
-      this.data = metadata.metadata;
+      // this.data = metadata.metadata;
       // this.buttonData = metadata.buttonData;
       this.buttonData = metadata.fieldData
     },
