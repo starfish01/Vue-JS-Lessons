@@ -33,7 +33,7 @@ function scrapFn(website) {
 
                 if ($(el).html().length !== 0) {
                     let scripts = $(el).html()
-                    console.log(scripts)
+                    // console.log(scripts)
 
                     // var position = scripts.search('formgroup_ids')
                     // // console.log(position)
@@ -48,9 +48,20 @@ function scrapFn(website) {
                     }
 
                     let customJS = scripts.match(new RegExp("toggle_fields\\([1-9]+,", "g"))
+                    
                     let workCustomJS =[];
                     if (customJS !== null) {
                         customJS.forEach((el)=>{
+
+                            console.log(scripts.indexOf(el))
+
+                           
+
+                            
+                            // console.log(scriptText.search(snip))
+
+                            // console.log(scripts.search(el));
+
                             //active
                             let activeID = el.slice(14,el.length).slice(0, -1);
                             
