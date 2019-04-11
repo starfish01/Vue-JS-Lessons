@@ -5,14 +5,12 @@ var metadata = []
 var buttonData = []
 var fieldData = []
 
+var hideShowArray = []
+
 function scrapFn(website) {
 
     //to bypass security we use the proxy below
     //https://cors-anywhere.herokuapp.com/
-    // console.log(website)
-    // return new Promise(function(res, rej){
-
-
 
     return request.post({
         url: 'https://cors-anywhere.herokuapp.com/' + website,
@@ -48,37 +46,74 @@ function scrapFn(website) {
                     }
 
                     let customJS = scripts.match(new RegExp("toggle_fields\\([1-9]+,", "g"))
-                    
-                    let workCustomJS =[];
+
+                    let workCustomJS = [];
                     if (customJS !== null) {
-                        customJS.forEach((el)=>{
+                        // console.log(customJS)
 
-                            console.log(scripts.indexOf(el))
+                        customJS.forEach((el) => {
 
-                           
+                            // let some = String(scripts);
 
+                            let startIndex = scripts.indexOf(el)
+                            let searchString = scripts.slice(startIndex)
+                            let endIndex = searchString.indexOf(')')
+
+                            let toggle = scripts.slice(startIndex + 14, endIndex + startIndex)
+
+                            toggle = toggle.replace(/'/g, "\"");
+
+                            let firstComma = toggle.indexOf(',')
+
+                            let firstCloseSquare = toggle.indexOf(']')
+                            let secondComma = toggle.slice(firstComma, toggle.indexOf(','))
+
+                            //second comma is tricky i need to check that a , comes before ]
+
+                            if (firstCloseSquare > secondComma) {
+                                secondComma = toggle.slice(firstCloseSquare).indexOf(',')+firstCloseSquare
+                            }
+
+                            // let endvalues = toggle.slice(secondComma+1, toggle.length).trim()
+
+                            let endvalues = []
+
+                            if(endvalues.indexOf('[') > -1){
+                                //dealing with an array of conditions
+                                endvalues = endvalues.slice(secondComma+1, toggle.length).replace(/\[/g, "").replace(/\]/g, "").trim().split(',')
+                            } else {
+                                //single
+                                endvalues.push(toggle.slice(secondComma+1, toggle.length).trim().replace(/\"/g, ""))
+                            }
                             
-                            // console.log(scriptText.search(snip))
+                            if(endvalues[0] === '"'){
+                                //makes sure its not double quoted
+                                endvalues = endvalues.slice(1,endvalues.length-1)
+                            }
 
-                            // console.log(scripts.search(el));
+                            let toBeTriggered = []
 
-                            //active
-                            let activeID = el.slice(14,el.length).slice(0, -1);
-                            
-                            //effected array
+                            if(toggle.slice(firstComma+1,secondComma).indexOf('[') > -1){
+                                //if an array create an array
+                                toBeTriggered = toggle.slice(firstComma+1,secondComma).trim().replace(/\[/g, "").replace(/\]/g, "").split(",")
+                            } else {
+                                //single item
+                                toBeTriggered.push(toggle.slice(firstComma+1,secondComma).trim())
+                            }
 
-                            //array id
+                            let trigger = toggle.slice(0, firstComma)
+                            // let toBeTriggered = toggle.slice(firstComma+1,secondComma).trim()
+                            let triggerValues = endvalues
 
-                            //condition single
+                            hideShowArray.push({
+                                trigger,
+                                toBeTriggered,
+                                triggerValues
+                            })
 
-                            //condition array
-
-                            //build object and push
 
                         })
                     }
-                
-
 
                 }
             })
@@ -108,6 +143,8 @@ function scrapFn(website) {
                     let type;
                     let width;
                     let required;
+
+                    let hideShows = [];
 
                     let values = [];
                     let allowOther;
@@ -141,6 +178,7 @@ function scrapFn(website) {
                         title = $(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm, "").trim()
 
                         if ($(el).children().html() !== '') {
+
                             if ($(el).children().next()[0].name !== undefined) {
                                 if ($(el).children().next()[0].name === 'input') {
 
@@ -287,11 +325,22 @@ function scrapFn(website) {
 
                     }
 
-
+                    //checks if element is required
                     if (requiredItems.indexOf(elementID) > -1) {
                         required = true
                     }
 
+                    //checks if it is conditionally displayed
+                    hideShowArray.forEach((el)=>{
+                        el.toBeTriggered.forEach((data)=>{
+                            if(elementID == data){
+                                hideShows.push({triggerValues : el.triggerValues})
+                                hideShows.push({trigger : el.trigger})
+                            }
+                        })
+                    })
+
+                    
                     fieldGroup.fieldGroupfields.push({
                         elementID,
                         positionOfElement,
@@ -307,6 +356,8 @@ function scrapFn(website) {
                         helpText,
                         placeholder,
 
+                        hideShows,
+
                         wysiwygContent
                     })
 
@@ -318,15 +369,12 @@ function scrapFn(website) {
 
 
         }
-    })
 
+
+    })
 
 }
 
-
-
 function data(val) { return val }
 
-
 export { data, metadata, buttonData, scrapFn, fieldData };
-
