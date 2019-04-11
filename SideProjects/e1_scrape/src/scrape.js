@@ -33,7 +33,7 @@ function scrapFn(website) {
 
                 if ($(el).html().length !== 0) {
                     let scripts = $(el).html()
-                    // console.log(scripts)
+                    console.log(scripts)
 
                     // var position = scripts.search('formgroup_ids')
                     // // console.log(position)
@@ -46,6 +46,28 @@ function scrapFn(website) {
                             requiredItems.push(item[0])
                         })
                     }
+
+                    let customJS = scripts.match(new RegExp("toggle_fields\\([1-9]+,", "g"))
+                    let workCustomJS =[];
+                    if (customJS !== null) {
+                        customJS.forEach((el)=>{
+                            //active
+                            let activeID = el.slice(14,el.length).slice(0, -1);
+                            
+                            //effected array
+
+                            //array id
+
+                            //condition single
+
+                            //condition array
+
+                            //build object and push
+
+                        })
+                    }
+                
+
 
                 }
             })
@@ -128,6 +150,10 @@ function scrapFn(website) {
                                     //radio
                                     if (classString.includes("radio")) {
                                         type = 'radio';
+
+                                        elementID = $(el).first().attr('data-formgroup-id')
+
+                                        width = $(el).parent().attr('class').substring(7, $(el).parent().attr('class').length)
 
                                         helpText = $(el).find('p.help-block').text()
 
@@ -274,10 +300,6 @@ function scrapFn(website) {
                     })
 
                 })
-
-
-                console.log(fieldGroup)
-
 
                 fieldData.push(fieldGroup)
 

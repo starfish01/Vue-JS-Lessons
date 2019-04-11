@@ -21,7 +21,7 @@ export default {
   data: () => ({
     data: 0,
     buttonData:{},
-    website: "https://digistorm-college.digistormenrol.com.au/applications/general/vnZoQC12xDbXqSpFEaXjTndqlCfFzY0bguiBEr5P18CyOTy3Bw/step/student-details"
+    website: "https://digistorm-college.digistormenrol.com.au/applications/general/EDHDIZiohSs4niIZmIEhgSyBkpu50h95lSvk2kdmiUSwNYayvU/step/student-details"
   }),
   computed: {
     isURL() {
