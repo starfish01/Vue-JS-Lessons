@@ -47,6 +47,8 @@ function scrapFn(website) {
 
                     let customJS = scripts.match(new RegExp("toggle_fields\\([1-9]+,", "g"))
 
+                    // console.log(customJS)
+
                     let workCustomJS = [];
                     if (customJS !== null) {
                         // console.log(customJS)
@@ -68,37 +70,33 @@ function scrapFn(website) {
                             let firstCloseSquare = toggle.indexOf(']')
                             let secondComma = toggle.slice(firstComma, toggle.indexOf(','))
 
-                            //second comma is tricky i need to check that a , comes before ]
-
                             if (firstCloseSquare > secondComma) {
-                                secondComma = toggle.slice(firstCloseSquare).indexOf(',')+firstCloseSquare
+                                secondComma = toggle.slice(firstCloseSquare).indexOf(',') + firstCloseSquare
                             }
-
-                            // let endvalues = toggle.slice(secondComma+1, toggle.length).trim()
 
                             let endvalues = []
 
-                            if(endvalues.indexOf('[') > -1){
+                            if (endvalues.indexOf('[') > -1) {
                                 //dealing with an array of conditions
-                                endvalues = endvalues.slice(secondComma+1, toggle.length).replace(/\[/g, "").replace(/\]/g, "").trim().split(',')
+                                endvalues = endvalues.slice(secondComma + 1, toggle.length).replace(/\[/g, "").replace(/\]/g, "").trim().split(',')
                             } else {
                                 //single
-                                endvalues.push(toggle.slice(secondComma+1, toggle.length).trim().replace(/\"/g, ""))
+                                endvalues.push(toggle.slice(secondComma + 1, toggle.length).trim().replace(/\"/g, ""))
                             }
-                            
-                            if(endvalues[0] === '"'){
+
+                            if (endvalues[0] === '"') {
                                 //makes sure its not double quoted
-                                endvalues = endvalues.slice(1,endvalues.length-1)
+                                endvalues = endvalues.slice(1, endvalues.length - 1)
                             }
 
                             let toBeTriggered = []
 
-                            if(toggle.slice(firstComma+1,secondComma).indexOf('[') > -1){
+                            if (toggle.slice(firstComma + 1, secondComma).indexOf('[') > -1) {
                                 //if an array create an array
-                                toBeTriggered = toggle.slice(firstComma+1,secondComma).trim().replace(/\[/g, "").replace(/\]/g, "").split(",")
+                                toBeTriggered = toggle.slice(firstComma + 1, secondComma).trim().replace(/\[/g, "").replace(/\]/g, "").split(",")
                             } else {
                                 //single item
-                                toBeTriggered.push(toggle.slice(firstComma+1,secondComma).trim())
+                                toBeTriggered.push(toggle.slice(firstComma + 1, secondComma).trim())
                             }
 
                             let trigger = toggle.slice(0, firstComma)
@@ -165,7 +163,10 @@ function scrapFn(website) {
                     //     console.log($(el).find('p').attr('class'))
                     // }
 
-                    if ($(el).first().attr('name') !== undefined && $(el).first().attr('name').includes("wysiwyg")) {
+                    //This was part of the if but seems to have caused some issues
+                    //&& $(el).first().attr('name').includes("wysiwyg")
+
+                    if ($(el).first().attr('name') !== undefined) {
 
                         title = "wysiwyg"
                         wysiwygContent = $(el).first().html().trim();
@@ -207,6 +208,9 @@ function scrapFn(website) {
                                         helpText = $(el).find('p.help-block').text()
 
                                         $(el).children().next().children().each((i, el) => {
+
+                                            //TODO - I think i need to allow other here
+
                                             values.push(
                                                 {
                                                     title: $(el).text().trim(),
@@ -214,6 +218,7 @@ function scrapFn(website) {
                                                 }
                                             )
                                         })
+
                                     }
 
                                     //checkbox
@@ -235,9 +240,11 @@ function scrapFn(website) {
                                                     id: $(el).children().attr('value')
                                                 })
                                             }
-                                            if ($(el).text().trim() !== 'Other...') {
+
+                                            if ($(el).text().trim() === 'Other...') {
                                                 allowOther = true;
                                             }
+
                                         })
                                     }
 
@@ -275,8 +282,7 @@ function scrapFn(website) {
                                             )
                                         }
 
-
-                                        if ($(el).text().trim() !== 'Other...') {
+                                        if ($(el).text().trim() === 'Other...') {
                                             allowOther = true;
                                         }
                                     })
@@ -331,16 +337,16 @@ function scrapFn(website) {
                     }
 
                     //checks if it is conditionally displayed
-                    hideShowArray.forEach((el)=>{
-                        el.toBeTriggered.forEach((data)=>{
-                            if(elementID == data){
-                                hideShows.push({triggerValues : el.triggerValues})
-                                hideShows.push({trigger : el.trigger})
+                    hideShowArray.forEach((el) => {
+                        el.toBeTriggered.forEach((data) => {
+                            if (elementID == data) {
+                                hideShows.push({ triggerValues: el.triggerValues })
+                                hideShows.push({ trigger: el.trigger })
                             }
                         })
                     })
 
-                    
+
                     fieldGroup.fieldGroupfields.push({
                         elementID,
                         positionOfElement,
