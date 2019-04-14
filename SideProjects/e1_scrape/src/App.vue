@@ -17,7 +17,7 @@
           dark
           v-on="on"
         >
-          Version 0.1
+          Version 0.1.1
         </v-btn>
       </template>
 
@@ -30,7 +30,7 @@
         </v-card-title>
 
         <v-card-text>
-          <p>Last updated: 11/04/2019</p>
+          <p>Last updated: 13/04/2019</p>
           <p>Doesn't support:</p>
           <ul>
             <li>Funnel JSON output yet</li>

@@ -14,17 +14,18 @@
           src="../assets/ripLoading.svg"
           alt
         >
-
-        <code
-          v-if="buttonData.length > 0 && buttonClicked"
-        >{{ buttonData }}</code>
-
-        <!-- <div v-if="buttonData.length > 0 && buttonClicked && buttonData[0] === 'Error'">
-          <p v-if="buttonData.length > 0 && buttonClicked && buttonData[0] === 'Error'">ERROR</p>
-          <img style="width:20%" src="../assets/error.gif" alt>
-        </div> -->
-
       </v-flex>
+      <v-flex xs6>
+        <h3>Enrol</h3>
+        <hr>
+        <code v-if="buttonData.length > 0 && buttonClicked">{{ buttonData }}</code>
+      </v-flex>
+      <v-flex xs6>
+        <h3>Funnel</h3>
+        <hr>
+        <code v-if="buttonData.length > 0 && buttonClicked"></code>
+      </v-flex>
+      <v-flex xs6></v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -37,8 +38,8 @@ export default {
     data: 0,
     buttonData: [],
     buttonClicked: false,
-    website: "",
-    website1:
+    website1: "",
+    website:
       "https://digistorm-college.digistormenrol.com.au/applications/general/EDHDIZiohSs4niIZmIEhgSyBkpu50h95lSvk2kdmiUSwNYayvU/step/student-details"
   }),
   computed: {
@@ -58,7 +59,7 @@ export default {
   methods: {
     scrapeBtn() {
       this.buttonClicked = true;
-      this.buttonData = []
+      this.buttonData = [];
       // this.data = metadata.data('hj')
       // console.log(this.website);
       metadata.scrapFn(this.website);
@@ -74,4 +75,7 @@ export default {
 </script>
 
 <style>
+code {
+  text-align: left;
+}
 </style>
