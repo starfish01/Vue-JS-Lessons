@@ -65,7 +65,9 @@ export default {
       metadata.scrapFn(this.website);
       // this.data = metadata.metadata;
       // this.buttonData = metadata.buttonData;
-      this.buttonData = metadata.fieldData;
+
+      this.buttonData = metadata.pages;
+
     },
     btnDataPrint() {
       console.log(this.buttonData);

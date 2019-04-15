@@ -8,6 +8,8 @@ export function validate(scrape){
     //hideshow array
     let hideShowArray = [];
 
+    var $ = cheerio.load(scrape)
+
     $('script').each((i, el) => {
 
         if ($(el).html().length !== 0) {

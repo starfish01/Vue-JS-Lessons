@@ -1,0 +1,2761 @@
+{
+  "media": {
+    "key": "media",
+    "path": "media",
+    "type": "Group",
+    "items": {
+      "website_publish_consent": {
+        "id": "crm.lead.content_model.media_website_publish_consent",
+        "title": "I agree to my child’s work being published on the school’s website",
+        "display": {
+          "width": 12
+        },
+        "position": 10,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "event_attendance_consent": {
+        "id": "crm.lead.content_model.media_event_attendance_consent",
+        "title": "I agree to my child’s attendance at media events",
+        "display": {
+          "width": 12
+        },
+        "position": 53,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "school_photo_use_consent": {
+        "id": "crm.lead.content_model.media_school_photo_use_consent",
+        "title": "I give consent for photographs and video recordings of my child being taken and used by the school on CECG websites / social media / Catholic Voice and other publications",
+        "display": {
+          "width": 12
+        },
+        "position": 30,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "school_photos_information_consent": {
+        "id": "crm.lead.content_model.media_school_photos_information_consent",
+        "title": "I agree to the release of my child’s information for school photos",
+        "display": {
+          "width": 12
+        },
+        "position": 20,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "title": "5.3. Media",
+    "display": {
+      "width": 12
+    },
+    "position": 53
+  },
+  "terms": {
+    "key": "terms",
+    "path": "terms",
+    "type": "Array",
+    "title": "Terms",
+    "display": {
+      "width": 12,
+      "widget": {
+        "id": "checkbox"
+      },
+      "htmlBefore": "<p>Application for enrolment of your child in a Catholic school means that you are choosing a Catholic education for your child. It requires your commitment to support the philosophy, values and aims of the school and a willingness to co-operate in their implementation. Specifically it means:</p><p>&nbsp;</p><ul><li><p>Religious Education is a core subject which includes participation in prayer and liturgy</p></li><li><p>Catholic values are emphasised</p></li></ul><p>Your child is expected to adhere to the school’s standards for:</p><p>&nbsp;</p><ul><li><p>Behaviour, dress and self-discipline</p></li><li><p>Application to course work and study</p></li></ul><p>Your co-operation is essential to assist your child to meet these expectations. Parents are expected to participate in the total life of the school.</p><p>&nbsp;</p><p><strong>Ensuring your privacy is protected</strong></p><p>&nbsp;</p><p>The Privacy Act 1988 (Cth) (Privacy Act) regulates how personal information is handled and the Education Act 2004 (ACT) (Education Act) sets out arrangements for education including for compulsory education. Catholic Education Canberra &amp; Goulburn (CECG) collects personal information on this application form to enable it to effectively manage enrolment in its Systemic schools. This information is stored securely.</p><p>&nbsp;</p><p>The information is also used or disclosed for the following purposes:</p><p>&nbsp;</p><ul><li><p>The education and welfare of the student</p></li><li><p>Communication with students, parents or carers</p></li><li><p>The health, safety and welfare of students, staff and visitors to the school</p></li><li><p>Provision and management of IT services including student administration services</p></li><li><p>National and international assessment and reporting purposes</p></li><li><p>Quality assurance activities such as high quality education and to enable CECG to perform its functions and activities under the Privacy Act and the Education Act</p></li><li><p>Any other purpose required by law or authorised under privacy legislation.</p><p>&nbsp;</p></li></ul><p>CECG provides this enrolment information (on request) to other Government agencies and third party entities, such as assessment entities authorised to receive it.</p><p>&nbsp;</p><p>Information may also be shared between Catholic Systemic schools your child has been enrolled at previously.</p><p>&nbsp;</p><p>Please contact the school to access or correct any personal information or if you have any concerns about the collection, use or disclosure of personal information.</p><p>&nbsp;</p><p><strong>Each person completing the application form agrees:</strong></p><p>&nbsp;</p><p>I have read and agree to the responsibilities in the above “Catholic philosophy, values and aims” and apply for enrolment of my child subject to those conditions. I agree to adhere to the policies and guidelines determined by the school.</p><p>&nbsp;</p><p>I agree jointly and severally to pay all school fees, levies and charges incurred while my child is enrolled, including any expenses incurred by the School as a result of late or non-payment of amounts owing. (Note: No student will be refused enrolment because of an inability, as distinct from an unwillingness, of a parent/legal guardian to meet their school fee commitments. Please contact the Principal or Bursar to discuss your particular circumstances).</p><p>&nbsp;</p><p>I acknowledge that providing false, misleading or incomplete information on this application form may result in the school cancelling or not accepting my child’s enrolment.</p><p>&nbsp;</p><p>I acknowledge that the school for which I am seeking enrolment for my child is part of a system of schools and I understand that the Government funding attracted to the System and school fees, may be distributed among member schools according to need as determined by the Approved System Authority.</p><p>&nbsp;</p><p>I agree to work in collaboration and cooperation with the school to support the learning of my child.</p><p>&nbsp;</p><p>I give consent for the school to obtain information about my child from their previous school specified in Section 3. I understand that I can request to see the information received by the school from my child's previous school.</p><p>&nbsp;</p><p>I have read and understand the “Enrolment Information Collection Notice” available on the CECG website at <a href=\"https://enrolments.cg.catholic.edu.au/enrolment\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">www.cg.catholic.edu.au/enrolment</a>, refer Enrolment Information Pack.</p><p><br></p>"
+    },
+    "options": [
+      {
+        "title": "I/We agree to the above terms and conditions of this application."
+      }
+    ],
+    "position": 70,
+    "validations": [
+      {
+        "message": "This field is required.",
+        "required": true
+      }
+    ]
+  },
+  "family": {
+    "key": "family",
+    "type": "Group",
+    "items": {
+      "sibling_1": {
+        "key": "sibling_1",
+        "type": "Group",
+        "items": {
+          "year_level": {
+            "id": "crm.lead.content_model.family_sibling_1_year_level",
+            "title": "Year Level",
+            "display": {
+              "width": 3
+            },
+            "position": 11,
+            "validations": []
+          },
+          "sibling_name": {
+            "id": "crm.lead.content_model.family_sibling_1_sibling_name",
+            "title": "Sibling Name",
+            "display": {
+              "width": 3
+            },
+            "position": 0,
+            "validations": []
+          },
+          "date_of_birth": {
+            "id": "crm.lead.content_model.family_sibling_1_date_of_birth",
+            "title": "Date of Birth",
+            "display": {
+              "width": 3
+            },
+            "position": 1,
+            "validations": [
+              {
+                "type": "Date"
+              }
+            ]
+          },
+          "current_school": {
+            "id": "crm.lead.content_model.family_sibling_1_current_school",
+            "title": "Current School",
+            "display": {
+              "width": 3
+            },
+            "position": 10,
+            "validations": []
+          }
+        },
+        "title": "Siblings",
+        "display": {
+          "width": 12,
+          "widget": {
+            "id": null
+          },
+          "conditions": [
+            {
+              "if": {
+                "==": [
+                  {
+                    "field": [
+                      "has_siblings"
+                    ]
+                  },
+                  "1"
+                ]
+              },
+              "action": {
+                "visible": true
+              }
+            }
+          ]
+        },
+        "position": 30
+      },
+      "sibling_2": {
+        "type": "Group",
+        "items": {
+          "year_level": {
+            "id": "crm.lead.content_model.family_sibling_2_year_level",
+            "title": "Year Level",
+            "display": {
+              "width": 3
+            },
+            "position": 11,
+            "validations": []
+          },
+          "sibling_name": {
+            "id": "crm.lead.content_model.family_sibling_2_sibling_name",
+            "title": "Sibling Name",
+            "display": {
+              "width": 3
+            },
+            "position": 0,
+            "validations": []
+          },
+          "date_of_birth": {
+            "id": "crm.lead.content_model.family_sibling_2_date_of_birth",
+            "title": "Date of Birth",
+            "display": {
+              "width": 3
+            },
+            "position": 1,
+            "validations": [
+              {
+                "type": "Date"
+              }
+            ]
+          },
+          "current_school": {
+            "id": "crm.lead.content_model.family_sibling_2_current_school",
+            "title": "Current School",
+            "display": {
+              "width": 3
+            },
+            "position": 10,
+            "validations": []
+          }
+        },
+        "title": "",
+        "display": {
+          "width": 12,
+          "widget": {
+            "id": null
+          },
+          "conditions": [
+            {
+              "if": {
+                "==": [
+                  {
+                    "field": [
+                      "has_siblings"
+                    ]
+                  },
+                  "1"
+                ]
+              },
+              "action": {
+                "visible": true
+              }
+            }
+          ]
+        },
+        "position": 30
+      },
+      "sibling_3": {
+        "type": "Group",
+        "items": {
+          "year_level": {
+            "id": "crm.lead.content_model.family_sibling_3_year_level",
+            "title": "Year Level",
+            "display": {
+              "width": 3
+            },
+            "position": 11,
+            "validations": []
+          },
+          "sibling_name": {
+            "id": "crm.lead.content_model.family_sibling_3_sibling_name",
+            "title": "Sibling Name",
+            "display": {
+              "width": 3
+            },
+            "position": 0,
+            "validations": []
+          },
+          "date_of_birth": {
+            "id": "crm.lead.content_model.family_sibling_3_date_of_birth",
+            "title": "Date of Birth",
+            "display": {
+              "width": 3
+            },
+            "position": 1,
+            "validations": [
+              {
+                "type": "Date"
+              }
+            ]
+          },
+          "current_school": {
+            "id": "crm.lead.content_model.family_sibling_3_current_school",
+            "title": "Current School",
+            "display": {
+              "width": 3
+            },
+            "position": 10,
+            "validations": []
+          }
+        },
+        "title": "",
+        "display": {
+          "width": 12,
+          "widget": {
+            "id": null
+          },
+          "conditions": [
+            {
+              "if": {
+                "==": [
+                  {
+                    "field": [
+                      "has_siblings"
+                    ]
+                  },
+                  "1"
+                ]
+              },
+              "action": {
+                "visible": true
+              }
+            }
+          ]
+        },
+        "position": 30
+      },
+      "has_siblings": {
+        "id": "crm.lead.content_model.family_has_siblings",
+        "title": "Does the student have any siblings?",
+        "display": {
+          "width": 12
+        },
+        "position": 20,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "court_order_details": {
+        "id": "crm.lead.content_model.family_court_order_details",
+        "title": "Please give details",
+        "display": {
+          "width": 12,
+          "conditions": [
+            {
+              "if": {
+                "==": [
+                  {
+                    "field": [
+                      "relevant_court_orders"
+                    ]
+                  },
+                  "1"
+                ]
+              },
+              "action": {
+                "visible": true
+              }
+            }
+          ]
+        },
+        "position": 10,
+        "validations": [
+          {
+            "if": {
+              "==": [
+                {
+                  "field": [
+                    "relevant_court_orders"
+                  ]
+                },
+                "1"
+              ]
+            },
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "relevant_court_orders": {
+        "id": "crm.lead.content_model.family_relevant_court_orders",
+        "title": "Are there any court orders relevant to this child?",
+        "display": {
+          "width": 12
+        },
+        "position": 0,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "title": "4.2. Family Circumstances & Siblings",
+    "display": {
+      "width": 12,
+      "widget": {
+        "id": null
+      }
+    },
+    "position": 42
+  },
+  "review": {
+    "type": "Display",
+    "display": {
+      "widget": {
+        "id": "review"
+      }
+    },
+    "position": 100,
+    "validations": []
+  },
+  "safety": {
+    "key": "safety",
+    "type": "Group",
+    "items": {
+      "welfare": {
+        "key": "welfare",
+        "path": "safety.items.welfare",
+        "type": "Group",
+        "items": {
+          "gp_name": {
+            "id": "crm.lead.content_model.safety_welfare_gp_name",
+            "title": "General Practitioner (GP) Name",
+            "display": {
+              "width": 6
+            },
+            "position": 32,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "gp_phone": {
+            "id": "crm.lead.content_model.safety_welfare_gp_phone",
+            "title": "GP Phone",
+            "display": {
+              "width": 6
+            },
+            "position": 33,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "gp_address": {
+            "id": "crm.lead.content_model.safety_welfare_gp_address",
+            "title": "GP Address",
+            "display": {
+              "width": 12
+            },
+            "position": 34,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "circumstances": {
+            "id": "crm.lead.content_model.safety_welfare_circumstances",
+            "title": "Are there any circumstances about the student seeking to be enrolled that the school should know prior to enrolment?",
+            "display": {
+              "width": 12
+            },
+            "position": 0,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "medicare_number": {
+            "id": "crm.lead.content_model.safety_welfare_medicare_number",
+            "title": "Medicare Number",
+            "display": {
+              "width": 6
+            },
+            "position": 35,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "additional_cover": {
+            "id": "crm.lead.content_model.safety_welfare_additional_cover",
+            "title": "Do you have additional cover",
+            "display": {
+              "width": 6
+            },
+            "position": 36,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "circumstances_risk": {
+            "id": "crm.lead.content_model.safety_welfare_circumstances_risk",
+            "title": "Is there anything in the student’s history or circumstances that might pose a risk of any type to the student, other students, staff or visitors?",
+            "display": {
+              "width": 12
+            },
+            "position": 20,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "special_considerations": {
+            "id": "crm.lead.content_model.safety_welfare_special_considerations",
+            "help": "Example: any cultural, religious or dietary requirements or any other additional needs",
+            "title": "Are there any special considerations to be considered?",
+            "display": {
+              "width": 12
+            },
+            "position": 31,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "circumstances_description": {
+            "id": "crm.lead.content_model.safety_welfare_circumstances_description",
+            "title": "Please describe the circumstances",
+            "display": {
+              "width": 12,
+              "conditions": [
+                {
+                  "if": {
+                    "==": [
+                      {
+                        "field": [
+                          "circumstances"
+                        ]
+                      },
+                      "1"
+                    ]
+                  },
+                  "action": {
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "position": 10,
+            "validations": [
+              {
+                "if": {
+                  "==": [
+                    {
+                      "field": [
+                        "circumstances"
+                      ]
+                    },
+                    "1"
+                  ]
+                },
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "circumstances_risk_description": {
+            "id": "crm.lead.content_model.safety_welfare_circumstances_risk_description",
+            "title": "Please provide brief description:",
+            "display": {
+              "width": 12,
+              "conditions": [
+                {
+                  "if": {
+                    "==": [
+                      {
+                        "field": [
+                          "circumstances_risk"
+                        ]
+                      },
+                      "1"
+                    ]
+                  },
+                  "action": {
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "position": 30,
+            "validations": [
+              {
+                "if": {
+                  "==": [
+                    {
+                      "field": [
+                        "circumstances_risk"
+                      ]
+                    },
+                    "1"
+                  ]
+                },
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          }
+        },
+        "display": {
+          "width": 12
+        },
+        "position": 0
+      }
+    },
+    "title": "3.2. Safety and Welfare Information",
+    "display": {
+      "width": 12,
+      "widget": {
+        "id": null
+      }
+    },
+    "position": 32
+  },
+  "billing": {
+    "type": "Group",
+    "items": {
+      "split_billing": {
+        "id": "crm.lead.content_model.billing_split_billing",
+        "help": "Please contact the school to complete the required documentation for split billing.",
+        "title": "Do you require the billing to be split between Parent /Guardian 1 and Parent /Guardian 2?",
+        "display": {
+          "width": 12
+        },
+        "position": 0,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "guardian_1_correspondence": {
+        "type": "Group",
+        "items": {
+          "email": {
+            "id": "crm.lead.content_model.billing_guardian_1_correspondence_email",
+            "title": "Email",
+            "display": {
+              "width": 6
+            },
+            "position": 0,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "address": {
+            "id": "crm.lead.content_model.billing_guardian_1_correspondence_address",
+            "title": "Address",
+            "display": {
+              "width": 6
+            },
+            "position": 10,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          }
+        },
+        "title": "Parent/Guardian 1",
+        "display": {
+          "width": 12,
+          "conditions": [
+            {
+              "if": {
+                "==": [
+                  {
+                    "field": [
+                      "correspondence_address_different"
+                    ]
+                  },
+                  "1"
+                ]
+              },
+              "action": {
+                "visible": true
+              }
+            }
+          ]
+        },
+        "position": 20
+      },
+      "guardian_2_correspondence": {
+        "type": "Group",
+        "items": {
+          "email": {
+            "id": "crm.lead.content_model.billing_guardian_2_correspondence_email",
+            "title": "Email",
+            "display": {
+              "width": 6
+            },
+            "position": 0,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "address": {
+            "id": "crm.lead.content_model.billing_guardian_2_correspondence_address",
+            "title": "Address",
+            "display": {
+              "width": 6
+            },
+            "position": 10,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          }
+        },
+        "title": "Parent/Guardian 2",
+        "display": {
+          "width": 12,
+          "conditions": [
+            {
+              "if": {
+                "==": [
+                  {
+                    "field": [
+                      "correspondence_address_different"
+                    ]
+                  },
+                  "1"
+                ]
+              },
+              "action": {
+                "visible": true
+              }
+            }
+          ]
+        },
+        "position": 30
+      },
+      "correspondence_address_different": {
+        "id": "crm.lead.content_model.billing_correspondence_address_different",
+        "title": "Is the Primary Correspondence Address different to the Student's Primary Residential Address?",
+        "display": {
+          "width": 12,
+          "htmlBefore": "<p>Please note that all correspondence and billing information from the school will be sent to the ‘Primary Residential Address’ specified in Section 1.3, unless indicated otherwise below. In the case of a split billing arrangement, information will also be sent to a second address.</p><p>&nbsp;</p><p><strong>Please indicate the address details to be used for correspondence from school and billing, if different from the student’s ‘Primary Residential Address’.</strong></p><p>&nbsp;</p>"
+        },
+        "position": 10,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "title": "4.1. Correspondence & Billing Information",
+    "display": {
+      "width": 12
+    },
+    "position": 41
+  },
+  "medical": {
+    "type": "Group",
+    "items": {
+      "conditions": {
+        "key": "conditions",
+        "type": "Group",
+        "items": {
+          "condition_1": {
+            "id": "crm.lead.content_model.medical_conditions_condition_1",
+            "title": "Condition/Allergy 1",
+            "display": {
+              "width": 6
+            },
+            "position": 0,
+            "validations": []
+          },
+          "condition_2": {
+            "id": "crm.lead.content_model.medical_conditions_condition_2",
+            "title": "Condition/Allergy 2",
+            "display": {
+              "width": 6
+            },
+            "position": 2,
+            "validations": []
+          },
+          "condition_3": {
+            "id": "crm.lead.content_model.medical_conditions_condition_3",
+            "title": "Condition/Allergy 3",
+            "display": {
+              "width": 6
+            },
+            "position": 4,
+            "validations": []
+          },
+          "condition_1_treatment": {
+            "id": "crm.lead.content_model.medical_conditions_condition_1_treatment",
+            "title": "Current Treatment 1",
+            "display": {
+              "width": 6
+            },
+            "position": 1,
+            "validations": []
+          },
+          "condition_2_treatment": {
+            "id": "crm.lead.content_model.medical_conditions_condition_2_treatment",
+            "title": "Current Treatment 2",
+            "display": {
+              "width": 6
+            },
+            "position": 3,
+            "validations": []
+          },
+          "condition_3_treatment": {
+            "id": "crm.lead.content_model.medical_conditions_condition_3_treatment",
+            "title": "Current Treatment 3",
+            "display": {
+              "width": 6
+            },
+            "position": 5,
+            "validations": []
+          }
+        },
+        "title": "Medical Conditions",
+        "display": {
+          "width": 12,
+          "widget": {
+            "id": null
+          },
+          "htmlAfterTitle": "<p>Please specify any medical conditions or allergies the student may have and any other information that would assist with the care of the student</p>"
+        },
+        "position": 40
+      },
+      "has_additional_needs": {
+        "id": "crm.lead.content_model.medical_has_additional_needs",
+        "title": "Does the student have any type of additional needs?",
+        "display": {
+          "width": 12,
+          "htmlBefore": "<p>This information is requested by the school to plan for any additional needs the student may have. Provision of this information will have no impact on the outcome of the enrolment application.</p><p>&nbsp;</p>"
+        },
+        "position": 0,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "immunisations_complete": {
+        "id": "crm.lead.content_model.medical_immunisations_complete",
+        "title": "Have all immunisations been completed?",
+        "display": {
+          "width": 6
+        },
+        "position": 51,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "has_learning_disability": {
+        "id": "crm.lead.content_model.medical_has_learning_disability",
+        "title": "Does the student currently have a learning difficulty in any areas such as literacy, numeracy, concentration, communication, personal care, social skills or any other learning needs?",
+        "display": {
+          "width": 12
+        },
+        "position": 20,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "additional_needs_details": {
+        "id": "crm.lead.content_model.medical_additional_needs_details",
+        "title": "Please provide details",
+        "display": {
+          "width": 12,
+          "conditions": [
+            {
+              "if": {
+                "==": [
+                  {
+                    "field": [
+                      "has_additional_needs"
+                    ]
+                  },
+                  "1"
+                ]
+              },
+              "action": {
+                "visible": true
+              }
+            }
+          ]
+        },
+        "position": 10,
+        "validations": [
+          {
+            "if": {
+              "==": [
+                {
+                  "field": [
+                    "has_additional_needs"
+                  ]
+                },
+                "1"
+              ]
+            },
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "learning_difficulty_details": {
+        "id": "crm.lead.content_model.medical_learning_difficulty_details",
+        "title": "Please provide details",
+        "display": {
+          "width": 12,
+          "conditions": [
+            {
+              "if": {
+                "==": [
+                  {
+                    "field": [
+                      "has_learning_disability"
+                    ]
+                  },
+                  "1"
+                ]
+              },
+              "action": {
+                "visible": true
+              }
+            }
+          ]
+        },
+        "position": 30,
+        "validations": [
+          {
+            "if": {
+              "==": [
+                {
+                  "field": [
+                    "has_learning_disability"
+                  ]
+                },
+                "1"
+              ]
+            },
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "title": "3.1. Needs and Medical Information",
+    "display": {
+      "width": 12
+    },
+    "position": 31
+  },
+  "payment": {
+    "id": "base.payment",
+    "title": "Payment",
+    "position": 101,
+    "validations": [
+      {
+        "message": "Payment is required.",
+        "required": true
+      }
+    ]
+  },
+  "student": {
+    "type": "Group",
+    "items": {
+      "legal_first_name": {
+        "id": "core.child.first_name",
+        "title": "Legal First Name",
+        "display": {
+          "width": 6,
+          "widget": {
+            "id": "singleLine"
+          }
+        },
+        "position": 10,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "legal_second_name": {
+        "id": "core.child.middle_name",
+        "title": "Legal Second Name",
+        "display": {
+          "width": 6,
+          "widget": {
+            "id": "singleLine"
+          }
+        },
+        "position": 11,
+        "validations": []
+      },
+      "students_legal_family_name": {
+        "id": "core.child.last_name",
+        "title": "Student's Legal Family Name",
+        "display": {
+          "width": 12,
+          "widget": {
+            "id": "singleLine"
+          }
+        },
+        "position": 0,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "title": "1.1. Name (as stated on the birth certificate or passport)",
+    "display": {
+      "width": 12
+    },
+    "position": 11
+  },
+  "admission": {
+    "type": "Group",
+    "items": {
+      "childcare": {
+        "id": "crm.lead.content_model.admission_childcare",
+        "title": "Childcare",
+        "display": {
+          "width": 6
+        },
+        "position": 4,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "year_of_admission": {
+        "id": "crm.lead.content_model.admission_year_of_admission",
+        "title": "Preferred Options",
+        "display": {
+          "width": 6
+        },
+        "position": 3,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "year_of_enrolment": {
+        "id": "crm.lead.proposed_entry_year",
+        "key": "year_of_enrolment",
+        "help": "This is the calendar year in which the student will start at the school",
+        "icon": "phone",
+        "title": "Year of Enrolment",
+        "display": {
+          "width": 6,
+          "widget": {
+            "id": "dropdown"
+          }
+        },
+        "options": {
+          "to": "{{date('+1 years', 'YYYY')}}",
+          "from": "{{date('now', 'YYYY')}}",
+          "step": 1,
+          "title": "{{value}}",
+          "value": "{{value}}"
+        },
+        "position": 0,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "expected_commencement": {
+        "id": "crm.lead.content_model.admission_expected_commencement",
+        "help": "If not starting in Term 1",
+        "title": "Expected date of commencement",
+        "display": {
+          "width": 6
+        },
+        "position": 2,
+        "validations": [
+          {
+            "min": "{{date('now')}}"
+          }
+        ]
+      }
+    },
+    "title": "1.2. Admission Details",
+    "display": {
+      "width": 12
+    },
+    "position": 12
+  },
+  "diversity": {
+    "key": "diversity",
+    "path": "diversity",
+    "type": "Group",
+    "items": {
+      "religion": {
+        "id": "core.child.religion_reference",
+        "title": "Religion",
+        "display": {
+          "width": 6
+        },
+        "position": 0,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "date_of_baptism": {
+        "id": "crm.lead.content_model.diversity_date_of_baptism",
+        "title": "Date of Baptism",
+        "display": {
+          "width": 6,
+          "conditions": [
+            {
+              "if": {
+                "!empty": [
+                  {
+                    "field": [
+                      "religion"
+                    ]
+                  }
+                ]
+              },
+              "action": {
+                "visible": true
+              }
+            }
+          ]
+        },
+        "position": 10,
+        "validations": []
+      },
+      "place_of_baptism": {
+        "id": "crm.lead.content_model.diversity_place_of_baptism",
+        "title": "Place of Baptism",
+        "display": {
+          "width": 6,
+          "conditions": [
+            {
+              "if": {
+                "!empty": [
+                  {
+                    "field": [
+                      "religion"
+                    ]
+                  }
+                ]
+              },
+              "action": {
+                "visible": true
+              }
+            }
+          ]
+        },
+        "position": 11,
+        "validations": []
+      },
+      "spoken_languages": {
+        "id": "crm.lead.content_model.diversity_spoken_languages",
+        "title": "Spoken Languages",
+        "display": {
+          "width": 6,
+          "conditions": [
+            {
+              "if": {
+                "==": [
+                  {
+                    "field": [
+                      "language_other_than_english"
+                    ]
+                  },
+                  "1"
+                ]
+              },
+              "action": {
+                "visible": true
+              }
+            }
+          ]
+        },
+        "position": 31,
+        "validations": [
+          {
+            "if": {
+              "==": [
+                {
+                  "field": [
+                    "language_other_than_english"
+                  ]
+                },
+                "1"
+              ]
+            },
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "cultural_background": {
+        "id": "crm.lead.content_model.diversity_cultural_background",
+        "title": "What is the cultural background of the student?",
+        "display": {
+          "width": 12
+        },
+        "position": 41,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "main_spoken_language": {
+        "id": "crm.lead.content_model.diversity_main_spoken_language",
+        "title": "Main Spoken Language",
+        "display": {
+          "width": 6,
+          "conditions": [
+            {
+              "if": {
+                "==": [
+                  {
+                    "field": [
+                      "language_other_than_english"
+                    ]
+                  },
+                  "1"
+                ]
+              },
+              "action": {
+                "visible": true
+              }
+            }
+          ]
+        },
+        "position": 30,
+        "validations": [
+          {
+            "if": {
+              "==": [
+                {
+                  "field": [
+                    "language_other_than_english"
+                  ]
+                },
+                "1"
+              ]
+            },
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "language_other_than_english": {
+        "id": "crm.lead.content_model.diversity_language_other_than_english",
+        "title": "Does the student speak a language other than English at home?",
+        "display": {
+          "width": 12
+        },
+        "position": 20,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "aboriginal_torres_strait_islander_origin": {
+        "id": "crm.lead.content_model.diversity_aboriginal_torres_strait_islander_origin",
+        "title": "Is the student of Aboriginal or Torres Strait Islander Origin?",
+        "display": {
+          "width": 12
+        },
+        "position": 40,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "title": "1.5. Diversity Information",
+    "display": {
+      "width": 12
+    },
+    "position": 15
+  },
+  "documents": {
+    "path": "documents",
+    "type": "Group",
+    "items": {
+      "recent_reports": {
+        "id": "crm.lead.content_model.documents_recent_reports",
+        "title": "Student's most recent school reports (if applicable)",
+        "display": {
+          "width": 12
+        },
+        "position": 30,
+        "validations": []
+      },
+      "protection_order": {
+        "id": "crm.lead.content_model.documents_protection_order",
+        "title": "Please upload copy of family law, personal protection order or other relevant court orders (if applicable)",
+        "display": {
+          "width": 12
+        },
+        "position": 60,
+        "validations": []
+      },
+      "birth_certificate": {
+        "id": "crm.lead.content_model.documents_birth_certificate",
+        "title": "Please upload a copy of the student's birth certificate or passport",
+        "display": {
+          "width": 12
+        },
+        "position": 0,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "assessment_reports": {
+        "id": "crm.lead.content_model.documents_assessment_reports",
+        "title": "Any medical reports and/or other assessment reports for students with additional learning needs (if applicable)",
+        "display": {
+          "width": 12
+        },
+        "position": 50,
+        "validations": []
+      },
+      "visa_grant_notices": {
+        "id": "crm.lead.content_model.documents_visa_grant_notices",
+        "title": "Visa grant notice for permanent and temporary visa-holders – for both student and parent(s) / legal guardian(s), including passport copies of students and parents/legal guardian(2) (if applicable).",
+        "display": {
+          "width": 12
+        },
+        "position": 40,
+        "validations": [
+          {
+            "if": {
+              "!=": [
+                {
+                  "field": [
+                    "residency.residency_status.status"
+                  ]
+                },
+                "AC"
+              ]
+            },
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "baptism_certificate": {
+        "id": "crm.lead.content_model.documents_baptism_certificate",
+        "title": "Certificate of Baptism (if applicable)",
+        "display": {
+          "width": 12
+        },
+        "position": 10,
+        "validations": []
+      },
+      "medical_action_plan": {
+        "id": "crm.lead.content_model.documents_medical_action_plan",
+        "title": "Medical action plan (if applicable)",
+        "display": {
+          "width": 12
+        },
+        "position": 80,
+        "validations": []
+      },
+      "immunisation_records": {
+        "id": "crm.lead.content_model.documents_immunisation_records",
+        "help": "A copy of the 'Immunisation History Statement' from Medicare is preferred.",
+        "title": "Student's immunisation records",
+        "display": {
+          "width": 12
+        },
+        "position": 1,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "proof_of_residential_address": {
+        "id": "crm.lead.content_model.documents_proof_of_residential_address",
+        "title": "Proof of residential address, such as rates notice, electricity, water or telephone bill",
+        "display": {
+          "width": 12
+        },
+        "position": 2,
+        "validations": []
+      }
+    },
+    "title": "6.1. Student Documents",
+    "display": {
+      "width": 12
+    },
+    "position": 61
+  },
+  "emergency": {
+    "type": "Group",
+    "items": {
+      "contact_1": {
+        "type": "Group",
+        "items": {
+          "home": {
+            "id": "crm.lead.content_model.emergency_contact_1_home",
+            "title": "Home",
+            "display": {
+              "width": 4
+            },
+            "position": 30,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "work": {
+            "id": "crm.lead.content_model.emergency_contact_1_work",
+            "title": "Work",
+            "display": {
+              "width": 4
+            },
+            "position": 32,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "title": {
+            "id": "crm.lead.content_model.emergency_contact_1_title",
+            "title": "Title",
+            "display": {
+              "width": 6
+            },
+            "position": 0,
+            "validations": [
+              {
+                "in": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "mobile": {
+            "id": "crm.lead.content_model.emergency_contact_1_mobile",
+            "title": "Mobile",
+            "display": {
+              "width": 4
+            },
+            "position": 31,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "legal_family_name": {
+            "id": "crm.lead.content_model.emergency_contact_1_legal_family_name",
+            "title": "Legal Family Name",
+            "display": {
+              "width": 6
+            },
+            "position": 1,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "relationship_to_child": {
+            "id": "crm.lead.content_model.emergency_contact_1_relationship_to_child",
+            "title": "Relationship to child",
+            "display": {
+              "width": 12
+            },
+            "position": 20,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "legal_given_name_first": {
+            "id": "crm.lead.content_model.emergency_contact_1_legal_given_name_first",
+            "title": "Legal Given Name: First",
+            "display": {
+              "width": 6
+            },
+            "position": 10,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "legal_given_name_second": {
+            "id": "crm.lead.content_model.emergency_contact_1_legal_given_name_second",
+            "title": "Legal Given Name: Second",
+            "display": {
+              "width": 6
+            },
+            "position": 11,
+            "validations": []
+          }
+        },
+        "title": "Contact 1",
+        "display": {
+          "width": 12,
+          "widget": {
+            "id": null
+          },
+          "htmlBefore": "<p>Please nominate a person <b>other than a parent / guardian / partner</b> who may be contacted in the event of an emergency. Please note they will be contacted only if the school has been unable to reach the parents/legal guardians.</p><p>&nbsp;</p>"
+        },
+        "position": 0
+      },
+      "contact_2": {
+        "key": "contact_2",
+        "path": "emergency.items.contact_2",
+        "type": "Group",
+        "items": {
+          "home": {
+            "id": "crm.lead.content_model.emergency_contact_2_home",
+            "title": "Home",
+            "display": {
+              "width": 4
+            },
+            "position": 30,
+            "validations": []
+          },
+          "work": {
+            "id": "crm.lead.content_model.emergency_contact_2_work",
+            "title": "Work",
+            "display": {
+              "width": 4
+            },
+            "position": 32,
+            "validations": []
+          },
+          "title": {
+            "id": "crm.lead.content_model.emergency_contact_2_title",
+            "title": "Title",
+            "display": {
+              "width": 6
+            },
+            "position": 0,
+            "validations": [
+              {
+                "in": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "required": false
+              }
+            ]
+          },
+          "mobile": {
+            "id": "crm.lead.content_model.emergency_contact_2_mobile",
+            "title": "Mobile",
+            "display": {
+              "width": 4
+            },
+            "position": 31,
+            "validations": []
+          },
+          "legal_family_name": {
+            "id": "crm.lead.content_model.emergency_contact_2_legal_family_name",
+            "title": "Legal Family Name",
+            "display": {
+              "width": 6
+            },
+            "position": 1,
+            "validations": []
+          },
+          "relationship_to_child": {
+            "id": "crm.lead.content_model.emergency_contact_2_relationship_to_child",
+            "title": "Relationship to child",
+            "display": {
+              "width": 12
+            },
+            "position": 20,
+            "validations": []
+          },
+          "legal_given_name_first": {
+            "id": "crm.lead.content_model.emergency_contact_2_legal_given_name_first",
+            "title": "Legal Given Name: First",
+            "display": {
+              "width": 6
+            },
+            "position": 10,
+            "validations": []
+          },
+          "legal_given_name_second": {
+            "id": "crm.lead.content_model.emergency_contact_2_legal_given_name_second",
+            "title": "Legal Given Name: Second",
+            "display": {
+              "width": 6
+            },
+            "position": 11,
+            "validations": []
+          }
+        },
+        "title": "Contact 2",
+        "display": {
+          "width": 12,
+          "widget": {
+            "id": null
+          }
+        },
+        "position": 0
+      }
+    },
+    "title": "4.3. Emergency Contacts",
+    "display": {
+      "width": 12
+    },
+    "position": 43
+  },
+  "residency": {
+    "key": "residency",
+    "type": "Group",
+    "items": {
+      "country_of_birth": {
+        "id": "crm.lead.content_model.residency_country_of_birth",
+        "title": "Country of Birth",
+        "display": {
+          "width": 12
+        },
+        "position": 20,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "residency_status": {
+        "key": "residency_status",
+        "type": "Group",
+        "items": {
+          "status": {
+            "id": "crm.lead.content_model.residency_residency_status_status",
+            "title": "Citizenship or Residency Status",
+            "display": {
+              "width": 12
+            },
+            "position": 0,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "visa_subclass": {
+            "id": "crm.lead.content_model.residency_residency_status_visa_subclass",
+            "title": "Visa Sub-Class No.",
+            "display": {
+              "width": 4,
+              "conditions": [
+                {
+                  "if": {
+                    "!=": [
+                      {
+                        "field": [
+                          "status"
+                        ]
+                      },
+                      "AC"
+                    ]
+                  },
+                  "action": {
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "position": 10,
+            "validations": [
+              {
+                "if": {
+                  "!=": [
+                    {
+                      "field": [
+                        "status"
+                      ]
+                    },
+                    "AC"
+                  ]
+                },
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "date_australia_arrival": {
+            "id": "crm.lead.content_model.residency_residency_status_date_australia_arrival",
+            "title": "Date of Arrival in Australia",
+            "display": {
+              "width": 4,
+              "conditions": [
+                {
+                  "if": {
+                    "!=": [
+                      {
+                        "field": [
+                          "status"
+                        ]
+                      },
+                      "AC"
+                    ]
+                  },
+                  "action": {
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "position": 11,
+            "validations": [
+              {
+                "if": {
+                  "!=": [
+                    {
+                      "field": [
+                        "status"
+                      ]
+                    },
+                    "AC"
+                  ]
+                },
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "date_australia_started_school": {
+            "id": "crm.lead.content_model.residency_residency_status_date_australia_started_school",
+            "title": "Date started school in Australia",
+            "display": {
+              "width": 4,
+              "conditions": [
+                {
+                  "if": {
+                    "!=": [
+                      {
+                        "field": [
+                          "status"
+                        ]
+                      },
+                      "AC"
+                    ]
+                  },
+                  "action": {
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "position": 12,
+            "validations": [
+              {
+                "if": {
+                  "!=": [
+                    {
+                      "field": [
+                        "status"
+                      ]
+                    },
+                    "AC"
+                  ]
+                },
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          }
+        },
+        "title": "Residency Status",
+        "display": {
+          "width": 12,
+          "htmlAfter": "<p>Fees may differ for holders of certain visas. Please refer to the Enrolment Information Pack <a href=\"https://enrolments.cg.catholic.edu.au/enrolment\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">https://enrolments.cg.catholic.edu.au/enrolment</a> for details.</p><p>&nbsp;</p>"
+        },
+        "position": 0
+      }
+    },
+    "title": "1.7. Residency",
+    "display": {
+      "width": 12
+    },
+    "position": 16
+  },
+  "acknowledgement": {
+    "type": "Array",
+    "title": "",
+    "display": {
+      "width": 12,
+      "widget": {
+        "id": "checkbox"
+      }
+    },
+    "options": [
+      {
+        "title": "I acknowledge that any Parent/Guardian the child resides with at any time has been added to this application form.",
+        "value": "1"
+      }
+    ],
+    "position": 22,
+    "validations": [
+      {
+        "message": "This field is required.",
+        "required": true
+      }
+    ]
+  },
+  "contact_details": {
+    "type": "Group",
+    "items": {
+      "primary_email_address": {
+        "id": "core.child.email",
+        "title": "Primary Email Address for Correspondence from School",
+        "display": {
+          "width": 6,
+          "widget": {
+            "id": "singleLine"
+          }
+        },
+        "position": 20,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "alt_residential_address": {
+        "id": "crm.lead.content_model.contact_details_alt_residential_address",
+        "help": "This is the student's alternative place of residence during term when the student lives with parents and/or guardians who live apart and/or who live with other partners.",
+        "title": "Other residential address (if applicable)",
+        "display": {
+          "width": 12
+        },
+        "position": 50,
+        "validations": []
+      },
+      "primary_residential_address": {
+        "id": "crm.lead.content_model.contact_details_primary_residential_address",
+        "title": "Student's Primary Residential Address",
+        "display": {
+          "width": 12
+        },
+        "position": 30,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "title": "1.3. Student Contact Details",
+    "display": {
+      "width": 12,
+      "widget": {
+        "id": null
+      }
+    },
+    "position": 13
+  },
+  "medical_treatment": {
+    "path": "medical_treatment",
+    "type": "Group",
+    "items": {
+      "authorise": {
+        "id": "crm.lead.content_model.medical_treatment_authorise",
+        "title": "I authorise the school to seek necessary medical attention for my child and I agree to pay all costs",
+        "display": {
+          "width": 12
+        },
+        "position": 0,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "emergency_contact": {
+        "id": "crm.lead.content_model.medical_treatment_emergency_contact",
+        "title": "I authorise the person(s) specified as 'Emergency Contacts' to be able to take my child outside the education and care service premises in case of an emergency if the parents/legal guardians cannot be contacted.",
+        "display": {
+          "width": 12
+        },
+        "position": 40,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "authorise_emergency_contact": {
+        "id": "crm.lead.content_model.medical_treatment_authorise_emergency_contact",
+        "title": "I authorise the person(s) specified as ‘EMERGENCY CONTACTS’ to be notified of an emergency involving my child if the parents/legal guardians cannot be contacted",
+        "display": {
+          "width": 12
+        },
+        "position": 10,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "authorise_emergency_contact_consent": {
+        "id": "crm.lead.content_model.medical_treatment_authorise_emergency_contact_consent",
+        "title": "I authorise the person(s) specified as ‘EMERGENCY CONTACTS' to consent to medical treatment of or authorise administration of medication to my child, if the parents/legal guardians cannot be contacted",
+        "display": {
+          "width": 12
+        },
+        "position": 20,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "title": "5.1. Medical Treatment",
+    "display": {
+      "width": 12,
+      "widget": {
+        "id": null
+      }
+    },
+    "position": 51
+  },
+  "school_excursions": {
+    "type": "Group",
+    "items": {
+      "general_locality": {
+        "id": "crm.lead.content_model.school_excursions_general_locality",
+        "title": "I give permission for my child to attend school outings within the general locality",
+        "display": {
+          "width": 12
+        },
+        "position": 0,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "title": "5.2. School Excursions",
+    "display": {
+      "width": 12
+    },
+    "position": 52
+  },
+  "personal_information": {
+    "key": "personal_information",
+    "type": "Group",
+    "items": {
+      "gender": {
+        "id": "core.child.gender_id",
+        "key": "gender",
+        "title": "Gender",
+        "display": {
+          "width": 6,
+          "widget": {
+            "id": "radio",
+            "layout": "horizontal"
+          }
+        },
+        "position": 1,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "date_of_birth": {
+        "id": "core.child.date_of_birth",
+        "key": "date_of_birth",
+        "type": "Date",
+        "title": "Date of Birth",
+        "display": {
+          "width": 6,
+          "widget": {
+            "id": "datePicker"
+          }
+        },
+        "position": 0,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "title": "1.4. Personal Information",
+    "display": {
+      "width": 12,
+      "widget": {
+        "id": null
+      }
+    },
+    "position": 14
+  },
+  "parent_legal_guardian": {
+    "type": "Collection",
+    "items": {
+      "email": {
+        "id": "core.guardian.email",
+        "title": "Email",
+        "display": {
+          "width": 12,
+          "widget": {
+            "id": "email"
+          }
+        },
+        "position": 20,
+        "validations": [
+          {
+            "regex": {
+              "flags": null,
+              "pattern": "^\\w[\\w.-]*@([\\w-]+\\.)+[\\w-]+$"
+            }
+          },
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "title": {
+        "id": "core.guardian.salutation_id",
+        "title": "Title",
+        "display": {
+          "width": 6,
+          "widget": {
+            "id": "dropdown"
+          }
+        },
+        "position": 3,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "gender": {
+        "id": "core.guardian.gender_id",
+        "title": "Gender",
+        "display": {
+          "width": 6,
+          "widget": {
+            "id": "radio",
+            "layout": "horizontal"
+          }
+        },
+        "position": 41,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "status": {
+        "id": "core.guardian.content_model.status",
+        "title": "Citizenship or Residency Status",
+        "display": {
+          "width": 6
+        },
+        "position": 71,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "childcare": {
+        "type": "Group",
+        "items": {
+          "date_of_birth": {
+            "id": "core.guardian.date_of_birth",
+            "type": "Date",
+            "title": "Parent's Date of Birth",
+            "display": {
+              "width": 6,
+              "widget": {
+                "id": "datePicker"
+              },
+              "conditions": [
+                {
+                  "if": {
+                    "==": [
+                      {
+                        "field": [
+                          "parent_childcare_subsidy"
+                        ]
+                      },
+                      "1"
+                    ]
+                  },
+                  "action": {
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "position": 2,
+            "validations": [
+              {
+                "if": {
+                  "==": [
+                    {
+                      "field": [
+                        "parent_childcare_subsidy"
+                      ]
+                    },
+                    "1"
+                  ]
+                },
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "child_crn_number": {
+            "id": "core.guardian.content_model.childcare_child_crn_number",
+            "title": "Child's Centrelink Reference Number (CRN)",
+            "display": {
+              "width": 6,
+              "conditions": [
+                {
+                  "if": {
+                    "==": [
+                      {
+                        "field": [
+                          "parent_childcare_subsidy"
+                        ]
+                      },
+                      "1"
+                    ]
+                  },
+                  "action": {
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "position": 4,
+            "validations": [
+              {
+                "if": {
+                  "==": [
+                    {
+                      "field": [
+                        "parent_childcare_subsidy"
+                      ]
+                    },
+                    "1"
+                  ]
+                },
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "parent_crn_number": {
+            "id": "core.guardian.content_model.childcare_parent_crn_number",
+            "title": "Parent's Centrelink Reference Number (CRN)",
+            "display": {
+              "width": 6,
+              "conditions": [
+                {
+                  "if": {
+                    "==": [
+                      {
+                        "field": [
+                          "parent_childcare_subsidy"
+                        ]
+                      },
+                      "1"
+                    ]
+                  },
+                  "action": {
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "position": 3,
+            "validations": [
+              {
+                "if": {
+                  "==": [
+                    {
+                      "field": [
+                        "parent_childcare_subsidy"
+                      ]
+                    },
+                    "1"
+                  ]
+                },
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "parent_childcare_subsidy": {
+            "id": "core.guardian.content_model.childcare_parent_childcare_subsidy",
+            "title": "Parent Eligible for Childcare Subsidy?",
+            "display": {
+              "width": 6
+            },
+            "position": 1,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          }
+        },
+        "position": 69
+      },
+      "diversity": {
+        "type": "Group",
+        "items": {
+          "religion": {
+            "id": "core.guardian.religion_reference",
+            "title": "Religion",
+            "display": {
+              "width": 6
+            },
+            "position": 81,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "spoken_languages": {
+            "id": "core.guardian.content_model.diversity_spoken_languages",
+            "title": "Spoken Languages",
+            "display": {
+              "width": 6,
+              "conditions": [
+                {
+                  "if": {
+                    "==": [
+                      {
+                        "field": [
+                          "language_other_than_english"
+                        ]
+                      },
+                      "1"
+                    ]
+                  },
+                  "action": {
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "position": 112,
+            "validations": [
+              {
+                "if": {
+                  "==": [
+                    {
+                      "field": [
+                        "language_other_than_english"
+                      ]
+                    },
+                    "1"
+                  ]
+                },
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "main_spoken_language": {
+            "id": "core.guardian.content_model.diversity_main_spoken_language",
+            "title": "Main Spoken Language",
+            "display": {
+              "width": 6,
+              "conditions": [
+                {
+                  "if": {
+                    "==": [
+                      {
+                        "field": [
+                          "language_other_than_english"
+                        ]
+                      },
+                      "1"
+                    ]
+                  },
+                  "action": {
+                    "visible": true
+                  }
+                }
+              ]
+            },
+            "position": 111,
+            "validations": [
+              {
+                "if": {
+                  "==": [
+                    {
+                      "field": [
+                        "language_other_than_english"
+                      ]
+                    },
+                    "1"
+                  ]
+                },
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "language_other_than_english": {
+            "id": "core.guardian.content_model.diversity_language_other_than_english",
+            "title": "Does the Parent/Legal Guardian speak a language other than English at home?",
+            "display": {
+              "width": 6
+            },
+            "position": 110,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          }
+        },
+        "position": 82
+      },
+      "employment": {
+        "type": "Group",
+        "items": {
+          "occupation": {
+            "id": "core.guardian.content_model.employment_occupation",
+            "title": "Occupation",
+            "display": {
+              "width": 6
+            },
+            "position": 1,
+            "validations": []
+          },
+          "employer_name": {
+            "id": "core.guardian.content_model.employment_employer_name",
+            "title": "Name of employer",
+            "display": {
+              "width": 6
+            },
+            "position": 0,
+            "validations": []
+          },
+          "australian_defence_force_member": {
+            "id": "core.guardian.content_model.employment_australian_defence_force_member",
+            "title": "Are you a member of the Australian Defence Force",
+            "display": {
+              "width": 6
+            },
+            "position": 2,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          }
+        },
+        "position": 81
+      },
+      "home_address": {
+        "id": "core.guardian.content_model.home_address",
+        "title": "Home Address",
+        "display": {
+          "width": 12
+        },
+        "position": 59,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "phone_numbers": {
+        "type": "Collection",
+        "items": {
+          "type": {
+            "id": "core.guardian.phone_numbers.label",
+            "title": "Type",
+            "display": {
+              "width": 6,
+              "widget": {
+                "id": "dropdown"
+              }
+            },
+            "position": 1,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "number": {
+            "id": "core.guardian.phone_numbers.number",
+            "title": "Number",
+            "display": {
+              "width": 6,
+              "widget": {
+                "id": "phone"
+              }
+            },
+            "position": 0,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          }
+        },
+        "title": "Phone Numbers",
+        "display": {
+          "width": 12,
+          "widget": {
+            "id": null
+          }
+        },
+        "position": 50,
+        "validations": [
+          {
+            "min": 1,
+            "message": "Please add at least 1 number."
+          }
+        ]
+      },
+      "visa_subclass": {
+        "id": "core.guardian.content_model.visa_subclass",
+        "title": "If on a Visa, please state Visa Subclass",
+        "display": {
+          "width": 6
+        },
+        "position": 80,
+        "validations": []
+      },
+      "education_group": {
+        "type": "Group",
+        "items": {
+          "occupation_group": {
+            "id": "core.guardian.content_model.education_group_occupation_group",
+            "title": "Occupation Group",
+            "display": {
+              "width": 12
+            },
+            "position": 140,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "school_education": {
+            "id": "core.guardian.content_model.education_group_school_education",
+            "title": "School Education",
+            "display": {
+              "width": 6
+            },
+            "position": 130,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          },
+          "non_school_education": {
+            "id": "core.guardian.content_model.education_group_non_school_education",
+            "title": "Non-School Education",
+            "display": {
+              "width": 6
+            },
+            "position": 131,
+            "validations": [
+              {
+                "message": "This field is required.",
+                "required": true
+              }
+            ]
+          }
+        },
+        "display": {
+          "width": 12,
+          "widget": {
+            "id": null
+          },
+          "htmlBefore": "<p>The following information is required by the Australian Government’s “<strong>National Reporting on Student Outcomes</strong>”.</p><p>It is merely a collection of information and has no bearing on the outcome of the enrolment application.</p><p>&nbsp;</p>"
+        },
+        "position": 120
+      },
+      "country_of_birth": {
+        "id": "core.guardian.content_model.country_of_birth",
+        "title": "Country of Birth",
+        "display": {
+          "width": 12
+        },
+        "position": 70,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "legal_family_name": {
+        "id": "core.guardian.last_name",
+        "title": "Legal Family Name",
+        "display": {
+          "width": 6,
+          "widget": {
+            "id": "singleLine"
+          }
+        },
+        "position": 4,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "other_home_address": {
+        "id": "core.guardian.address_lookup",
+        "title": "Other Home Address",
+        "display": {
+          "width": 12,
+          "conditions": [
+            {
+              "if": {
+                "==": [
+                  {
+                    "field": [
+                      "home_address"
+                    ]
+                  },
+                  "other"
+                ]
+              },
+              "action": {
+                "visible": true
+              }
+            }
+          ]
+        },
+        "position": 60,
+        "validations": []
+      },
+      "legal_given_name_first": {
+        "id": "core.guardian.first_name",
+        "title": "Legal Given Name: First",
+        "display": {
+          "width": 6,
+          "widget": {
+            "id": "singleLine"
+          }
+        },
+        "position": 10,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      },
+      "legal_given_name_second": {
+        "id": "core.guardian.middle_name",
+        "title": "Legal Given Name: Second",
+        "display": {
+          "width": 6,
+          "widget": {
+            "id": "singleLine"
+          }
+        },
+        "position": 11,
+        "validations": []
+      },
+      "relationship_to_student": {
+        "id": "core.guardian_relationship.relationship_id",
+        "help": "\"Other Partners\"  refer to separated families where a parent/legal guardian lives with another partner. If this option is selected, please ensure valid parent/legal guardian information is entered.",
+        "title": "Relationship to Student",
+        "display": {
+          "width": 6,
+          "widget": {
+            "id": "dropdown"
+          }
+        },
+        "options": [
+          {
+            "title": "Mother",
+            "value": 1
+          },
+          {
+            "title": "Father",
+            "value": 2
+          },
+          {
+            "title": "Legal Guardian",
+            "value": 13
+          },
+          {
+            "title": "Other Partner/Carer",
+            "value": 14
+          }
+        ],
+        "position": 40,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "title": "2.1. Parent/Legal Guardian",
+    "display": {
+      "width": 12,
+      "widget": {
+        "id": null
+      },
+      "addLabel": "Add another Parent/Legal Guardian"
+    },
+    "position": 21,
+    "validations": [
+      {
+        "min": 1,
+        "where": {
+          "in": [
+            {
+              "field": [
+                "relationship_to_student"
+              ]
+            },
+            [
+              13,
+              1,
+              2
+            ]
+          ]
+        },
+        "message": "At least one (1) legal guardian must be added to the application"
+      }
+    ]
+  },
+  "information_privacy_act": {
+    "type": "Group",
+    "items": {
+      "consent": {
+        "id": "crm.lead.content_model.information_privacy_act_consent",
+        "title": "I acknowledge Catholic Education may need to disclose my personal and sensitive information as defined in the Information Privacy Act 2014 (ACT), including origin, education, background, address details, names of parents to the Australian Government’s Department of Education and Training for statistical purposes",
+        "display": {
+          "width": 12
+        },
+        "position": 0,
+        "validations": [
+          {
+            "message": "This field is required.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "title": "5.4. Information to be provided to Australian Government for Statistical Purposes",
+    "display": {
+      "width": 12,
+      "widget": {
+        "id": null
+      }
+    },
+    "position": 54
+  }
+}

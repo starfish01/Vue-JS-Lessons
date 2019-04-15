@@ -2,10 +2,14 @@ var request = require('request');
 var cheerio = require('cheerio');
 
 import * as validation from '../scrape_scripts/validation';
+import {widthCalculate} from './widthFix';
+import {hideShowBuilder} from './hideShow';
+import {funnelMapper} from '../funnel_format/funnelMapper';
 
 var metadata = []
 var buttonData = []
 var fieldData = []
+var pages = []
 
 function scrapFn(website) {
 
@@ -24,107 +28,27 @@ function scrapFn(website) {
             console.log('2')
             var $ = cheerio.load(html)
 
+            let validations = validation.validate(html)
+
             //items to be made required
-            let requiredItems = [];
+            let requiredItems = validations.requiredItems;
 
             //hideshow array
-            let hideShowArray = [];
+            let hideShowArray = validations.hideShowArray;       
 
-            console.log(validation.validate($).data.requiredItems)
+            $('div.page-header').first().text();
 
+            let wholeTitle = $('div.page-header').first().text().trim()
 
+            let pageNumber = wholeTitle.match(new RegExp("[0-9]+"))[0]
 
+            let title = wholeTitle.slice(wholeTitle.match(new RegExp("[0-9]+")).length+1,wholeTitle.length).trim()
 
-            console.log(validation.validate(6))
-
-            $('script').each((i, el) => {
-
-                if ($(el).html().length !== 0) {
-                    let scripts = $(el).html()
-                    // console.log(scripts)
-
-                    // var position = scripts.search('formgroup_ids')
-                    // // console.log(position)
-
-                    //can confirm this returns for singleline, datapicker, select
-                    let firstSetOfRequired = scripts.match(new RegExp("formgroup_ids\[[0-9]+\]", "g"))
-                    if (firstSetOfRequired !== null) {
-                        firstSetOfRequired.forEach((el) => {
-                            let item = el.match(RegExp("[0-9]+", "g"))
-                            requiredItems.push(item[0])
-                        })
-                    }
-
-                    let customJS = scripts.match(new RegExp("toggle_fields\\([1-9]+,", "g"))
-
-                    // console.log(customJS)
-
-                    if (customJS !== null) {
-                        // console.log(customJS)
-
-                        customJS.forEach((el) => {
-
-                            // let some = String(scripts);
-
-                            let startIndex = scripts.indexOf(el)
-                            let searchString = scripts.slice(startIndex)
-                            let endIndex = searchString.indexOf(')')
-
-                            let toggle = scripts.slice(startIndex + 14, endIndex + startIndex)
-
-                            toggle = toggle.replace(/'/g, "\"");
-
-                            let firstComma = toggle.indexOf(',')
-
-                            let firstCloseSquare = toggle.indexOf(']')
-                            let secondComma = toggle.slice(firstComma, toggle.indexOf(','))
-
-                            if (firstCloseSquare > secondComma) {
-                                secondComma = toggle.slice(firstCloseSquare).indexOf(',') + firstCloseSquare
-                            }
-
-                            let endvalues = []
-
-                            if (endvalues.indexOf('[') > -1) {
-                                //dealing with an array of conditions
-                                endvalues = endvalues.slice(secondComma + 1, toggle.length).replace(/\[/g, "").replace(/\]/g, "").trim().split(',')
-                            } else {
-                                //single
-                                endvalues.push(toggle.slice(secondComma + 1, toggle.length).trim().replace(/\"/g, ""))
-                            }
-
-                            if (endvalues[0] === '"') {
-                                //makes sure its not double quoted
-                                endvalues = endvalues.slice(1, endvalues.length - 1)
-                            }
-
-                            let toBeTriggered = []
-
-                            if (toggle.slice(firstComma + 1, secondComma).indexOf('[') > -1) {
-                                //if an array create an array
-                                toBeTriggered = toggle.slice(firstComma + 1, secondComma).trim().replace(/\[/g, "").replace(/\]/g, "").split(",")
-                            } else {
-                                //single item
-                                toBeTriggered.push(toggle.slice(firstComma + 1, secondComma).trim())
-                            }
-
-                            let trigger = toggle.slice(0, firstComma)
-                            // let toBeTriggered = toggle.slice(firstComma+1,secondComma).trim()
-                            let triggerValues = endvalues
-
-                            hideShowArray.push({
-                                trigger,
-                                toBeTriggered,
-                                triggerValues
-                            })
-
-
-                        })
-                    }
-
-                }
-            })
-
+            let page = {
+                pageNumber,
+                title,
+                content : []
+            }
 
 
             $('fieldset').each((i, el) => {
@@ -158,22 +82,11 @@ function scrapFn(website) {
 
 
                     let helpText;
-                    //looks like this
-                    //<p class="help-block">Use format of <strong>Name, Age, Current School (if applicable)</strong>. New line per sibling.</p>
 
                     let placeholder;
-                    //placeholder looks to be just an attribute
-                    //placeholder="If applicable..."
 
                     let wysiwygContent;
 
-                    //check if field is required
-                    // if($(el).find('p').attr('class')){
-                    //     console.log($(el).find('p').attr('class'))
-                    // }
-
-                    //This was part of the if but seems to have caused some issues
-                    //&& $(el).first().attr('name').includes("wysiwyg")
 
                     if ($(el).first().attr('name') !== undefined) {
 
@@ -203,6 +116,8 @@ function scrapFn(website) {
                                     placeholder = $(el).children().next().attr('placeholder')
 
                                 } else if ($(el).children().next()[0].name === 'div') {
+
+
 
                                     let classString = $(el).children().next().attr('class')
 
@@ -345,16 +260,14 @@ function scrapFn(website) {
                         required = true
                     }
 
-                    //checks if it is conditionally displayed
-                    hideShowArray.forEach((el) => {
-                        el.toBeTriggered.forEach((data) => {
-                            if (elementID == data) {
-                                hideShows.push({ triggerValues: el.triggerValues })
-                                hideShows.push({ trigger: el.trigger })
-                            }
-                        })
-                    })
 
+                    //  manages hide and shows
+                    // it may be better to place in a group and then show and hide
+                    hideShows = hideShowBuilder(elementID,hideShowArray)
+
+
+                    //e2 only accepts widths of 3, 4, 6 and, 12
+                    width = widthCalculate(width)
 
                     fieldGroup.fieldGroupfields.push({
                         elementID,
@@ -382,6 +295,13 @@ function scrapFn(website) {
 
             })
 
+            console.log(page)
+
+            page.content = fieldData
+
+            pages.push(page)
+
+            funnelMapper(fieldData)
 
         }
 
@@ -392,4 +312,4 @@ function scrapFn(website) {
 
 function data(val) { return val }
 
-export { data, metadata, buttonData, scrapFn, fieldData };
+export { data, metadata, buttonData, scrapFn, fieldData, pages };
