@@ -1,11 +1,11 @@
 var request = require('request');
 var cheerio = require('cheerio');
 
+import * as validation from '../scrape_scripts/validation';
+
 var metadata = []
 var buttonData = []
 var fieldData = []
-
-var hideShowArray = []
 
 function scrapFn(website) {
 
@@ -26,6 +26,16 @@ function scrapFn(website) {
 
             //items to be made required
             let requiredItems = [];
+
+            //hideshow array
+            let hideShowArray = [];
+
+            console.log(validation.validate($).data.requiredItems)
+
+
+
+
+            console.log(validation.validate(6))
 
             $('script').each((i, el) => {
 
@@ -49,7 +59,6 @@ function scrapFn(website) {
 
                     // console.log(customJS)
 
-                    let workCustomJS = [];
                     if (customJS !== null) {
                         // console.log(customJS)
 

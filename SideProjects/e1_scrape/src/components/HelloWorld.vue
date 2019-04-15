@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import * as metadata from "../scrape";
+import * as metadata from "../scrape_scripts/scrape";
 
 export default {
   data: () => ({

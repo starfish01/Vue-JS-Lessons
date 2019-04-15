@@ -17,7 +17,7 @@
           dark
           v-on="on"
         >
-          Version 0.1.1
+          Version 0.2
         </v-btn>
       </template>
 
@@ -26,7 +26,7 @@
           class="headline grey lighten-2"
           primary-title
         >
-          Version 0.1
+          Version 0.2
         </v-card-title>
 
         <v-card-text>
