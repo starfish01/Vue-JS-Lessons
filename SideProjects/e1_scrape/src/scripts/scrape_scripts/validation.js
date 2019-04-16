@@ -98,6 +98,8 @@ export function validate(scrape){
         }
     })
 
+    console.log(hideShowArray)
+
     let data = {requiredItems,hideShowArray}
 
     return data

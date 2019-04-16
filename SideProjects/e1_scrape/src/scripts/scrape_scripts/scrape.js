@@ -52,7 +52,6 @@ function scrapFn(website) {
 
 
             $('fieldset').each((i, el) => {
-                console.log(i)
 
                 let id = $(el).attr('id').substring(9, $(el).attr('id').length)
                 let title = $(el).children().first().text().trim().substring(4, $(el).text().trim().length)
@@ -118,24 +117,17 @@ function scrapFn(website) {
                             //hidden title fix
                             if($(el).children().next()[0] === undefined){
                                 //has no title
-                                console.log('No title')
-                                console.log($(el).children().next()[0])
+                                typeOfField = $(el).children()[0].name
 
-                                typeOfField = $(el).children()[0]
-
-                                console.log($(el).children()[0])
                             } else {
                                 // does have title
-
-                                typeOfField = $(el).children().next()[0]
+                                typeOfField = $(el).children().next()[0].name
                                 
-
                             }
 
 
 
                             if (typeOfField !== undefined) {
-                                console.log('bang')
                                 if (typeOfField === 'input') {
 
                                     type = 'singleLine';
@@ -149,8 +141,6 @@ function scrapFn(website) {
                                     placeholder = $(el).children().next().attr('placeholder')
 
                                 } else if (typeOfField === 'div') {
-
-
 
                                     let classString = $(el).children().next().attr('class')
 
@@ -223,6 +213,8 @@ function scrapFn(website) {
                                     type = 'select';
 
                                     helpText = $(el).find('p.help-block').text()
+
+                                    // console.log(title)
 
                                     width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
 
