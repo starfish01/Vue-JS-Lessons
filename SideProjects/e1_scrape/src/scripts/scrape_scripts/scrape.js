@@ -55,7 +55,7 @@ function scrapFn(website) {
 
                 let id = $(el).attr('id').substring(9, $(el).attr('id').length)
                 let title = $(el).children().first().text().trim().substring(4, $(el).text().trim().length)
-                let positionOfGroup = (i + 1) * 10;
+                let positionOfGroup = pageNumber + "" + i;
 
                 let fieldGroup = {
                     id,

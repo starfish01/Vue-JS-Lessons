@@ -30,7 +30,13 @@
         </v-card-title>
 
         <v-card-text>
-          <p>Last updated: 13/04/2019</p>
+          <p>Last updated: 17/04/2019</p>
+          <p>Update: 17/04/2019</p>
+          <ul>
+            <li>Fix for fields with hidden titles</li>
+            <li>Started work on mapping captured data</li>
+          </ul>
+<br>
           <p>Doesn't support:</p>
           <ul>
             <li>Funnel JSON output yet</li>

@@ -38,10 +38,10 @@ export default {
   data: () => ({
     data: 0,
     buttonData: [],
-    funnelData: [],
+    funnelData:'',
     buttonClicked: false,
-    website1: "",
-    website:"https://msmc.digistormenrol.com.au/applications/enrolment/70nkzNpdGqwdyc3msPfbF90nGLqfNcMXzvb54mrrYDNjnMEQJH/step/family-information"
+    website: "",
+    website3:"https://msmc.digistormenrol.com.au/applications/enrolment/70nkzNpdGqwdyc3msPfbF90nGLqfNcMXzvb54mrrYDNjnMEQJH/step/family-information"
    ,website2:
       "https://digistorm-college.digistormenrol.com.au/applications/general/EDHDIZiohSs4niIZmIEhgSyBkpu50h95lSvk2kdmiUSwNYayvU/step/student-details"
   }),
@@ -68,6 +68,9 @@ export default {
 
       this.buttonData = metadata.pages;
 
+
+      // this.funnelData = funnelBuilder.funnelMap;
+
     },
     btnDataPrint() {
       console.log(this.buttonData);
@@ -78,6 +81,8 @@ export default {
 
 <style>
 code {
-  text-align: left;
+    width: 90%;
+    text-align: left;
+    margin: 0px 10px;
 }
 </style>

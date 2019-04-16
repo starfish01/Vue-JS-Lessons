@@ -28,7 +28,7 @@ export function validate(scrape){
                 })
             }
 
-            let customJS = scripts.match(new RegExp("toggle_fields\\([1-9]+,", "g"))
+            let customJS = scripts.match(new RegExp("toggle_fields\\([0-9]+,", "g"))
 
             // console.log(customJS)
 
@@ -98,7 +98,6 @@ export function validate(scrape){
         }
     })
 
-    console.log(hideShowArray)
 
     let data = {requiredItems,hideShowArray}
 

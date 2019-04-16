@@ -10,16 +10,5 @@ export function hideShowBuilder(elementID,hideShowArray){
         })
     })
 
-    if(elementID === '32610'){
-        console.log(hideShows)
-        console.log('yes')
-        hideShowArray.forEach((el) => {
-            el.toBeTriggered.forEach((data) => {
-                console.log(data)
-            })
-        })
-
-    }
-
     return hideShows;
 }
