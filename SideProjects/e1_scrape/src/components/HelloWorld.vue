@@ -23,7 +23,7 @@
       <v-flex xs6>
         <h3>Funnel</h3>
         <hr>
-        <code v-if="buttonData.length > 0 && buttonClicked"></code>
+        <code v-if="buttonData.length > 0 && buttonClicked">{{ funnelData }}</code>
       </v-flex>
       <v-flex xs6></v-flex>
     </v-layout>
@@ -31,15 +31,18 @@
 </template>
 
 <script>
-import * as metadata from "../scrape_scripts/scrape";
+import * as metadata from "../scripts/scrape_scripts/scrape";
+import * as funnelBuilder from '../scripts/funnel_format/funnelMapper';
 
 export default {
   data: () => ({
     data: 0,
     buttonData: [],
+    funnelData: [],
     buttonClicked: false,
     website1: "",
-    website:
+    website:"https://msmc.digistormenrol.com.au/applications/enrolment/70nkzNpdGqwdyc3msPfbF90nGLqfNcMXzvb54mrrYDNjnMEQJH/step/family-information"
+   ,website2:
       "https://digistorm-college.digistormenrol.com.au/applications/general/EDHDIZiohSs4niIZmIEhgSyBkpu50h95lSvk2kdmiUSwNYayvU/step/student-details"
   }),
   computed: {
@@ -60,11 +63,8 @@ export default {
     scrapeBtn() {
       this.buttonClicked = true;
       this.buttonData = [];
-      // this.data = metadata.data('hj')
-      // console.log(this.website);
+
       metadata.scrapFn(this.website);
-      // this.data = metadata.metadata;
-      // this.buttonData = metadata.buttonData;
 
       this.buttonData = metadata.pages;
 

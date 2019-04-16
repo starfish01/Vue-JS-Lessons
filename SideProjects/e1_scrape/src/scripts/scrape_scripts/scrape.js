@@ -52,6 +52,7 @@ function scrapFn(website) {
 
 
             $('fieldset').each((i, el) => {
+                console.log(i)
 
                 let id = $(el).attr('id').substring(9, $(el).attr('id').length)
                 let title = $(el).children().first().text().trim().substring(4, $(el).text().trim().length)
@@ -98,12 +99,44 @@ function scrapFn(website) {
 
                     } else {
 
+                                        
                         title = $(el).find('label').first().text().replace(/(\r\n|\n|\r)/gm, "").trim()
+
+
+                        if(title.length === 0 ){
+                            title = 'hidden_title'
+                        }
+
+                    
 
                         if ($(el).children().html() !== '') {
 
-                            if ($(el).children().next()[0].name !== undefined) {
-                                if ($(el).children().next()[0].name === 'input') {
+
+                            let typeOfField;
+                            // NEED TO WORK HERE TO RESOLVE THE ISSUE
+
+                            //hidden title fix
+                            if($(el).children().next()[0] === undefined){
+                                //has no title
+                                console.log('No title')
+                                console.log($(el).children().next()[0])
+
+                                typeOfField = $(el).children()[0]
+
+                                console.log($(el).children()[0])
+                            } else {
+                                // does have title
+
+                                typeOfField = $(el).children().next()[0]
+                                
+
+                            }
+
+
+
+                            if (typeOfField !== undefined) {
+                                console.log('bang')
+                                if (typeOfField === 'input') {
 
                                     type = 'singleLine';
 
@@ -115,7 +148,7 @@ function scrapFn(website) {
 
                                     placeholder = $(el).children().next().attr('placeholder')
 
-                                } else if ($(el).children().next()[0].name === 'div') {
+                                } else if (typeOfField === 'div') {
 
 
 
@@ -186,7 +219,7 @@ function scrapFn(website) {
 
                                     }
 
-                                } else if ($(el).children().next()[0].name === 'select') {
+                                } else if (typeOfField === 'select') {
                                     type = 'select';
 
                                     helpText = $(el).find('p.help-block').text()
@@ -229,7 +262,7 @@ function scrapFn(website) {
                                         )
                                     }
 
-                                } else if ($(el).children().next()[0].name === 'br') {
+                                } else if (typeOfField === 'br') {
                                     type = 'file';
 
                                     elementID = $(el).first().attr('data-formgroup-id')
@@ -238,7 +271,7 @@ function scrapFn(website) {
 
                                     width = $(el).parent().first().attr('class').substring(7, $(el).first().attr('class').length)
 
-                                } else if ($(el).children().next()[0].name === 'textarea') {
+                                } else if (typeOfField === 'textarea') {
                                     type = 'textarea';
 
                                     helpText = $(el).find('p.help-block').text()
@@ -295,16 +328,14 @@ function scrapFn(website) {
 
             })
 
-            console.log(page)
-
             page.content = fieldData
 
             pages.push(page)
 
-            funnelMapper(fieldData)
-
         }
 
+
+        funnelMapper(pages)
 
     })
 
