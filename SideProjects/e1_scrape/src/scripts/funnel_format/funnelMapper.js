@@ -3,6 +3,7 @@ var funnelMap = {};
 import * as slugit from './slugifyItems'
 
 import * as singleLine from './fields/singleLineBuilder'
+import * as datePicker from './fields/datePickerBuilder'
 
 
 export function funnelMapper(data) {
@@ -11,7 +12,7 @@ export function funnelMapper(data) {
 
     let scrapeData = data[0].content
 
-    scrapeData.forEach((data)=>{
+    scrapeData.forEach((data) => {
 
         let fieldSetTitleSlug = slugit.slugFn(data.title)
 
@@ -19,12 +20,12 @@ export function funnelMapper(data) {
 
         funnelMap[fieldSetTitleSlug] = {
             type: "Group",
-                "display": {
-                    "width": 12
-                },
-                "position": data.positionOfGroup,
-                "items": fields,
-                "title": data.title
+            "display": {
+                "width": 12
+            },
+            "position": data.positionOfGroup,
+            "items": fields,
+            "title": data.title
         }
     })
 
@@ -33,26 +34,28 @@ export function funnelMapper(data) {
 
 function fieldSetFields(data) {
 
-    let q = {}
+    let field = {}
 
 
-    data.forEach((data)=>{
+    data.forEach((data) => {
 
         let title = slugit.slugFn(data.title)
 
         switch (data.type) {
-            case 'singleLine': 
-            q[title] =  singleLine.singleLineBuilder(data)
-           
-            break;
-        
+            case 'singleLine':
+                field[title] = singleLine.singleLineBuilder(data)
+                break;
+            case 'datepicker':
+                field[title] = datePicker.datePickerBuilder(data)
+                break;
+
             default:
                 break;
         }
-        
+
     })
 
-    return q
+    return field
 }
 
 export { funnelMap }
