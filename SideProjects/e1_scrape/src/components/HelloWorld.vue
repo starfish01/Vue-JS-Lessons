@@ -40,8 +40,8 @@ export default {
     buttonData: [],
     funnelData:'',
     buttonClicked: false,
-    website: "",
-    website3:"https://msmc.digistormenrol.com.au/applications/enrolment/70nkzNpdGqwdyc3msPfbF90nGLqfNcMXzvb54mrrYDNjnMEQJH/step/family-information"
+    website3: "",
+    website:"https://msmc.digistormenrol.com.au/applications/enrolment/70nkzNpdGqwdyc3msPfbF90nGLqfNcMXzvb54mrrYDNjnMEQJH/step/family-information"
    ,website2:
       "https://digistorm-college.digistormenrol.com.au/applications/general/EDHDIZiohSs4niIZmIEhgSyBkpu50h95lSvk2kdmiUSwNYayvU/step/student-details"
   }),
@@ -69,7 +69,7 @@ export default {
       this.buttonData = metadata.pages;
 
 
-      // this.funnelData = funnelBuilder.funnelMap;
+      this.funnelData = funnelBuilder.funnelMap;
 
     },
     btnDataPrint() {

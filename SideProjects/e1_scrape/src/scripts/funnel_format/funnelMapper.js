@@ -1,57 +1,58 @@
 var funnelMap = {};
 
+import * as slugit from './slugifyItems'
+
+import * as singleLine from './fields/singleLineBuilder'
+
 
 export function funnelMapper(data) {
 
+    console.log(data)
 
-    // let scrapeData = data[0].content
+    let scrapeData = data[0].content
 
-    // //fieldSet
-    // let parentLayer = {
-    //     type: "Group",
-    //     "display": {
-    //         "width": 12
-    //     },
-    //     "position": data[0].pageNumber,
-    //     "items": {},
-    //     "title": ""
-    // }
+    scrapeData.forEach((data)=>{
 
-    // scrapeData.forEach(fieldSet => {
+        let fieldSetTitleSlug = slugit.slugFn(data.title)
 
-    //     //fieldSet
-    //     funnelMap.content( parentLayer = {
-    //         type: "Group",
-    //         "display": {
-    //             "width": 12
-    //         },
-    //         "position": "",
-    //         "items": {},
-    //         "title": ""
-    //     })
+        let fields = fieldSetFields(data.fieldGroupfields)
 
-    // });
+        funnelMap[fieldSetTitleSlug] = {
+            type: "Group",
+                "display": {
+                    "width": 12
+                },
+                "position": data.positionOfGroup,
+                "items": fields,
+                "title": data.title
+        }
+    })
 
-    // //fieldSet
-    // let parentLayer = {
-    //     type: "Group",
-    //     "display": {
-    //         "width": 12
-    //     },
-    //     "position": data[0].pageNumber,
-    //     "items": {},
-    //     "title": ""
-    // }
+}
 
 
-    //name object
-    // funnelMap[data[0].title] = parentLayer
+function fieldSetFields(data) {
+
+    let q = {}
 
 
+    data.forEach((data)=>{
 
+        let title = slugit.slugFn(data.title)
 
+        switch (data.type) {
+            case 'singleLine': 
+            q[title] =  singleLine.singleLineBuilder(data)
+           
+            break;
+        
+            default:
+                break;
+        }
+        
+    })
 
-
+    return q
 }
 
 export { funnelMap }
