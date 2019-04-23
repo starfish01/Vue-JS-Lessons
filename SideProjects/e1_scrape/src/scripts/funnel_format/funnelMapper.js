@@ -5,6 +5,8 @@ import * as slugit from './slugifyItems'
 import * as singleLine from './fields/singleLineBuilder'
 import * as datePicker from './fields/datePickerBuilder'
 
+import * as defaultBuilder from './fields/defaultBuilder'
+
 
 export function funnelMapper(data) {
 
@@ -41,17 +43,7 @@ function fieldSetFields(data) {
 
         let title = slugit.slugFn(data.title)
 
-        switch (data.type) {
-            case 'singleLine':
-                field[title] = singleLine.singleLineBuilder(data)
-                break;
-            case 'datepicker':
-                field[title] = datePicker.datePickerBuilder(data)
-                break;
-
-            default:
-                break;
-        }
+        field[title] = defaultBuilder.fieldBuilder(data)
 
     })
 

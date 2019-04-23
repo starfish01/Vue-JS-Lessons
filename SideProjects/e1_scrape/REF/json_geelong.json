@@ -1,0 +1,918 @@
+{
+    
+    "students_details": {
+        "type": "Group",
+        "items": {
+            "christian_name": {
+                "id": "core.child.first_name",
+                "title": "Christian Name",
+                "display": {
+                    "width": 6,
+                    "conditions": []
+                },
+                "position": 1,
+                "validations": [
+                    {
+                        "message": "This field is required",
+                        "required": true
+                    }
+                ]
+            },
+            "surname": {
+                "id": "core.child.last_name",
+                "title": "Surname",
+                "display": {
+                    "width": 6
+                },
+                "position": 2,
+                "validations": [
+                    {
+                        "message": "This field is required",
+                        "required": true
+                    }
+                ]
+            },
+            "date_of_birth": {
+                "id": "core.child.date_of_birth",
+                "display": {
+                    "width": 6
+                },
+                "position": 11,
+                "validations": [
+                    {
+                        "min": "{{date('1950-01-01')}}",
+                        "message": "This field is required"
+                    },
+                    {
+                        "type": "Date",
+                        "message": "This field is required"
+                    },
+                    {
+                        "message": "This field is required",
+                        "required": true
+                    }
+                ]
+            },
+            "gender_set": {
+                "id": "core.child.gender_id",
+                "display": {
+                    "width": 6
+                },
+                "position": 12,
+                "validations": [
+                    {
+                        "in": [
+                            1,
+                            2
+                        ],
+                        "message": "The selected Child's gender is invalid."
+                    },
+                    {
+                        "message": "This field is required",
+                        "required": true
+                    }
+                ]
+            },
+            "proposed_year_entry": {
+                "id": "crm.lead.proposed_entry_year",
+                "display": {
+                    "width": 4
+                },
+                "position": 21,
+                "validations": [
+                    {
+                        "0": "numeric",
+                        "message": "The proposed entry year must be a number."
+                    },
+                    {
+                        "between": {
+                            "max": 2039,
+                            "min": 1999
+                        }
+                    },
+                    {
+                        "message": "This field is required",
+                        "required": true
+                    }
+                ]
+            },
+            "proposed_year_level": {
+                "id": "crm.lead.proposed_year_level_id",
+                "display": {
+                    "width": 4
+                },
+                "position": 22,
+                "validations": [
+                    {
+                        "in": [
+                            4079,
+                            4064,
+                            4065,
+                            4066,
+                            4067,
+                            4068,
+                            4069,
+                            4070,
+                            4071,
+                            4072,
+                            4073,
+                            4074,
+                            4075,
+                            4076,
+                            4077,
+                            4078
+                        ],
+                        "message": "The selected Lead's year level is invalid."
+                    },
+                    {
+                        "message": "This field is required",
+                        "required": true
+                    }
+                ]
+            },
+            "campus_select": {
+                "type": "String",
+                "title": "Campus",
+                "display": {
+                    "width": 4,
+                    "widget": {
+                        "id": "dropdown"
+                    }
+                },
+                "options": [
+                    {
+                        "title": "Bellarine - Drysdale",
+                        "value": "B"
+                    },
+                    {
+                        "title": "Junior - Highton",
+                        "value": "J"
+                    },
+                    {
+                        "title": "Middle - Highton",
+                        "value": "H"
+                    },
+                    {
+                        "title": "Senior - Waurn Ponds",
+                        "value": "S"
+                    },
+                    {
+                        "title": "Surf Coast - Jan Juc",
+                        "value": "T"
+                    }
+                ],
+                "position": 23,
+                "validations": [
+                    {
+                        "message": "This field is required",
+                        "required": true
+                    }
+                ]
+            },
+            "kindergarten_enrolment": {
+                "type": "Group",
+                "items": {
+                    "which_kindergarten_child": {
+                        "type": "String",
+                        "title": "Which kindergarten is this child enrolled?",
+                        "display": {
+                            "width": 12,
+                            "widget": {
+                                "id": "dropdown"
+                            }
+                        },
+                        "options": [
+                            {
+                                "title": "Williams House",
+                                "value": "W"
+                            },
+                            {
+                                "title": "Butterfield House",
+                                "value": "B"
+                            },
+                            {
+                                "title": "Other Kindergarten",
+                                "value": "O"
+                            },
+                            {
+                                "title": "None",
+                                "value": "N"
+                            }
+                        ],
+                        "position": 1
+                    },
+                    "williams_house": {
+                        "type": "Number",
+                        "title": "Williams House",
+                        "display": {
+                            "width": 12,
+                            "widget": {
+                                "id": "dropdown"
+                            },
+                            "conditions": [
+                                {
+                                    "if": {
+                                        "==": [
+                                            {
+                                                "field": [
+                                                    "which_kindergarten_child"
+                                                ]
+                                            },
+                                            "W"
+                                        ]
+                                    },
+                                    "action": {
+                                        "visible": true
+                                    }
+                                }
+                            ]
+                        },
+                        "options": [
+                            {
+                                "title": "Pre-Kinder and Pre-School",
+                                "value": 1
+                            },
+                            {
+                                "title": "Pre-School Only",
+                                "value": 2
+                            },
+                            {
+                                "title": "Pre-Kinder Only",
+                                "value": 3
+                            }
+                        ],
+                        "position": 11
+                    },
+                    "butterfield_house": {
+                        "type": "Number",
+                        "title": "Butterfield House",
+                        "display": {
+                            "width": 12,
+                            "widget": {
+                                "id": "dropdown"
+                            },
+                            "conditions": [
+                                {
+                                    "if": {
+                                        "==": [
+                                            {
+                                                "field": [
+                                                    "which_kindergarten_child"
+                                                ]
+                                            },
+                                            "B"
+                                        ]
+                                    },
+                                    "action": {
+                                        "visible": true
+                                    }
+                                }
+                            ]
+                        },
+                        "options": [
+                            {
+                                "title": "Pre-Kinder and Pre-School",
+                                "value": 1
+                            },
+                            {
+                                "title": "Pre-School Only",
+                                "value": 2
+                            },
+                            {
+                                "title": "Pre-Kinder Only",
+                                "value": 3
+                            }
+                        ],
+                        "position": 21
+                    },
+                    "other_kindergarten": {
+                        "type": "String",
+                        "title": "Other Kindergarten",
+                        "display": {
+                            "width": 12,
+                            "widget": {
+                                "id": "singleLine"
+                            },
+                            "conditions": [
+                                {
+                                    "if": {
+                                        "==": [
+                                            {
+                                                "field": [
+                                                    "which_kindergarten_child"
+                                                ]
+                                            },
+                                            "O"
+                                        ]
+                                    },
+                                    "action": {
+                                        "visible": true
+                                    }
+                                }
+                            ]
+                        },
+                        "position": 31
+                    }
+                },
+                "title": "Kindergarten Enrolment",
+                "display": {
+                    "width": 12,
+                    "widget": {
+                        "id": null
+                    },
+                    "conditions": [
+                        {
+                            "if": {
+                                "in": [
+                                    {
+                                        "field": [
+                                            "proposed_year_level"
+                                        ]
+                                    },
+                                    [
+                                        4066,
+                                        4065,
+                                        4064,
+                                        4079
+                                    ]
+                                ]
+                            },
+                            "type": true,
+                            "action": {
+                                "visible": true
+                            }
+                        }
+                    ]
+                },
+                "position": 31
+            }
+        },
+        "title": "Student’s Details",
+        "display": {
+            "width": 12,
+            "widget": {
+                "id": null
+            }
+        },
+        "position": 171,
+        "validations": [
+            {
+                "min": 1,
+                "message": "This field is required"
+            }
+        ]
+    },
+    "are_any_children": {
+        "type": "String",
+        "title": "Are any children in the family currently attending Christian College?",
+        "display": {
+            "width": 12,
+            "widget": {
+                "id": "radio",
+                "layout": "horizontal"
+            }
+        },
+        "options": [
+            {
+                "title": "Yes",
+                "value": "1"
+            },
+            {
+                "title": "No",
+                "value": "0"
+            }
+        ],
+        "position": 211,
+        "validations": [
+            {
+                "message": "This field is required",
+                "required": true
+            }
+        ]
+    },
+    "_field_1555287664601": {
+        "type": "Group",
+        "items": {
+            "_field_1555287667647": {
+                "id": "core.guardian.name",
+                "display": {
+                    "width": 6
+                },
+                "position": 1
+            },
+            "_field_1555287681469": {
+                "id": "core.guardian.last_name",
+                "display": {
+                    "width": 6
+                },
+                "position": 2
+            },
+            "_field_1555287691971": {
+                "id": "core.guardian.email",
+                "display": {
+                    "width": 6
+                },
+                "position": 11
+            },
+            "_field_1555287706659": {
+                "id": "core.guardian.phone_numbers.number",
+                "display": {
+                    "width": 6
+                },
+                "position": 12
+            },
+            "guardian_former_student": {
+                "type": "String",
+                "title": "Is this parent a former student of Christian College Geelong?",
+                "display": {
+                    "width": 4,
+                    "widget": {
+                        "id": "radio",
+                        "layout": "horizontal"
+                    }
+                },
+                "options": [
+                    {
+                        "title": "Yes",
+                        "value": "Y"
+                    },
+                    {
+                        "title": "No",
+                        "value": "N"
+                    }
+                ],
+                "position": 21
+            },
+            "graduationYearOrLastYearAttend": {
+                "type": "Date",
+                "title": "Graduation Year or Last Year Attended",
+                "display": {
+                    "width": 4,
+                    "widget": {
+                        "id": "dateInput"
+                    }
+                },
+                "position": 22
+            },
+            "name_at_school": {
+                "type": "String",
+                "title": "Name when at school (if different to current name)",
+                "display": {
+                    "width": 4,
+                    "widget": {
+                        "id": "singleLine"
+                    }
+                },
+                "position": 23
+            },
+            "postal_address": {
+                "id": "core.guardian.address_lookup",
+                "title": "Postal Address",
+                "display": {
+                    "width": 12
+                },
+                "position": 31
+            },
+            "home_address": {
+                "id": "core.guardian.address_lookup",
+                "title": "Home Address",
+                "display": {
+                    "width": 12
+                },
+                "position": 41
+            }
+        },
+        "title": "Group",
+        "display": {
+            "width": 12
+        },
+        "position": 221
+    },
+    "_field_1555291730518": {
+        "type": "Collection",
+        "items": {
+            "_field_1555291752502": {
+                "type": "String",
+                "title": "Student Name",
+                "display": {
+                    "width": 4,
+                    "widget": {
+                        "id": "singleLine"
+                    }
+                },
+                "position": 1
+            },
+            "_field_1555291759557": {
+                "type": "Number",
+                "title": "Campus",
+                "display": {
+                    "width": 4,
+                    "widget": {
+                        "id": "dropdown"
+                    }
+                },
+                "options": [
+                    {
+                        "title": "Bellarine - Drysdale",
+                        "value": "B"
+                    },
+                    {
+                        "title": "Junior - Highton",
+                        "value": "J"
+                    },
+                    {
+                        "title": "Middle - Highton",
+                        "value": "H"
+                    },
+                    {
+                        "title": "Senior - Waurn Ponds",
+                        "value": "S"
+                    },
+                    {
+                        "title": "Surf Coast - Jan Juc",
+                        "value": "T"
+                    }
+                ],
+                "position": 2
+            },
+            "_field_1555291776803": {
+                "type": "Number",
+                "title": "Current Year Level",
+                "display": {
+                    "width": 4,
+                    "widget": {
+                        "id": "dropdown"
+                    }
+                },
+                "options": [
+                    {
+                        "title": "Option 1",
+                        "value": 1
+                    },
+                    {
+                        "title": "Option 2",
+                        "value": 2
+                    },
+                    {
+                        "title": "Option 3",
+                        "value": 3
+                    }
+                ],
+                "position": 3
+            }
+        },
+        "title": "Students Currently Attending",
+        "display": {
+            "width": 12,
+            "widget": {
+                "id": null
+            },
+            "conditions": [
+                {
+                    "if": {
+                        "==": [
+                            {
+                                "field": [
+                                    "are_any_children"
+                                ]
+                            },
+                            "1"
+                        ]
+                    },
+                    "action": {
+                        "visible": true
+                    }
+                }
+            ]
+        },
+        "position": 231,
+        "validations": [
+            {
+                "min": 1,
+                "message": "Please add at least one student"
+            }
+        ]
+    },
+    "have_any_children": {
+        "type": "String",
+        "title": "Have any children in the family previously attended Christian College Geelong?",
+        "display": {
+            "width": 12,
+            "widget": {
+                "id": "radio",
+                "layout": "horizontal"
+            }
+        },
+        "options": [
+            {
+                "title": "Yes",
+                "value": "1"
+            },
+            {
+                "title": "No",
+                "value": "0"
+            }
+        ],
+        "position": 241,
+        "validations": [
+            {
+                "message": "This field is required",
+                "required": true
+            }
+        ]
+    },
+    "_field_1555291904715": {
+        "type": "Collection",
+        "items": {
+            "student_name_previously_attended": {
+                "type": "String",
+                "title": "Student Name",
+                "display": {
+                    "width": 4,
+                    "widget": {
+                        "id": "singleLine"
+                    }
+                },
+                "position": 1
+            },
+            "_field_1555292437122": {
+                "type": "Number",
+                "title": "Campus",
+                "display": {
+                    "width": 4,
+                    "widget": {
+                        "id": "dropdown"
+                    }
+                },
+                "options": [
+                    {
+                        "title": "Bellarine - Drysdale",
+                        "value": "B"
+                    },
+                    {
+                        "title": "Junior - Highton",
+                        "value": "J"
+                    },
+                    {
+                        "title": "Middle - Highton",
+                        "value": "H"
+                    },
+                    {
+                        "title": "Senior - Waurn Ponds",
+                        "value": "S"
+                    },
+                    {
+                        "title": "Surf Coast - Jan Juc",
+                        "value": "T"
+                    }
+                ],
+                "position": 2
+            },
+            "_field_1555292498162": {
+                "type": "String",
+                "title": "Last Year attended",
+                "display": {
+                    "width": 4,
+                    "widget": {
+                        "id": "singleLine"
+                    }
+                },
+                "position": 3
+            }
+        },
+        "title": "Family Previously Attended",
+        "display": {
+            "width": 12,
+            "conditions": [
+                {
+                    "if": {
+                        "==": [
+                            {
+                                "field": [
+                                    "have_any_children"
+                                ]
+                            },
+                            "1"
+                        ]
+                    },
+                    "action": {
+                        "visible": true
+                    }
+                }
+            ]
+        },
+        "position": 251,
+        "validations": [
+            {
+                "min": 1,
+                "message": "Please add one record"
+            }
+        ]
+    },
+    "parent_guardian_contact_details": {
+        "type": "Collection",
+        "items": {
+            "guardian_first_name": {
+                "title": "Christian Name",
+                "position": 1,
+                "display": {
+                    "width": 6
+                },
+                "id": "core.guardian.first_name"
+            },
+            "parent_surname": {
+                "title": "Surname",
+                "position": 2,
+                "display": {
+                    "width": 6
+                },
+                "validations": [
+                    {
+                        "message": "This field is required",
+                        "required": true
+                    }
+                ],
+                "id": "core.guardian.last_name"
+            },
+            "guardian_email": {
+                "validations": [
+                    {
+                        "email": true,
+                        "message": "The Guardian's email must be a valid email address."
+                    },
+                    {
+                        "message": "This field is required",
+                        "required": true
+                    }
+                ],
+                "position": 11,
+                "display": {
+                    "width": 6,
+                    "widget": {
+                        "id": null
+                    }
+                },
+                "id": "core.guardian.email"
+            },
+            "guardian_phone_number": {
+                "display": {
+                    "width": 6
+                },
+                "validations": [
+                    {
+                        "type": "Phone",
+                        "message": "The number format is invalid."
+                    },
+                    {
+                        "message": "This field is required",
+                        "required": true
+                    }
+                ],
+                "position": 12,
+                "id": "core.guardian.phone_numbers.number"
+            },
+            "parent_a_former": {
+                "type": "String",
+                "title": "Is this parent a former student of Christian College Geelong?",
+                "display": {
+                    "width": 4,
+                    "widget": {
+                        "id": "radio",
+                        "layout": "horizontal"
+                    }
+                },
+                "options": [
+                    {
+                        "title": "Yes",
+                        "value": "1"
+                    },
+                    {
+                        "title": "No",
+                        "value": "0"
+                    }
+                ],
+                "position": 21,
+                "validations": [
+                    {
+                        "message": "This field is required",
+                        "required": true
+                    }
+                ]
+            },
+            "graduation_year_last": {
+                "type": "String",
+                "title": "Graduation Year or Last Year Attended",
+                "display": {
+                    "width": 4,
+                    "widget": {
+                        "id": "singleLine",
+                        "placeholder": "eg. 2018"
+                    },
+                    "conditions": [
+                        {
+                            "if": {
+                                "==": [
+                                    {
+                                        "field": [
+                                            "parent_a_former"
+                                        ]
+                                    },
+                                    "1"
+                                ]
+                            },
+                            "action": {
+                                "visible": true
+                            }
+                        }
+                    ]
+                },
+                "position": 22
+            },
+            "name_at_school": {
+                "type": "String",
+                "title": "Name when at school (if different to current name)",
+                "display": {
+                    "width": 4,
+                    "widget": {
+                        "id": "singleLine"
+                    },
+                    "conditions": [
+                        {
+                            "if": {
+                                "in": [
+                                    {
+                                        "field": [
+                                            "parent_a_former"
+                                        ]
+                                    },
+                                    [
+                                        "1"
+                                    ]
+                                ]
+                            },
+                            "action": {
+                                "visible": true
+                            }
+                        }
+                    ]
+                },
+                "position": 23
+            },
+            "relationship_to_student": {
+                "type": "String",
+                "title": "Relationship to Student",
+                "display": {
+                    "width": 12,
+                    "widget": {
+                        "id": "singleLine"
+                    }
+                },
+                "position": 31,
+                "validations": [
+                    {
+                        "message": "This field is required",
+                        "required": true
+                    }
+                ]
+            },
+            "postal_address": {
+                "title": "Postal Address",
+                "display": {
+                    "width": 12
+                },
+                "position": 41,
+                "validations": [
+                    {
+                        "message": "This field is required",
+                        "required": true
+                    }
+                ],
+                "id": "core.guardian.address_lookup"
+            },
+            "home_address": {
+                "title": "Home Address",
+                "display": {
+                    "width": 12
+                },
+                "position": 51,
+                "id": "core.guardian.address_lookup"
+            }
+        },
+        "title": "Parent/Guardian Contact Details",
+        "display": {
+            "width": 12,
+            "widget": {
+                "id": null
+            },
+            "addLabel": "Add Additional Parent/Guardian",
+            "conditions": []
+        },
+        "position": 1,
+        "validations": [
+            {
+                "min": 1,
+                "message": "This field is required"
+            }
+        ]
+    }
+}

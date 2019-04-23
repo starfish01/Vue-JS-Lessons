@@ -26,6 +26,11 @@ function newObject () {
   height: 100%;
 }
 
+/* fix for image on flex */
+.dashboard .dashboard-buttons .dashboard-buttons-group{
+  width:100%;
+}
+
 .dashboard-slider {
   height: 1px;
   position: relative;
