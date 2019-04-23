@@ -12,7 +12,7 @@ export function fieldBuilder(data) {
     field["display"] = {
         "width": data.width,
         "widget": {
-            
+            "id": "singleLine"
         }
     }
 

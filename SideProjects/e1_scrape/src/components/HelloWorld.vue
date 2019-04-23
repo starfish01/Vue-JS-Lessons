@@ -40,9 +40,9 @@ export default {
     buttonData: [],
     funnelData:'',
     buttonClicked: false,
-    website3: "",
+    website: "",
     website1:"https://msmc.digistormenrol.com.au/applications/enrolment/70nkzNpdGqwdyc3msPfbF90nGLqfNcMXzvb54mrrYDNjnMEQJH/step/family-information"
-   ,website:
+   ,website3:
       "https://digistorm-college.digistormenrol.com.au/applications/general/EDHDIZiohSs4niIZmIEhgSyBkpu50h95lSvk2kdmiUSwNYayvU/step/student-details"
   }),
   computed: {
