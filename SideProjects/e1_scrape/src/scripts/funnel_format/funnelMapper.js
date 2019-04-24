@@ -41,7 +41,7 @@ function fieldSetFields(data) {
 
     data.forEach((data) => {
 
-        let title = slugit.slugFn(data.title)
+        let title = data.elementID + "_" + slugit.slugFn(data.title)
 
         field[title] = defaultBuilder.fieldBuilder(data)
 

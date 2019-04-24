@@ -77,7 +77,7 @@ function scrapFn(website) {
 
                     let hideShows = [];
 
-                    let values = [];
+                    let options = [];
                     let allowOther;
 
 
@@ -158,10 +158,10 @@ function scrapFn(website) {
 
                                             //TODO - I think i need to allow other here
 
-                                            values.push(
+                                            options.push(
                                                 {
                                                     title: $(el).text().trim(),
-                                                    id: $(el).children().attr('value')
+                                                    value: $(el).children().attr('value')
                                                 }
                                             )
                                         })
@@ -182,9 +182,9 @@ function scrapFn(website) {
 
                                             if ($(el).text().trim().length !== 0 && $(el).text().trim() !== 'Other...') {
 
-                                                values.push({
+                                                options.push({
                                                     title: $(el).text().trim(),
-                                                    id: $(el).children().attr('value')
+                                                    value: $(el).children().attr('value')
                                                 })
                                             }
 
@@ -223,10 +223,10 @@ function scrapFn(website) {
                                     //get items
                                     $(el).children().next().children().each((i, el) => {
                                         if ($(el).text().trim().length !== 0 && $(el).text().trim() !== 'Other...' && $(el).text().trim() !== '-- Select --') {
-                                            values.push(
+                                            options.push(
                                                 {
                                                     title: $(el).text().trim(),
-                                                    id: $(el).attr('value')
+                                                    value: $(el).attr('value')
                                                 }
                                             )
                                         }
@@ -237,7 +237,7 @@ function scrapFn(website) {
                                     })
 
                                     //if its an ajax select 
-                                    if (values.length == 0) {
+                                    if (options.length == 0) {
 
                                         let newURL = website.replace(/^https?\:\/\//i, "");
                                         let fullstopPosition = newURL.indexOf(".");
@@ -248,7 +248,7 @@ function scrapFn(website) {
                                         request('https://cors-anywhere.herokuapp.com/' + callURL, function (error, response, html) {
 
                                             if (!error && response.statusCode == 200) {
-                                                values.push(JSON.parse(html).results)
+                                                options.push(JSON.parse(html).results)
                                             }
                                         }
                                         )
@@ -303,7 +303,7 @@ function scrapFn(website) {
                         width,
                         required,
 
-                        values,
+                        options,
                         allowOther,
 
                         helpText,

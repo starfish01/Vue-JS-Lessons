@@ -2,9 +2,13 @@ import * as util from './util'
 
 export function fieldBuilder(data) {
 
-    let field = {}
+    if(data.type === "wysiwyg"){
+        //Because there is no wysiwyg field we will 
+        //need to do some trickery to get it to work
+        return 
+    }
 
-//"id": "singleLine"
+    let field = {}
 
     field["type"] = util.dataTypeRef(data.type)
     field["title"] = data.title
@@ -12,15 +16,26 @@ export function fieldBuilder(data) {
     field["display"] = {
         "width": data.width,
         "widget": {
-            "id": "singleLine"
+            
         }
     }
 
+    //options
+    if(data.options != undefined && data.options.length > 0){
+        // console.log(data.options.length)
+        field["options"] = data.options
+    }
+
+
+    //text afterfield
     if (data.helpText != undefined && data.helpText.length > 0) {
         field.display["htmlAfter"] = data.helpText
     }
 
-    // console.log(data.type)
+    //placeholder text check
+    if(data.placeholder != undefined && data.placeholder.length > 0){
+        field.display.widget["placeholder"] = data.placeholder
+    }
 
     /*
     singleLine = singleLine
@@ -40,7 +55,6 @@ export function fieldBuilder(data) {
                 "required": true
             }
     }
-
 
     return field
 
