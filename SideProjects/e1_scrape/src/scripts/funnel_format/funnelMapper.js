@@ -10,8 +10,6 @@ import * as defaultBuilder from './fields/defaultBuilder'
 
 export function funnelMapper(data) {
 
-    console.log(data)
-
     let scrapeData = data[0].content
 
     scrapeData.forEach((data) => {

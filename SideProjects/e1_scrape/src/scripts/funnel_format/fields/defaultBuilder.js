@@ -11,7 +11,7 @@ export function fieldBuilder(data) {
     let field = {}
 
     field["type"] = util.dataTypeRef(data.type)
-    field["title"] = data.title
+    field["title"] = data.title.slice(0,(data.title.length -1))
     field["position"] = data.positionOfElement
     field["display"] = {
         "width": data.width,

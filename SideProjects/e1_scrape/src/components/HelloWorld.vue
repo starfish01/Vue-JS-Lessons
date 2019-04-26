@@ -2,7 +2,11 @@
   <v-container>
     <v-layout text-xs-center wrap>
       <v-flex xs12>
-        <v-text-field v-model="website" label="URL"/>
+        <div v-for="(url,i) in arrayOfPages" v-bind:key="i">
+          <v-text-field v-model="arrayOfPages[i]" label="URL"/>
+        </div>
+
+        <v-btn @click="addURL()">+ URL</v-btn>
 
         <div>
           <v-btn :disabled="website === ''" @click="scrapeBtn()">Scrape</v-btn>
@@ -32,17 +36,19 @@
 
 <script>
 import * as metadata from "../scripts/scrape_scripts/scrape";
-import * as funnelBuilder from '../scripts/funnel_format/funnelMapper';
+import * as funnelBuilder from "../scripts/funnel_format/funnelMapper";
 
 export default {
   data: () => ({
     data: 0,
     buttonData: [],
-    funnelData:'',
+    funnelData: "",
+    arrayOfPages: [],
     buttonClicked: false,
     website3: "",
-    website1:"https://msmc.digistormenrol.com.au/applications/enrolment/70nkzNpdGqwdyc3msPfbF90nGLqfNcMXzvb54mrrYDNjnMEQJH/step/family-information"
-   ,website:
+    website1:
+      "https://msmc.digistormenrol.com.au/applications/enrolment/70nkzNpdGqwdyc3msPfbF90nGLqfNcMXzvb54mrrYDNjnMEQJH/step/family-information",
+    website:
       "https://digistorm-college.digistormenrol.com.au/applications/general/EDHDIZiohSs4niIZmIEhgSyBkpu50h95lSvk2kdmiUSwNYayvU/step/student-details"
   }),
   computed: {
@@ -60,17 +66,27 @@ export default {
     }
   },
   methods: {
+    addURL() {
+      this.arrayOfPages.push("");
+    },
     scrapeBtn() {
-      this.buttonClicked = true;
-      this.buttonData = [];
-
-      metadata.scrapFn(this.website);
-
-      this.buttonData = metadata.pages;
-
+      // this.buttonData = metadata.pages;
 
       this.funnelData = funnelBuilder.funnelMap;
 
+      this.buttonClicked = true;
+
+      this.buttonData = [];
+
+      this.arrayOfPages.forEach(url => {
+        metadata.scrapFn(url);
+        // console.log(url)
+      });
+
+      this.buttonData.push(metadata.pages);
+
+
+      // metadata.scrapFn(this.website);
     },
     btnDataPrint() {
       console.log(this.buttonData);
@@ -81,8 +97,8 @@ export default {
 
 <style>
 code {
-    width: 90%;
-    text-align: left;
-    margin: 0px 10px;
+  width: 90%;
+  text-align: left;
+  margin: 0px 10px;
 }
 </style>

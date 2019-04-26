@@ -326,7 +326,6 @@ function scrapFn(website) {
 
         }
 
-
         funnelMapper(pages)
 
     })
