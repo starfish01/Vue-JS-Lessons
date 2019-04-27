@@ -2,14 +2,22 @@
   <v-container>
     <v-layout text-xs-center wrap>
       <v-flex xs12>
-        <div v-for="(url,i) in arrayOfPages" v-bind:key="i">
-          <v-text-field v-model="arrayOfPages[i]" label="URL"/>
-        </div>
 
         <v-btn @click="addURL()">+ URL</v-btn>
 
+        <div v-for="(url,i) in arrayOfPages" v-bind:key="i">
+          <v-layout row wrap>
+            <v-flex md10>
+              <v-text-field v-model="arrayOfPages[i]" label="URL"/>
+            </v-flex>
+            <v-flex md2>
+              <v-btn @click="removeURL(i)">X</v-btn>
+            </v-flex>
+          </v-layout>
+        </div>
+
         <div>
-          <v-btn :disabled="website === ''" @click="scrapeBtn()">Scrape</v-btn>
+          <v-btn :disabled="arrayOfPages.length <= 0" @click="scrapeBtn()">Scrape</v-btn>
         </div>
 
         <img
@@ -69,6 +77,9 @@ export default {
     addURL() {
       this.arrayOfPages.push("");
     },
+    removeURL(i) {
+      this.arrayOfPages.splice(i, 1);
+    },
     scrapeBtn() {
       // this.buttonData = metadata.pages;
 
@@ -84,7 +95,6 @@ export default {
       });
 
       this.buttonData.push(metadata.pages);
-
 
       // metadata.scrapFn(this.website);
     },
