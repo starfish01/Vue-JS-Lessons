@@ -25,6 +25,7 @@ function scrapFn(website) {
     }, function (error, response, html) {
         console.log('1')
         if (!error && response.statusCode == 200) {
+            console.log(website)
             console.log('2')
             var $ = cheerio.load(html)
 
@@ -325,8 +326,6 @@ function scrapFn(website) {
             pages.push(page)
 
         }
-
-        funnelMapper(pages)
 
     })
 

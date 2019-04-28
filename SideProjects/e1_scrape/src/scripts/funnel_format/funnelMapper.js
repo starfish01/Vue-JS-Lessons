@@ -1,4 +1,5 @@
-var funnelMap = {};
+var funnelMap = [];
+var funnelMapPages = [];
 
 import * as slugit from './slugifyItems'
 
@@ -6,6 +7,8 @@ import * as singleLine from './fields/singleLineBuilder'
 import * as datePicker from './fields/datePickerBuilder'
 
 import * as defaultBuilder from './fields/defaultBuilder'
+
+
 
 
 export function funnelMapper(data) {
@@ -48,4 +51,4 @@ function fieldSetFields(data) {
     return field
 }
 
-export { funnelMap }
+export { funnelMap,funnelMapPages }

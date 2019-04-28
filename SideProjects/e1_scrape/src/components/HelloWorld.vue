@@ -80,21 +80,23 @@ export default {
     removeURL(i) {
       this.arrayOfPages.splice(i, 1);
     },
-    scrapeBtn() {
-      // this.buttonData = metadata.pages;
+     scrapeBtn() {
 
       this.funnelData = funnelBuilder.funnelMap;
 
       this.buttonClicked = true;
 
-      this.buttonData = [];
-
       this.arrayOfPages.forEach(url => {
-        metadata.scrapFn(url);
-        // console.log(url)
+
+        metadata.scrapFn(url)
+
       });
 
-      this.buttonData.push(metadata.pages);
+      this.buttonData = metadata.pages
+
+      // funnelBuilder.funnelMapper(metadata.pages)
+
+      // this.buttonData.push(metadata.pages);
 
       // metadata.scrapFn(this.website);
     },
