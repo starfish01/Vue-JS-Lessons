@@ -2,7 +2,6 @@
   <v-container>
     <v-layout text-xs-center wrap>
       <v-flex xs12>
-
         <v-btn @click="addURL()">+ URL</v-btn>
 
         <div v-for="(url,i) in arrayOfPages" v-bind:key="i">
@@ -32,11 +31,20 @@
         <hr>
         <code v-if="buttonData.length > 0 && buttonClicked">{{ buttonData }}</code>
       </v-flex>
-      <v-flex xs6>
+      <!-- <v-flex xs6>
         <h3>Funnel</h3>
         <hr>
         <code v-if="buttonData.length > 0 && buttonClicked">{{ funnelData }}</code>
+      </v-flex> -->
+
+      <v-flex xs6>
+        <h3>Funnel</h3>
+        <hr>
+        <code v-if="buttonData.length > 0 && buttonClicked">{{ funnelDataCompute }}</code>
       </v-flex>
+
+
+
       <v-flex xs6></v-flex>
     </v-layout>
   </v-container>
@@ -80,45 +88,40 @@ export default {
     removeURL(i) {
       this.arrayOfPages.splice(i, 1);
     },
-     scrapeBtn() {
-
+    scrapeBtn() {
       this.funnelData = funnelBuilder.funnelMap;
 
       this.buttonClicked = true;
 
-      let promData = new Promise((resolve,reject)=>{
-        this.ScrapeData(); 
-        console.log('p1')
-        resolve('hi')
-      }).then((data)=>{
-        console.log(data)
-        console.log('p2')
-        console.log('done')
-        return 10
-      })
-      console.log('p3')
+      // console.log(this.arrayOfPages)
 
-      // this.ScrapeData();      
+      let listOfSites = this.arrayOfPages;
 
-      this.buttonData = metadata.pages
+      metadata.scrapFn2(listOfSites);
+
+      this.buttonData = metadata.pages;
 
       // funnelBuilder.funnelMapper(metadata.pages)
 
       // this.buttonData.push(metadata.pages);
 
       // metadata.scrapFn(this.website);
+      this.funnelData = funnelBuilder.funnelMap;
     },
     btnDataPrint() {
       console.log(this.buttonData);
     },
-    ScrapeData(){
-
+    ScrapeData() {
       this.arrayOfPages.forEach(url => {
-
-        metadata.scrapFn(url)
-
+        metadata.scrapFn(url);
       });
-
+    }
+  },
+  computed:{
+    funnelDataCompute() {
+      console.log(this.funnelData )
+      // this.funnelData = funnelBuilder.funnelMap;
+      return this.funnelData 
     }
   }
 };
