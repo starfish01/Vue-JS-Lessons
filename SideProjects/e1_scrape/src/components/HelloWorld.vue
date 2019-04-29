@@ -86,11 +86,19 @@ export default {
 
       this.buttonClicked = true;
 
-      this.arrayOfPages.forEach(url => {
+      let promData = new Promise((resolve,reject)=>{
+        this.ScrapeData(); 
+        console.log('p1')
+        resolve('hi')
+      }).then((data)=>{
+        console.log(data)
+        console.log('p2')
+        console.log('done')
+        return 10
+      })
+      console.log('p3')
 
-        metadata.scrapFn(url)
-
-      });
+      // this.ScrapeData();      
 
       this.buttonData = metadata.pages
 
@@ -102,6 +110,15 @@ export default {
     },
     btnDataPrint() {
       console.log(this.buttonData);
+    },
+    ScrapeData(){
+
+      this.arrayOfPages.forEach(url => {
+
+        metadata.scrapFn(url)
+
+      });
+
     }
   }
 };
