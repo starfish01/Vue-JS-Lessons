@@ -1,5 +1,6 @@
 var funnelMap = [];
-var funnelMapPages = [];
+var someOther = 'hello'
+
 
 import * as slugit from './slugifyItems'
 
@@ -9,9 +10,14 @@ import * as datePicker from './fields/datePickerBuilder'
 import * as defaultBuilder from './fields/defaultBuilder'
 
 
-
+export function someOtherValue(){
+    // Object.assign(funnelMap)
+    return Object.assign(funnelMap)
+}
 
 export function funnelMapper(data) {
+
+    console.log('3')
 
     let scrapeData = data[0].content
 
@@ -53,4 +59,4 @@ function fieldSetFields(data) {
     return field
 }
 
-export { funnelMap,funnelMapPages }
+export { funnelMap }

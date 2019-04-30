@@ -35,6 +35,8 @@
       <v-flex xs6>
         <h3>Funnel</h3>
         <hr>
+{{otherData}}
+        {{funnelData.length}}
         <code>{{ funnelData }}</code>
       </v-flex>
 
@@ -54,6 +56,7 @@ export default {
     funnelData: [],
     arrayOfPages: [],
     buttonClicked: false,
+    otherData:'',
     website3: "",
     website1:
       "https://msmc.digistormenrol.com.au/applications/enrolment/70nkzNpdGqwdyc3msPfbF90nGLqfNcMXzvb54mrrYDNjnMEQJH/step/family-information",
@@ -84,28 +87,48 @@ export default {
     scrapeBtn() {
       this.buttonClicked = true;
 
+      // this.funnelData = funnelBuilder.funnelMap;
+
       let listOfSites = this.arrayOfPages;
 
-      return new Promise((resolve, reject) => {
+      new Promise((resolve, reject) => {
         let scrapData = metadata.scrapFn2(listOfSites);
         resolve(scrapData);
       }).then(scrapData => {
+        
         this.buttonData = scrapData;
 
         //convert data
-        this.funnelData = funnelBuilder.funnelMapper(scrapData);
+        return funnelBuilder.funnelMapper(scrapData);
+        
+      }).then(funnelDataComp => {
+        // console.log(funnelDataComp)
 
-        console.log("we waited");
+        this.funnelData = funnelDataComp
+
+        // this.otherData = funnelBuilder.someOther
+
+        this.otherData = funnelBuilder.someOtherValue()
+        console.log(funnelBuilder.someOtherValue())
+
       });
+
+      
+
     },
-    btnDataPrint() {
-      console.log(this.buttonData);
-    },
-    ScrapeData() {
-      this.arrayOfPages.forEach(url => {
-        metadata.scrapFn(url);
-      });
+    funnelDataCompailer(scrapData){
+
+      
+      this.funnelData = scrapData
+
+      // console.log(q)
+      // console.log(this.funnelData)
+
+      // console.log(funnelBuilder.funnelMap)
+
+      // this.funnelData = funnelBuilder.funnelMap
     }
+
   }
 };
 </script>

@@ -31,7 +31,6 @@ function scrapFn(website) {
 
             scrappingData(html, website)
 
-
         }
 
     })
@@ -60,19 +59,16 @@ function scrapFn2(websites) {
 
                     scrappingData(html, website)
 
-                    resolve('[ass')
+                    resolve()
                 } else {
-                    reject('err')
+                    reject()
                 }
 
             })
         });
-    }).then(()=>{
+    }).then(() => {
 
-        return(this.pages)
-        
-        funnelMapper(this.pages)
-
+        return (this.pages)
 
         console.log(this.pages)
     })
