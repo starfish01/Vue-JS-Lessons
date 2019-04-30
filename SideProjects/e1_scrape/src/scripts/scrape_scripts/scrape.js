@@ -38,36 +38,44 @@ function scrapFn(website) {
 
 }
 
-
-
-
-
 function scrapFn2(websites) {
 
     //to bypass security we use the proxy below
     //https://cors-anywhere.herokuapp.com/
 
-    websites.forEach(website => {
-        request.post({
-            url: 'https://cors-anywhere.herokuapp.com/' + website,
-            form: { 'foo': 'bar' },
-            headers: {
-                'User-Agent': 'Super Cool Browser' // optional headers
-            }
-        }, function (error, response, html) {
+    return new Promise((resolve, reject) => {
+        websites.forEach(website => {
+            request.post({
+                url: 'https://cors-anywhere.herokuapp.com/' + website,
+                form: { 'foo': 'bar' },
+                headers: {
+                    'User-Agent': 'Super Cool Browser' // optional headers
+                }
+            }, function (error, response, html) {
 
-            console.log('1')
-            if (!error && response.statusCode == 200) {
+                console.log('1')
+                if (!error && response.statusCode == 200) {
 
-                console.log('2')
+                    console.log('2')
 
-                scrappingData(html, website)
+                    scrappingData(html, website)
+
+                    resolve('[ass')
+                } else {
+                    reject('err')
+                }
+
+            })
+        });
+    }).then(()=>{
+
+        return(this.pages)
+        
+        funnelMapper(this.pages)
 
 
-            }
-
-        })
-    });
+        console.log(this.pages)
+    })
 
 }
 
@@ -371,7 +379,7 @@ function scrappingData(html, website) {
 
     pages.push(page)
 
-    
+
 }
 
 function data(val) { return val }

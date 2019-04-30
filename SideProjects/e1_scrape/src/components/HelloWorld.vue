@@ -31,19 +31,12 @@
         <hr>
         <code v-if="buttonData.length > 0 && buttonClicked">{{ buttonData }}</code>
       </v-flex>
-      <!-- <v-flex xs6>
-        <h3>Funnel</h3>
-        <hr>
-        <code v-if="buttonData.length > 0 && buttonClicked">{{ funnelData }}</code>
-      </v-flex> -->
 
       <v-flex xs6>
         <h3>Funnel</h3>
         <hr>
-        <code v-if="buttonData.length > 0 && buttonClicked">{{ funnelDataCompute }}</code>
+        <code>{{ funnelData }}</code>
       </v-flex>
-
-
 
       <v-flex xs6></v-flex>
     </v-layout>
@@ -58,7 +51,7 @@ export default {
   data: () => ({
     data: 0,
     buttonData: [],
-    funnelData: "",
+    funnelData: [],
     arrayOfPages: [],
     buttonClicked: false,
     website3: "",
@@ -89,24 +82,21 @@ export default {
       this.arrayOfPages.splice(i, 1);
     },
     scrapeBtn() {
-      this.funnelData = funnelBuilder.funnelMap;
-
       this.buttonClicked = true;
-
-      // console.log(this.arrayOfPages)
 
       let listOfSites = this.arrayOfPages;
 
-      metadata.scrapFn2(listOfSites);
+      return new Promise((resolve, reject) => {
+        let scrapData = metadata.scrapFn2(listOfSites);
+        resolve(scrapData);
+      }).then(scrapData => {
+        this.buttonData = scrapData;
 
-      this.buttonData = metadata.pages;
+        //convert data
+        this.funnelData = funnelBuilder.funnelMapper(scrapData);
 
-      // funnelBuilder.funnelMapper(metadata.pages)
-
-      // this.buttonData.push(metadata.pages);
-
-      // metadata.scrapFn(this.website);
-      this.funnelData = funnelBuilder.funnelMap;
+        console.log("we waited");
+      });
     },
     btnDataPrint() {
       console.log(this.buttonData);
@@ -115,13 +105,6 @@ export default {
       this.arrayOfPages.forEach(url => {
         metadata.scrapFn(url);
       });
-    }
-  },
-  computed:{
-    funnelDataCompute() {
-      console.log(this.funnelData )
-      // this.funnelData = funnelBuilder.funnelMap;
-      return this.funnelData 
     }
   }
 };

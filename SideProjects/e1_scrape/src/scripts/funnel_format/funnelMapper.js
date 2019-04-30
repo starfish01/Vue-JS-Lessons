@@ -32,6 +32,8 @@ export function funnelMapper(data) {
         }
     })
 
+    return funnelMap
+
 }
 
 
