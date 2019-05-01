@@ -11,31 +11,31 @@ var buttonData = []
 var fieldData = []
 var pages = []
 
-function scrapFn(website) {
+// function scrapFn(website) {
 
-    //to bypass security we use the proxy below
-    //https://cors-anywhere.herokuapp.com/
+//     //to bypass security we use the proxy below
+//     //https://cors-anywhere.herokuapp.com/
 
-    return request.post({
-        url: 'https://cors-anywhere.herokuapp.com/' + website,
-        form: { 'foo': 'bar' },
-        headers: {
-            'User-Agent': 'Super Cool Browser' // optional headers
-        }
-    }, function (error, response, html) {
+//     return request.post({
+//         url: 'https://cors-anywhere.herokuapp.com/' + website,
+//         form: { 'foo': 'bar' },
+//         headers: {
+//             'User-Agent': 'Super Cool Browser' // optional headers
+//         }
+//     }, function (error, response, html) {
 
-        console.log('1')
-        if (!error && response.statusCode == 200) {
+//         console.log('1')
+//         if (!error && response.statusCode == 200) {
 
-            console.log('2')
+//             console.log('2')
 
-            scrappingData(html, website)
+//             scrappingData(html, website)
 
-        }
+//         }
 
-    })
+//     })
 
-}
+// }
 
 function scrapFn2(websites) {
 
@@ -57,20 +57,28 @@ function scrapFn2(websites) {
 
                     console.log('2')
 
-                    scrappingData(html, website)
+                    
 
-                    resolve()
+                    pages.push(scrappingData(html, website))
+
+                    console.log(pages)
+
+                    resolve();
+
                 } else {
                     reject()
                 }
 
             })
         });
+
+
+
     }).then(() => {
 
+        console.log('return')
         return (this.pages)
 
-        console.log(this.pages)
     })
 
 }
@@ -373,11 +381,10 @@ function scrappingData(html, website) {
 
     page.content = fieldData
 
-    pages.push(page)
-
+    return page
 
 }
 
 function data(val) { return val }
 
-export { data, metadata, buttonData, scrapFn, fieldData, pages, scrapFn2 };
+export { data, metadata, buttonData, fieldData, pages, scrapFn2 };

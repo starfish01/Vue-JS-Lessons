@@ -1,4 +1,4 @@
-var funnelMap = [];
+var funnelMap = {};
 var someOther = 'hello'
 
 
