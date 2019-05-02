@@ -11,31 +11,9 @@ var buttonData = []
 var fieldData = []
 var pages = []
 
-// function scrapFn(website) {
+var siteAndData = []
 
-//     //to bypass security we use the proxy below
-//     //https://cors-anywhere.herokuapp.com/
 
-//     return request.post({
-//         url: 'https://cors-anywhere.herokuapp.com/' + website,
-//         form: { 'foo': 'bar' },
-//         headers: {
-//             'User-Agent': 'Super Cool Browser' // optional headers
-//         }
-//     }, function (error, response, html) {
-
-//         console.log('1')
-//         if (!error && response.statusCode == 200) {
-
-//             console.log('2')
-
-//             scrappingData(html, website)
-
-//         }
-
-//     })
-
-// }
 
 function scrapFn2(websites) {
 
@@ -43,9 +21,11 @@ function scrapFn2(websites) {
     //https://cors-anywhere.herokuapp.com/
 
     return new Promise((resolve, reject) => {
-        websites.forEach(website => {
+        websites.forEach((website,index) => {
+
             request.post({
                 url: 'https://cors-anywhere.herokuapp.com/' + website,
+                
                 form: { 'foo': 'bar' },
                 headers: {
                     'User-Agent': 'Super Cool Browser' // optional headers
@@ -57,13 +37,16 @@ function scrapFn2(websites) {
 
                     console.log('2')
 
-                    
+                    // pages.push(scrappingData(html, website))
 
-                    pages.push(scrappingData(html, website))
+                    // console.log(pages)
 
-                    console.log(pages)
+                    siteAndData.push({html,website})
+                    // 
 
-                    resolve();
+                    if(websites.length === index+1){
+                        resolve(siteAndData);
+                    }
 
                 } else {
                     reject()
@@ -72,12 +55,18 @@ function scrapFn2(websites) {
             })
         });
 
+    }).then((siteAndData) => {
+
+        // pages.push(scrappingData(html, website))
+
+        siteAndData.forEach((site,index) => {
 
 
-    }).then(() => {
+            pages.push(scrappingData(site.html, site.website))
+        })
 
-        console.log('return')
-        return (this.pages)
+        console.log(pages)
+        return (pages)
 
     })
 
@@ -94,8 +83,6 @@ function scrappingData(html, website) {
 
     //hideshow array
     let hideShowArray = validations.hideShowArray;
-
-    $('div.page-header').first().text();
 
     let wholeTitle = $('div.page-header').first().text().trim()
 
@@ -124,7 +111,10 @@ function scrappingData(html, website) {
         }
 
 
+
         $(el).children().find('[data-formgroup-id]').each((i, el) => {
+
+            // fieldData = [];
 
             let elementID;
             let positionOfElement = (i + 1) * 10;
@@ -338,6 +328,7 @@ function scrappingData(html, website) {
                 }
 
             }
+
 
             //checks if element is required
             if (requiredItems.indexOf(elementID) > -1) {
