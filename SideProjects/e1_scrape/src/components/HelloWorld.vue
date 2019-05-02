@@ -35,7 +35,7 @@
       <v-flex xs6>
         <h3>Funnel</h3>
         <hr>
-        <code>{{ funnelData }}</code>
+        <code v-if="buttonData.length > 0 && buttonClicked">{{ funnelData }}</code>
       </v-flex>
 
       <v-flex xs6></v-flex>

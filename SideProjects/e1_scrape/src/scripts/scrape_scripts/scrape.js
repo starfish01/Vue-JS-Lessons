@@ -45,6 +45,8 @@ function scrapFn2(websites) {
                     // 
 
                     if(websites.length === index+1){
+                        // console.log(websites.length)
+                        // console.log(index+1)
                         resolve(siteAndData);
                     }
 

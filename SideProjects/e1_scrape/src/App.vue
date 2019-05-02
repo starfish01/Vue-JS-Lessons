@@ -8,17 +8,22 @@
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" width="500">
         <template v-slot:activator="{ on }">
-          <v-btn color="primary" flat dark v-on="on">Version 0.2.1</v-btn>
+          <v-btn color="primary" flat dark v-on="on">Version 0.2.2</v-btn>
         </template>
 
         <v-card>
-          <v-card-title class="headline grey lighten-2" primary-title>Version 0.2.1</v-card-title>
+          <v-card-title class="headline grey lighten-2" primary-title>Version 0.2.2</v-card-title>
 
-          <v-card-text>
+          <v-card-text><p>Last updated: 2/05/2019</p>
+            <ul>
+              <li>Added the ability to add multiple pages at once</li>
+            </ul>
+            <br>
             <p>Last updated: 24/04/2019</p>
             <ul>
               <li>Output JSON, all of it as singleLines</li>
             </ul>
+            <br>
             <p>Update: 17/04/2019</p>
             <ul>
               <li>Fix for fields with hidden titles</li>
@@ -27,6 +32,7 @@
             <br>
             <p>Doesn't support:</p>
             <ul>
+              <li>Funnel Mapping is not correctly set up</li>
               <li>Conditionally required yet</li>
               <li>Multipage set up yet</li>
             </ul>
