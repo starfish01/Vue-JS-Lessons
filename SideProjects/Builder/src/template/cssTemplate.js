@@ -29,6 +29,9 @@ function newObject () {
 /* fix for image on flex */
 .dashboard .dashboard-buttons .dashboard-buttons-group{
   width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dashboard-slider {
@@ -83,6 +86,13 @@ html.screenshot.ios .dashboard {
 .links .content-icon svg.injected-svg path, 
 .links .content-icon svg.injected-svg polygon {
   fill: #749BC0 !important;
+}
+
+/* Login screen */
+.login .form-wrapper {
+  box-shadow: 0 0 10px #00000022;
+  -webkit-box-shadow: 0 0 10px #00000022;
+  -moz-box-shadow: 0 0 10px #00000022;
 }
 
 /* Fixes screenshot issue with dashboard icons shrinking */
