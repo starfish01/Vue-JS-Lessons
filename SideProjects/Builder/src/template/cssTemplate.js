@@ -2,7 +2,7 @@ export { newObject }
 
 function newObject () {
   let obj = `
-/* flex dashboard */ 
+/* flex dashboard */
 
 .dashboard, #container, #sections {
   display: flex;
@@ -15,12 +15,12 @@ function newObject () {
   flex-direction: column;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-} 
+}
 
-/* flex grow slider */ 
+/* flex grow slider */
 
-.dashboard-slider .slick-list,  
-.dashboard-slider .slick-track,  
+.dashboard-slider .slick-list,
+.dashboard-slider .slick-track,
 .dashboard-slider-image {
   width: 100%;
   height: 100%;
@@ -61,29 +61,29 @@ function newObject () {
   position: absolute;
   width: 100%;
   height: 100%;
-} 
+}
 
-/* tablet login */ 
+/* tablet login */
 .tablet .modal .logo {
   margin: 140px auto;
-} 
+}
 
-/* Fixes for iOS Screenshots */ 
+/* Fixes for iOS Screenshots */
 html.screenshot.ios body {
   top: 0;
 }
 
 html.screenshot.ios .dashboard {
   min-height: calc(100% - 20px);
-} 
+}
 
-/* Fix core links svgs */ 
+/* Fix core links svgs */
 .links .content-icon svg.injected-svg {
   width: 20px !important;
 }
 
-.links .content-icon svg.injected-svg g, 
-.links .content-icon svg.injected-svg path, 
+.links .content-icon svg.injected-svg g,
+.links .content-icon svg.injected-svg path,
 .links .content-icon svg.injected-svg polygon {
   fill: #749BC0 !important;
 }
@@ -93,6 +93,11 @@ html.screenshot.ios .dashboard {
   box-shadow: 0 0 10px #00000022;
   -webkit-box-shadow: 0 0 10px #00000022;
   -moz-box-shadow: 0 0 10px #00000022;
+}
+
+/* Alert Button */
+.dashboard-badge {
+    border-radius: 25px;
 }
 
 /* Fixes screenshot issue with dashboard icons shrinking */
