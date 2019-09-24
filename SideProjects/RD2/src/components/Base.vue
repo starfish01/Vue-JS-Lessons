@@ -1,6 +1,6 @@
 <template>
-  <v-container fluid>
-    <v-layout>
+  <v-container fluid class="teal lighten-3">
+    <v-layout class="mb-5">
       <addTop></addTop>
     </v-layout>
     <v-layout>
