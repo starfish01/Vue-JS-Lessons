@@ -6,15 +6,18 @@
     <v-layout>
       <v-row>
         <v-col cols="12" md="2">
-          <appLRSponser></appLRSponser>
+          <appLRSponser class="hidden-sm-and-down"></appLRSponser>
         </v-col>
         <v-col style="background:blue" cols="12" md="8">
           <appMap></appMap>
         </v-col>
         <v-col cols="12" md="2">
-          <appLRSponser></appLRSponser>
+          <appLRSponser class="hidden-sm-and-down"></appLRSponser>
         </v-col>
       </v-row>
+    </v-layout>
+        <v-layout class="mt-5">
+      <addTop></addTop>
     </v-layout>
   </v-container>
 </template>
