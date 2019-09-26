@@ -26,6 +26,7 @@
 import Map from "../components/map/Map";
 import TopSponsor from "../components/sponsor/Top";
 import LeftRightSponser from "../components/sponsor/LeftRight";
+
 export default {
   data() {
     return {};
