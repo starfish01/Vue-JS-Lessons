@@ -14,18 +14,48 @@
       <l-tile-layer :url="url" />
 
       <l-control class="example-custom-control">
-        <ul>
-          <li v-for="(section, i) in mapData" v-bind:key="i">{{ section.title }}</li>
-        </ul>
+        <template v-for="(section, i) in mapData">
+          <v-checkbox
+            @click="sectionClicked(i)"
+            class="shrink ma-0 pa-0 font-weight-bold"
+            v-bind:key="i"
+            :label="section.title"
+            v-model="section.display"
+            hide-details
+          ></v-checkbox>
+          <template v-if="section.group">
+            <v-checkbox
+              v-for="(item,i) in section.locations"
+              v-bind:key="i + section.title"
+              class="shrink ma-0 pa-0"
+              :label="item.title"
+              v-model="item.display"
+              hide-details
+            ></v-checkbox>
+          </template>
+        </template>
       </l-control>
 
-      <template v-for="(section, i) in mapData">
-        <template v-if="section.display">
-          <l-marker v-for="(item,i) in section.locations" v-bind:key="i" :lat-lng="item.position">
-            <l-popup>
-              <div @click="innerClick">{{item.title}}</div>
-            </l-popup>
-          </l-marker>
+      <template v-for="(section) in mapData">
+        <template v-for="(item,i) in section.locations">
+          <template v-if="section.group">
+            <l-marker v-if="item.display" v-bind:key="i + section.title" :lat-lng="item.position">
+              <l-popup>
+                <div @click="innerClick">{{item.title}} + {{ i }}</div>
+              </l-popup>
+            </l-marker>
+          </template>
+          <template v-if="!section.group">
+            <l-marker
+              v-if="section.display"
+              v-bind:key="i + section.title"
+              :lat-lng="item.position"
+            >
+              <l-popup>
+                <div @click="innerClick">{{item.title}} + {{ i }}</div>
+              </l-popup>
+            </l-marker>
+          </template>
         </template>
       </template>
     </l-map>
@@ -80,6 +110,20 @@ export default {
     },
     showLongText() {
       this.showParagraph = !this.showParagraph;
+    },
+    sectionClicked(i) {
+      const sectionReference = this.mapData[i];
+      const displayValue = sectionReference.display;
+
+      // Need to check if this is a group section or not if its not we just need to update the parent
+      if (sectionReference.group) {
+        sectionReference.locations.forEach(function(location) {
+          location.display = displayValue;
+        });
+        // Update all items
+      } else {
+        return;
+      }
     }
   },
   data() {
@@ -94,28 +138,31 @@ export default {
 
       mapData: [
         {
-          id: 1,
           title: "Premium Cigarettes",
           display: true,
+          group: true,
           locations: [
             {
-              title: "Text Here",
-              position: [70.41322, -1.219482]
+              title: "Location A",
+              position: [70.41322, -1.219482],
+              display: true
             },
             {
-              title: "Second one",
-              position: [47.41322, -1.219482]
+              title: "Location B",
+              position: [47.41322, -1.219482],
+              display: true
             }
           ]
         },
         {
-          id: 1,
-          title: "Ho",
+          title: "Horse",
           display: true,
+          group: false,
           locations: [
             {
               title: "Text 1222222",
-              position: [40.41322, -1.219482]
+              position: [40.41322, -1.219482],
+              display: true
             }
           ]
         }
@@ -144,5 +191,8 @@ button.leaflet-control-layers-toggle {
   padding: 0 0.5em;
   border: 1px solid #aaa;
   border-radius: 0.1em;
+}
+.label.v-label.theme--light {
+  font-size: 0.8em;
 }
 </style>
