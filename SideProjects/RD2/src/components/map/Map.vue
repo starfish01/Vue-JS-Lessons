@@ -11,24 +11,23 @@
       @update:center="centerUpdated"
       @update:bounds="boundsUpdated"
     >
-      <l-control-layers position="topleft" />
-      <l-tile-layer
-        v-for="layer in layers"
-        :key="layer.name"
-        :layers="layer.layers"
-        :visible="layer.visible"
-        :name="layer.name"
-        layer-type="base"
-      />
+      <l-tile-layer :url="url" />
 
-      <!-- <l-marker :lat-lng="markerLatLng">
-        <l-tooltip>Hello!</l-tooltip>
-      </l-marker>-->
+      <l-control class="example-custom-control">
+        <ul>
+          <li v-for="(section, i) in mapData" v-bind:key="i">{{ section.title }}</li>
+        </ul>
+      </l-control>
 
-      <l-tile-layer :noWrap="true" :url="url"></l-tile-layer>
-      <div class="info-lat-long">
-        <span>{{ mousePosition.lat }} x {{ mousePosition.lng }}</span>
-      </div>
+      <template v-for="(section, i) in mapData">
+        <template v-if="section.display">
+          <l-marker v-for="(item,i) in section.locations" v-bind:key="i" :lat-lng="item.position">
+            <l-popup>
+              <div @click="innerClick">{{item.title}}</div>
+            </l-popup>
+          </l-marker>
+        </template>
+      </template>
     </l-map>
   </div>
 </template>
@@ -40,8 +39,12 @@ import {
   LMarker,
   LControl,
   LControlLayers,
-  LWMSTileLayer
+  LWMSTileLayer,
+  LPopup,
+  LTooltip
 } from "vue2-leaflet";
+import { latLng } from "leaflet";
+
 import "leaflet/dist/leaflet.css";
 
 export default {
@@ -51,10 +54,15 @@ export default {
     LMarker,
     LControl,
     LControlLayers,
-    LWMSTileLayer
+    LWMSTileLayer,
+    LPopup,
+    LTooltip
   },
   mounted() {},
   methods: {
+    innerClick() {
+      alert("Click!");
+    },
     getMousePosition(event) {
       this.mousePosition = {
         lat: event.latlng.lat.toFixed(2),
@@ -70,7 +78,9 @@ export default {
     boundsUpdated(bounds) {
       this.bounds = bounds;
     },
-    showAlert() {}
+    showLongText() {
+      this.showParagraph = !this.showParagraph;
+    }
   },
   data() {
     return {
@@ -79,23 +89,35 @@ export default {
       center: [42, 0],
       bounds: null,
       mousePosition: { lat: 0, lng: 0 },
-      markerLatLng: [47.31322, -1.319482],
-      layers: [
+      // withPopup: latLng(47.41322, -1.219482),
+      // pointtwo: [70.41322, -1.219482],
+
+      mapData: [
         {
-          name: "Boundaries",
-          visible: false,
-          layers: "ne:ne_10m_admin_0_boundary_lines_land"
+          id: 1,
+          title: "Premium Cigarettes",
+          display: true,
+          locations: [
+            {
+              title: "Text Here",
+              position: [70.41322, -1.219482]
+            },
+            {
+              title: "Second one",
+              position: [47.41322, -1.219482]
+            }
+          ]
         },
         {
-          name: "Countries",
-          visible: true,
-          layers: "ne:ne_10m_admin_0_countries"
-        },
-        {
-          name: "Boundaries and Countries",
-          visible: true,
-          layers:
-            "ne:ne_10m_admin_0_boundary_lines_land,ne:ne_10m_admin_0_countries"
+          id: 1,
+          title: "Ho",
+          display: true,
+          locations: [
+            {
+              title: "Text 1222222",
+              position: [40.41322, -1.219482]
+            }
+          ]
         }
       ]
     };
@@ -116,5 +138,11 @@ export default {
 button.leaflet-control-layers-toggle {
   background-color: #fff;
   border-bottom: 1px solid #ccc;
+}
+.example-custom-control {
+  background: #fff;
+  padding: 0 0.5em;
+  border: 1px solid #aaa;
+  border-radius: 0.1em;
 }
 </style>
