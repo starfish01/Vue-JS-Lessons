@@ -16,8 +16,8 @@
       <l-control class="example-custom-control">
         <template v-for="(section, i) in mapData">
           <v-checkbox
-            @click="sectionClicked(i)"
-            class="shrink ma-0 pa-0 font-weight-bold"
+            @change="sectionClicked(i)"
+            class="shrink font-weight-bold"
             v-bind:key="i"
             :label="section.title"
             v-model="section.display"
@@ -59,18 +59,34 @@
             </template>
           </template>
         </template>
-        <!-- <template v-if="section.type === 'circle'">
+        <template v-if="section.type === 'circle'">
           <template v-for="(item,i) in section.locations">
+<template v-if="section.group">
             <l-circle
-              color="red"
+             v-if="item.display"
+              :color="item.colour"
               v-bind:key="i + section.title"
               :lat-lng="item.position"
-              :radius="5000"
+              :radius="item.radius"
             >
               <l-popup :content="item.title" />
             </l-circle>
+</template>
+            <template v-if="!section.group">
+
+              <l-circle
+             v-if="section.display"
+              :color="item.colour"
+              v-bind:key="i + section.title"
+              :lat-lng="item.position"
+              :radius="item.radius"
+            >
+              <l-popup :content="item.title" />
+            </l-circle>
+
+</template>
           </template>
-        </template>-->
+        </template>
       </template>
     </l-map>
   </div>
@@ -89,7 +105,6 @@ import {
   LCircle
 } from "vue2-leaflet";
 import { latLng } from "leaflet";
-
 import "leaflet/dist/leaflet.css";
 
 export default {
@@ -128,7 +143,7 @@ export default {
       this.showParagraph = !this.showParagraph;
     },
     sectionClicked(i) {
-      console.log("clicked");
+      console.log(i)
       const sectionReference = this.mapData[i];
       const displayValue = sectionReference.display;
 
@@ -150,9 +165,6 @@ export default {
       center: [42, 0],
       bounds: null,
       mousePosition: { lat: 0, lng: 0 },
-      // withPopup: latLng(47.41322, -1.219482),
-      // pointtwo: [70.41322, -1.219482],
-
       mapData: [
         {
           title: "Premium Cigarettes",
@@ -175,7 +187,7 @@ export default {
         {
           title: "Horse",
           display: true,
-          group: true,
+          group: false,
           type: "marker",
           locations: [
             {
@@ -189,21 +201,51 @@ export default {
               display: true
             }
           ]
-        }
-        // {
-        //   title: "Deer",
-        //   display: true,
-        //   group: true,
-        //   type: "circle",
-        //   locations: [
-        //     {
-        //       title: "Circle",
-        //       position: [10.41322, 50.219482],
-        //       display: true,
-        //       radius: 4500
-        //     }
-        //   ]
-        // },
+        },
+        {
+          title: "Deer",
+          display: true,
+          group: true,
+          type: "circle",
+          locations: [
+            {
+              title: "Circle",
+              position: [10.41322, 50.219482],
+              display: true,
+              colour:'green',
+              radius: 450000
+            },
+            {
+              title: "Circle",
+              position: [20.41322, 30.219482],
+              display: true,
+              colour:'red',
+              radius: 450000
+            }
+          ]
+        },
+        {
+          title: "Bear",
+          display: true,
+          group: false,
+          type: "circle",
+          locations: [
+            {
+              title: "Circle",
+              position: [20.41322, 70.219482],
+              display: true,
+              colour:'red',
+              radius: 450000
+            },
+            {
+              title: "Circle",
+              position: [30.41322, 60.219482],
+              display: true,
+              colour:'blue',
+              radius: 450000
+            }
+          ]
+        },
 
         // {
         //   title: "Bear",
