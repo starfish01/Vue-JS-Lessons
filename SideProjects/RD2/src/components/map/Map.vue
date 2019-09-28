@@ -42,8 +42,10 @@
             <template v-if="section.group">
               <l-marker v-if="item.display" v-bind:key="i + section.title" :lat-lng="item.position">
                 <l-popup>
-                  <div @click="innerClick">{{item.title}} + {{ i }}</div>
+                  <div @click="innerClick">{{item.title}}</div>
                 </l-popup>
+
+                <l-icon v-if="item.icon" :icon-url="item.icon.url"></l-icon>
               </l-marker>
             </template>
             <template v-if="!section.group">
@@ -53,38 +55,67 @@
                 :lat-lng="item.position"
               >
                 <l-popup>
-                  <div @click="innerClick">{{item.title}} + {{ i }}</div>
+                  <div @click="innerClick">{{item.title}}</div>
                 </l-popup>
+                <l-icon v-if="item.icon" :icon-url="item.icon.url"></l-icon>
               </l-marker>
             </template>
           </template>
         </template>
         <template v-if="section.type === 'circle'">
           <template v-for="(item,i) in section.locations">
-<template v-if="section.group">
-            <l-circle
-             v-if="item.display"
-              :color="item.colour"
-              v-bind:key="i + section.title"
-              :lat-lng="item.position"
-              :radius="item.radius"
-            >
-              <l-popup :content="item.title" />
-            </l-circle>
-</template>
-            <template v-if="!section.group">
-
+            <template v-if="section.group">
               <l-circle
-             v-if="section.display"
-              :color="item.colour"
-              v-bind:key="i + section.title"
-              :lat-lng="item.position"
-              :radius="item.radius"
-            >
-              <l-popup :content="item.title" />
-            </l-circle>
+                v-if="item.display"
+                :color="item.colour"
+                v-bind:key="i + section.title"
+                :lat-lng="item.position"
+                :radius="item.radius"
+              >
+                <l-popup :content="item.title" />
+              </l-circle>
+            </template>
+            <template v-if="!section.group">
+              <l-circle
+                v-if="section.display"
+                :color="item.colour"
+                v-bind:key="i + section.title"
+                :lat-lng="item.position"
+                :radius="item.radius"
+              >
+                <l-popup :content="item.title" />
+              </l-circle>
+            </template>
+          </template>
+        </template>
 
-</template>
+        <template v-if="section.type === 'polygon'">
+          <template v-for="(item,i) in section.locations">
+            <template v-if="section.group">
+              <l-polygon
+                v-if="item.display"
+                v-bind:key="i + section.title"
+                :lat-lngs="item.position"
+                :color="item.colour"
+              >
+                <l-popup>
+                  <div @click="innerClick">{{item.title}}</div>
+                </l-popup>
+              </l-polygon>
+            </template>
+
+            <template v-if="!section.group">
+              <l-polygon
+                v-if="section.display"
+                v-bind:key="i + section.title"
+                :lat-lngs="item.position"
+                :color="item.colour"
+              >
+                <l-popup>
+                  <div @click="innerClick">{{item.title}}</div>
+                </l-popup>
+              </l-polygon>
+            </template>
           </template>
         </template>
       </template>
@@ -102,7 +133,9 @@ import {
   LWMSTileLayer,
   LPopup,
   LTooltip,
-  LCircle
+  LCircle,
+  LPolygon,
+  LIcon
 } from "vue2-leaflet";
 import { latLng } from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -117,7 +150,9 @@ export default {
     LWMSTileLayer,
     LPopup,
     LTooltip,
-    LCircle
+    LCircle,
+    LPolygon,
+    LIcon
   },
   mounted() {},
   methods: {
@@ -143,7 +178,7 @@ export default {
       this.showParagraph = !this.showParagraph;
     },
     sectionClicked(i) {
-      console.log(i)
+      console.log(i);
       const sectionReference = this.mapData[i];
       const displayValue = sectionReference.display;
 
@@ -175,7 +210,10 @@ export default {
             {
               title: "Location A",
               position: [70.41322, -1.219482],
-              display: true
+              display: true,
+              icon: {
+                url: "marker/baseball-marker.png"
+              }
             },
             {
               title: "Location B",
@@ -212,14 +250,14 @@ export default {
               title: "Circle",
               position: [10.41322, 50.219482],
               display: true,
-              colour:'green',
+              colour: "green",
               radius: 450000
             },
             {
               title: "Circle",
               position: [20.41322, 30.219482],
               display: true,
-              colour:'red',
+              colour: "red",
               radius: 450000
             }
           ]
@@ -234,53 +272,88 @@ export default {
               title: "Circle",
               position: [20.41322, 70.219482],
               display: true,
-              colour:'red',
+              colour: "red",
               radius: 450000
             },
             {
               title: "Circle",
               position: [30.41322, 60.219482],
               display: true,
-              colour:'blue',
+              colour: "blue",
               radius: 450000
             }
           ]
         },
 
-        // {
-        //   title: "Bear",
-        //   display: true,
-        //   group: false,
-        //   type: "polygon",
-        //   locations: [
-        //     {
-        //       title: "Poly bear",
-        //       position: [
-        //         [47.2263299, -1.6222],
-        //         [47.21024000000001, -1.6270065],
-        //         [47.1969447, -1.6136169],
-        //         [47.18527929999999, -1.6143036],
-        //         [47.1794457, -1.6098404],
-        //         [47.1775788, -1.5985107],
-        //         [47.1676598, -1.5753365],
-        //         [47.1593731, -1.5521622],
-        //         [47.1593731, -1.5319061],
-        //         [47.1722111, -1.5143967],
-        //         [47.1960115, -1.4841843],
-        //         [47.2095404, -1.4848709],
-        //         [47.2291277, -1.4683914],
-        //         [47.2533687, -1.5116501],
-        //         [47.2577961, -1.5531921],
-        //         [47.26828069, -1.5621185],
-        //         [47.2657179, -1.589241],
-        //         [47.2589612, -1.6204834],
-        //         [47.237287, -1.6266632],
-        //         [47.2263299, -1.6222]
-        //       ],
-        //       display: true
-        //     }
-        //   ]
-        // }
+        {
+          title: "Croc",
+          display: true,
+          group: true,
+          type: "polygon",
+          locations: [
+            {
+              title: "Poly Croc",
+              position: [
+                [47.2263299, -1.6222],
+                [48.21024000000001, -10.6270065],
+                [49.1969447, -20.6136169],
+                [50.18527929999999, -20.6143036],
+                [55.1794457, -22.6098404],
+                [60.1775788, -23.5985107],
+                [47.2263299, -1.6222]
+              ],
+              display: true
+            },
+            {
+              title: "Poly Croc",
+              position: [
+                [57.2263299, 1.6222],
+                [58.21024000000001, 10.6270065],
+                [59.1969447, 20.6136169],
+                [60.18527929999999, 20.6143036],
+                [65.1794457, 22.6098404],
+                [50.1775788, 23.5985107],
+                [57.2263299, 1.6222]
+              ],
+              display: true
+            }
+          ]
+        },
+        {
+          title: "Bat",
+          display: true,
+          group: false,
+          type: "polygon",
+          locations: [
+            {
+              title: "Poly Bat",
+              position: [
+                [17.2263299, -1.6222],
+                [18.21024000000001, -10.6270065],
+                [19.1969447, -20.6136169],
+                [20.18527929999999, -20.6143036],
+                [25.1794457, -22.6098404],
+                [30.1775788, -23.5985107],
+                [27.2263299, -1.6222]
+              ],
+              display: true
+            },
+            {
+              title: "Poly Bat",
+              colour: "red",
+              position: [
+                [37.2263299, 1.6222],
+                [38.21024000000001, 10.6270065],
+                [39.1969447, 20.6136169],
+                [40.18527929999999, 20.6143036],
+                [55.1794457, 22.6098404],
+                [40.1775788, 23.5985107],
+                [37.2263299, 1.6222]
+              ],
+              display: true
+            }
+          ]
+        }
       ]
     };
   }
