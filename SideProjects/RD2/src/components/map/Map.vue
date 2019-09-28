@@ -1,7 +1,7 @@
 <template>
-  <div style="height: 100%; width: 100%">
+  <div style="height: 100%; width: 100%;">
     <l-map
-      style="height: 100%; width: 100%"
+      style="height: 100%; width: 100%; background:#D5B7AB"
       @mousemove="getMousePosition"
       :zoom="zoom"
       :center="center"
@@ -11,7 +11,7 @@
       @update:center="centerUpdated"
       @update:bounds="boundsUpdated"
     >
-      <l-tile-layer :url="url" />
+      <l-tile-layer :url="url" :noWrap="true" />
 
       <l-control class="example-custom-control">
         <template v-for="(section, i) in mapData">
@@ -23,7 +23,7 @@
             v-model="section.display"
             hide-details
           ></v-checkbox>
-          <template v-if="section.group">
+          <template v-if="section.group && section.locations.length > 1">
             <v-checkbox
               v-for="(item,i) in section.locations"
               v-bind:key="i + section.title"
@@ -37,26 +37,40 @@
       </l-control>
 
       <template v-for="(section) in mapData">
-        <template v-for="(item,i) in section.locations">
-          <template v-if="section.group">
-            <l-marker v-if="item.display" v-bind:key="i + section.title" :lat-lng="item.position">
-              <l-popup>
-                <div @click="innerClick">{{item.title}} + {{ i }}</div>
-              </l-popup>
-            </l-marker>
-          </template>
-          <template v-if="!section.group">
-            <l-marker
-              v-if="section.display"
-              v-bind:key="i + section.title"
-              :lat-lng="item.position"
-            >
-              <l-popup>
-                <div @click="innerClick">{{item.title}} + {{ i }}</div>
-              </l-popup>
-            </l-marker>
+        <template v-if="section.type === 'marker'">
+          <template v-for="(item,i) in section.locations">
+            <template v-if="section.group">
+              <l-marker v-if="item.display" v-bind:key="i + section.title" :lat-lng="item.position">
+                <l-popup>
+                  <div @click="innerClick">{{item.title}} + {{ i }}</div>
+                </l-popup>
+              </l-marker>
+            </template>
+            <template v-if="!section.group">
+              <l-marker
+                v-if="section.display"
+                v-bind:key="i + section.title"
+                :lat-lng="item.position"
+              >
+                <l-popup>
+                  <div @click="innerClick">{{item.title}} + {{ i }}</div>
+                </l-popup>
+              </l-marker>
+            </template>
           </template>
         </template>
+        <!-- <template v-if="section.type === 'circle'">
+          <template v-for="(item,i) in section.locations">
+            <l-circle
+              color="red"
+              v-bind:key="i + section.title"
+              :lat-lng="item.position"
+              :radius="5000"
+            >
+              <l-popup :content="item.title" />
+            </l-circle>
+          </template>
+        </template>-->
       </template>
     </l-map>
   </div>
@@ -71,7 +85,8 @@ import {
   LControlLayers,
   LWMSTileLayer,
   LPopup,
-  LTooltip
+  LTooltip,
+  LCircle
 } from "vue2-leaflet";
 import { latLng } from "leaflet";
 
@@ -86,7 +101,8 @@ export default {
     LControlLayers,
     LWMSTileLayer,
     LPopup,
-    LTooltip
+    LTooltip,
+    LCircle
   },
   mounted() {},
   methods: {
@@ -112,6 +128,7 @@ export default {
       this.showParagraph = !this.showParagraph;
     },
     sectionClicked(i) {
+      console.log("clicked");
       const sectionReference = this.mapData[i];
       const displayValue = sectionReference.display;
 
@@ -141,6 +158,7 @@ export default {
           title: "Premium Cigarettes",
           display: true,
           group: true,
+          type: "marker",
           locations: [
             {
               title: "Location A",
@@ -157,15 +175,70 @@ export default {
         {
           title: "Horse",
           display: true,
-          group: false,
+          group: true,
+          type: "marker",
           locations: [
             {
               title: "Text 1222222",
               position: [40.41322, -1.219482],
               display: true
+            },
+            {
+              title: "Text new",
+              position: [43.41322, 4.219482],
+              display: true
             }
           ]
         }
+        // {
+        //   title: "Deer",
+        //   display: true,
+        //   group: true,
+        //   type: "circle",
+        //   locations: [
+        //     {
+        //       title: "Circle",
+        //       position: [10.41322, 50.219482],
+        //       display: true,
+        //       radius: 4500
+        //     }
+        //   ]
+        // },
+
+        // {
+        //   title: "Bear",
+        //   display: true,
+        //   group: false,
+        //   type: "polygon",
+        //   locations: [
+        //     {
+        //       title: "Poly bear",
+        //       position: [
+        //         [47.2263299, -1.6222],
+        //         [47.21024000000001, -1.6270065],
+        //         [47.1969447, -1.6136169],
+        //         [47.18527929999999, -1.6143036],
+        //         [47.1794457, -1.6098404],
+        //         [47.1775788, -1.5985107],
+        //         [47.1676598, -1.5753365],
+        //         [47.1593731, -1.5521622],
+        //         [47.1593731, -1.5319061],
+        //         [47.1722111, -1.5143967],
+        //         [47.1960115, -1.4841843],
+        //         [47.2095404, -1.4848709],
+        //         [47.2291277, -1.4683914],
+        //         [47.2533687, -1.5116501],
+        //         [47.2577961, -1.5531921],
+        //         [47.26828069, -1.5621185],
+        //         [47.2657179, -1.589241],
+        //         [47.2589612, -1.6204834],
+        //         [47.237287, -1.6266632],
+        //         [47.2263299, -1.6222]
+        //       ],
+        //       display: true
+        //     }
+        //   ]
+        // }
       ]
     };
   }
