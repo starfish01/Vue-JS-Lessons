@@ -13,6 +13,8 @@
     >
       <l-tile-layer :url="url" :noWrap="true" />
 
+      <!-- User Checkboxes -->
+
       <l-control class="example-custom-control">
         <template v-for="(section, i) in mapData">
           <v-checkbox
@@ -36,129 +38,70 @@
         </template>
       </l-control>
 
-      <template v-for="(section) in mapData">
-        <template v-if="section.type === 'marker'">
-          <template v-for="(item,i) in section.locations">
-            <template v-if="section.group">
-              <l-marker v-if="item.display" v-bind:key="i + section.title" :lat-lng="item.position">
-                <l-popup>
-                  <div @click="innerClick">{{item.title}}</div>
-                </l-popup>
+      <!-- Types of Markers -->
 
-                <l-icon v-if="item.icon" :icon-url="item.icon.url"></l-icon>
-              </l-marker>
-            </template>
-            <template v-if="!section.group">
-              <l-marker
-                v-if="section.display"
-                v-bind:key="i + section.title"
-                :lat-lng="item.position"
-              >
-                <l-popup>
-                  <div @click="innerClick">{{item.title}}</div>
-                </l-popup>
-                <l-icon v-if="item.icon" :icon-url="item.icon.url"></l-icon>
-              </l-marker>
-            </template>
-          </template>
+      <template v-for="(section) in mapData">
+        <!-- Marker -->
+
+        <template v-if="section.type === 'marker'">
+          <appMarker
+            v-for="(item,i) in section.locations"
+            v-bind:key="i + section.title"
+            :markerData="item"
+            :isGroup="section.group"
+            :sectionDisplay="section.display"
+          ></appMarker>
         </template>
+
+        <!-- Circle -->
+
         <template v-if="section.type === 'circle'">
-          <template v-for="(item,i) in section.locations">
-            <template v-if="section.group">
-              <l-circle
-                v-if="item.display"
-                :color="item.colour"
-                v-bind:key="i + section.title"
-                :lat-lng="item.position"
-                :radius="item.radius"
-              >
-                <l-popup :content="item.title" />
-              </l-circle>
-            </template>
-            <template v-if="!section.group">
-              <l-circle
-                v-if="section.display"
-                :color="item.colour"
-                v-bind:key="i + section.title"
-                :lat-lng="item.position"
-                :radius="item.radius"
-              >
-                <l-popup :content="item.title" />
-              </l-circle>
-            </template>
-          </template>
+          <appCircle
+            v-for="(item,i) in section.locations"
+            v-bind:key="i + section.title"
+            :markerData="item"
+            :isGroup="section.group"
+            :sectionDisplay="section.display"
+          ></appCircle>
         </template>
+
+        <!-- Polygon -->
 
         <template v-if="section.type === 'polygon'">
-          <template v-for="(item,i) in section.locations">
-            <template v-if="section.group">
-              <l-polygon
-                v-if="item.display"
-                v-bind:key="i + section.title"
-                :lat-lngs="item.position"
-                :color="item.colour"
-              >
-                <l-popup>
-                  <div @click="innerClick">{{item.title}}</div>
-                </l-popup>
-              </l-polygon>
-            </template>
-
-            <template v-if="!section.group">
-              <l-polygon
-                v-if="section.display"
-                v-bind:key="i + section.title"
-                :lat-lngs="item.position"
-                :color="item.colour"
-              >
-                <l-popup>
-                  <div @click="innerClick">{{item.title}}</div>
-                </l-popup>
-              </l-polygon>
-            </template>
-          </template>
+          <appPolygon
+            v-for="(item,i) in section.locations"
+            v-bind:key="i + section.title"
+            :markerData="item"
+            :isGroup="section.group"
+            :sectionDisplay="section.display"
+          ></appPolygon>
         </template>
+
+        <!-- end markers -->
       </template>
     </l-map>
   </div>
 </template>
 
 <script>
-import {
-  LMap,
-  LTileLayer,
-  LMarker,
-  LControl,
-  LControlLayers,
-  LWMSTileLayer,
-  LPopup,
-  LTooltip,
-  LCircle,
-  LPolygon,
-  LIcon
-} from "vue2-leaflet";
+import { LMap, LTileLayer, LControl } from "vue2-leaflet";
 import { latLng } from "leaflet";
 import "leaflet/dist/leaflet.css";
+
+import appMarker from "./markers/Marker";
+import appCircle from "./markers/Circle";
+import appPolygon from "./markers/Polygon";
 
 export default {
   components: {
     LMap,
     LTileLayer,
-    LMarker,
     LControl,
-    LControlLayers,
-    LWMSTileLayer,
-    LPopup,
-    LTooltip,
-    LCircle,
-    LPolygon,
-    LIcon
+    appMarker,
+    appCircle,
+    appPolygon
   },
-  mounted() {},
   methods: {
-    innerClick() {
-      alert("Click!");
-    },
     getMousePosition(event) {
       this.mousePosition = {
         lat: event.latlng.lat.toFixed(2),
@@ -181,13 +124,10 @@ export default {
       console.log(i);
       const sectionReference = this.mapData[i];
       const displayValue = sectionReference.display;
-
-      // Need to check if this is a group section or not if its not we just need to update the parent
       if (sectionReference.group) {
         sectionReference.locations.forEach(function(location) {
           location.display = displayValue;
         });
-        // Update all items
       } else {
         return;
       }
@@ -212,13 +152,17 @@ export default {
               position: [70.41322, -1.219482],
               display: true,
               icon: {
-                url: "marker/baseball-marker.png"
+                url: "marker/RDOIcons/image_part_076.png",
+                icon_size: [40, 50]
               }
             },
             {
               title: "Location B",
               position: [47.41322, -1.219482],
-              display: true
+              display: true,
+              icon: {
+                url: "marker/RDOIcons/image_part_076.png"
+              }
             }
           ]
         },
@@ -230,13 +174,11 @@ export default {
           locations: [
             {
               title: "Text 1222222",
-              position: [40.41322, -1.219482],
-              display: true
+              position: [40.41322, -1.219482]
             },
             {
               title: "Text new",
-              position: [43.41322, 4.219482],
-              display: true
+              position: [43.41322, 4.219482]
             }
           ]
         },
@@ -271,14 +213,12 @@ export default {
             {
               title: "Circle",
               position: [20.41322, 70.219482],
-              display: true,
               colour: "red",
               radius: 450000
             },
             {
               title: "Circle",
               position: [30.41322, 60.219482],
-              display: true,
               colour: "blue",
               radius: 450000
             }
