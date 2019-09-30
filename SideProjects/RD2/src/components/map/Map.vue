@@ -77,8 +77,13 @@
           ></appPolygon>
         </template>
 
-        <!-- end markers -->
       </template>
+
+        <!-- end markers -->
+
+      <!-- <div>{{info-lat-long()}}</div> -->
+
+
     </l-map>
   </div>
 </template>
