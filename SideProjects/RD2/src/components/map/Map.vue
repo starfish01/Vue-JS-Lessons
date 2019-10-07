@@ -1,11 +1,11 @@
 <template>
   <div style="height: 100%; width: 100%;">
     <l-map
-      style="height: 100%; width: 100%; background:#D5B7AB"
+      style="height: 100%; width: 100%; background:#D3B790"
       @mousemove="getMousePosition"
       :zoom="zoom"
       :center="center"
-      :maxZoom="5"
+      :maxZoom="8"
       :minZoom="2"
       @update:zoom="zoomUpdated"
       @update:center="centerUpdated"
@@ -15,28 +15,65 @@
 
       <!-- User Checkboxes -->
 
-      <l-control class="example-custom-control">
-        <template v-for="(section, i) in mapData">
-          <v-checkbox
-            @change="sectionClicked(i)"
-            class="shrink font-weight-bold"
-            v-bind:key="i"
-            :label="section.title"
-            v-model="section.display"
-            hide-details
-          ></v-checkbox>
-          <template v-if="section.group && section.locations.length > 1">
-            <v-checkbox
-              v-for="(item,i) in section.locations"
-              v-bind:key="i + section.title"
-              class="shrink ma-0 pa-0"
-              :label="item.title"
-              v-model="item.display"
-              hide-details
-            ></v-checkbox>
-          </template>
-        </template>
-      </l-control>
+      <div v-if="!displayMenu" class="location-button">
+        <v-btn icon>
+          <v-icon @click="displayMenuChange()" dark>mdi-map</v-icon>
+        </v-btn>
+      </div>
+
+      <div v-if="displayMenu" class="location-button-exit">
+        <v-btn icon>
+          <v-icon @click="displayMenuChange()" dark>mdi-close</v-icon>
+        </v-btn>
+      </div>
+
+      <template v-if="displayMenu">
+        <div @mouseleave="displayMenuChange()">
+          <l-control @mouseleave="displayMenuChange()" class="example-custom-control">
+            <template v-for="(section, i) in mapData">
+              <v-checkbox
+                @change="sectionClicked(i)"
+                class="shrink font-weight-bold"
+                v-bind:key="i"
+                :label="section.title"
+                v-model="section.display"
+                hide-details
+              ></v-checkbox>
+              <template v-if="section.group && section.locations.length > 1">
+                <v-checkbox
+                  v-for="(item,i) in section.locations"
+                  v-bind:key="i + section.title"
+                  class="shrink ma-0 pa-0"
+                  :label="item.title"
+                  v-model="item.display"
+                  hide-details
+                ></v-checkbox>
+              </template>
+            </template>
+
+            <template v-for="(section, i) in mapData">
+              <v-checkbox
+                @change="sectionClicked(i)"
+                class="shrink font-weight-bold"
+                v-bind:key="i"
+                :label="section.title"
+                v-model="section.display"
+                hide-details
+              ></v-checkbox>
+              <template v-if="section.group && section.locations.length > 1">
+                <v-checkbox
+                  v-for="(item,i) in section.locations"
+                  v-bind:key="i + section.title"
+                  class="shrink ma-0 pa-0"
+                  :label="item.title"
+                  v-model="item.display"
+                  hide-details
+                ></v-checkbox>
+              </template>
+            </template>
+          </l-control>
+        </div>
+      </template>
 
       <!-- Types of Markers -->
 
@@ -76,14 +113,11 @@
             :sectionDisplay="section.display"
           ></appPolygon>
         </template>
-
       </template>
 
-        <!-- end markers -->
+      <!-- end markers -->
 
       <!-- <div>{{info-lat-long()}}</div> -->
-
-
     </l-map>
   </div>
 </template>
@@ -113,6 +147,10 @@ export default {
         lng: event.latlng.lng.toFixed(2)
       };
     },
+    displayMenuChange() {
+      console.log(this.displayMenu);
+      this.displayMenu = !this.displayMenu;
+    },
     zoomUpdated(zoom) {
       this.zoom = zoom;
     },
@@ -140,10 +178,11 @@ export default {
   },
   data() {
     return {
-      url: "/map-assets/{z}/{x}/{y}.png",
+      url: "https://s.rsg.sc/sc/images/games/RDR2/map/game/{z}/{x}/{y}.jpg",
       zoom: 2,
       center: [42, 0],
       bounds: null,
+      displayMenu: false,
       mousePosition: { lat: 0, lng: 0 },
       mapData: [
         {
@@ -304,7 +343,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .info-lat-long {
   padding: 5px;
   position: absolute;
@@ -324,8 +363,30 @@ button.leaflet-control-layers-toggle {
   padding: 0 0.5em;
   border: 1px solid #aaa;
   border-radius: 0.1em;
+  overflow-y: auto;
+  height: 600px;
 }
 .label.v-label.theme--light {
   font-size: 0.8em;
+}
+.location-button {
+  position: absolute;
+  background: white;
+  z-index: 9999;
+  font-size: 20px;
+  left: auto;
+  right: 10px;
+  top: 10px;
+  padding: 10px;
+  border: 1px gray solid;
+  border-radius: 3px;
+}
+.location-button-exit {
+  position: absolute;
+  z-index: 9999;
+  left: auto;
+  right: 8px;
+  top: 8px;
+  padding: 0px;
 }
 </style>

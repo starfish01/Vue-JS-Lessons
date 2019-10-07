@@ -1,10 +1,10 @@
 <template>
   <v-container fluid style="background:#300002">
-    <v-layout class="mb-5">
+    <v-layout class="mb-5 mt-12">
       <addTop></addTop>
     </v-layout>
     <v-layout>
-      <v-row style="height:800px;">
+      <v-row style="height:76vh;">
         <v-col class="hidden-sm-and-down" cols="12" md="2">
           <appLRSponser></appLRSponser>
         </v-col>
@@ -16,7 +16,7 @@
         </v-col>
       </v-row>
     </v-layout>
-    <v-layout class="mt-5">
+    <v-layout class="mt-12">
       <addTop></addTop>
     </v-layout>
   </v-container>

@@ -1,9 +1,11 @@
 <template>
   <v-app>
     <Header />
-    <v-content>
-      <Base />
-    </v-content>
+    <!-- <v-content class="yellow"> -->
+
+    <Base fluid />
+
+    <!-- </v-content> -->
   </v-app>
 </template>
 
