@@ -1,4 +1,4 @@
-# state-checker
+# pokie-stats
 
 ## Project setup
 ```
