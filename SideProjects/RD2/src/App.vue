@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <Header />
     <!-- <v-content class="yellow"> -->
 
     <Base fluid />

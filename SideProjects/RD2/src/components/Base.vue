@@ -1,23 +1,8 @@
 <template>
-  <v-container fluid style="background:#300002">
-    <v-layout class="mb-5 mt-12">
-      <addTop></addTop>
-    </v-layout>
-    <v-layout>
-      <v-row style="height:76vh;">
-        <v-col class="hidden-sm-and-down" cols="12" md="2">
-          <appLRSponser></appLRSponser>
-        </v-col>
-        <v-col class="something" style="background:#EE0000" cols="12" md="8">
+  <v-container style="height:100%">
+    <v-layout style="height:100%">
           <appMap></appMap>
-        </v-col>
-        <v-col class="hidden-sm-and-down" cols="12" md="2">
-          <appLRSponser></appLRSponser>
-        </v-col>
-      </v-row>
-    </v-layout>
-    <v-layout class="mt-12">
-      <addTop></addTop>
+
     </v-layout>
   </v-container>
 </template>
@@ -41,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-.something {
+.something-else {
   clip-path: polygon(
     3% 0,
     7% 1%,

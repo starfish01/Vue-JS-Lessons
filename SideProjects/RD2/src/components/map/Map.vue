@@ -116,9 +116,9 @@
       </template>
 
       <!-- end markers -->
-
       <!-- <div>{{info-lat-long()}}</div> -->
     </l-map>
+          <div class="latinfo">-{{mousePosition}}</div>
   </div>
 </template>
 
@@ -185,16 +185,40 @@ export default {
       displayMenu: false,
       mousePosition: { lat: 0, lng: 0 },
       mapData: [
+
+               {
+          title: "Test",
+          display: true,
+          group: false,
+          type: "marker",
+          locations: [
+            {
+              title: "Text 1222222",
+              // -5848.5,11492.5
+              position: [74.88, -53.75]
+            },
+            {
+              title: "Text new",
+              //[-6533.5,17151.5]
+              position: [72.75, 8.46]
+            }
+          ]
+        },
+
+
+
+
+
         {
           title: "Premium Cigarettes",
-          display: true,
+          display: false,
           group: true,
           type: "marker",
           locations: [
             {
               title: "Location A",
               position: [70.41322, -1.219482],
-              display: true,
+              display: false,
               icon: {
                 url: "marker/RDOIcons/image_part_076.png",
                 icon_size: [40, 50]
@@ -203,7 +227,7 @@ export default {
             {
               title: "Location B",
               position: [47.41322, -1.219482],
-              display: true,
+              display: false,
               icon: {
                 url: "marker/RDOIcons/image_part_076.png"
               }
@@ -212,7 +236,7 @@ export default {
         },
         {
           title: "Horse",
-          display: true,
+          display: false,
           group: false,
           type: "marker",
           locations: [
@@ -228,21 +252,21 @@ export default {
         },
         {
           title: "Deer",
-          display: true,
+          display: false,
           group: true,
           type: "circle",
           locations: [
             {
               title: "Circle",
               position: [10.41322, 50.219482],
-              display: true,
+              display: false,
               colour: "green",
               radius: 450000
             },
             {
               title: "Circle",
               position: [20.41322, 30.219482],
-              display: true,
+              display: false,
               colour: "red",
               radius: 450000
             }
@@ -250,7 +274,7 @@ export default {
         },
         {
           title: "Bear",
-          display: true,
+          display: false,
           group: false,
           type: "circle",
           locations: [
@@ -271,7 +295,7 @@ export default {
 
         {
           title: "Croc",
-          display: true,
+         display: false,
           group: true,
           type: "polygon",
           locations: [
@@ -286,7 +310,7 @@ export default {
                 [60.1775788, -23.5985107],
                 [47.2263299, -1.6222]
               ],
-              display: true
+              display: false
             },
             {
               title: "Poly Croc",
@@ -299,13 +323,13 @@ export default {
                 [50.1775788, 23.5985107],
                 [57.2263299, 1.6222]
               ],
-              display: true
+              display: false
             }
           ]
         },
         {
           title: "Bat",
-          display: true,
+          display: false,
           group: false,
           type: "polygon",
           locations: [
@@ -320,7 +344,7 @@ export default {
                 [30.1775788, -23.5985107],
                 [27.2263299, -1.6222]
               ],
-              display: true
+              display: false
             },
             {
               title: "Poly Bat",
@@ -334,7 +358,7 @@ export default {
                 [40.1775788, 23.5985107],
                 [37.2263299, 1.6222]
               ],
-              display: true
+              display: false
             }
           ]
         }
@@ -350,6 +374,10 @@ export default {
   z-index: 999;
   bottom: 0px;
   font-weight: 600;
+}
+
+.latinfo {
+      background: yellow;
 }
 .leaflet-control {
   border: 2px solid rgba(0, 0, 0, 0.2);
