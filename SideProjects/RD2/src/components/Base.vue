@@ -1,7 +1,5 @@
 <template>
-
-          <appMap style="height: 95%;"></appMap>
-
+  <appMap style="height: 95%;"></appMap>
 </template>
 
 <script>
