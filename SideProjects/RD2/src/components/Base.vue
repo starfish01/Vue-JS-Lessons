@@ -1,11 +1,11 @@
 <template>
-  <appMap style="height: 95%;"></appMap>
+  <div style="height: 95%;">
+    <appMap></appMap>
+  </div>
 </template>
 
 <script>
 import Map from "../components/map/Map";
-import TopSponsor from "../components/sponsor/Top";
-import LeftRightSponser from "../components/sponsor/LeftRight";
 
 export default {
   data() {
@@ -13,9 +13,7 @@ export default {
   },
   methods: {},
   components: {
-    appMap: Map,
-    addTop: TopSponsor,
-    appLRSponser: LeftRightSponser
+    appMap: Map
   }
 };
 </script>

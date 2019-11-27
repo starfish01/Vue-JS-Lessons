@@ -13,74 +13,6 @@
     >
       <l-tile-layer :url="url" :noWrap="true" />
 
-      <!-- User Checkboxes
-
-      <div v-if="!displayMenu" class="location-button">
-        <v-btn icon>
-          <v-icon @click="displayMenuChange()" dark>mdi-map</v-icon>
-        </v-btn>
-      </div>
-
-      <div v-if="displayMenu" class="location-button-exit">
-        <v-btn icon>
-          <v-icon @click="displayMenuChange()" dark>mdi-close</v-icon>
-        </v-btn>
-      </div>
-
-
-
-      <template v-if="displayMenu">
-        <div @mouseleave="displayMenuChange()">
-          <l-control
-            @mouseleave="displayMenuChange()"
-            class="example-custom-control"
-          >
-            <template v-for="(section, i) in mapData">
-              <v-checkbox
-                @change="sectionClicked(i)"
-                class="shrink font-weight-bold"
-                v-bind:key="i"
-                :label="section.title"
-                v-model="section.display"
-                hide-details
-              ></v-checkbox>
-              <template v-if="section.group && section.locations.length > 1">
-                <v-checkbox
-                  v-for="(item, i) in section.locations"
-                  v-bind:key="i + section.title"
-                  class="shrink ma-0 pa-0"
-                  :label="item.title"
-                  v-model="item.display"
-                  hide-details
-                ></v-checkbox>
-              </template>
-            </template>
-
-            <template v-for="(section, i) in mapData">
-              <v-checkbox
-                @change="sectionClicked(i)"
-                class="shrink font-weight-bold"
-                v-bind:key="i"
-                :label="section.title"
-                v-model="section.display"
-                hide-details
-              ></v-checkbox>
-              <template v-if="section.group && section.locations.length > 1">
-                <v-checkbox
-                  v-for="(item, i) in section.locations"
-                  v-bind:key="i + section.title"
-                  class="shrink ma-0 pa-0"
-                  :label="item.title"
-                  v-model="item.display"
-                  hide-details
-                ></v-checkbox>
-              </template>
-            </template>
-          </l-control>
-        </div>
-      </template>
-        -->
-
       <!-- Types of Markers -->
 
       <template v-for="section in mapData">
@@ -121,18 +53,15 @@
         </template>
       </template>
 
-      <div class="controls-nav-map-menu">
-        <span class="sidemenu"  v-if="displayMenu">
-          <v-icon @click="displayMenuChange()" dark
-            >mdi-arrow-right</v-icon
-          ></span
-        >
-        <span class="sidemenuin"  v-if="!displayMenu">
-          <v-icon @click="displayMenuChange()" dark
-            >mdi-arrow-left</v-icon
-          ></span
-        >
+      <!-- end markers -->
 
+      <div class="controls-nav-map-menu is-hidden-mobile">
+        <span class="sidemenu" v-if="displayMenu">
+          <v-icon @click="displayMenuChange()" dark>mdi-arrow-right</v-icon>
+        </span>
+        <span class="sidemenuin" v-if="!displayMenu">
+          <v-icon @click="displayMenuChange()" dark>mdi-arrow-left</v-icon>
+        </span>
 
         <transition name="slide">
           <div class="controls-nav-map-menu-inside" v-if="displayMenu">
@@ -140,26 +69,6 @@
               <h3>Red Dead Map Online</h3>
               <hr />
             </div>
-            <template v-for="(section, i) in mapData">
-              <v-checkbox
-                @change="sectionClicked(i)"
-                class="shrink font-weight-bold"
-                v-bind:key="i"
-                :label="section.title"
-                v-model="section.display"
-                hide-details
-              ></v-checkbox>
-              <template v-if="section.group && section.locations.length > 1">
-                <v-checkbox
-                  v-for="(item, i) in section.locations"
-                  v-bind:key="i + section.title"
-                  class="shrink ma-0 pa-0"
-                  :label="item.title"
-                  v-model="item.display"
-                  hide-details
-                ></v-checkbox>
-              </template>
-            </template>
 
             <template v-for="(section, i) in mapData">
               <v-checkbox
@@ -170,6 +79,7 @@
                 v-model="section.display"
                 hide-details
               ></v-checkbox>
+
               <template v-if="section.group && section.locations.length > 1">
                 <v-checkbox
                   v-for="(item, i) in section.locations"
@@ -184,10 +94,8 @@
           </div>
         </transition>
       </div>
-
-      <!-- end markers -->
-      <!-- <div>{{info-lat-long()}}</div> -->
     </l-map>
+
     <div class="latinfo">-{{ mousePosition }}</div>
   </div>
 </template>
@@ -258,7 +166,7 @@ export default {
         {
           title: "Test",
           display: true,
-          group: false,
+          group: true,
           type: "marker",
           locations: [
             {
@@ -497,14 +405,14 @@ button.leaflet-control-layers-toggle {
     left: -34px;
     background: #948066;
     padding: 5px;
-            border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 10px;
   }
   .sidemenuin {
     position: absolute;
     right: 0;
     background: #948066;
     padding: 5px;
-        border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 10px;
   }
   .controls-nav-map-menu-inside {
     overflow-y: auto;
