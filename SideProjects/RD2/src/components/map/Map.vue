@@ -13,7 +13,7 @@
     >
       <l-tile-layer :url="url" :noWrap="true" />
 
-      <!-- User Checkboxes -->
+      <!-- User Checkboxes
 
       <div v-if="!displayMenu" class="location-button">
         <v-btn icon>
@@ -26,6 +26,8 @@
           <v-icon @click="displayMenuChange()" dark>mdi-close</v-icon>
         </v-btn>
       </div>
+
+       -->
 
       <template v-if="displayMenu">
         <div @mouseleave="displayMenuChange()">
@@ -114,6 +116,52 @@
           ></appPolygon>
         </template>
       </template>
+
+      <div class="controls-nav-map-menu">
+      <div class="controls-nav-map-menu-inside">
+<template v-for="(section, i) in mapData">
+              <v-checkbox
+                @change="sectionClicked(i)"
+                class="shrink font-weight-bold"
+                v-bind:key="i"
+                :label="section.title"
+                v-model="section.display"
+                hide-details
+              ></v-checkbox>
+              <template v-if="section.group && section.locations.length > 1">
+                <v-checkbox
+                  v-for="(item,i) in section.locations"
+                  v-bind:key="i + section.title"
+                  class="shrink ma-0 pa-0"
+                  :label="item.title"
+                  v-model="item.display"
+                  hide-details
+                ></v-checkbox>
+              </template>
+            </template>
+
+            <template v-for="(section, i) in mapData">
+              <v-checkbox
+                @change="sectionClicked(i)"
+                class="shrink font-weight-bold"
+                v-bind:key="i"
+                :label="section.title"
+                v-model="section.display"
+                hide-details
+              ></v-checkbox>
+              <template v-if="section.group && section.locations.length > 1">
+                <v-checkbox
+                  v-for="(item,i) in section.locations"
+                  v-bind:key="i + section.title"
+                  class="shrink ma-0 pa-0"
+                  :label="item.title"
+                  v-model="item.display"
+                  hide-details
+                ></v-checkbox>
+              </template>
+            </template>
+            </div>
+</div>
 
       <!-- end markers -->
       <!-- <div>{{info-lat-long()}}</div> -->
@@ -416,5 +464,19 @@ button.leaflet-control-layers-toggle {
   right: 8px;
   top: 8px;
   padding: 0px;
+}
+.controls-nav-map-menu {
+    top: 0;
+    position: absolute;
+    right: 0;
+    z-index: 1000;
+    height: 100%;
+    width: 25%;
+    .controls-nav-map-menu-inside {
+          overflow-y: auto;
+height: 100%;
+    background: #948066;
+    padding: 10px;
+    }
 }
 </style>

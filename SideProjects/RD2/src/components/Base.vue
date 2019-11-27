@@ -1,10 +1,7 @@
 <template>
-  <v-container style="height:100%">
-    <v-layout style="height:100%">
-          <appMap></appMap>
 
-    </v-layout>
-  </v-container>
+          <appMap style="height: 95%;"></appMap>
+
 </template>
 
 <script>
