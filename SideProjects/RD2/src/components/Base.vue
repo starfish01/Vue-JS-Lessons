@@ -1,6 +1,6 @@
 <template>
   <div style="height: 95%;">
-    <appMap></appMap>
+    <appMap :mapData="mapData"></appMap>
   </div>
 </template>
 
@@ -9,11 +9,170 @@ import Map from "../components/map/Map";
 
 export default {
   data() {
-    return {};
+    return {
+      mapData: []
+    };
   },
   methods: {},
   components: {
     appMap: Map
+  },
+  mounted() {
+    this.mapData = [
+      {
+        title: "Premium Cigarettes",
+        display: false,
+        group: true,
+        type: "marker",
+        locations: [
+          {
+            title: "Location A",
+            position: [70.41322, -1.219482],
+            display: false,
+            icon: {
+              url: "marker/RDOIcons/image_part_076.png",
+              icon_size: [40, 50]
+            }
+          },
+          {
+            title: "Location B",
+            position: [47.41322, -1.219482],
+            display: false,
+            icon: {
+              url: "marker/RDOIcons/image_part_076.png"
+            }
+          }
+        ]
+      },
+      {
+        title: "Horse",
+        display: false,
+        group: false,
+        type: "marker",
+        locations: [
+          {
+            title: "Text 1222222",
+            position: [40.41322, -1.219482]
+          },
+          {
+            title: "Text new",
+            position: [43.41322, 4.219482]
+          }
+        ]
+      },
+      {
+        title: "Deer",
+        display: false,
+        group: true,
+        type: "circle",
+        locations: [
+          {
+            title: "Circle",
+            position: [10.41322, 50.219482],
+            display: false,
+            colour: "green",
+            radius: 450000
+          },
+          {
+            title: "Circle",
+            position: [20.41322, 30.219482],
+            display: false,
+            colour: "red",
+            radius: 450000
+          }
+        ]
+      },
+      {
+        title: "Bear",
+        display: false,
+        group: false,
+        type: "circle",
+        locations: [
+          {
+            title: "Circle",
+            position: [20.41322, 70.219482],
+            colour: "red",
+            radius: 450000
+          },
+          {
+            title: "Circle",
+            position: [30.41322, 60.219482],
+            colour: "blue",
+            radius: 450000
+          }
+        ]
+      },
+
+      {
+        title: "Croc",
+        display: false,
+        group: true,
+        type: "polygon",
+        locations: [
+          {
+            title: "Poly Croc",
+            position: [
+              [47.2263299, -1.6222],
+              [48.21024000000001, -10.6270065],
+              [49.1969447, -20.6136169],
+              [50.18527929999999, -20.6143036],
+              [55.1794457, -22.6098404],
+              [60.1775788, -23.5985107],
+              [47.2263299, -1.6222]
+            ],
+            display: false
+          },
+          {
+            title: "Poly Croc",
+            position: [
+              [57.2263299, 1.6222],
+              [58.21024000000001, 10.6270065],
+              [59.1969447, 20.6136169],
+              [60.18527929999999, 20.6143036],
+              [65.1794457, 22.6098404],
+              [50.1775788, 23.5985107],
+              [57.2263299, 1.6222]
+            ],
+            display: false
+          }
+        ]
+      },
+      {
+        title: "Bat",
+        display: false,
+        group: false,
+        type: "polygon",
+        locations: [
+          {
+            title: "Poly Bat",
+            position: [
+              [17.2263299, -1.6222],
+              [18.21024000000001, -10.6270065],
+              [19.1969447, -20.6136169],
+              [20.18527929999999, -20.6143036],
+              [25.1794457, -22.6098404],
+              [30.1775788, -23.5985107],
+              [27.2263299, -1.6222]
+            ],
+            display: false
+          },
+          {
+            title: "Poly Bat",
+            colour: "red",
+            position: [
+              [37.2263299, 1.6222],
+              [38.21024000000001, 10.6270065],
+              [39.1969447, 20.6136169],
+              [40.18527929999999, 20.6143036],
+              [55.1794457, 22.6098404],
+              [40.1775788, 23.5985107],
+              [37.2263299, 1.6222]
+            ],
+            display: false
+          }
+        ]
+      }
+    ];
   }
 };
 </script>

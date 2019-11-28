@@ -55,6 +55,8 @@
 
       <!-- end markers -->
 
+      <!-- Navbar -->
+
       <div class="controls-nav-map-menu is-hidden-mobile">
         <span class="sidemenu" v-if="displayMenu">
           <v-icon @click="displayMenuChange()" dark>mdi-arrow-right</v-icon>
@@ -69,54 +71,43 @@
               <hr />
             </div>
 
+            <div class="columns is-multiline ">
+              <template v-for="(section, i) in mapData">
+                <div class="column is-centered is-full" v-bind:key="i">
+                  <v-checkbox
+                    @change="sectionClicked(i)"
+                    class="shrink font-weight-bold checkboxclicker"
+                    :label="section.title"
+                    v-model="section.display"
+                    hide-details
+                  ></v-checkbox>
+                </div>
 
-<div class="columns is-multiline ">
-            <template v-for="(section, i) in mapData">
-
- <div class="column is-centered is-full">
-              <v-checkbox
-                @change="sectionClicked(i)"
-                class="shrink font-weight-bold"
-                v-bind:key="i"
-                :label="section.title"
-                v-model="section.display"
-                hide-details
-              ></v-checkbox>
-</div>
-
-              <template v-if="section.group && section.locations.length > 1">
-
- <template v-for="(item, i) in section.locations">
-              <div class="column is-one-third is-half-touch"> 
- 
-                 <v-checkbox
-                  
-                  v-bind:key="i + section.title"
-                  class="shrink ma-0 pa-0"
-                  :label="item.title"
-                  v-model="item.display"
-                  hide-details
-                ></v-checkbox>
- 
-                              </div> 
- </template>
-
+                <template v-if="section.group && section.locations.length > 1">
+                  <template v-for="(item, i) in section.locations">
+                    <div
+                      v-bind:key="i + section.title"
+                      class="column is-one-third is-half-touch"
+                    >
+                      <v-checkbox
+                        class="shrink ma-0 pa-0"
+                        :label="item.title"
+                        v-model="item.display"
+                        hide-details
+                      ></v-checkbox>
+                    </div>
+                  </template>
+                </template>
               </template>
-
-
-
-            </template>
             </div>
-
-
-
-
-
           </div>
         </transition>
       </div>
-    </l-map>
 
+      <!-- end Navbar -->
+
+
+    </l-map>
     <div class="latinfo">-{{ mousePosition }}</div>
   </div>
 </template>
@@ -175,189 +166,18 @@ export default {
       }
     }
   },
+  props: {
+    mapData: Array
+  },
   data() {
     return {
       url: "https://s.rsg.sc/sc/images/games/RDR2/map/game/{z}/{x}/{y}.jpg",
       zoom: 2,
-      center: [42, 0],
+      center: [60, -40],
       bounds: null,
       displayMenu: false,
       mousePosition: { lat: 0, lng: 0 },
-      checkboxGroup:[],
-      mapData: [
-        {
-          title: "Test",
-          display: true,
-          group: true,
-          type: "marker",
-          locations: [
-            {
-              title: "Text 1222222",
-              // -5848.5,11492.5
-              position: [74.88, -53.75]
-            },
-            {
-              title: "Text new",
-              //[-6533.5,17151.5]
-              position: [72.75, 8.46]
-            }
-          ]
-        },
-
-        {
-          title: "Premium Cigarettes",
-          display: false,
-          group: true,
-          type: "marker",
-          locations: [
-            {
-              title: "Location A",
-              position: [70.41322, -1.219482],
-              display: false,
-              icon: {
-                url: "marker/RDOIcons/image_part_076.png",
-                icon_size: [40, 50]
-              }
-            },
-            {
-              title: "Location B",
-              position: [47.41322, -1.219482],
-              display: false,
-              icon: {
-                url: "marker/RDOIcons/image_part_076.png"
-              }
-            }
-          ]
-        },
-        {
-          title: "Horse",
-          display: false,
-          group: false,
-          type: "marker",
-          locations: [
-            {
-              title: "Text 1222222",
-              position: [40.41322, -1.219482]
-            },
-            {
-              title: "Text new",
-              position: [43.41322, 4.219482]
-            }
-          ]
-        },
-        {
-          title: "Deer",
-          display: false,
-          group: true,
-          type: "circle",
-          locations: [
-            {
-              title: "Circle",
-              position: [10.41322, 50.219482],
-              display: false,
-              colour: "green",
-              radius: 450000
-            },
-            {
-              title: "Circle",
-              position: [20.41322, 30.219482],
-              display: false,
-              colour: "red",
-              radius: 450000
-            }
-          ]
-        },
-        {
-          title: "Bear",
-          display: false,
-          group: false,
-          type: "circle",
-          locations: [
-            {
-              title: "Circle",
-              position: [20.41322, 70.219482],
-              colour: "red",
-              radius: 450000
-            },
-            {
-              title: "Circle",
-              position: [30.41322, 60.219482],
-              colour: "blue",
-              radius: 450000
-            }
-          ]
-        },
-
-        {
-          title: "Croc",
-          display: false,
-          group: true,
-          type: "polygon",
-          locations: [
-            {
-              title: "Poly Croc",
-              position: [
-                [47.2263299, -1.6222],
-                [48.21024000000001, -10.6270065],
-                [49.1969447, -20.6136169],
-                [50.18527929999999, -20.6143036],
-                [55.1794457, -22.6098404],
-                [60.1775788, -23.5985107],
-                [47.2263299, -1.6222]
-              ],
-              display: false
-            },
-            {
-              title: "Poly Croc",
-              position: [
-                [57.2263299, 1.6222],
-                [58.21024000000001, 10.6270065],
-                [59.1969447, 20.6136169],
-                [60.18527929999999, 20.6143036],
-                [65.1794457, 22.6098404],
-                [50.1775788, 23.5985107],
-                [57.2263299, 1.6222]
-              ],
-              display: false
-            }
-          ]
-        },
-        {
-          title: "Bat",
-          display: false,
-          group: false,
-          type: "polygon",
-          locations: [
-            {
-              title: "Poly Bat",
-              position: [
-                [17.2263299, -1.6222],
-                [18.21024000000001, -10.6270065],
-                [19.1969447, -20.6136169],
-                [20.18527929999999, -20.6143036],
-                [25.1794457, -22.6098404],
-                [30.1775788, -23.5985107],
-                [27.2263299, -1.6222]
-              ],
-              display: false
-            },
-            {
-              title: "Poly Bat",
-              colour: "red",
-              position: [
-                [37.2263299, 1.6222],
-                [38.21024000000001, 10.6270065],
-                [39.1969447, 20.6136169],
-                [40.18527929999999, 20.6143036],
-                [55.1794457, 22.6098404],
-                [40.1775788, 23.5985107],
-                [37.2263299, 1.6222]
-              ],
-              display: false
-            }
-          ]
-        }
-      ]
+      checkboxGroup: []
     };
   }
 };
@@ -442,21 +262,31 @@ button.leaflet-control-layers-toggle {
     background: #948066;
     padding: 10px;
   }
-  .v-input--is-label-active {
-    text-decoration: line-through;
-  }
-  .v-input--selection-controls__input {
-    display:none !important;
+  // .v-input--is-label-active {
+  //   text-decoration: line-through;
+  // }
+  // // .v-input--selection-controls__input {
+  // //   display: none !important;
+  // // }
+
+  .checkboxclicker {
+    .v-input--selection-controls__input {
+      display: none;
+    }
   }
 
-.b-checkbox {
-  &.checkbox {
-.check{
-  display:none;
-}
+  .column {
+    padding-top: 0;
+    padding-bottom: 0;
   }
-}
 
+  .b-checkbox {
+    &.checkbox {
+      .check {
+        display: none;
+      }
+    }
+  }
 }
 
 .slide-enter-active,
