@@ -62,7 +62,6 @@
         <span class="sidemenuin" v-if="!displayMenu">
           <v-icon @click="displayMenuChange()" dark>mdi-arrow-left</v-icon>
         </span>
-
         <transition name="slide">
           <div class="controls-nav-map-menu-inside" v-if="displayMenu">
             <div style="text-align:center">
@@ -70,7 +69,11 @@
               <hr />
             </div>
 
+
+<div class="columns is-multiline ">
             <template v-for="(section, i) in mapData">
+
+ <div class="column is-centered is-full">
               <v-checkbox
                 @change="sectionClicked(i)"
                 class="shrink font-weight-bold"
@@ -79,18 +82,36 @@
                 v-model="section.display"
                 hide-details
               ></v-checkbox>
+</div>
 
               <template v-if="section.group && section.locations.length > 1">
-                <v-checkbox
-                  v-for="(item, i) in section.locations"
+
+ <template v-for="(item, i) in section.locations">
+              <div class="column is-one-third is-half-touch"> 
+ 
+                 <v-checkbox
+                  
                   v-bind:key="i + section.title"
                   class="shrink ma-0 pa-0"
                   :label="item.title"
                   v-model="item.display"
                   hide-details
                 ></v-checkbox>
+ 
+                              </div> 
+ </template>
+
               </template>
+
+
+
             </template>
+            </div>
+
+
+
+
+
           </div>
         </transition>
       </div>
@@ -126,7 +147,7 @@ export default {
       };
     },
     displayMenuChange() {
-      console.log(this.displayMenu);
+      // console.log(this.displayMenu);
       this.displayMenu = !this.displayMenu;
     },
     zoomUpdated(zoom) {
@@ -142,7 +163,7 @@ export default {
       this.showParagraph = !this.showParagraph;
     },
     sectionClicked(i) {
-      console.log(i);
+      // console.log(i);
       const sectionReference = this.mapData[i];
       const displayValue = sectionReference.display;
       if (sectionReference.group) {
@@ -162,6 +183,7 @@ export default {
       bounds: null,
       displayMenu: false,
       mousePosition: { lat: 0, lng: 0 },
+      checkboxGroup:[],
       mapData: [
         {
           title: "Test",
@@ -420,6 +442,21 @@ button.leaflet-control-layers-toggle {
     background: #948066;
     padding: 10px;
   }
+  .v-input--is-label-active {
+    text-decoration: line-through;
+  }
+  .v-input--selection-controls__input {
+    display:none !important;
+  }
+
+.b-checkbox {
+  &.checkbox {
+.check{
+  display:none;
+}
+  }
+}
+
 }
 
 .slide-enter-active,
