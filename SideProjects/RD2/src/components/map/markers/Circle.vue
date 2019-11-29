@@ -2,6 +2,7 @@
   <l-circle
     v-if="isGroup && markerData.display || !isGroup && sectionDisplay"
     :color="markerData.colour"
+    :weight="markerData.weight ? markerData.weight : 0"
     :lat-lng="markerData.position"
     :radius="markerData.radius"
   >

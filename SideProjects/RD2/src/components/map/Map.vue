@@ -57,7 +57,7 @@
 
       <!-- Navbar -->
 
-      <div class="controls-nav-map-menu is-hidden-mobile">
+      <div class="controls-nav-map-menu  ">
         <span class="sidemenu" v-if="displayMenu">
           <v-icon @click="displayMenuChange()" dark>mdi-arrow-right</v-icon>
         </span>
@@ -71,7 +71,7 @@
               <hr />
             </div>
 
-            <div class="columns is-multiline ">
+            <div class="columns is-multiline">
               <template v-for="(section, i) in mapData">
                 <div class="column is-centered is-full" v-bind:key="i">
                   <v-checkbox
@@ -87,7 +87,7 @@
                   <template v-for="(item, i) in section.locations">
                     <div
                       v-bind:key="i + section.title"
-                      class="column is-one-third is-half-touch"
+                      class="column is-one-third is-full-mobile"
                     >
                       <v-checkbox
                         class="shrink ma-0 pa-0"
@@ -105,7 +105,6 @@
       </div>
 
       <!-- end Navbar -->
-
 
     </l-map>
     <div class="latinfo">-{{ mousePosition }}</div>
@@ -183,17 +182,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.info-lat-long {
-  padding: 5px;
-  position: absolute;
-  z-index: 999;
-  bottom: 0px;
-  font-weight: 600;
-}
+
 h3 {
   color: white;
 }
-
 .latinfo {
   background: yellow;
 }
@@ -262,19 +254,11 @@ button.leaflet-control-layers-toggle {
     background: #948066;
     padding: 10px;
   }
-  // .v-input--is-label-active {
-  //   text-decoration: line-through;
-  // }
-  // // .v-input--selection-controls__input {
-  // //   display: none !important;
-  // // }
-
   .checkboxclicker {
     .v-input--selection-controls__input {
       display: none;
     }
   }
-
   .column {
     padding-top: 0;
     padding-bottom: 0;

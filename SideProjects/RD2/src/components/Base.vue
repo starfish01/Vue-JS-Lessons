@@ -78,7 +78,8 @@ export default {
             position: [20.41322, 30.219482],
             display: false,
             colour: "red",
-            radius: 450000
+            radius: 450000,
+            weight: 1
           }
         ]
       },
