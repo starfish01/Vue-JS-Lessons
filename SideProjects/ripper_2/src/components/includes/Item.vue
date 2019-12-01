@@ -25,6 +25,7 @@
               </b-select>
             </b-field>
           </div>
+
           <template v-if="location.type === 'marker'">
             <div class="column is-one-quarter">
               <b-field label="Lat">
@@ -46,6 +47,29 @@
             </div>
             <div class="column is-one-quarter">
               <img :src="selectedIconCom" />
+            </div>
+          </template>
+
+          <template v-if="location.type === 'circle'">
+            <div class="column is-one-quarter">
+              <b-field label="Lat">
+                <b-input v-model="location.position[0]"></b-input>
+              </b-field>
+            </div>
+            <div class="column is-one-quarter">
+              <b-field label="Lat">
+                <b-input v-model="location.position[1]"></b-input>
+              </b-field>
+            </div>
+            <div class="column is-one-quarter">
+              <b-field label="Colour">
+                <b-input v-model="location.colour">red</b-input>
+              </b-field>
+            </div>
+            <div class="column is-one-quarter">
+              <b-field label="Radius">
+                <b-input v-model="location.radius"></b-input>
+              </b-field>
             </div>
           </template>
         </div>
@@ -91,7 +115,6 @@ export default {
         this.removeIcon();
         return "";
       }
-
       let image = this.selectedIcon;
       if (image < 10) {
         image = "00" + image;

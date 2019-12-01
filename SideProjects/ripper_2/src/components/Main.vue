@@ -15,6 +15,7 @@
               </span>
             </template>
           </template>
+          <hr />
           <div class="list is-hoverable">
             <b-field label="Title">
               <b-input v-model="sectionTitle"></b-input>
