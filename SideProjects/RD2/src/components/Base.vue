@@ -46,7 +46,7 @@ export default {
       },
       {
         title: "Horse",
-        display: false,
+        display: true,
         group: false,
         type: "marker",
         locations: [
@@ -55,7 +55,10 @@ export default {
             position: [40.41322, -1.219482]
           },
           {
-            title: "Text new",
+            title: "Text new1",
+            icon: {
+              url: "marker/RDOIcons/index.png"
+            },
             position: [43.41322, 4.219482]
           }
         ]

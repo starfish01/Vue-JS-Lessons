@@ -8,8 +8,6 @@
       :maxZoom="8"
       :minZoom="2"
       @update:zoom="zoomUpdated"
-      @update:center="centerUpdated"
-      @update:bounds="boundsUpdated"
     >
       <l-tile-layer :url="url" :noWrap="true" />
 
@@ -57,7 +55,7 @@
 
       <!-- Navbar -->
 
-      <div class="controls-nav-map-menu  ">
+      <div class="controls-nav-map-menu">
         <span class="sidemenu" v-if="displayMenu">
           <v-icon @click="displayMenuChange()" dark>mdi-arrow-right</v-icon>
         </span>
@@ -67,7 +65,7 @@
         <transition name="slide">
           <div class="controls-nav-map-menu-inside" v-if="displayMenu">
             <div style="text-align:center">
-              <h3>Red Dead Map Online</h3>
+              <h3 class="subtitle">Red Dead Map Online</h3>
               <hr />
             </div>
 
@@ -87,7 +85,7 @@
                   <template v-for="(item, i) in section.locations">
                     <div
                       v-bind:key="i + section.title"
-                      class="column is-one-third is-full-mobile"
+                      class="column is-one-third is-half-touch subchecklistitem"
                     >
                       <v-checkbox
                         class="shrink ma-0 pa-0"
@@ -103,11 +101,9 @@
           </div>
         </transition>
       </div>
-
+      <div class="latinfo">{{ mousePosition.lat - 85 }}, {{ mousePosition.lng + 180 }}</div>
       <!-- end Navbar -->
-
     </l-map>
-    <div class="latinfo">-{{ mousePosition }}</div>
   </div>
 </template>
 
@@ -182,12 +178,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
 h3 {
   color: white;
 }
 .latinfo {
-  background: yellow;
+  bottom: 0;
+  position: absolute;
 }
 .leaflet-control {
   border: 2px solid rgba(0, 0, 0, 0.2);
@@ -233,7 +229,15 @@ button.leaflet-control-layers-toggle {
   right: 0;
   z-index: 1000;
   height: 100%;
-  width: 40%;
+  @media screen and (min-width: 769px) {
+    width: 40%;
+  }
+
+  .subchecklistitem {
+    @media screen and (max-width: 769px) {
+      width: 100%;
+    }
+  }
   .sidemenu {
     position: absolute;
     left: -34px;
@@ -250,6 +254,7 @@ button.leaflet-control-layers-toggle {
   }
   .controls-nav-map-menu-inside {
     overflow-y: auto;
+    overflow-x: hidden;
     height: 100%;
     background: #948066;
     padding: 10px;
