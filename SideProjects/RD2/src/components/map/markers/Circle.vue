@@ -26,9 +26,6 @@ export default {
     },
     isGroup: {
       type: Boolean
-    },
-    sectionDisplay: {
-      type: Boolean
     }
   }
 };

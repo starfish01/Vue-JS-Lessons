@@ -1,5 +1,8 @@
 <template>
   <div style="height: 100%; width: 100%;">
+
+{{mapData}}
+
     <l-map
       style="height: 100%; width: 100%; background:#D3B790"
       @mousemove="getMousePosition"
@@ -13,15 +16,21 @@
 
       <!-- Types of Markers -->
 
-      <template v-for="section in mapData">
+      <template v-for="groups in mapData">
+      <template v-for="section in groups.groups">
+      
+<template v-for="section in section.locations">
+        
+
+
+
         <!-- Marker -->
+
+        <br><br><br><br>
 
         <template v-if="section.type === 'marker'">
           <appMarker
-            v-for="(item, i) in section.locations"
-            v-bind:key="i + section.title"
-            :markerData="item"
-            :isGroup="section.group"
+            :markerData="section"
             :sectionDisplay="section.display"
           ></appMarker>
         </template>
@@ -30,10 +39,7 @@
 
         <template v-if="section.type === 'circle'">
           <appCircle
-            v-for="(item, i) in section.locations"
-            v-bind:key="i + section.title"
-            :markerData="item"
-            :isGroup="section.group"
+            :markerData="section"
             :sectionDisplay="section.display"
           ></appCircle>
         </template>
@@ -42,14 +48,14 @@
 
         <template v-if="section.type === 'polygon'">
           <appPolygon
-            v-for="(item, i) in section.locations"
-            v-bind:key="i + section.title"
-            :markerData="item"
-            :isGroup="section.group"
+            :markerData="section"
             :sectionDisplay="section.display"
           ></appPolygon>
         </template>
       </template>
+      </template>
+       </template>
+
 
       <!-- end markers -->
 

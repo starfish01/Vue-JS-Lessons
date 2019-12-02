@@ -26,9 +26,6 @@ export default {
     markerData: {
       type: Object
     },
-    isGroup: {
-      type: Boolean
-    },
     sectionDisplay: {
       type: Boolean
     }

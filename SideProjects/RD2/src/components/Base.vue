@@ -1,6 +1,6 @@
 <template>
   <div style="height: 95%;">
-    <appMap :mapData="mapData"></appMap>
+    <appMap :mapData="mapDataNew"></appMap>
   </div>
 </template>
 
@@ -10,7 +10,8 @@ import Map from "../components/map/Map";
 export default {
   data() {
     return {
-      mapData: []
+      mapData: [],
+      mapDataNew: []
     };
   },
   methods: {},
@@ -177,6 +178,64 @@ export default {
         ]
       }
     ];
+
+    this.mapDataNew = [{
+	"title": "Food",
+	"groups": [{
+		"title": "Apple",
+		"message": "",
+		"type": "",
+		"display": false,
+		"group": false,
+		"locations": [{
+			"position": ["200", "100"],
+			"title": "Apples",
+			"type": "marker",
+      "display":true,
+            "isGroup":true,
+		}, {
+			"position": ["100", "100"],
+			"icon": {},
+			"title": "Apples 2",
+			"type": "circle",
+			"radius": "6000",
+      "display":true,
+      "isGroup":true,
+		}]
+	}, {
+		"title": "Something else",
+		"message": "",
+		"type": "",
+		"display": false,
+		"group": false,
+		"locations": [{
+			"position": ["123", "124"],
+			"icon": {},
+			"title": "Jackels",
+			"type": "circle",
+			"colour": "red",
+			"radius": "4000",
+      "display":true,
+            "isGroup":true,
+		}]
+	}]
+}, {
+	"title": "ANOTHER section",
+	"groups": [{
+		"title": "Blah",
+		"message": "",
+		"type": "",
+		"display": false,
+		"group": false,
+		"locations": [{
+			"position": ["12", "60"],
+			"title": "Veggies",
+			"type": "marker",
+      "display":true,
+            "isGroup":true,
+		}]
+	}]
+}];
   }
 };
 </script>
