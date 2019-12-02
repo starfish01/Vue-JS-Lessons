@@ -1,6 +1,6 @@
 <template>
   <div style="height: 95%;">
-    <appMap :mapData="mapData"></appMap>
+    <appMap :markerPoints="markerPoints" :mapData="mapData"></appMap>
   </div>
 </template>
 
@@ -10,7 +10,8 @@ import Map from "../components/map/Map";
 export default {
   data() {
     return {
-      mapData: []
+      mapData: [],
+      markerPoints: [],
     };
   },
   methods: {},
@@ -26,21 +27,27 @@ export default {
         type: "marker",
         locations: [
           {
+            type: "marker",
+             group: true,
             title: "Location A",
             position: [70.41322, -1.219482],
             display: false,
             icon: {
               url: "marker/RDOIcons/image_part_076.png",
               icon_size: [40, 50]
-            }
+            },
+            display: true
           },
           {
             title: "Location B",
+            type: "marker",
+             group: true,
             position: [47.41322, -1.219482],
             display: false,
             icon: {
               url: "marker/RDOIcons/image_part_076.png"
-            }
+            },
+            display: true
           }
         ]
       },
@@ -51,15 +58,21 @@ export default {
         type: "marker",
         locations: [
           {
+            group: false,
+            type: "marker",
             title: "Text 1222222",
-            position: [40.41322, -1.219482]
+            position: [40.41322, -1.219482],
+            display: true
           },
           {
+            group: false,
             title: "Text new1",
+            type: "marker",
             icon: {
               url: "marker/RDOIcons/index.png"
             },
-            position: [43.41322, 4.219482]
+            position: [43.41322, 4.219482],
+            display: true
           }
         ]
       },
@@ -70,19 +83,25 @@ export default {
         type: "circle",
         locations: [
           {
+            group: true,
+            type: "circle",
             title: "Circle",
             position: [10.41322, 50.219482],
             display: false,
             colour: "green",
-            radius: 450000
+            radius: 450000,
+            display: true
           },
           {
+            group: true,
+            type: "circle",
             title: "Circle",
             position: [20.41322, 30.219482],
             display: false,
             colour: "red",
             radius: 450000,
-            weight: 1
+            weight: 1,
+            display: true
           }
         ]
       },
@@ -93,16 +112,22 @@ export default {
         type: "circle",
         locations: [
           {
+            group: false,
+            type: "circle",
             title: "Circle",
             position: [20.41322, 70.219482],
             colour: "red",
-            radius: 450000
+            radius: 450000,
+            display: true
           },
           {
+            group: false,
+            type: "circle",
             title: "Circle",
             position: [30.41322, 60.219482],
             colour: "blue",
-            radius: 450000
+            radius: 450000,
+            display: true
           }
         ]
       },
@@ -114,7 +139,9 @@ export default {
         type: "polygon",
         locations: [
           {
+             group: true,
             title: "Poly Croc",
+            type: "polygon",
             position: [
               [47.2263299, -1.6222],
               [48.21024000000001, -10.6270065],
@@ -127,7 +154,9 @@ export default {
             display: false
           },
           {
+             group: true,
             title: "Poly Croc",
+            type: "polygon",
             position: [
               [57.2263299, 1.6222],
               [58.21024000000001, 10.6270065],
@@ -148,7 +177,9 @@ export default {
         type: "polygon",
         locations: [
           {
+            group: false,
             title: "Poly Bat",
+            type: "polygon",
             position: [
               [17.2263299, -1.6222],
               [18.21024000000001, -10.6270065],
@@ -161,8 +192,10 @@ export default {
             display: false
           },
           {
+            group: false,
             title: "Poly Bat",
             colour: "red",
+            type: "polygon",
             position: [
               [37.2263299, 1.6222],
               [38.21024000000001, 10.6270065],
@@ -177,6 +210,17 @@ export default {
         ]
       }
     ];
+
+    const mapDataPoints = [];
+
+    this.mapData.forEach(group => {
+      group.locations.forEach(location => {
+        mapDataPoints.push(location);
+      })
+    });
+
+    this.markerPoints = mapDataPoints;
+
   }
 };
 </script>

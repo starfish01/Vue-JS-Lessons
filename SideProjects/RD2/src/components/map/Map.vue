@@ -13,45 +13,38 @@
 
       <!-- Types of Markers -->
 
-      <template v-for="section in mapData">
+      <template v-for="section in markerPoints">
+
         <!-- Marker -->
 
-        <template v-if="section.type === 'marker'">
           <appMarker
-            v-for="(item, i) in section.locations"
-            v-bind:key="i + section.title"
-            :markerData="item"
+            v-if="section.type === 'marker'"
+            :markerData="section"
             :isGroup="section.group"
             :sectionDisplay="section.display"
           ></appMarker>
-        </template>
 
         <!-- Circle -->
-
-        <template v-if="section.type === 'circle'">
           <appCircle
-            v-for="(item, i) in section.locations"
-            v-bind:key="i + section.title"
-            :markerData="item"
+            v-if="section.type === 'circle'"
+            :markerData="section"
             :isGroup="section.group"
             :sectionDisplay="section.display"
           ></appCircle>
-        </template>
 
-        <!-- Polygon -->
 
-        <template v-if="section.type === 'polygon'">
+        <!-- Polygon -->       
           <appPolygon
-            v-for="(item, i) in section.locations"
-            v-bind:key="i + section.title"
-            :markerData="item"
+            v-if="section.type === 'polygon'"
+            :markerData="section"
             :isGroup="section.group"
             :sectionDisplay="section.display"
           ></appPolygon>
-        </template>
+
+        <!-- end markers -->
+
       </template>
 
-      <!-- end markers -->
 
       <!-- Navbar -->
 
@@ -162,7 +155,8 @@ export default {
     }
   },
   props: {
-    mapData: Array
+    mapData: Array,
+    markerPoints: Array
   },
   data() {
     return {
