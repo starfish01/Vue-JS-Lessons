@@ -1,7 +1,6 @@
 <template>
   <div>
     <LPolygon
-      v-if="isGroup && markerData.display || !isGroup && sectionDisplay"
       :lat-lngs="markerData.position"
       :color="markerData.colour"
       :weight="markerData.weight ? markerData.weight : 0"

@@ -1,6 +1,5 @@
 <template>
   <l-marker
-    v-if="isGroup && markerData.display || !isGroup && sectionDisplay"
     :lat-lng="markerData.position"
   >
     <appPopup :popupText="markerData.title"></appPopup>

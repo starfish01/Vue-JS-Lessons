@@ -34,7 +34,6 @@ export default {
               url: "marker/RDOIcons/image_part_076.png",
               icon_size: [40, 50]
             },
-            display: true
           },
           {
             title: "Location B",
@@ -44,7 +43,6 @@ export default {
             icon: {
               url: "marker/RDOIcons/image_part_076.png"
             },
-            display: true
           }
         ]
       },
@@ -63,7 +61,7 @@ export default {
             title: "Text new1",
             type: "marker",
             icon: {
-              url: "marker/RDOIcons/index.png"
+              url: "marker/RDOIcons/index.png",
             },
             position: [43.41322, 4.219482],
             display: true
@@ -82,7 +80,7 @@ export default {
             display: false,
             colour: "green",
             radius: 450000,
-            display: true
+            display: false
           },
           {
             type: "circle",
@@ -92,7 +90,7 @@ export default {
             colour: "red",
             radius: 450000,
             weight: 1,
-            display: true
+            display: false
           }
         ]
       },

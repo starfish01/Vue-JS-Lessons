@@ -14,40 +14,30 @@
       <!-- Types of Markers -->
 
       <template v-for="section in markerPoints">
-
         <!-- Marker -->
 
-          <appMarker
-            v-if="section.type === 'marker'"
-            :key="section.id"
-            :markerData="section"
-            :isGroup="section.group"
-            :sectionDisplay="section.display"
-          ></appMarker>
+        <appMarker
+          v-if="section.type === 'marker' && section.display"
+          :key="section.id"
+          :markerData="section"
+        ></appMarker>
 
         <!-- Circle -->
-          <appCircle
-            v-if="section.type === 'circle'"
-            :key="section.id"
-            :markerData="section"
-            :isGroup="section.group"
-            :sectionDisplay="section.display"
-          ></appCircle>
+        <appCircle
+          v-if="section.type === 'circle'  && section.display"
+          :key="section.id"
+          :markerData="section"
+        ></appCircle>
 
-
-        <!-- Polygon -->       
-          <appPolygon
-            v-if="section.type === 'polygon'"
-            :key="section.id"
-            :markerData="section"
-            :isGroup="section.group"
-            :sectionDisplay="section.display"
-          ></appPolygon>
+        <!-- Polygon -->
+        <appPolygon
+          v-if="section.type === 'polygon'  && section.display"
+          :key="section.id"
+          :markerData="section"
+        ></appPolygon>
 
         <!-- end markers -->
-
       </template>
-
 
       <!-- Navbar -->
 
@@ -145,17 +135,12 @@ export default {
       this.showParagraph = !this.showParagraph;
     },
     sectionClicked(i) {
- 
-      // this not working with grouping
-      
-      console.log(this.mapData[i])
-      
       const sectionReference = this.mapData[i];
       const displayValue = sectionReference.display;
 
-        sectionReference.locations.forEach(function(location) {
-          location.display = displayValue;
-        });
+      sectionReference.locations.forEach(function(location) {
+        location.display = displayValue;
+      });
     }
   },
   props: {
