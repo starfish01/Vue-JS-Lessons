@@ -4,11 +4,11 @@
       <div class="columns is-multiline">
         <div class="column is-one-third">
           <b-field label="Section">
-            <b-input v-model="markerMakerSection"></b-input>
+            <b-input disabled v-model="markerMakerSection"></b-input>
           </b-field>
         </div>
         <div class="column is-one-third">
-          <b-field label="Group">
+          <b-field label="Location Title">
             <b-input v-model="markerMakerGroup"></b-input>
           </b-field>
         </div>
@@ -170,20 +170,32 @@ export default {
       });
     },
     clickCheck(mousePosition) {
-      this.markerMakeArray.push({
-        title: this.markerMakerSection,
-        groups: [
+      // this.markerMakeArray.push({
+      //   title: this.markerMakerSection,
+      //   groups: [
+      //     {
+      //       title: this.markerMakerGroup,
+      //       group: true,
+      //       locations: [
+      //         {
+      //           position: [mousePosition.lat, mousePosition.lng]
+      //         }
+      //       ]
+      //     }
+      //   ]
+      // });
+
+      const item = {
+        title: this.markerMakerGroup,
+        group: true,
+        locations: [
           {
-            title: this.markerMakerGroup,
-            group: true,
-            locations: [
-              {
-                position: [mousePosition.lat, mousePosition.lng]
-              }
-            ]
+            position: [mousePosition.lat, mousePosition.lng]
           }
         ]
-      });
+      };
+
+      this.markerMakeArray.push(item);
 
       this.markerMakeOutput = JSON.stringify(this.markerMakeArray);
     }
