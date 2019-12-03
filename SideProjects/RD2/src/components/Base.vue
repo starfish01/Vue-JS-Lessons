@@ -24,11 +24,9 @@ export default {
         title: "Premium Cigarettes",
         display: false,
         group: true,
-        type: "marker",
         locations: [
           {
             type: "marker",
-             group: true,
             title: "Location A",
             position: [70.41322, -1.219482],
             display: false,
@@ -41,7 +39,6 @@ export default {
           {
             title: "Location B",
             type: "marker",
-             group: true,
             position: [47.41322, -1.219482],
             display: false,
             icon: {
@@ -55,17 +52,14 @@ export default {
         title: "Horse",
         display: true,
         group: false,
-        type: "marker",
         locations: [
           {
-            group: false,
             type: "marker",
             title: "Text 1222222",
             position: [40.41322, -1.219482],
             display: true
           },
           {
-            group: false,
             title: "Text new1",
             type: "marker",
             icon: {
@@ -80,10 +74,8 @@ export default {
         title: "Deer",
         display: false,
         group: true,
-        type: "circle",
         locations: [
           {
-            group: true,
             type: "circle",
             title: "Circle",
             position: [10.41322, 50.219482],
@@ -93,9 +85,8 @@ export default {
             display: true
           },
           {
-            group: true,
             type: "circle",
-            title: "Circle",
+            title: "Circle?",
             position: [20.41322, 30.219482],
             display: false,
             colour: "red",
@@ -109,21 +100,18 @@ export default {
         title: "Bear",
         display: false,
         group: false,
-        type: "circle",
         locations: [
           {
-            group: false,
             type: "circle",
-            title: "Circle",
+            title: "Circle?",
             position: [20.41322, 70.219482],
             colour: "red",
             radius: 450000,
             display: true
           },
           {
-            group: false,
             type: "circle",
-            title: "Circle",
+            title: "Circle?",
             position: [30.41322, 60.219482],
             colour: "blue",
             radius: 450000,
@@ -136,10 +124,8 @@ export default {
         title: "Croc",
         display: false,
         group: true,
-        type: "polygon",
         locations: [
           {
-             group: true,
             title: "Poly Croc",
             type: "polygon",
             position: [
@@ -154,7 +140,6 @@ export default {
             display: false
           },
           {
-             group: true,
             title: "Poly Croc",
             type: "polygon",
             position: [
@@ -174,10 +159,8 @@ export default {
         title: "Bat",
         display: false,
         group: false,
-        type: "polygon",
         locations: [
           {
-            group: false,
             title: "Poly Bat",
             type: "polygon",
             position: [
@@ -192,7 +175,6 @@ export default {
             display: false
           },
           {
-            group: false,
             title: "Poly Bat",
             colour: "red",
             type: "polygon",
@@ -213,8 +195,9 @@ export default {
 
     const mapDataPoints = [];
 
-    this.mapData.forEach(group => {
-      group.locations.forEach(location => {
+    this.mapData.forEach((group,groupIndex) => {
+      group.locations.forEach((location,locationIndex) => {
+        location.id = '' + groupIndex + locationIndex;
         mapDataPoints.push(location);
       })
     });

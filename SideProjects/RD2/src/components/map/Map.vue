@@ -19,6 +19,7 @@
 
           <appMarker
             v-if="section.type === 'marker'"
+            :key="section.id"
             :markerData="section"
             :isGroup="section.group"
             :sectionDisplay="section.display"
@@ -27,6 +28,7 @@
         <!-- Circle -->
           <appCircle
             v-if="section.type === 'circle'"
+            :key="section.id"
             :markerData="section"
             :isGroup="section.group"
             :sectionDisplay="section.display"
@@ -36,6 +38,7 @@
         <!-- Polygon -->       
           <appPolygon
             v-if="section.type === 'polygon'"
+            :key="section.id"
             :markerData="section"
             :isGroup="section.group"
             :sectionDisplay="section.display"
@@ -74,7 +77,7 @@
                   ></v-checkbox>
                 </div>
 
-                <template v-if="section.group && section.locations.length > 1">
+                <template v-if="!section.group && section.locations.length > 1">
                   <template v-for="(item, i) in section.locations">
                     <div
                       v-bind:key="i + section.title"
@@ -142,16 +145,17 @@ export default {
       this.showParagraph = !this.showParagraph;
     },
     sectionClicked(i) {
-      // console.log(i);
+ 
+      // this not working with grouping
+      
+      console.log(this.mapData[i])
+      
       const sectionReference = this.mapData[i];
       const displayValue = sectionReference.display;
-      if (sectionReference.group) {
+
         sectionReference.locations.forEach(function(location) {
           location.display = displayValue;
         });
-      } else {
-        return;
-      }
     }
   },
   props: {
