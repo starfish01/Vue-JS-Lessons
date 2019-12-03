@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       mapData: [],
-      markerPoints: [],
+      markerPoints: []
     };
   },
   methods: {},
@@ -21,171 +21,181 @@ export default {
   mounted() {
     this.mapData = [
       {
-        title: "Premium Cigarettes",
-        display: false,
-        group: true,
-        locations: [
+        title: "Health Items",
+        groups: [
           {
-            type: "marker",
-            title: "Location A",
-            position: [70.41322, -1.219482],
+            title: "Premium Cigarettes",
             display: false,
-            icon: {
-              url: "marker/RDOIcons/image_part_076.png",
-              icon_size: [40, 50]
-            },
+            group: true,
+            locations: [
+              {
+                type: "marker",
+                title: "Location A",
+                position: [70.41322, -1.219482],
+                display: false,
+                icon: {
+                  url: "marker/RDOIcons/image_part_076.png",
+                  icon_size: [40, 50]
+                }
+              },
+              {
+                title: "Location B",
+                type: "marker",
+                position: [47.41322, -1.219482],
+                display: false,
+                icon: {
+                  url: "marker/RDOIcons/image_part_076.png"
+                }
+              }
+            ]
           },
           {
-            title: "Location B",
-            type: "marker",
-            position: [47.41322, -1.219482],
-            display: false,
-            icon: {
-              url: "marker/RDOIcons/image_part_076.png"
-            },
+            title: "Horse",
+            display: true,
+            group: false,
+            locations: [
+              {
+                type: "marker",
+                title: "Text 1222222",
+                position: [40.41322, -1.219482],
+                display: true
+              },
+              {
+                title: "Text new1",
+                type: "marker",
+                icon: {
+                  url: "marker/RDOIcons/index.png"
+                },
+                position: [43.41322, 4.219482],
+                display: true
+              }
+            ]
           }
         ]
       },
       {
-        title: "Horse",
-        display: true,
-        group: false,
-        locations: [
+        title: "Animals",
+        groups: [
           {
-            type: "marker",
-            title: "Text 1222222",
-            position: [40.41322, -1.219482],
-            display: true
-          },
-          {
-            title: "Text new1",
-            type: "marker",
-            icon: {
-              url: "marker/RDOIcons/index.png",
-            },
-            position: [43.41322, 4.219482],
-            display: true
-          }
-        ]
-      },
-      {
-        title: "Deer",
-        display: false,
-        group: true,
-        locations: [
-          {
-            type: "circle",
-            title: "Circle",
-            position: [10.41322, 50.219482],
+            title: "Deer",
             display: false,
-            colour: "green",
-            radius: 450000,
-            display: false
+            group: true,
+            locations: [
+              {
+                type: "circle",
+                title: "Circle",
+                position: [10.41322, 50.219482],
+                display: false,
+                colour: "green",
+                radius: 450000,
+                display: false
+              },
+              {
+                type: "circle",
+                title: "Circle?",
+                position: [20.41322, 30.219482],
+                display: false,
+                colour: "red",
+                radius: 450000,
+                weight: 1,
+                display: false
+              }
+            ]
           },
           {
-            type: "circle",
-            title: "Circle?",
-            position: [20.41322, 30.219482],
+            title: "Bear",
             display: false,
-            colour: "red",
-            radius: 450000,
-            weight: 1,
-            display: false
-          }
-        ]
-      },
-      {
-        title: "Bear",
-        display: false,
-        group: false,
-        locations: [
-          {
-            type: "circle",
-            title: "Circle?",
-            position: [20.41322, 70.219482],
-            colour: "red",
-            radius: 450000,
-            display: true
+            group: false,
+            locations: [
+              {
+                type: "circle",
+                title: "Circle?",
+                position: [20.41322, 70.219482],
+                colour: "red",
+                radius: 450000,
+                display: true
+              },
+              {
+                type: "circle",
+                title: "Circle?",
+                position: [30.41322, 60.219482],
+                colour: "blue",
+                radius: 450000,
+                display: true
+              }
+            ]
           },
-          {
-            type: "circle",
-            title: "Circle?",
-            position: [30.41322, 60.219482],
-            colour: "blue",
-            radius: 450000,
-            display: true
-          }
-        ]
-      },
 
-      {
-        title: "Croc",
-        display: false,
-        group: true,
-        locations: [
           {
-            title: "Poly Croc",
-            type: "polygon",
-            position: [
-              [47.2263299, -1.6222],
-              [48.21024000000001, -10.6270065],
-              [49.1969447, -20.6136169],
-              [50.18527929999999, -20.6143036],
-              [55.1794457, -22.6098404],
-              [60.1775788, -23.5985107],
-              [47.2263299, -1.6222]
-            ],
-            display: false
+            title: "Croc",
+            display: false,
+            group: true,
+            locations: [
+              {
+                title: "Poly Croc",
+                type: "polygon",
+                position: [
+                  [47.2263299, -1.6222],
+                  [48.21024000000001, -10.6270065],
+                  [49.1969447, -20.6136169],
+                  [50.18527929999999, -20.6143036],
+                  [55.1794457, -22.6098404],
+                  [60.1775788, -23.5985107],
+                  [47.2263299, -1.6222]
+                ],
+                display: false
+              },
+              {
+                title: "Poly Croc",
+                type: "polygon",
+                position: [
+                  [57.2263299, 1.6222],
+                  [58.21024000000001, 10.6270065],
+                  [59.1969447, 20.6136169],
+                  [60.18527929999999, 20.6143036],
+                  [65.1794457, 22.6098404],
+                  [50.1775788, 23.5985107],
+                  [57.2263299, 1.6222]
+                ],
+                display: false
+              }
+            ]
           },
           {
-            title: "Poly Croc",
-            type: "polygon",
-            position: [
-              [57.2263299, 1.6222],
-              [58.21024000000001, 10.6270065],
-              [59.1969447, 20.6136169],
-              [60.18527929999999, 20.6143036],
-              [65.1794457, 22.6098404],
-              [50.1775788, 23.5985107],
-              [57.2263299, 1.6222]
-            ],
-            display: false
-          }
-        ]
-      },
-      {
-        title: "Bat",
-        display: false,
-        group: false,
-        locations: [
-          {
-            title: "Poly Bat",
-            type: "polygon",
-            position: [
-              [17.2263299, -1.6222],
-              [18.21024000000001, -10.6270065],
-              [19.1969447, -20.6136169],
-              [20.18527929999999, -20.6143036],
-              [25.1794457, -22.6098404],
-              [30.1775788, -23.5985107],
-              [27.2263299, -1.6222]
-            ],
-            display: false
-          },
-          {
-            title: "Poly Bat",
-            colour: "red",
-            type: "polygon",
-            position: [
-              [37.2263299, 1.6222],
-              [38.21024000000001, 10.6270065],
-              [39.1969447, 20.6136169],
-              [40.18527929999999, 20.6143036],
-              [55.1794457, 22.6098404],
-              [40.1775788, 23.5985107],
-              [37.2263299, 1.6222]
-            ],
-            display: false
+            title: "Bat",
+            display: false,
+            group: false,
+            locations: [
+              {
+                title: "Poly Bat",
+                type: "polygon",
+                position: [
+                  [17.2263299, -1.6222],
+                  [18.21024000000001, -10.6270065],
+                  [19.1969447, -20.6136169],
+                  [20.18527929999999, -20.6143036],
+                  [25.1794457, -22.6098404],
+                  [30.1775788, -23.5985107],
+                  [27.2263299, -1.6222]
+                ],
+                display: false
+              },
+              {
+                title: "Poly Bat",
+                colour: "red",
+                type: "polygon",
+                position: [
+                  [37.2263299, 1.6222],
+                  [38.21024000000001, 10.6270065],
+                  [39.1969447, 20.6136169],
+                  [40.18527929999999, 20.6143036],
+                  [55.1794457, 22.6098404],
+                  [40.1775788, 23.5985107],
+                  [37.2263299, 1.6222]
+                ],
+                display: false
+              }
+            ]
           }
         ]
       }
@@ -193,15 +203,16 @@ export default {
 
     const mapDataPoints = [];
 
-    this.mapData.forEach((group,groupIndex) => {
-      group.locations.forEach((location,locationIndex) => {
-        location.id = '' + groupIndex + locationIndex;
-        mapDataPoints.push(location);
-      })
+    this.mapData.forEach((section, sectionIndex) => {
+      section.groups.forEach((group, groupIndex) => {
+        group.locations.forEach((location, locationIndex) => {
+          location.id = "" + sectionIndex + groupIndex + locationIndex;
+          mapDataPoints.push(location);
+        });
+      });
     });
 
     this.markerPoints = mapDataPoints;
-
   }
 };
 </script>

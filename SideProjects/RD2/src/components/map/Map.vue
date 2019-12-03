@@ -1,5 +1,26 @@
 <template>
   <div style="height: 100%; width: 100%;">
+    <div>
+      <div class="columns is-multiline">
+        <div class="column is-one-third">
+          <b-field label="Section">
+            <b-input v-model="markerMakerSection"></b-input>
+          </b-field>
+        </div>
+        <div class="column is-one-third">
+          <b-field label="Group">
+            <b-input v-model="markerMakerGroup"></b-input>
+          </b-field>
+        </div>
+      </div>
+      <div class="columns is-multiline">
+        <div class="column">
+          <b-field label="Output">
+            <b-input v-model="markerMakeOutput" type="textarea"></b-input>
+          </b-field>
+        </div>
+      </div>
+    </div>
     <l-map
       style="height: 100%; width: 100%; background:#D3B790"
       @mousemove="getMousePosition"
@@ -8,6 +29,7 @@
       :maxZoom="8"
       :minZoom="2"
       @update:zoom="zoomUpdated"
+      @click="clickCheck(mousePosition)"
     >
       <l-tile-layer :url="url" :noWrap="true" />
 
@@ -15,7 +37,6 @@
 
       <template v-for="section in markerPoints">
         <!-- Marker -->
-
         <appMarker
           v-if="section.type === 'marker' && section.display"
           :key="section.id"
@@ -41,7 +62,7 @@
 
       <!-- Navbar -->
 
-      <div class="controls-nav-map-menu">
+      <div v-if="markerPoints.length" class="controls-nav-map-menu">
         <span class="sidemenu" v-if="displayMenu">
           <v-icon @click="displayMenuChange()" dark>mdi-arrow-right</v-icon>
         </span>
@@ -54,32 +75,37 @@
               <h3 class="subtitle">Red Dead Map Online</h3>
               <hr />
             </div>
-
             <div class="columns is-multiline">
-              <template v-for="(section, i) in mapData">
-                <div class="column is-centered is-full" v-bind:key="i">
-                  <v-checkbox
-                    @change="sectionClicked(i)"
-                    class="shrink font-weight-bold checkboxclicker"
-                    :label="section.title"
-                    v-model="section.display"
-                    hide-details
-                  ></v-checkbox>
-                </div>
+              <template v-for="(group, groupIndex) in mapData">
+                <div class="column is-centered is-full" v-bind:key="'' + groupIndex">{{group.title}}</div>
+                <template v-for="(section, sectionIndex) in group.groups">
+                  <div
+                    class="column is-centered is-full"
+                    v-bind:key="'' + groupIndex + sectionIndex"
+                  >
+                    <v-checkbox
+                      @change="sectionClicked(section)"
+                      class="shrink font-weight-bold checkboxclicker"
+                      :label="section.title"
+                      v-model="section.display"
+                      hide-details
+                    ></v-checkbox>
+                  </div>
 
-                <template v-if="!section.group && section.locations.length > 1">
-                  <template v-for="(item, i) in section.locations">
-                    <div
-                      v-bind:key="i + section.title"
-                      class="column is-one-third is-half-touch subchecklistitem"
-                    >
-                      <v-checkbox
-                        class="shrink ma-0 pa-0"
-                        :label="item.title"
-                        v-model="item.display"
-                        hide-details
-                      ></v-checkbox>
-                    </div>
+                  <template v-if="!section.group && section.locations.length > 1">
+                    <template v-for="(item, i) in section.locations">
+                      <div
+                        v-bind:key="i + section.title + groupIndex"
+                        class="column is-one-third is-half-touch subchecklistitem"
+                      >
+                        <v-checkbox
+                          class="shrink ma-0 pa-0"
+                          :label="item.title"
+                          v-model="item.display"
+                          hide-details
+                        ></v-checkbox>
+                      </div>
+                    </template>
                   </template>
                 </template>
               </template>
@@ -90,6 +116,7 @@
       <div class="latinfo">{{ mousePosition.lat - 85 }}, {{ mousePosition.lng + 180 }}</div>
       <!-- end Navbar -->
     </l-map>
+    <div></div>
   </div>
 </template>
 
@@ -134,13 +161,31 @@ export default {
     showLongText() {
       this.showParagraph = !this.showParagraph;
     },
-    sectionClicked(i) {
-      const sectionReference = this.mapData[i];
-      const displayValue = sectionReference.display;
+    sectionClicked(section) {
+      const sectionReference = section.locations;
+      const displayValue = section.display;
 
-      sectionReference.locations.forEach(function(location) {
+      sectionReference.forEach(function(location) {
         location.display = displayValue;
       });
+    },
+    clickCheck(mousePosition) {
+      this.markerMakeArray.push({
+        title: this.markerMakerSection,
+        groups: [
+          {
+            title: this.markerMakerGroup,
+            group: true,
+            locations: [
+              {
+                position: [mousePosition.lat, mousePosition.lng]
+              }
+            ]
+          }
+        ]
+      });
+
+      this.markerMakeOutput = JSON.stringify(this.markerMakeArray);
     }
   },
   props: {
@@ -155,7 +200,11 @@ export default {
       bounds: null,
       displayMenu: false,
       mousePosition: { lat: 0, lng: 0 },
-      checkboxGroup: []
+      checkboxGroup: [],
+      markerMakerSection: "",
+      markerMakerGroup: "",
+      markerMakeOutput: "",
+      markerMakeArray: []
     };
   }
 };
@@ -167,6 +216,7 @@ h3 {
 .latinfo {
   bottom: 0;
   position: absolute;
+  z-index: 999;
 }
 .leaflet-control {
   border: 2px solid rgba(0, 0, 0, 0.2);
