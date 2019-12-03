@@ -187,12 +187,8 @@ export default {
 
       const item = {
         title: this.markerMakerGroup,
-        group: true,
-        locations: [
-          {
-            position: [mousePosition.lat, mousePosition.lng]
-          }
-        ]
+        display: false,
+        position: [mousePosition.lat, mousePosition.lng]
       };
 
       this.markerMakeArray.push(item);
