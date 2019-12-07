@@ -4,8 +4,8 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import vuetify from './plugins/vuetify'
-
 import { Icon } from 'leaflet'
+
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 
