@@ -10,6 +10,7 @@ import './plugins'
 
 // Sync router with store
 import { sync } from 'vuex-router-sync'
+import VueClipboard from 'vue-clipboard2'
 
 // Application imports
 import App from './App'
@@ -17,12 +18,9 @@ import i18n from '@/i18n'
 import router from '@/router'
 import store from '@/store'
 
-
-
 // Sync store with router
 sync(store, router)
 
-import VueClipboard from 'vue-clipboard2'
 Vue.use(VueClipboard)
 
 Vue.config.productionTip = false

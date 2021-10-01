@@ -1,4 +1,4 @@
-export { CSSstyling, setImageUrl }
+export { CSSstyling }
 
 var url = '';
 

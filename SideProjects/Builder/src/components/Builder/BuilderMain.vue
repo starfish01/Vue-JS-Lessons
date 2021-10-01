@@ -164,7 +164,6 @@ export default {
             settings: null,
             collection: null
           },
-
           {
             name: "container",
             css: null,
@@ -201,13 +200,13 @@ export default {
         ]
       };
 
-      if (this.deviceSelected == "Mobile") {
+      if (this.deviceSelected === "Mobile") {
         devices = { mobile: sectionsJSON };
       } else {
         devices = { tablet: sectionsJSON };
       }
 
-      this.exportvalues[0].data = { devices };
+      this.exportvalues[0].data = devices;
 
       // END BUTTON
 
@@ -217,41 +216,33 @@ export default {
 
       this.dashboardImages.forEach((element, i) => {
         dashboardImagesCSS += `${
-          this.deviceSelected == "Mobile" ? "" : ".tablet"
-        } .dashboard-slider-image:nth-child(${i +
-          1}) { background-image: url("${element}"); }`;
-        dashboardImagesCSS += `
-        `;
+          this.deviceSelected === 'Mobile' ? '' : '.tablet '
+        }.dashboard-slider-image:nth-child(${i +
+          1}) { background-image: url("${element}");}`;
+        dashboardImagesCSS += '\n';
       });
 
-      let sectionLayoutCSS = " ";
+      let sectionLayoutCSS = '';
+
       this.allCSS.forEach((element, index) => {
-        sectionLayoutCSS += `#button-group-${index} .dashboard-button
-        {
-          width: ${element}; 
-          padding: 5px;
-        } 
-        `;
+        sectionLayoutCSS += '#button-group-' + index + ' .dashboard-button {\n    width: ' + element + ';\n    padding: 5px;\n}';
       });
 
       this.exportvalues[1].data = CSSTemplate.newObject();
       if (this.schoolboxPermissionsAllowed) {
-        this.exportvalues[1].data += `.for-student, .for-staff, .for-parent, .for-none 
-          {display: none;} 
-          html.role-type-student .for-student, html.role-type-staff .for-staff, html.role-type-admin .for-staff, html.role-type-parent .for-parent 
-          {display: block;}
-          `;
+        this.exportvalues[1].data += '.for-student, .for-staff, .for-parent, .for-none, .for-guest {\n    display: none;\n}\n';
+        this.exportvalues[1].data += 'html.role-type-student .for-student, html.role-type-staff .for-staff, html.role-type-admin .for-staff, html.role-type-parent .for-parent, html.role-type-guest .for-guest {\n    display: block;\n}\n';
       }
 
-      let collectivelayout = "/* Button layouts and general */";
-      collectivelayout += `
-      `;
+      this.exportvalues[1].data += '.disabled-btn {\n    opacity:0.5;\n}\n';
+
+      // button down css
+      this.exportvalues[1].data += '.dashboard-buttons .dashboard-button img.mo {\n    opacity:0.5;\n}\n';
+
+      let collectivelayout = '/* Button layouts and general */\n';
       collectivelayout += sectionLayoutCSS;
-      collectivelayout += `
-      `;
-      collectivelayout += "/* Dashboard Images */";
-      collectivelayout += `
-      `;
+      collectivelayout += '\n';
+      collectivelayout += "/* Dashboard Images */\n";
       collectivelayout += dashboardImagesCSS;
       collectivelayout += this.exportvalues[1].data;
 
