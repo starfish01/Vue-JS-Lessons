@@ -32,7 +32,7 @@
                 </v-flex>
                 <v-flex xs12 sm6 v-if="schoolboxPermissionsAllowed">
                     <v-autocomplete
-                        :items="['Parent', 'Student', 'Staff']"
+                        :items="['Parent', 'Student', 'Staff', 'Guest']"
                         label="Permission To View"
                         v-model="selectedSchoolboxPermissions"
                         multiple
@@ -64,7 +64,7 @@
                 </v-flex>
 
                 <v-flex xs12>
-                    <component :is="currentModuleSelectedAdditions" 
+                    <component :is="currentModuleSelectedAdditions"
                       @sectionButtonData="moduleDATA = $event"
                       :schoolboxPermissionsAllowed="schoolboxPermissionsAllowed"
                     ></component>
@@ -79,27 +79,27 @@
             <v-spacer></v-spacer>
             <v-btn  flat color="error" @click="deleteDialog = true">Delete</v-btn>
             <v-btn color="blue darken-1" flat @click="closeDialogButton()">Close</v-btn>
-            
+
 <v-dialog
         v-model="deleteDialog"
         max-width="290"
       >
         <v-card>
           <v-card-title class="headline">Are you sure you want to delete?</v-card-title>
-  
+
           <v-card-actions>
             <v-spacer></v-spacer>
-  
+
             <v-btn
               color="error darken-1"
               @click="deleteButton()"
             >
               YES
             </v-btn>
-  
+
             <v-btn
               color="blue darken-1"
-              
+
               @click="deleteDialog = false"
             >
               Cancel
@@ -173,7 +173,7 @@ export default {
       deleteDialog:false,
       coreLinksAdded: [],
       moduleDATA:null,
-      
+
     }
   },
   props: { 'button': Object,
@@ -288,6 +288,10 @@ export default {
         CSSstring += "for-student "
         checker = true
       }
+      if(this.selectedSchoolboxPermissions.includes('Guest')){
+        CSSstring += "for-guest "
+        checker = true
+      }
 
       if(!checker)
       {
@@ -298,7 +302,7 @@ export default {
 
     },
     closeDialogButton () {
-      
+
 
       if(this.schoolboxPermissionsAllowed){
         this.createCSSForSchoolboxPermissions()
